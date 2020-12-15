@@ -1,0 +1,39 @@
+{
+  "name": "my_school_erp_backend",
+  "version": "1.0.0",
+  "description": "rest api for my frontend flutter app",
+  "author": "Salim Benabadji",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node ./src/app.ts",
+    "test": "mocha --require ts-node/register --watch-extensions ts 'test/**/*.spec.ts' --timeout 5000"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/chai": "^4.2.11",
+    "@types/chai-as-promised": "^7.1.2",
+    "@types/express": "^4.17.7",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/mocha": "^7.0.2",
+    "@types/mongoose": "^5.7.29",
+    "@types/redis": "^2.8.25",
+    "@types/supertest": "^2.0.10",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "mocha": "^8.0.1",
+    "supertest": "^4.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.0",
+    "express-validators": "^1.0.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.21",
+    "redis": "^3.0.2"
+  }
+}
