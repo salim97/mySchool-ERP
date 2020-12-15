@@ -1,0 +1,9 @@
+* linguist-vendored
+
+*.dart linguist-vendored=false
+*.dart linguist-language=Dart
+
+
+
+*.ts linguist-vendored=false
+*.ts linguist-language=TypeScript
