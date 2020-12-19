@@ -12,10 +12,13 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^3.0.10
+  stack_trace: ^1.9.3
   shared_preferences: ^0.5.8
   logger: ^0.7.0+2
-  json_serializable: ^3.3.0
-  json_annotation: ^3.0.1
+  # json_serializable: ^3.3.0
+  json_serializable: ^3.5.1
+  # json_annotation: ^3.0.1
+  json_annotation: 
 
 dev_dependencies:
   flutter_test:

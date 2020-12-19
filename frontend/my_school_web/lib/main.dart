@@ -3,7 +3,6 @@ import 'package:my_school_web/provider/app_provider.dart';
 import 'package:my_school_web/provider/auth.dart';
 
 import 'package:my_school_web/rounting/router.dart';
-import 'package:my_school_web/widgets/layout/layout.dart';
 import 'package:my_school_web/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

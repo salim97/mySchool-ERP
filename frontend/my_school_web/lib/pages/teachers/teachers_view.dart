@@ -16,98 +16,26 @@ class TeachersView extends StatefulWidget {
 }
 
 class _TeachersViewState extends State<TeachersView> {
-  List<DatatableHeader> _headers = [
-    DatatableHeader(text: "ID", value: "id", show: false, sortable: true, textAlign: TextAlign.right),
-    DatatableHeader(text: "Name", value: "name", show: true, flex: 2, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "SKU", value: "sku", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Category", value: "category", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Price", value: "price", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Margin", value: "margin", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "In Stock", value: "in_stock", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Alert", value: "alert", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(
-        text: "Received",
-        value: "received",
-        show: true,
-        sortable: false,
-        sourceBuilder: (value, row) {
-          List list = List.from(value);
-          return Container(
-            child: Column(
-              children: [
-                Container(
-                  width: 85,
-                  child: LinearProgressIndicator(
-                    value: list.first / list.last,
-                  ),
-                ),
-                Text("${list.first} of ${list.last}")
-              ],
-            ),
-          );
-        },
-        textAlign: TextAlign.center),
-  ];
-
   List<int> _perPages = [5, 10, 15, 100];
   int _total = 100;
   int _currentPerPage;
   int _currentPage = 1;
-  bool _isSearch = false;
-  List<Map<String, dynamic>> _source = List<Map<String, dynamic>>();
-  List<Map<String, dynamic>> _selecteds = List<Map<String, dynamic>>();
-  String _selectableKey = "id";
-
-  String _sortColumn;
-  bool _sortAscending = true;
-  bool _isLoading = true;
-  bool _showSelect = true;
-
-  List<Map<String, dynamic>> _generateData({int n: 100}) {
-    final List source = List.filled(n, Random.secure());
-    List<Map<String, dynamic>> temps = List<Map<String, dynamic>>();
-    var i = _source.length;
-    print(i);
-    for (var data in source) {
-      temps.add({
-        "id": i,
-        "sku": "$i\000$i",
-        "name": "Product Product Product Product $i",
-        "category": "Category-$i",
-        "price": "${i}0.00",
-        "cost": "20.00",
-        "margin": "${i}0.20",
-        "in_stock": "${i}0",
-        "alert": "5",
-        "received": [i + 20, 150]
-      });
-      i++;
-    }
-    return temps;
-  }
-
-  _initData() async {
-    setState(() => _isLoading = true);
-    Future.delayed(Duration(seconds: 2)).then((value) {
-      _source.addAll(_generateData(n: 1000));
-      setState(() => _isLoading = false);
-    });
-  }
 
   @override
   void initState() {
     super.initState();
-    _initData();
   }
 
   @override
   Widget build(BuildContext context) {
-       final AppProvider appProvider = Provider.of<AppProvider>(context);
+    final AppProvider appProvider = Provider.of<AppProvider>(context);
 
     return ViewModelBuilder<TeachersViewModel>.reactive(
         viewModelBuilder: () => TeachersViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
+          print("onModelReady");
+          model.onRefresh();
         },
         builder: (context, model, child) {
           return SingleChildScrollView(
@@ -126,9 +54,11 @@ class _TeachersViewState extends State<TeachersView> {
                 shadowColor: Colors.black,
                 clipBehavior: Clip.none,
                 child: ResponsiveDatatable(
-                  title: !_isSearch
+                  title: !model.isSearch
                       ? RaisedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            model.onCreateNew();
+                          },
                           icon: Icon(
                             Icons.add,
                             color: Colors.white,
@@ -141,7 +71,7 @@ class _TeachersViewState extends State<TeachersView> {
                         )
                       : null,
                   actions: [
-                    if (_isSearch)
+                    if (model.isSearch)
                       Expanded(
                           child: TextField(
                         decoration: InputDecoration(
@@ -149,55 +79,56 @@ class _TeachersViewState extends State<TeachersView> {
                                 icon: Icon(Icons.cancel),
                                 onPressed: () {
                                   setState(() {
-                                    _isSearch = false;
+                                    model.isSearch = false;
                                   });
                                 }),
                             suffixIcon: IconButton(icon: Icon(Icons.search), onPressed: () {})),
                       )),
-                    if (!_isSearch)
+                    if (!model.isSearch)
                       IconButton(
                           icon: Icon(Icons.search),
                           onPressed: () {
                             setState(() {
-                              _isSearch = true;
+                              model.isSearch = true;
                             });
                           })
                   ],
-                  headers: _headers,
-                  source: _source,
-                  selecteds: _selecteds,
-                  showSelect: _showSelect,
+                  headers: model.headers,
+                  source: model.source,
+                  selecteds: model.selecteds,
+                  showSelect: model.showSelect,
                   autoHeight: false,
                   onTabRow: (data) {
                     print(data);
                   },
                   onSort: (value) {
-                    setState(() {
-                      _sortColumn = value;
-                      _sortAscending = !_sortAscending;
-                      if (_sortAscending) {
-                        _source.sort((a, b) => b["$_sortColumn"].compareTo(a["$_sortColumn"]));
-                      } else {
-                        _source.sort((a, b) => a["$_sortColumn"].compareTo(b["$_sortColumn"]));
-                      }
-                    });
+                    model.sortColumn = value;
+                    model.sortAscending = !model.sortAscending;
+                    if (model.sortAscending) {
+                      model.source.sort((a, b) => b[model.sortColumn].compareTo(a[model.sortColumn]));
+                    } else {
+                      model.source.sort((a, b) => a[model.sortColumn].compareTo(b[model.sortColumn]));
+                    }
+                    model.notifyListeners();
                   },
-                  sortAscending: _sortAscending,
-                  sortColumn: _sortColumn,
-                  isLoading: _isLoading,
+                  sortAscending: model.sortAscending,
+                  sortColumn: model.sortColumn,
+                  isLoading: model.isLoading,
                   onSelect: (value, item) {
                     print("$value  $item ");
                     if (value) {
-                      setState(() => _selecteds.add(item));
+                      setState(() => model.selecteds.add(item));
                     } else {
-                      setState(() => _selecteds.removeAt(_selecteds.indexOf(item)));
+                      setState(() => model.selecteds.removeAt(model.selecteds.indexOf(item)));
                     }
                   },
                   onSelectAll: (value) {
                     if (value) {
-                      setState(() => _selecteds = _source.map((entry) => entry).toList().cast());
+                      model.selecteds = model.source.map((entry) => entry).toList().cast();
+                      model.notifyListeners();
                     } else {
-                      setState(() => _selecteds.clear());
+                      model.selecteds.clear();
+                      model.notifyListeners();
                     }
                   },
                   footers: [

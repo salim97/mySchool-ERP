@@ -1,25 +1,34 @@
+import 'dart:convert';
+
+import 'package:common/models/user_model.dart';
+import 'package:crypto/crypto.dart';
+
+import '../rest_api.dart';
+
 abstract class AuthService {
   Future<Map> login({String email, String password});
 
   Future<bool> signout();
 }
 
-class FakeAuthService implements AuthService {
+class FakeAuthService  implements AuthService  {
   @override
   Future<Map> login({String email, String password}) async {
-    return {
-      "token": "azertyu35461+-sdf54sdf981",
-      "email": "email@email.com",
-      "first name": "si zebi",
-      "last name": "nik mok",
-      "profile image": "sowa.com"
-    };
+    UserModel userModel = new UserModel();
+    userModel.token = sha256.convert(utf8.encode(email + password)).toString();
+    userModel.email = email;
+    userModel.id = 1;
+    userModel.role = "admin";
+   
+    return userModel.toJson();
   }
 
   @override
-  Future<bool> signout() {
-    // TODO: implement signout
-    throw UnimplementedError();
+  Future<bool> signout() async {
+    await Future.delayed(Duration(seconds: 2), () {
+      return;
+    });
+    return true;
   }
 }
 

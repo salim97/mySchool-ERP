@@ -3,7 +3,6 @@ import 'package:my_school_web/pages/dashboard/dashboard_view.dart';
 import 'package:my_school_web/pages/home/home_view.dart';
 import 'package:my_school_web/pages/login/login_view.dart';
 import 'package:my_school_web/pages/teachers/teachers_view.dart';
-import 'package:my_school_web/widgets/layout/layout.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
