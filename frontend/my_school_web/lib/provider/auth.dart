@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:my_school_web/helpers/costants.dart';
 import 'package:my_school_web/models/user.dart';
-import 'package:my_school_web/services/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -12,7 +11,6 @@ enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 class AuthProvider with ChangeNotifier {
   // User _user;
   Status _status = Status.Authenticated;
-  UserServices _userServices = UserServices();
   UserModel _userModel;
 
 //  getter
@@ -96,7 +94,6 @@ class AuthProvider with ChangeNotifier {
   }
 
   updateUserData(Map<String, dynamic> data) async {
-    _userServices.updateUserData(data);
   }
 
   // _onStateChanged(User firebaseUser) async {
