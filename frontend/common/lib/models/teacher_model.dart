@@ -29,6 +29,7 @@ class TeacherModel {
 // account information:
   String email_address;
   String username;
+  String password;
 
 // school details:
   String joining_date;
@@ -60,6 +61,7 @@ class TeacherModel {
     this.working_hours,
     this.subjects_handling,
     this.incharge_class,
+    this.password
   });
 
   factory TeacherModel.fromJson(Map<String, dynamic> json) => _$TeacherModelFromJson(json);

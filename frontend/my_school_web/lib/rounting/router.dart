@@ -2,6 +2,7 @@ import 'package:my_school_web/main.dart';
 import 'package:my_school_web/pages/dashboard/dashboard_view.dart';
 import 'package:my_school_web/pages/home/home_view.dart';
 import 'package:my_school_web/pages/login/login_view.dart';
+import 'package:my_school_web/pages/teachers/add_teacher_view.dart';
 import 'package:my_school_web/pages/teachers/teachers_view.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return _getPageRoute(DashboardView());
     case "Teachers":
       return _getPageRoute(TeachersView());
+    case "AddTeacherView":
+      return _getPageRoute(AddTeacherView());
     // case ProductsRoute:
     //   return _getPageRoute(ProductsPage());
     // case OrdersRoute:

@@ -30,6 +30,7 @@ TeacherModel _$TeacherModelFromJson(Map<String, dynamic> json) {
     working_hours: json['working_hours'] as String,
     subjects_handling: json['subjects_handling'] as String,
     incharge_class: json['incharge_class'] as String,
+    password: json['password'] as String,
   );
 }
 
@@ -52,6 +53,7 @@ Map<String, dynamic> _$TeacherModelToJson(TeacherModel instance) =>
       'pin_code': instance.pin_code,
       'email_address': instance.email_address,
       'username': instance.username,
+      'password': instance.password,
       'joining_date': instance.joining_date,
       'leaving_date': instance.leaving_date,
       'current_position': instance.current_position,

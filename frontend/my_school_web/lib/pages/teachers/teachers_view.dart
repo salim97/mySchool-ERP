@@ -34,7 +34,6 @@ class _TeachersViewState extends State<TeachersView> {
         viewModelBuilder: () => TeachersViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
-          print("onModelReady");
           model.onRefresh();
         },
         builder: (context, model, child) {

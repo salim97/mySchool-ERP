@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:common/common.dart';
 import 'package:my_school_web/provider/app_provider.dart';
+import 'package:my_school_web/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
@@ -118,5 +119,8 @@ class TeachersViewModel extends BaseViewModel {
     // });
   }
 
-  onCreateNew() {}
+  onCreateNew() {
+    //appProvider.changeCurrentPage("addTeacher");
+    locator<NavigationService>().navigateTo("AddTeacherView");
+  }
 }
