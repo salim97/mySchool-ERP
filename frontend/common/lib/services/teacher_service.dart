@@ -10,7 +10,7 @@ abstract class TeacherService {
   Future<List<TeacherModel>> getAll();
   Future<bool> add(TeacherModel teacherModel);
   Future<List<TeacherModel>> search(String query);
-  Future<List<TeacherModel>> delete(TeacherModel teacherModel);
+  Future<List<TeacherModel>> delete(int id);
 }
 
 class FakeTeacherService implements TeacherService {
@@ -53,8 +53,18 @@ class FakeTeacherService implements TeacherService {
   }
 
   @override
-  Future<List<TeacherModel>> delete(TeacherModel teacherModel) {
-    listTeacherModel.removeWhere((element) => element.id == teacherModel.id);
+  Future<List<TeacherModel>> delete(int id) {
+    print(listTeacherModel.length);
+    // for (int i = 0; i < listTeacherModel.length; i++) {
+    //   if (listTeacherModel.elementAt(i).id == id) {
+    //     listTeacherModel.removeAt(i);
+    //   }
+    // }
+    listTeacherModel.removeWhere((element) {
+      print(element.id.toString() + " == " + id.toString());
+      return element.id == id;
+    });
+    print(listTeacherModel.length);
     return Future<List<TeacherModel>>.value(listTeacherModel);
   }
 }

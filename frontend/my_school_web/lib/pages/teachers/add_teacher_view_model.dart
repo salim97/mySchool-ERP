@@ -1,10 +1,14 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
+import 'package:my_school_web/services/navigation_service.dart';
 import 'package:stacked/stacked.dart';
+
+import '../../locator.dart';
 
 class AddTeacherViewModel extends BaseViewModel {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final TeacherService teacherService = locator<TeacherService>();
 
   //personal details
   String selectedGender = "Male";
@@ -59,12 +63,13 @@ class AddTeacherViewModel extends BaseViewModel {
 
     Logger log = Logger();
     log.d(teacherModel.toJson());
-
+    teacherService.add(teacherModel);
     if (formKey.currentState.validate()) {
       print("validated");
     } else {
       print("Not validated");
     }
+    locator<NavigationService>().navigateTo("Teachers");
   }
 
   onGenderChanged(value) {

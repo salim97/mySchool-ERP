@@ -15,8 +15,6 @@ class AddTeacherView extends StatefulWidget {
 
 class _AddTeacherViewState extends State<AddTeacherView> {
   bool _obscureText = true;
-  List gender = ["Male", "Female", "Other"];
-  String select = "Male";
 
   @override
   Widget build(BuildContext context) {
@@ -61,17 +59,29 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                           ),
                           Row(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text("Gender"),
+                              userProfile(),
+                              SizedBox(
+                                width: 150,
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              addRadioButton(btnValue: 0, title: 'Male', onChanged: model.onGenderChanged),
-                              addRadioButton(btnValue: 1, title: 'Female', onChanged: model.onGenderChanged),
-                              addRadioButton(btnValue: 2, title: 'Others', onChanged: model.onGenderChanged),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "Gender",
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                  Row(
+                                    children: <Widget>[
+                                      addRadioButton(btnValue: 0, title: 'Male', onChanged: model.onGenderChanged),
+                                      addRadioButton(btnValue: 1, title: 'Female', onChanged: model.onGenderChanged),
+                                      addRadioButton(btnValue: 2, title: 'Others', onChanged: model.onGenderChanged),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ],
                           ),
                           Row(
@@ -371,6 +381,8 @@ class _AddTeacherViewState extends State<AddTeacherView> {
     );
   }
 
+  List gender = ["Male", "Female", "Other"];
+  String select = "Male";
   Row addRadioButton({int btnValue, String title, Function(dynamic) onChanged}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -389,6 +401,42 @@ class _AddTeacherViewState extends State<AddTeacherView> {
         ),
         Text(title)
       ],
+    );
+  }
+
+  Widget userProfile({String imagePath}) {
+    double size = 128;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Text("Profile Image"),
+          GestureDetector(
+            onTap: () {
+              print("nikmok");
+            },
+            child: SizedBox(
+              height: size,
+              width: size,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.asset("assets/images/default_avtar.jpg"),
+                  ),
+                  Positioned(
+                    bottom: 5,
+                    right: 5,
+                    child: FloatingActionButton(
+                      mini: true,
+                      child: Icon(Icons.edit),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

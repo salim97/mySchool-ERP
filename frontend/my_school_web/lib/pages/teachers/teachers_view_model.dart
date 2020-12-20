@@ -20,50 +20,6 @@ class TeachersViewModel extends BaseViewModel {
 
   TeachersViewModel() {}
 
-  List<DatatableHeader> headers = [
-    DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
-    DatatableHeader(text: "Employee Code", value: "Employee_Code", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Name", value: "Name", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Incharge Class", value: "Incharge_Class", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Subjects Handling", value: "Subjects_Handling", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(
-        flex: 2,
-        text: "Action",
-        value: "Action",
-        show: true,
-        sortable: false,
-        sourceBuilder: (value, row) {
-          //List list = List.from(value);
-          return Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  icon: Icon(Icons.remove_red_eye),
-                  onPressed: () {
-                    print("kamok id = " + value.toString());
-                  },
-                ),
-                IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    print("kamok");
-                  },
-                ),
-                IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {
-                    print("kamok");
-                  },
-                )
-              ],
-            ),
-          );
-        },
-        textAlign: TextAlign.center),
-  ];
-
   bool isSearch = false;
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
   List<Map<String, dynamic>> selecteds = List<Map<String, dynamic>>();
@@ -99,6 +55,7 @@ class TeachersViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     List<TeacherModel> listTeacherModel = await teacherService.getAll();
+    source.clear();
     listTeacherModel.forEach((element) {
       source.add({
         "ID": element.id,

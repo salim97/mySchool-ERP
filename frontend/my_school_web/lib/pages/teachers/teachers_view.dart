@@ -37,6 +37,53 @@ class _TeachersViewState extends State<TeachersView> {
           model.onRefresh();
         },
         builder: (context, model, child) {
+          List<DatatableHeader> headers = [
+            DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
+            DatatableHeader(text: "Employee Code", value: "Employee_Code", show: true, sortable: true, textAlign: TextAlign.left),
+            DatatableHeader(text: "Name", value: "Name", show: true, sortable: true, textAlign: TextAlign.center),
+            DatatableHeader(text: "Incharge Class", value: "Incharge_Class", show: true, sortable: true, textAlign: TextAlign.center),
+            DatatableHeader(text: "Subjects Handling", value: "Subjects_Handling", show: true, sortable: true, textAlign: TextAlign.center),
+            DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+            DatatableHeader(
+                flex: 2,
+                text: "Action",
+                value: "Action",
+                show: true,
+                sortable: false,
+                sourceBuilder: (value, row) {
+                  //List list = List.from(value);
+                  return Container(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.remove_red_eye),
+                          onPressed: () {
+                            print("kamok id = " + value.toString());
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.edit),
+                          onPressed: () {
+                            print("kamok");
+                          },
+                        ),
+                        IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () async {
+                            print("kamok");
+                            await model.teacherService.delete(value);
+                            model.onRefresh();
+                            model.notifyListeners();
+                          },
+                        )
+                      ],
+                    ),
+                  );
+                },
+                textAlign: TextAlign.center),
+          ];
+
           return SingleChildScrollView(
               child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
             PageHeader(
@@ -92,7 +139,7 @@ class _TeachersViewState extends State<TeachersView> {
                             });
                           })
                   ],
-                  headers: model.headers,
+                  headers: headers,
                   source: model.source,
                   selecteds: model.selecteds,
                   showSelect: model.showSelect,
