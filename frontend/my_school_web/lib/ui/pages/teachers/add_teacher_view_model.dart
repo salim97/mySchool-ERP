@@ -1,10 +1,10 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
-import 'package:my_school_web/services/navigation_service.dart';
+import 'package:my_school_web/app/locator.dart';
+import 'package:my_school_web/app/router.gr.dart';
 import 'package:stacked/stacked.dart';
-
-import '../../locator.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class AddTeacherViewModel extends BaseViewModel {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -35,7 +35,23 @@ class AddTeacherViewModel extends BaseViewModel {
   TextEditingController employeeCodeController = TextEditingController();
   TextEditingController workingHoursController = TextEditingController();
 
-  onBackClicked() {}
+  onBackClicked() async {
+    //locator<NavigationService>().navigateTo(Routes.addTeacherView);
+    final DialogService _dialogService = locator<DialogService>();
+          await _dialogService.showDialog(
+        title: "Time out",
+        description: "Try again",
+        dialogPlatform: DialogPlatform.Material,
+      );
+
+    // await _dialogService.showCustomDialog(
+    //     title: 'This is a custom UI with Text as main button',
+    //     description: 'Sheck out the builder in the dialog_ui_register.dart file',
+    //     mainButtonTitle: 'Ok',
+    //     showIconInMainButton: false,
+    //     barrierDismissible: true);
+  }
+
   onSubmitClicked() {
     TeacherModel teacherModel = new TeacherModel();
     teacherModel.gender = selectedGender;
@@ -69,7 +85,7 @@ class AddTeacherViewModel extends BaseViewModel {
     } else {
       print("Not validated");
     }
-    locator<NavigationService>().navigateTo("Teachers");
+    locator<NavigationService>().navigateTo(Routes.addTeacherView);
   }
 
   onGenderChanged(value) {

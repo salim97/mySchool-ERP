@@ -1,22 +1,42 @@
-import 'package:my_school_web/pages/login/login_view.dart';
+import 'package:my_school_web/ui/pages/login/login_view.dart';
 import 'package:my_school_web/provider/app_provider.dart';
 import 'package:my_school_web/provider/auth.dart';
 
-import 'package:my_school_web/rounting/router.dart';
-import 'package:my_school_web/widgets/loading.dart';
+import 'package:my_school_web/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'helpers/costants.dart';
-import 'locator.dart';
-import 'pages/home/home_view.dart';
+import 'package:stacked_services/stacked_services.dart';
+
+import 'app/locator.dart';
+import 'ui/pages/home/home_view.dart';
+import './app/router.gr.dart' as auto_router;
+import 'package:stacked_services/stacked_services.dart';
+
+void setupDialogUi() {
+  var dialogService = locator<DialogService>();
+
+  dialogService.registerCustomDialogUi((context, dialogRequest) => Dialog(
+        backgroundColor: Colors.transparent,
+        child: Container(
+          padding: const EdgeInsets.all(2),
+          height: MediaQuery.of(context).size.height * 0.8,
+          // width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(color: Colors.white.withOpacity(0.90), borderRadius: BorderRadius.all(Radius.circular(36)), boxShadow: [
+            BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.3), blurRadius: 36),
+          ]),
+          child: dialogRequest.customData as Widget,
+        ),
+      ));
+}
 
 void main() {
   setupLocator();
+  setupDialogUi();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: AppProvider.init()),
     ChangeNotifierProvider.value(value: AuthProvider.initialize()),
-  ], child: MyApp()));
+  ], child:  MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,8 +49,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      onGenerateRoute: generateRoute,
-      initialRoute: "PageControllerRoute",
+      // navigatorKey: locator<NavigationService>().navigatorKey,
+      initialRoute: auto_router.Routes.appPagesController,
+      onGenerateRoute: auto_router.Router().onGenerateRoute,
+      // home: AppPagesController(),
     );
   }
 }
@@ -47,7 +69,7 @@ class AppPagesController extends StatelessWidget {
       case Status.Authenticating:
         return LoginView();
       case Status.Authenticated:
-        return HomeView();
+        return  HomeView();
       default:
         return LoginView();
     }

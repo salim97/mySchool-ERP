@@ -1,17 +1,18 @@
-import 'package:my_school_web/locator.dart';
+import 'package:my_school_web/app/locator.dart';
+import 'package:my_school_web/app/router.gr.dart';
 import 'package:my_school_web/provider/auth.dart';
 
-import 'package:my_school_web/services/navigation_service.dart';
-import 'package:my_school_web/widgets/custom_text.dart';
-import 'package:my_school_web/widgets/loading.dart';
+import 'package:my_school_web/ui/widgets/custom_text.dart';
+import 'package:my_school_web/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 import 'login_view_model.dart';
 
 class LoginView extends StatelessWidget {
-  final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
+  // final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +29,7 @@ class LoginView extends StatelessWidget {
             child: authProvider.status == Status.Authenticating
                 ? Loading()
                 : Scaffold(
-                    key: _key,
+                    // key: _key,
                     backgroundColor: Colors.transparent,
                     body: Center(
                       child: Container(
@@ -113,7 +114,9 @@ class LoginView extends StatelessWidget {
                                       // }
                                       // authProvider.clearController();
 
-                                      locator<NavigationService>().globalNavigateTo("LayoutRoute", context);
+                                      //locator<NavigationService>().globalNavigateTo("LayoutRoute", context);??
+                                      // Navigator.of(context).pushNamed("LayoutRoute"); ??
+                                      locator<NavigationService>().navigateTo(Routes.homeView);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -147,7 +150,8 @@ class LoginView extends StatelessWidget {
                                     ),
                                     GestureDetector(
                                         onTap: () {
-                                          locator<NavigationService>().globalNavigateTo("RegistrationRoute", context);
+                                          // locator<NavigationService>().globalNavigateTo("RegistrationRoute", context);
+                                          Navigator.of(context).pushNamed("RegistrationRoute");
                                         },
                                         child: CustomText(
                                           text: "Sign up here. ",

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:my_school_web/helpers/costants.dart';
 import 'package:my_school_web/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -19,7 +18,7 @@ class AuthProvider with ChangeNotifier {
   // User get user => _user;
 
   // public variables
-  final formkey = GlobalKey<FormState>();
+  // final formkey = GlobalKey<FormState>();
 
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();

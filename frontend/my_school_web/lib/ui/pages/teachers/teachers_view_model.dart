@@ -1,19 +1,20 @@
 import 'dart:math';
 
 import 'package:common/common.dart';
+import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/provider/app_provider.dart';
-import 'package:my_school_web/services/navigation_service.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/provider/app_provider.dart';
-import 'package:my_school_web/widgets/page_header.dart';
+import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
 import 'package:stacked/stacked.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-import '../../locator.dart';
+
 
 class TeachersViewModel extends BaseViewModel {
   final TeacherService teacherService = locator<TeacherService>();
@@ -78,6 +79,6 @@ class TeachersViewModel extends BaseViewModel {
 
   onCreateNew() {
     //appProvider.changeCurrentPage("addTeacher");
-    locator<NavigationService>().navigateTo("AddTeacherView");
+    // locator<NavigationService>().navigateTo("AddTeacherView");
   }
 }

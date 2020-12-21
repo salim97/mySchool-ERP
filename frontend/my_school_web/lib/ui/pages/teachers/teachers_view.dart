@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:my_school_web/provider/app_provider.dart';
-import 'package:my_school_web/widgets/page_header.dart';
+import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
@@ -51,7 +51,6 @@ class _TeachersViewState extends State<TeachersView> {
                 show: true,
                 sortable: false,
                 sourceBuilder: (value, row) {
-                  //List list = List.from(value);
                   return Container(
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -71,7 +70,6 @@ class _TeachersViewState extends State<TeachersView> {
                         IconButton(
                           icon: Icon(Icons.delete),
                           onPressed: () async {
-                            print("kamok");
                             await model.teacherService.delete(value);
                             model.onRefresh();
                             model.notifyListeners();

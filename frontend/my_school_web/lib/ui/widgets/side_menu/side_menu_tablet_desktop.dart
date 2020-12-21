@@ -1,12 +1,13 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:my_school_web/locator.dart';
+import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/provider/app_provider.dart';
-import 'package:my_school_web/services/navigation_service.dart';
-import 'package:my_school_web/widgets/navbar/navbar_logo.dart';
-import 'package:my_school_web/widgets/side_menu/side_menu_item.dart';
+import 'package:my_school_web/ui/widgets/navbar/navbar_logo.dart';
+import 'package:my_school_web/ui/widgets/side_menu/side_menu_item.dart';
 import 'package:flutter/material.dart';
-import 'package:my_school_web/widgets/side_menu/side_menu_item_with_sub_item.dart';
+import 'package:my_school_web/ui/widgets/side_menu/side_menu_item_with_sub_item.dart';
 import 'package:provider/provider.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class SideMenuTabletDesktop extends StatelessWidget {
   // Widget jsonToWidget({String key, Map value}) {
@@ -35,8 +36,13 @@ class SideMenuTabletDesktop extends StatelessWidget {
             text: key1,
             active: appProvider.currentPage == key1,
             onTap: () {
+              print("IIIIIIIKAMOK");
               appProvider.changeCurrentPage(key1);
               locator<NavigationService>().navigateTo(value1["route name"]);
+              // ExtendedNavigator.of(context).push(value1["route name"]);
+              //Navigator.of(context).pushNamed(value1["route name"]);
+
+              print(value1["route name"]);
             },
           ),
         );
@@ -53,7 +59,8 @@ class SideMenuTabletDesktop extends StatelessWidget {
             active: appProvider.currentPage == key2,
             onTap: () {
               appProvider.changeCurrentPage(key2);
-              locator<NavigationService>().navigateTo(value2["route name"]);
+              // locator<NavigationService>().navigateTo(value2["route name"]);
+              Navigator.of(context).pushNamed(value1["route name"]);
             },
           ),
         );

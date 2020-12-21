@@ -1,5 +1,4 @@
-import 'package:my_school_web/helpers/app_colors.dart';
-import 'package:my_school_web/widgets/custom_text.dart';
+import 'package:my_school_web/ui/widgets/custom_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

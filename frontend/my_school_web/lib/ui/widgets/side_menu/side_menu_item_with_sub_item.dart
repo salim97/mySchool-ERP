@@ -1,4 +1,4 @@
-import 'package:my_school_web/widgets/custom_text.dart';
+import 'package:my_school_web/ui/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
 class SideMenuItemWidthSubItemDesktop extends StatelessWidget {

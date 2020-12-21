@@ -5,14 +5,14 @@ import 'navbar_mobile.dart';
 import 'navbar_tablet_desktop.dart';
 
 class NavigationBar extends StatelessWidget {
-  final GlobalKey<ScaffoldState> scaffoldState;
+  // final GlobalKey<ScaffoldState> scaffoldState;
 
-  const NavigationBar({Key key, this.scaffoldState}) : super(key: key);
+  const NavigationBar({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ScreenTypeLayout(
       mobile: NavigationBarMobile(
-        scaffoldState: scaffoldState,
+        // scaffoldState: scaffoldState,
       ),
       tablet: NavigationTabletDesktop(),
     );

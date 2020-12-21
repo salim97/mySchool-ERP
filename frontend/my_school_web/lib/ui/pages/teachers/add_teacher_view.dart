@@ -1,7 +1,8 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
+import 'package:my_school_web/app/router.gr.dart';
 import 'package:my_school_web/provider/app_provider.dart';
-import 'package:my_school_web/widgets/page_header.dart';
+import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:stacked/stacked.dart';
@@ -270,7 +271,10 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: RaisedButton(
                                       color: Colors.black,
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        model.onBackClicked();
+                                        //Navigator.of(context).pushNamed(Routes.teachersView);
+                                      },
                                       child: Text(
                                         "Back",
                                         style: TextStyle(color: Colors.white),

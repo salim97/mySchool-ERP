@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 
 class NavigationBarMobile extends StatelessWidget {
-  final GlobalKey<ScaffoldState> scaffoldState;
+  // final GlobalKey<ScaffoldState> scaffoldState;
 
-  const NavigationBarMobile({Key key, this.scaffoldState}) : super(key: key);
+  const NavigationBarMobile({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

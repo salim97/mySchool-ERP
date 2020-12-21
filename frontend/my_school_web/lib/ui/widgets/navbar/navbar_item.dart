@@ -1,8 +1,8 @@
-import 'package:my_school_web/services/navigation_service.dart';
+import 'package:my_school_web/app/locator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:stacked_services/stacked_services.dart';
 
-import '../../locator.dart';
 
 class NavBarItem extends StatelessWidget {
   final String title;
@@ -13,7 +13,7 @@ class NavBarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        locator<NavigationService>().navigateTo(navigationPath);
+        // locator<NavigationService>().navigateTo(navigationPath);
       },
       child: Text(
         title,
