@@ -37,13 +37,17 @@ class AddTeacherViewModel extends BaseViewModel {
 
   onBackClicked() async {
     //locator<NavigationService>().navigateTo(Routes.addTeacherView);
-    final DialogService _dialogService = locator<DialogService>();
-          await _dialogService.showDialog(
-        title: "Time out",
-        description: "Try again",
-        dialogPlatform: DialogPlatform.Material,
-      );
-
+    // final DialogService _dialogService = locator<DialogService>();
+    // DialogResponse dr = await _dialogService.showConfirmationDialog(
+    //   title: 'The Confirmation Dialog',
+    //   description: 'Do you want to update Confiramtion state in the UI?',
+    //   confirmationTitle: 'Yes',
+    //   cancelTitle: 'No',
+    // );
+    final _bottomSheetService = locator<BottomSheetService>();
+    var response = await _bottomSheetService.showBottomSheet(title: "zab el kbir", description: "zebi vrai kbir");
+    print(response?.confirmed);
+    // print(dr);
     // await _dialogService.showCustomDialog(
     //     title: 'This is a custom UI with Text as main button',
     //     description: 'Sheck out the builder in the dialog_ui_register.dart file',

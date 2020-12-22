@@ -16,6 +16,32 @@ class AddTeacherView extends StatefulWidget {
 
 class _AddTeacherViewState extends State<AddTeacherView> {
   bool _obscureText = true;
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, //this means the user must tap a button to exit the Alert Dialog
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('AlertDialog Title'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Hello From Alert DIalog'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Approve'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -258,8 +284,9 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                     padding: const EdgeInsets.all(8.0),
                                     child: RaisedButton(
                                       color: Colors.green,
-                                      onPressed: () {
-                                        model.onSubmitClicked();
+                                      onPressed: () async {
+                                        //model.onSubmitClicked();
+                                        _showMyDialog();
                                       },
                                       child: Text(
                                         "Submit",

@@ -10,6 +10,8 @@ import 'package:get_it/get_it.dart';
 
 void $initGetIt(GetIt g, {String environment}) {
   final thirdPartyServicesModule = _$ThirdPartyServicesModule();
+  g.registerLazySingleton<BottomSheetService>(
+      () => thirdPartyServicesModule.bottomSheetService);
   g.registerLazySingleton<DialogService>(
       () => thirdPartyServicesModule.dialogService);
   g.registerLazySingleton<NavigationService>(
@@ -19,6 +21,8 @@ void $initGetIt(GetIt g, {String environment}) {
 }
 
 class _$ThirdPartyServicesModule extends ThirdPartyServicesModule {
+  @override
+  BottomSheetService get bottomSheetService => BottomSheetService();
   @override
   DialogService get dialogService => DialogService();
   @override

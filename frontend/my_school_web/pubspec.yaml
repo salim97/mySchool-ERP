@@ -34,8 +34,8 @@ dependencies:
   material_design_icons_flutter: ^4.0.5755
   stacked: ^1.7.1+1
   # stacked_services: ^0.4.4+3
-  # stacked_services: ^0.6.0+1 
-  stacked_services: 0.5.4+5 
+  stacked_services: ^0.6.0+1 
+  # stacked_services: 0.5.4+5 
   logger: ^0.7.0+2
   auto_route: ^0.6.9
   injectable: ^0.4.0+1
