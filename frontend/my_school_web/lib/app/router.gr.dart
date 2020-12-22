@@ -13,6 +13,8 @@ import '../main.dart';
 import '../ui/pages/dashboard/dashboard_view.dart';
 import '../ui/pages/home/home_view.dart';
 import '../ui/pages/login/login_view.dart';
+import '../ui/pages/students/add_student_view.dart';
+import '../ui/pages/students/students_view.dart';
 import '../ui/pages/teachers/add_teacher_view.dart';
 import '../ui/pages/teachers/teachers_view.dart';
 
@@ -21,6 +23,8 @@ class Routes {
   static const String dashboardView = '/dashboard-view';
   static const String teachersView = '/teachers-view';
   static const String addTeacherView = '/add-teacher-view';
+  static const String studentsView = '/students-view';
+  static const String addStudentView = '/add-student-view';
   static const String loginView = '/login-view';
   static const String appPagesController = '/app-pages-controller';
   static const all = <String>{
@@ -28,6 +32,8 @@ class Routes {
     dashboardView,
     teachersView,
     addTeacherView,
+    studentsView,
+    addStudentView,
     loginView,
     appPagesController,
   };
@@ -41,6 +47,8 @@ class Router extends RouterBase {
     RouteDef(Routes.dashboardView, page: DashboardView),
     RouteDef(Routes.teachersView, page: TeachersView),
     RouteDef(Routes.addTeacherView, page: AddTeacherView),
+    RouteDef(Routes.studentsView, page: StudentsView),
+    RouteDef(Routes.addStudentView, page: AddStudentView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.appPagesController, page: AppPagesController),
   ];
@@ -68,6 +76,18 @@ class Router extends RouterBase {
     AddTeacherView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => AddTeacherView(),
+        settings: data,
+      );
+    },
+    StudentsView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => StudentsView(),
+        settings: data,
+      );
+    },
+    AddStudentView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => AddStudentView(),
         settings: data,
       );
     },

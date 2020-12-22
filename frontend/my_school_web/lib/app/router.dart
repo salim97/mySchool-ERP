@@ -8,6 +8,8 @@ import 'package:my_school_web/main.dart';
 import 'package:my_school_web/ui/pages/dashboard/dashboard_view.dart';
 import 'package:my_school_web/ui/pages/home/home_view.dart';
 import 'package:my_school_web/ui/pages/login/login_view.dart';
+import 'package:my_school_web/ui/pages/students/add_student_view.dart';
+import 'package:my_school_web/ui/pages/students/students_view.dart';
 import 'package:my_school_web/ui/pages/teachers/add_teacher_view.dart';
 import 'package:my_school_web/ui/pages/teachers/teachers_view.dart';
 
@@ -27,28 +29,28 @@ import 'package:my_school_web/ui/pages/teachers/teachers_view.dart';
   routes: <AutoRoute>[
     MaterialRoute(
       page: HomeView,
-      name: 'homeView',
       // initial: true,
     ),
     MaterialRoute(
       page: DashboardView,
-      name: 'dashboardView',
     ),
     MaterialRoute(
       page: TeachersView,
-      // name: 'teachersView',
     ),
     MaterialRoute(
       page: AddTeacherView,
-      name: 'addTeacherView',
+    ),
+    MaterialRoute(
+      page: StudentsView,
+    ),
+    MaterialRoute(
+      page: AddStudentView,
     ),
     MaterialRoute(
       page: LoginView,
-      name: 'loginView',
     ),
     MaterialRoute(
       page: AppPagesController,
-      name: 'appPagesController',
     ),
   ],
   // transitionsBuilder: TransitionsBuilders.zoomIn,

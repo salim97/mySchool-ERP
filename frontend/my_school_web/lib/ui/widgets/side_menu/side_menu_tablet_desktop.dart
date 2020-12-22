@@ -36,13 +36,8 @@ class SideMenuTabletDesktop extends StatelessWidget {
             text: key1,
             active: appProvider.currentPage == key1,
             onTap: () {
-              print("IIIIIIIKAMOK");
               appProvider.changeCurrentPage(key1);
               locator<NavigationService>().navigateTo(value1["route name"]);
-              // ExtendedNavigator.of(context).push(value1["route name"]);
-              //Navigator.of(context).pushNamed(value1["route name"]);
-
-              print(value1["route name"]);
             },
           ),
         );

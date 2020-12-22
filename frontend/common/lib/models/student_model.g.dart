@@ -9,6 +9,7 @@ part of 'student_model.dart';
 StudentModel _$StudentModelFromJson(Map<String, dynamic> json) {
   return StudentModel(
     id: json['id'] as int,
+    parent_id: json['parent_id'] as int,
     gender: json['gender'] as String,
     first_name: json['first_name'] as String,
     middle_name: json['middle_name'] as String,
@@ -22,12 +23,13 @@ StudentModel _$StudentModelFromJson(Map<String, dynamic> json) {
     pin_code: json['pin_code'] as String,
     email_address: json['email_address'] as String,
     username: json['username'] as String,
+    password: json['password'] as String,
     joining_date: json['joining_date'] as String,
     leaving_date: json['leaving_date'] as String,
     current_position: json['current_position'] as String,
-    employee_code: json['employee_code'] as String,
+    rollNo: json['rollNo'] as String,
     working_hours: json['working_hours'] as String,
-  )..parent_id = json['parent_id'] as int;
+  );
 }
 
 Map<String, dynamic> _$StudentModelToJson(StudentModel instance) =>
@@ -47,9 +49,10 @@ Map<String, dynamic> _$StudentModelToJson(StudentModel instance) =>
       'pin_code': instance.pin_code,
       'email_address': instance.email_address,
       'username': instance.username,
+      'password': instance.password,
       'joining_date': instance.joining_date,
       'leaving_date': instance.leaving_date,
       'current_position': instance.current_position,
-      'employee_code': instance.employee_code,
+      'rollNo': instance.rollNo,
       'working_hours': instance.working_hours,
     };

@@ -8,14 +8,14 @@ import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
 import 'package:stacked/stacked.dart';
 
-import 'teachers_view_model.dart';
+import 'students_view_model.dart';
 
-class TeachersView extends StatefulWidget {
+class StudentsView extends StatefulWidget {
   @override
-  _TeachersViewState createState() => _TeachersViewState();
+  _StudentsViewState createState() => _StudentsViewState();
 }
 
-class _TeachersViewState extends State<TeachersView> {
+class _StudentsViewState extends State<StudentsView> {
   List<int> _perPages = [5, 10, 15, 100];
   int _total = 100;
   int _currentPerPage;
@@ -30,19 +30,20 @@ class _TeachersViewState extends State<TeachersView> {
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<TeachersViewModel>.reactive(
-        viewModelBuilder: () => TeachersViewModel(),
+    return ViewModelBuilder<StudentsViewModel>.reactive(
+        viewModelBuilder: () => StudentsViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
           model.onRefresh();
         },
         builder: (context, model, child) {
+
           List<DatatableHeader> headers = [
             DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
-            DatatableHeader(text: "Employee Code", value: "Employee_Code", show: true, sortable: true, textAlign: TextAlign.left),
-            DatatableHeader(text: "Name", value: "Name", show: true, sortable: true, textAlign: TextAlign.center),
-            DatatableHeader(text: "Incharge Class", value: "Incharge_Class", show: true, sortable: true, textAlign: TextAlign.center),
-            DatatableHeader(text: "Subjects Handling", value: "Subjects_Handling", show: true, sortable: true, textAlign: TextAlign.center),
+            DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
+            DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.center),
+            DatatableHeader(text: "Parent", value: "Parent", show: true, sortable: true, textAlign: TextAlign.center),
+            DatatableHeader(text: "Street Address", value: "Street Address", show: true, sortable: true, textAlign: TextAlign.center),
             DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
             DatatableHeader(
                 flex: 2,

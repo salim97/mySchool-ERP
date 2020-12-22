@@ -9,7 +9,7 @@ import 'package:stacked_services/stacked_services.dart';
 class AddTeacherViewModel extends BaseViewModel {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TeacherService teacherService = locator<TeacherService>();
-
+  final TeacherModel teacherModel = new TeacherModel();
   //personal details
   String selectedGender = "Male";
   TextEditingController firstNameController = TextEditingController();
@@ -35,29 +35,46 @@ class AddTeacherViewModel extends BaseViewModel {
   TextEditingController employeeCodeController = TextEditingController();
   TextEditingController workingHoursController = TextEditingController();
 
+  fillUI(TeacherModel teacherModel) {
+    this.teacherModel.id = teacherModel.id;
+    if(teacherModel.gender != null)
+    selectedGender = teacherModel.gender ;
+    firstNameController.text = teacherModel.first_name;
+    middleNameController.text = teacherModel.middle_name;
+    lastNameController.text = teacherModel.last_name;
+    dateOfBirthController.text = teacherModel.date_of_birth;
+    phoneController.text = teacherModel.phone;
+    qualificationController.text = teacherModel.qualification;
+
+    streetAddressController.text = teacherModel.street_address;
+    cityNameController.text = teacherModel.city_name;
+    countryController.text = teacherModel.country;
+    pinCodeController.text = teacherModel.pin_code;
+
+    emailAddressController.text = teacherModel.email_address;
+    usernameController.text = teacherModel.username;
+    passwordController.text = teacherModel.password;
+    confirmPasswordController.text = teacherModel.password;
+
+    joiningDateController.text = teacherModel.joining_date;
+    leavingDateController.text = teacherModel.leaving_date;
+    currentPositionController.text = teacherModel.current_position;
+    employeeCodeController.text = teacherModel.employee_code;
+    workingHoursController.text = teacherModel.working_hours;
+    notifyListeners();
+  }
+
   onBackClicked() async {
-    //locator<NavigationService>().navigateTo(Routes.addTeacherView);
-    // final DialogService _dialogService = locator<DialogService>();
-    // DialogResponse dr = await _dialogService.showConfirmationDialog(
-    //   title: 'The Confirmation Dialog',
-    //   description: 'Do you want to update Confiramtion state in the UI?',
-    //   confirmationTitle: 'Yes',
-    //   cancelTitle: 'No',
-    // );
-    final _bottomSheetService = locator<BottomSheetService>();
-    var response = await _bottomSheetService.showBottomSheet(title: "zab el kbir", description: "zebi vrai kbir");
-    print(response?.confirmed);
-    // print(dr);
-    // await _dialogService.showCustomDialog(
-    //     title: 'This is a custom UI with Text as main button',
-    //     description: 'Sheck out the builder in the dialog_ui_register.dart file',
-    //     mainButtonTitle: 'Ok',
-    //     showIconInMainButton: false,
-    //     barrierDismissible: true);
+    // locator<NavigationService>().navigateTo(Routes.addTeacherView);
+    locator<NavigationService>().back();
+
+    // final _bottomSheetService = locator<BottomSheetService>();
+    // var response = await _bottomSheetService.showBottomSheet(title: "zab el kbir", description: "zebi vrai kbir");
+    // print(response?.confirmed);
+
   }
 
   onSubmitClicked() {
-    TeacherModel teacherModel = new TeacherModel();
     teacherModel.gender = selectedGender;
     teacherModel.first_name = firstNameController.text;
     teacherModel.middle_name = middleNameController.text;

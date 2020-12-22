@@ -15,10 +15,10 @@ import 'package:responsive_table/responsive_table.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class TeachersViewModel extends BaseViewModel {
-  final TeacherService teacherService = locator<TeacherService>();
-  List<TeacherModel> listTeacherModel;
-  TeachersViewModel() {}
+class StudentsViewModel extends BaseViewModel {
+  final StudentService studentService = locator<StudentService>();
+  List<StudentModel> listStudentModel;
+  StudentsViewModel() {}
 
   bool isSearch = false;
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
@@ -33,15 +33,15 @@ class TeachersViewModel extends BaseViewModel {
   onRefresh() async {
     isLoading = true;
     notifyListeners();
-    listTeacherModel = await teacherService.getAll();
+    listStudentModel = await studentService.getAll();
     source.clear();
-    listTeacherModel.forEach((element) {
+    listStudentModel.forEach((element) {
       source.add({
         "ID": element.id,
-        "Employee_Code": element.employee_code,
-        "Name": element.first_name + " " + element.last_name,
-        "Incharge_Class": element.incharge_class,
-        "Subjects_Handling": element.subjects_handling,
+        "Roll No.": element.rollNo,
+        "Full Name": element.first_name + " " + element.last_name,
+        "Parent": element.parent_id,
+        "Street Address": element.street_address,
         "Phone": element.phone,
         "Action": element.id
       });
@@ -55,55 +55,10 @@ class TeachersViewModel extends BaseViewModel {
     // });
   }
 
-  onCreateNew() {
-    locator<NavigationService>().navigateTo(Routes.addTeacherView);
-  }
-
-  onEdit(id) async {
-    TeacherModel tm = listTeacherModel.firstWhere((element) => element.id == id);
-    await locator<NavigationService>().navigateTo(Routes.addTeacherView, arguments: tm);
-    await onRefresh();
-  }
-
-  onView(id) async {
-    TeacherModel tm = listTeacherModel.firstWhere((element) => element.id == id);
-    String description = "";
-    description += "Full Name :" + tm.first_name + "\n";
-    description += "Date of birth :" + "tm?.date_of_birth" + "\n";
-    description += "Phone Number :" + "tm?.phone" + "\n";
-    description += "Position :" + "tm?.current_position" + "\n";
-    description += "Address :" + "tm?.street_address" + "\n";
-    description += "Joining Date :" + "tm?.joining_date" + "\n";
-    description += "Working Hours :" + "tm?.working_hours" + "\n";
-    description += "Gender :" + "tm?.gender" + "\n";
-    description += "Email :" + "tm?.email_address" + "\n";
-    description += "Blood Group :" + "tm?.blood_group" + "\n";
-    description += "Qualification :" + " tm?.qualification" + "\n";
-    description += "Leaving Date :" + "tm?.leaving_date" + "\n";
-    description += "Employee Code :" + tm.employee_code + "\n";
-
-    final _bottomSheetService = locator<BottomSheetService>();
-    await _bottomSheetService.showBottomSheet(title: "INFO", description: description);
-  }
-
-  onDelete(id) async {
-    final _bottomSheetService = locator<BottomSheetService>();
-    var response = await _bottomSheetService.showBottomSheet(
-        title: "Are you sure you want delete this record ?",
-        description: "click on Yes to confirm suppresion of the record",
-        confirmButtonTitle: "YES",
-        cancelButtonTitle: "NO");
-    if (response == null) return;
-    if (response.confirmed) {
-      teacherService.delete(id);
-      onRefresh();
-    }
-  }
-
   onSearch(query) async {
     isLoading = true;
     notifyListeners();
-    Iterable<TeacherModel> ltm = listTeacherModel.where((element) {
+    Iterable<StudentModel> ltm = listStudentModel.where((element) {
       if (element.first_name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
@@ -120,10 +75,10 @@ class TeachersViewModel extends BaseViewModel {
     ltm.forEach((element) {
       source.add({
         "ID": element.id,
-        "Employee_Code": element.employee_code,
-        "Name": element.first_name + " " + element.last_name,
-        "Incharge_Class": element.incharge_class,
-        "Subjects_Handling": element.subjects_handling,
+        "Roll No.": element.rollNo,
+        "Full Name": element.first_name + " " + element.last_name,
+        "Parent": element.parent_id,
+        "Street Address": element.street_address,
         "Phone": element.phone,
         "Action": element.id
       });
@@ -132,4 +87,51 @@ class TeachersViewModel extends BaseViewModel {
     isLoading = false;
     notifyListeners();
   }
+
+  onCreateNew() {
+    locator<NavigationService>().navigateTo(Routes.addStudentView);
+  }
+
+  onEdit(id) async {
+    StudentModel tm = listStudentModel.firstWhere((element) => element.id == id);
+    await locator<NavigationService>().navigateTo(Routes.addStudentView, arguments: tm);
+    await onRefresh();
+  }
+
+  onView(id) async {
+    StudentModel tm = listStudentModel.firstWhere((element) => element.id == id);
+    String description = "";
+    description += "Full Name :" + tm.first_name + "\n";
+    description += "Date of birth :" + "tm?.date_of_birth" + "\n";
+    description += "Phone Number :" + "tm?.phone" + "\n";
+    description += "Position :" + "tm?.current_position" + "\n";
+    description += "Address :" + "tm?.street_address" + "\n";
+    description += "Joining Date :" + "tm?.joining_date" + "\n";
+    description += "Working Hours :" + "tm?.working_hours" + "\n";
+    description += "Gender :" + "tm?.gender" + "\n";
+    description += "Email :" + "tm?.email_address" + "\n";
+    description += "Blood Group :" + "tm?.blood_group" + "\n";
+    description += "Qualification :" + " tm?.qualification" + "\n";
+    description += "Leaving Date :" + "tm?.leaving_date" + "\n";
+    description += "Employee Code :" + tm.rollNo + "\n";
+
+    final _bottomSheetService = locator<BottomSheetService>();
+    await _bottomSheetService.showBottomSheet(title: "INFO", description: description);
+  }
+
+  onDelete(id) async {
+    final _bottomSheetService = locator<BottomSheetService>();
+    var response = await _bottomSheetService.showBottomSheet(
+        title: "Are you sure you want delete this record ?",
+        description: "click on Yes to confirm suppresion of the record",
+        confirmButtonTitle: "YES",
+        cancelButtonTitle: "NO");
+    if (response == null) return;
+    if (response.confirmed) {
+      studentService.delete(id);
+      onRefresh();
+    }
+  }
+
+
 }

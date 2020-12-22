@@ -41,7 +41,7 @@ class HomeView extends StatelessWidget {
                   child: Navigator(
                     key: locator<NavigationService>().navigatorKey,
                     onGenerateRoute: auto_router.Router().onGenerateRoute,
-                    initialRoute: auto_router.Routes.addTeacherView,
+                    initialRoute: auto_router.Routes.dashboardView,
                     // initialRoute: "Dashboard",
                   ),
                 )

@@ -8,14 +8,14 @@ import 'package:provider/provider.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:stacked/stacked.dart';
 import 'package:intl/intl.dart';
-import 'add_teacher_view_model.dart';
+import 'add_student_view_model.dart';
 
-class AddTeacherView extends StatefulWidget {
+class AddStudentView extends StatefulWidget {
   @override
-  _AddTeacherViewState createState() => _AddTeacherViewState();
+  _AddStudentViewState createState() => _AddStudentViewState();
 }
 
-class _AddTeacherViewState extends State<AddTeacherView> {
+class _AddStudentViewState extends State<AddStudentView> {
   @override
   void initState() {
     super.initState();
@@ -27,15 +27,15 @@ class _AddTeacherViewState extends State<AddTeacherView> {
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<AddTeacherViewModel>.reactive(
-      viewModelBuilder: () => AddTeacherViewModel(),
+    return ViewModelBuilder<AddStudentViewModel>.reactive(
+      viewModelBuilder: () => AddStudentViewModel(),
       onModelReady: (model) {
-        final TeacherModel teacherModel = ModalRoute.of(context).settings.arguments;
-        if (teacherModel != null) model.fillUI(teacherModel);
+        final StudentModel studentModel = ModalRoute.of(context).settings.arguments;
+        if (studentModel != null) model.fillUI(studentModel);
       },
       builder: (
         BuildContext context,
-        AddTeacherViewModel model,
+        AddStudentViewModel model,
         Widget child,
       ) {
         return Container(
@@ -283,7 +283,6 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                       color: Colors.black,
                                       onPressed: () {
                                         model.onBackClicked();
-                                        //Navigator.of(context).pushNamed(Routes.teachersView);
                                       },
                                       child: Text(
                                         "Back",

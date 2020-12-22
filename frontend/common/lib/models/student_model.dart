@@ -17,7 +17,7 @@ class StudentModel {
   String date_of_birth;
   String blood_group;
   String phone;
-
+  get name => first_name + " " + middle_name + " " + last_name;
 // address:
   String street_address;
   String city_name;
@@ -27,16 +27,18 @@ class StudentModel {
 // account information:
   String email_address;
   String username;
+  String password;
 
 // school details:
   String joining_date;
   String leaving_date;
   String current_position;
-  String employee_code;
+  String rollNo;
   String working_hours;
 
   StudentModel(
       {this.id,
+      this.parent_id,
       this.gender,
       this.first_name,
       this.middle_name,
@@ -50,10 +52,11 @@ class StudentModel {
       this.pin_code,
       this.email_address,
       this.username,
+      this.password,
       this.joining_date,
       this.leaving_date,
       this.current_position,
-      this.employee_code,
+      this.rollNo,
       this.working_hours});
 
   factory StudentModel.fromJson(Map<String, dynamic> json) => _$StudentModelFromJson(json);

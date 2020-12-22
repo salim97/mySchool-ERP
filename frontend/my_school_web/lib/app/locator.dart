@@ -1,6 +1,6 @@
 // flutter pub run build_runner build
 
-import 'package:common/services/teacher_service.dart';
+import 'package:common/common.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,4 +14,5 @@ void setupLocator() {
   // locator.registerLazySingleton(() => NavigationService());
   $initGetIt(locator);
   locator.registerLazySingleton<TeacherService>(() => FakeTeacherService());
+  locator.registerLazySingleton<StudentService>(() => FakeStudentService());
 }
