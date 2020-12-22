@@ -15,4 +15,5 @@ void setupLocator() {
   $initGetIt(locator);
   locator.registerLazySingleton<TeacherService>(() => FakeTeacherService());
   locator.registerLazySingleton<StudentService>(() => FakeStudentService());
+  locator.registerLazySingleton<WorkingHoursService>(() => FakeWorkingHoursService());
 }

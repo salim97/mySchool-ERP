@@ -15,32 +15,32 @@ Map menuAdmin = {
   "Dashboard": {"route name": "/dashboard-view", "icon": MdiIcons.desktopMacDashboard, "children": null},
   "Teachers": {"route name": "/teachers-view", "icon": MdiIcons.accountTie, "children": null},
   "Students": {"route name": "/students-view", "icon": MdiIcons.account, "children": null},
-  "Parents": {"route name": "Parents", "icon": MdiIcons.humanFemaleGirl, "children": null},
+  "Parents": {"route name": "/to-do-page", "icon": MdiIcons.humanFemaleGirl, "children": null},
   "Classes": {
     "icon": MdiIcons.newspaper,
     "children": {
-      "Classes": {"route name": "Classes", "icon": MdiIcons.minus, "children": null},
-      "Subjects": {"route name": "Subjects", "icon": MdiIcons.minus, "children": null},
-      "Subject Mark Fields": {"route name": "Subject Mark Fields", "icon": MdiIcons.minus, "children": null},
-      "Marks": {"route name": "Marks", "icon": MdiIcons.minus, "children": null},
-      "Exams": {"route name": "Exams", "icon": MdiIcons.minus, "children": null},
-      "Time Table": {"route name": "Time Table", "icon": MdiIcons.minus, "children": null},
+      "Classes": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Subjects": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Subject Mark Fields": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Marks": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Exams": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Time Table": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
     }
   },
   "Attendance": {
     "icon": MdiIcons.formatListChecks,
     "children": {
-      "Students Attendance": {"route name": "Students Attendance", "icon": MdiIcons.minus, "children": null},
-      "Teachers Attendance": {"route name": "Teachers Attendance", "icon": MdiIcons.minus, "children": null},
+      "Students Attendance": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Teachers Attendance": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
     }
   },
-  "Events": {"route name": "Events", "icon": MdiIcons.calendar, "children": null},
-  "Notify": {"route name": "Notify", "icon": MdiIcons.bell, "children": null},
+  "Events": {"route name": "/to-do-page", "icon": MdiIcons.calendar, "children": null},
+  "Notify": {"route name": "/to-do-page", "icon": MdiIcons.bell, "children": null},
   "General Settings": {
     "icon": MdiIcons.cog,
     "children": {
-      "Settings": {"route name": "Settings", "icon": MdiIcons.minus, "children": null},
-      "Working Hours": {"route name": "Working Hours", "icon": MdiIcons.minus, "children": null},
+      "Settings": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Working Hours": {"route name": "/working-hours-view", "icon": MdiIcons.minus, "children": null},
     }
   },
 };

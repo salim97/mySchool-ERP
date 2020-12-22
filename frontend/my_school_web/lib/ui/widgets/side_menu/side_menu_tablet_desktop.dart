@@ -36,6 +36,7 @@ class SideMenuTabletDesktop extends StatelessWidget {
             text: key1,
             active: appProvider.currentPage == key1,
             onTap: () {
+              print("goto " + value1["route name"]);
               appProvider.changeCurrentPage(key1);
               locator<NavigationService>().navigateTo(value1["route name"]);
             },
@@ -53,9 +54,9 @@ class SideMenuTabletDesktop extends StatelessWidget {
             text: key2,
             active: appProvider.currentPage == key2,
             onTap: () {
+              print("goto " + value2["route name"]);
               appProvider.changeCurrentPage(key2);
-              // locator<NavigationService>().navigateTo(value2["route name"]);
-              Navigator.of(context).pushNamed(value1["route name"]);
+              locator<NavigationService>().navigateTo(value2["route name"]);
             },
           ),
         );
