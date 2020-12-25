@@ -10,9 +10,7 @@ TeacherModel _$TeacherModelFromJson(Map<String, dynamic> json) {
   return TeacherModel(
     id: json['id'] as int,
     gender: json['gender'] as String,
-    first_name: json['first_name'] as String,
-    middle_name: json['middle_name'] as String,
-    last_name: json['last_name'] as String,
+    full_name: json['full_name'] as String,
     date_of_birth: json['date_of_birth'] as String,
     blood_group: json['blood_group'] as String,
     phone: json['phone'] as String,
@@ -38,9 +36,7 @@ Map<String, dynamic> _$TeacherModelToJson(TeacherModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'gender': instance.gender,
-      'first_name': instance.first_name,
-      'middle_name': instance.middle_name,
-      'last_name': instance.last_name,
+      'full_name': instance.full_name,
       'date_of_birth': instance.date_of_birth,
       'blood_group': instance.blood_group,
       'phone': instance.phone,

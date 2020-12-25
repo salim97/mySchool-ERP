@@ -14,6 +14,7 @@ SubjectModel _$SubjectModelFromJson(Map<String, dynamic> json) {
     teacher_name: json['teacher_name'] as String,
     teacher_id: json['teacher_id'] as String,
     book_name: json['book_name'] as String,
+    type: json['type'] as String,
   );
 }
 
@@ -25,4 +26,5 @@ Map<String, dynamic> _$SubjectModelToJson(SubjectModel instance) =>
       'teacher_name': instance.teacher_name,
       'teacher_id': instance.teacher_id,
       'book_name': instance.book_name,
+      'type': instance.type,
     };

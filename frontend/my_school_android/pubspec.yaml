@@ -28,10 +28,36 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.1
+  responsive_builder: ^0.3.0
+  get_it: ^3.0.3
+  fl_chart: ^0.12.0
+  charts_flutter: ^0.9.0
+  provider: ^4.3.2+2
+  responsive_table: ^0.1.1+8
+  shared_preferences: ^0.5.12+4
+  flutter_spinkit: ^4.1.2+1
+  material_design_icons_flutter: ^4.0.5755
+  stacked: ^1.7.1+1
+  # stacked_services: ^0.4.4+3
+  stacked_services: ^0.6.0+1 
+  # stacked_services: 0.5.4+5 
+  logger: ^0.7.0+2
+  auto_route: ^0.6.9
+  injectable: ^0.4.0+1
+  datetime_picker_formfield: ^1.0.0
+  dio: ^3.0.10
+  http:
+  fluttertoast:
+  flutter_calendar_carousel: ^1.4.10
+  common:
+    path: ../common
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner:
+  auto_route_generator:
+  injectable_generator:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -45,8 +71,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+      - assets/images/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

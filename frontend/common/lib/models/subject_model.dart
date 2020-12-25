@@ -13,6 +13,7 @@ class SubjectModel {
   String teacher_name;
   String teacher_id;
   String book_name;
+  String type;
 
   SubjectModel({
     this.id,
@@ -21,6 +22,7 @@ class SubjectModel {
     this.teacher_name,
     this.teacher_id,
     this.book_name,
+    this.type,
   });
 
   factory SubjectModel.fromJson(Map<String, dynamic> json) => _$SubjectModelFromJson(json);

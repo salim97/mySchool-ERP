@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:my_school_web/models/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,10 +9,10 @@ enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 class AuthProvider with ChangeNotifier {
   // User _user;
   Status _status = Status.Authenticated;
-  UserModel _userModel;
+  // UserModel _userModel;
 
 //  getter
-  UserModel get userModel => _userModel;
+  // UserModel get userModel => _userModel;
   Status get status => _status;
   // User get user => _user;
 

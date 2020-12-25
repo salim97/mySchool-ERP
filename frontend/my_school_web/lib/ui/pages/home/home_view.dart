@@ -39,11 +39,11 @@ class HomeView extends StatelessWidget {
                 NavigationBar(),
                 Expanded(
                   child: Navigator(
-                    key: locator<NavigationService>().navigatorKey,
-                    onGenerateRoute: auto_router.Router().onGenerateRoute,
-                    initialRoute: auto_router.Routes.workingHoursView,
-                    // initialRoute: "Dashboard",
-                  ),
+                      key: locator<NavigationService>().navigatorKey,
+                      onGenerateRoute: auto_router.Router().onGenerateRoute,
+                      initialRoute: auto_router.Routes.dashboardView
+                      // initialRoute: "Dashboard",
+                      ),
                 )
               ],
             ),

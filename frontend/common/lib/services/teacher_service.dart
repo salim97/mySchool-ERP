@@ -21,8 +21,7 @@ class FakeTeacherService implements TeacherService {
       listTeacherModel.add(new TeacherModel(
         id: randomInt,
         employee_code: randomInt.toString(),
-        first_name: "teacher ",
-        last_name: i.toString(),
+        full_name: "teacher " + i.toString(),
         phone: "06" + randomInt.toString(),
       ));
     }
@@ -47,7 +46,7 @@ class FakeTeacherService implements TeacherService {
     List<TeacherModel> selected = new List<TeacherModel>();
     listTeacherModel.forEach((element) {
       if (element.phone.contains(query)) selected.add(element);
-      if (element.name.contains(query)) selected.add(element);
+      if (element.full_name.contains(query)) selected.add(element);
     });
     return Future<List<TeacherModel>>.value(selected);
   }

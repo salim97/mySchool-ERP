@@ -50,6 +50,7 @@ class AppPagesController extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     print(authProvider.status.toString());
+    return HomeView();
     switch (authProvider.status) {
       case Status.Uninitialized:
         return Loading();
