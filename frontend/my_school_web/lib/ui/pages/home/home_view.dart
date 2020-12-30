@@ -21,7 +21,7 @@ class HomeView extends StatelessWidget {
           children: [
             UserAccountsDrawerHeader(
               accountEmail: Text("abc@gmail.com"),
-              accountName: Text("Santos Enoque"),
+              accountName: Text("Nom Prenom"),
             ),
             ListTile(
               title: Text("Lessons"),

@@ -67,16 +67,7 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
                   ),
                   child: Column(
                     children: <Widget>[
-                      Container(
-                        alignment: Alignment.topCenter,
-                        height: 10.0,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage('assets/images/line.png'),
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
-                      ),
+
                       Container(
                         height: MediaQuery.of(context).size.height / 2,
                         child: Column(

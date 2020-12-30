@@ -28,3 +28,5 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/auth', CompositionRoot.authRouter())
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`))
+
+

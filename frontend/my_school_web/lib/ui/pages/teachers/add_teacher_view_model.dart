@@ -39,9 +39,9 @@ class AddTeacherViewModel extends BaseViewModel {
     this.teacherModel.id = teacherModel.id;
     if(teacherModel.gender != null)
     selectedGender = teacherModel.gender ;
-    firstNameController.text = teacherModel.first_name;
-    middleNameController.text = teacherModel.middle_name;
-    lastNameController.text = teacherModel.last_name;
+    // firstNameController.text = teacherModel.first_name;
+    // middleNameController.text = teacherModel.middle_name;
+    // lastNameController.text = teacherModel.last_name;
     dateOfBirthController.text = teacherModel.date_of_birth;
     phoneController.text = teacherModel.phone;
     qualificationController.text = teacherModel.qualification;
@@ -76,9 +76,9 @@ class AddTeacherViewModel extends BaseViewModel {
 
   onSubmitClicked() {
     teacherModel.gender = selectedGender;
-    teacherModel.first_name = firstNameController.text;
-    teacherModel.middle_name = middleNameController.text;
-    teacherModel.last_name = lastNameController.text;
+    // teacherModel.first_name = firstNameController.text;
+    // teacherModel.middle_name = middleNameController.text;
+    // teacherModel.last_name = lastNameController.text;
     teacherModel.date_of_birth = dateOfBirthController.text;
     teacherModel.phone = phoneController.text;
     teacherModel.qualification = qualificationController.text;

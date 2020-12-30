@@ -4,10 +4,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
 import 'package:my_school_android/ui/pages/attendance/attendance_view.dart';
+import 'package:my_school_android/ui/pages/documents/documents_view.dart';
+import 'package:my_school_android/ui/pages/examination/examination_view.dart';
 import 'package:my_school_android/ui/pages/home/home_view.dart';
 import 'package:my_school_android/ui/pages/homework/homework_view.dart';
 import 'package:my_school_android/ui/pages/login/login_view.dart';
+import 'package:my_school_android/ui/pages/notice/notice_view.dart';
+import 'package:my_school_android/ui/pages/profile/profile_view.dart';
 import 'package:my_school_android/ui/pages/routine/routine_view.dart';
+import 'package:my_school_android/ui/pages/settings/settings_view.dart';
 import 'package:my_school_android/ui/pages/splash/splash_view.dart';
 import 'package:my_school_android/ui/pages/subjects/subject_screen_view.dart';
 import 'package:my_school_android/ui/pages/teachers/student_teacher_view.dart';
@@ -24,7 +29,11 @@ import 'package:my_school_android/ui/pages/todo_page.dart';
     MaterialRoute(page: SubjectView),
     MaterialRoute(page: StudentTeacherView),
     MaterialRoute(page: AttendanceView),
-    // MaterialRoute(page: ToDoPage),
+    MaterialRoute(page: SettingsView),
+    MaterialRoute(page: DocumentsView),
+    MaterialRoute(page: ProfileView),
+    MaterialRoute(page: NoticeView),
+    MaterialRoute(page: ExaminationView),
   ],
   transitionsBuilder: TransitionsBuilders.zoomIn,
   durationInMilliseconds: 400,

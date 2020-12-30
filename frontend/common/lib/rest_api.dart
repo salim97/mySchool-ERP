@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
 
 const SERVER_NAME = "http://127.0.0.1"; //your server's ip address
-const DEBUG_HTTP = false; //print http responses from server
+const DEBUG_HTTP = true; //print http responses from server
 
 class RestAPI {
   Dio dio = new Dio();
@@ -60,16 +60,21 @@ class RestAPI {
   }
 
   Future<Response> myDioPOST(
-      {String url, dynamic data, Map<String, dynamic> queryParameters, String contentType =_defaultContentType, bool noAuth_key = false}) async {
-
+      {String url,
+      dynamic data,
+      Map<String, dynamic> queryParameters,
+      String contentType = _defaultContentType,
+      bool isAuthKeyRequeried = false}) async {
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
-        print("url = " + url);
+        print("request.url = " + url);
+        print("request.queryParameters = " + queryParameters.toString());
+        print("request.data = " + data.toString());
       }
       Response response;
       Map<String, dynamic> headers;
-      if (!noAuth_key)
+      if (isAuthKeyRequeried)
         headers = {
           "Authorization": "Bearer " + _token,
         };
@@ -90,23 +95,22 @@ class RestAPI {
         ),
       );
       if (DEBUG_HTTP) {
-        print("response.statusCode = " + response.statusCode.toString());
-        print("request.queryParameters = " + response.request.queryParameters.toString());
-        print("request.data = " + response.request.data.toString());
-        print("response.data = " + response.data.toString());
+        // print("response.statusCode = " + response?.statusCode.toString());
+        print("response.data = " + response?.data.toString());
       }
       lastResponse = response;
       return response;
     } catch (e) {
       print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
-      handleError(e);
+      print(e);
+      //handleError(e);
       lastResponse = e.response;
       return e.response;
     }
   }
 
-  Future<Response> myDioPUT({String url, dynamic data, Map<String, dynamic> queryParameters, String contentType = _defaultContentType}) async {
-
+  Future<Response> myDioPUT(
+      {String url, dynamic data, Map<String, dynamic> queryParameters, String contentType = _defaultContentType}) async {
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -120,7 +124,7 @@ class RestAPI {
         options: Options(
           contentType: contentType, // or whatever
           headers: {
-            "Authorization": "Bearer " +_token,
+            "Authorization": "Bearer " + _token,
           },
           // followRedirects: false,
           // validateStatus: (status) {
@@ -162,7 +166,7 @@ class RestAPI {
         print("There is something wrong with our servers, please report to the admin so it gets fixed.");
         break;
       default:
-        print("Something went wrong. status code ="+error.response.statusCode.toString());
+        print("Something went wrong. status code =" + error.response.statusCode.toString());
     }
   }
 }

@@ -30,7 +30,7 @@ class CardItem extends StatelessWidget {
              padding: const EdgeInsets.all(8.0),
              child: Container(
                height: 80,
-               width: MediaQuery.of(context).size.width / 4,
+               width: MediaQuery.of(context).size.width / 5,
                decoration: BoxDecoration(
                    color: Colors.white,
                    borderRadius: BorderRadius.circular(8),

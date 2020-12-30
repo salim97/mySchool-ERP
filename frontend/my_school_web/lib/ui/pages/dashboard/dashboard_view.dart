@@ -21,7 +21,7 @@ class DashboardView extends StatelessWidget {
           return ListView(
             children: [
               PageHeader(
-                text: "DASHBOARD",
+                text: "TABLEAU DE BORD",
               ),
               CardsList(),
               Padding(
@@ -29,28 +29,33 @@ class DashboardView extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(height: 600, width: MediaQuery.of(context).size.width / 1.9, child: SalesChart()),
+                    SizedBox(
+                      height: 800,
+                      width: MediaQuery.of(context).size.width / 1.9,
+                      child: SalesChart(),
+                    ),
                     Container(
                       width: MediaQuery.of(context).size.width / 4,
-                      height: 600,
+                      height: 800,
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [BoxShadow(color: Colors.grey[300], offset: Offset(0, 3), blurRadius: 16)]),
                       child: Column(
+                        
                         children: [
                           CustomText(
-                            text: 'Top Buyers',
+                            text: 'EXAMS',
                             size: 30,
                           ),
-                          TopBuyerWidget(),
-                          TopBuyerWidget(),
-                          TopBuyerWidget(),
-                          TopBuyerWidget(),
-                          TopBuyerWidget(),
-                          TopBuyerWidget(),
-                          TopBuyerWidget(),
-                          TopBuyerWidget(),
+                          // TopBuyerWidget(),
+                          // TopBuyerWidget(),
+                          // TopBuyerWidget(),
+                          // TopBuyerWidget(),
+                          // TopBuyerWidget(),
+                          // TopBuyerWidget(),
+                          // TopBuyerWidget(),
+                          // TopBuyerWidget(),
                         ],
                       ),
                     )

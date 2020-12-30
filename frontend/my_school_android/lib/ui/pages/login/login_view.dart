@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_school_android/app/locator.dart';
 import 'package:my_school_android/app/router.gr.dart';
+import 'package:my_school_android/app/theme.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -134,7 +135,7 @@ class _LoginViewState extends State<LoginView> {
                                 height: 50.0,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15.0),
-                                  color: Colors.purple,
+                                  color: MyTheme.primaryColor,
                                 ),
                                 child: Text(
                                   "Login",

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:common/common.dart';
 import 'package:common/models/user_model.dart';
 import 'package:common/services/teacher_service.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,6 +10,18 @@ import 'package:logger/logger.dart';
 
 void main() {
   test('main', () {
+    AuthServiceImpl authServiceImpl = new AuthServiceImpl();
+     authServiceImpl.signup(UserModel(
+      fullName: "full name",
+      auth_type: "email",
+      email: "email@email.com",
+      password: "password",
+      role: "student",
+    )).then((value) {
+expect(true, true);
+    });
+
+    /*
     var logger = new Logger();
     FakeTeacherService fakeTeacherService = new FakeTeacherService();
     Directory current = Directory.current;
@@ -34,8 +47,9 @@ void main() {
         }
       }
     }
-
     expect(true, true);
+*/
+    
 
 //     final calculator = Calculator();
 //     expect(calculator.addOne(2), 3);

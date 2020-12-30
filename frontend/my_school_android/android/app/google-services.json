@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "358226921083",
+    "project_id": "school-erp-ef01f",
+    "storage_bucket": "school-erp-ef01f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358226921083:android:f8a4255e8d06a3484144de",
+        "android_client_info": {
+          "package_name": "com.example.my_school_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358226921083-f75r469i52h1pln5030heben95fq6ibj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.my_school_android",
+            "certificate_hash": "4405f7c88de64ddbb4c7c0790f2e64ee63e58b94"
+          }
+        },
+        {
+          "client_id": "358226921083-c0u1s1s7mcgqpij5pjqkv0afj33ha02u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ2TV9FeuY_Mx65ReUBfz7QG-MkvBJUMU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358226921083-c0u1s1s7mcgqpij5pjqkv0afj33ha02u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

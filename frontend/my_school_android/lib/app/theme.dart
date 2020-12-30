@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+class MyTheme {
+  static Color primaryColor = Color(0xff34495e);
+}
+
 ThemeData basicTheme() {
   TextTheme _basicTextTheme(TextTheme base) {
     return base.copyWith(
@@ -15,11 +19,7 @@ ThemeData basicTheme() {
           fontWeight: FontWeight.w500,
           color: Color(0xFF415094),
         ),
-        display1: base.headline.copyWith(
-            fontFamily: 'popins',
-            fontSize: 15.0,
-            fontWeight: FontWeight.w300,
-            color: Color(0xFF727FC8)),
+        display1: base.headline.copyWith(fontFamily: 'popins', fontSize: 15.0, fontWeight: FontWeight.w300, color: Color(0xFF727FC8)),
         display2: base.headline.copyWith(
           fontFamily: 'popins',
           fontSize: 22.0,
@@ -39,7 +39,7 @@ ThemeData basicTheme() {
       //primaryColor: Color(0xff4829b2),
       indicatorColor: Color(0xFF807A6B),
       scaffoldBackgroundColor: Color(0xFFF5F5F5),
-      accentColor: Colors.purpleAccent,
+      accentColor: Colors.blueAccent,
       iconTheme: IconThemeData(
         color: Colors.white,
         size: 30.0,

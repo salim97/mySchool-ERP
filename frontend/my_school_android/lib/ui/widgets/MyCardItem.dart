@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_school_android/app/theme.dart';
 
 import 'MyUtils.dart';
 
@@ -26,17 +27,16 @@ class CustomWidget extends StatefulWidget {
 }
 
 class _CustomWidgetState extends State<CustomWidget> {
-  String title;
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    title = widget.headline;
-  }
+  double iconSize = 120;
+  double iconTitleSize = 24.0;
+
+
 
   @override
   Widget build(BuildContext context) {
+    iconTitleSize = 18;
+    iconSize = 60;
     return GestureDetector(
       onTap: widget.onSelect,
       child: Padding(
@@ -68,22 +68,24 @@ class _CustomWidgetState extends State<CustomWidget> {
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Column(
                   children: <Widget>[
-                    Image.asset(
-                      widget.icon.toString(),
-                      color: widget.isSelected ? Colors.white : Colors.blue,
-                      width: 30.0,
-                      height: 30.0,
+                    Expanded(
+                      child: Image.asset(
+                        widget.icon.toString(),
+                        color: widget.isSelected ? Colors.white : MyTheme.primaryColor,
+                        // width: iconSize,
+                        // height: iconSize,
+                      ),
                     ),
                     SizedBox(
                       height: 5.0,
                     ),
                     Text(
-                      title != null ? title : '...',
+                      widget.headline != null ? widget.headline : '...',
                       style: TextStyle(
                         color: widget.isSelected ? Colors.white : Colors.grey,
-                        fontSize: 10.0,
+                        fontSize: iconTitleSize,
                       ),
-                      maxLines: 1,
+                      maxLines: 2,
                       textAlign: TextAlign.center,
                     )
                   ],

@@ -43,7 +43,7 @@ class NavigationTabletDesktop extends StatelessWidget {
               FlatButton.icon(
                 icon: Icon(Icons.settings),
                 label: CustomText(
-                  text: 'Settings',
+                  text: 'Paramètres',
                 ),
                 onPressed: () {},
               ),
@@ -61,7 +61,7 @@ class NavigationTabletDesktop extends StatelessWidget {
                     width: 5,
                   ),
                   CustomText(
-                    text: 'Santos Enoque',
+                    text: 'Nom Prenom',
                   ),
                   IconButton(
                     icon: Icon(Icons.keyboard_arrow_down),

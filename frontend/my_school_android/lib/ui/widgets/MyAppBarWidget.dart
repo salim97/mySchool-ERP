@@ -27,6 +27,7 @@ class AppBarWidget {
       ),
       flexibleSpace: Image(
         image: AssetImage('assets/images/tool_bar_bg.png'),
+        // image: NetworkImage('assets/images/tool_bar_bg.png'),
         //width: MediaQuery.of(context).size.width,
         height: 200.0,
         fit: BoxFit.cover,

@@ -1,11 +1,30 @@
+import * as express from 'express'
 import IAuthRepository from '../domain/IAuthRepository'
 import IPasswordService from '../services/IPasswordService'
+import ITokenService from '../services/ITokenService'
 
-export default class SignInUseCase {
+export default class LoginEndpoint {
   constructor(
     private authRepository: IAuthRepository,
-    private passwordService: IPasswordService
+    private passwordService: IPasswordService,
+    private tokenService: ITokenService,
   ) {}
+
+  public async request(req: express.Request, res: express.Response) {
+    try {
+      const { name, email, password, auth_type } = req.body
+      return this.execute(name, email, password, auth_type)
+        .then((id: string) =>
+          res.status(200).json({ auth_token: this.tokenService.encode(id) })
+        )
+        .catch((err: Error) => {
+          console.log(err);
+          return res.status(404).json({ error: err, "zebi f zokek": "mkhabi" })
+        })
+    } catch (err) {
+      return res.status(400).json({ error: err })
+    }
+  }
 
   public async execute(
     name: string,

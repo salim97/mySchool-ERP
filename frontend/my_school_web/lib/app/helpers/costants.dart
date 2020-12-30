@@ -12,11 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 Map menuAdmin = {
-  "tableux de bord": {"route name": "/dashboard-view", "icon": MdiIcons.desktopMacDashboard, "children": null},
-  "Teachers": {"route name": "/teachers-view", "icon": MdiIcons.accountTie, "children": null},
+  "Tableau de Bord": {"route name": "/dashboard-view", "icon": MdiIcons.desktopMacDashboard, "children": null},
+  "Enseignantes": {"route name": "/teachers-view", "icon": MdiIcons.accountTie, "children": null},
   "Students": {"route name": "/students-view", "icon": MdiIcons.account, "children": null},
-  "Parents": {"route name": "/to-do-page", "icon": MdiIcons.humanFemaleGirl, "children": null},
-  "Classes": {
+  "Élèves": {"route name": "/to-do-page", "icon": MdiIcons.humanFemaleGirl, "children": null},
+  "Des classes": {
     "icon": MdiIcons.newspaper,
     "children": {
       "Classes": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
@@ -27,20 +27,20 @@ Map menuAdmin = {
       "Time Table": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
     }
   },
-  "Attendance": {
+  "Présence": {
     "icon": MdiIcons.formatListChecks,
     "children": {
       "Students Attendance": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
       "Teachers Attendance": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
     }
   },
-  "Events": {"route name": "/to-do-page", "icon": MdiIcons.calendar, "children": null},
-  "Notify": {"route name": "/to-do-page", "icon": MdiIcons.bell, "children": null},
-  "General Settings": {
+  "Événements": {"route name": "/to-do-page", "icon": MdiIcons.calendar, "children": null},
+  "Notifier": {"route name": "/to-do-page", "icon": MdiIcons.bell, "children": null},
+  "Réglages Généraux": {
     "icon": MdiIcons.cog,
     "children": {
-      "Settings": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
-      "Working Hours": {"route name": "/working-hours-view", "icon": MdiIcons.minus, "children": null},
+      "Paramètres": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Heures d'ouverture": {"route name": "/working-hours-view", "icon": MdiIcons.minus, "children": null},
     }
   },
 };

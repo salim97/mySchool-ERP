@@ -3,14 +3,14 @@ import chaiAsPromised from 'chai-as-promised'
 import 'mocha'
 import IAuthRepository from '../../../src/auth/domain/IAuthRepository'
 import IPasswordService from '../../../src/auth/services/IPasswordService'
-import SignInUseCase from '../../../src/auth/usecases/SignInUseCase'
+import LoginEndpoint from '../../../src/auth/endpoint/login_endpoint'
 import FakePasswordService from '../helpers/FakePasswordService'
 import FakeRepository from '../helpers/FakeRepository'
 
 chai.use(chaiAsPromised)
 
 describe('SignInUseCase', () => {
-  let sut: SignInUseCase
+  let sut: LoginEndpoint
   let repository: IAuthRepository
   let passowrdService: IPasswordService
 
@@ -25,7 +25,7 @@ describe('SignInUseCase', () => {
   beforeEach(() => {
     repository = new FakeRepository()
     passowrdService = new FakePasswordService()
-    sut = new SignInUseCase(repository, passowrdService)
+    sut = new LoginEndpoint(repository, passowrdService)
   })
 
   it('should throw error when user is not found', async () => {

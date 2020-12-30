@@ -4,7 +4,7 @@ import AuthRepository from './auth/data/repository/AuthRepository'
 import BcryptPasswordService from './auth/data/services/BcryptPasswordService'
 import JwtTokenService from './auth/data/services/JwtTokenService'
 import RedisTokenStore from './auth/data/services/RedisTokenStore'
-import AuthRouter from './auth/entrypoint/AuthRouter'
+import AuthRouter from './AuthRouter'
 import TokenValidator from './auth/helpers/TokenValidator'
 export default class CompositionRoot {
   private static client: mongoose.Mongoose

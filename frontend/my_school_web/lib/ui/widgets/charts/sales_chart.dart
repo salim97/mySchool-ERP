@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class SalesChart extends StatefulWidget {
   @override
@@ -8,11 +9,18 @@ class SalesChart extends StatefulWidget {
 
 class SalesChartState extends State<SalesChart> {
   bool isShowingMainData;
-
+  CalendarController _calendarController;
   @override
   void initState() {
     super.initState();
+    _calendarController = CalendarController();
     isShowingMainData = true;
+  }
+
+  @override
+  void dispose() {
+    _calendarController.dispose();
+    super.dispose();
   }
 
   @override
@@ -22,72 +30,17 @@ class SalesChartState extends State<SalesChart> {
       child: Container(
         decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(18)),
-          gradient: LinearGradient(
-            colors: [
-              Color(0xff2c274c),
-              Color(0xff46426c),
-            ],
-            begin: Alignment.bottomCenter,
-            end: Alignment.topCenter,
-          ),
+          // gradient: LinearGradient(
+          //   colors: [
+          //     Color(0xff2c274c),
+          //     Color(0xff46426c),
+          //   ],
+          //   begin: Alignment.bottomCenter,
+          //   end: Alignment.topCenter,
+          // ),
         ),
-        child: Stack(
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                const SizedBox(
-                  height: 37,
-                ),
-                const Text(
-                  'Unfold Shop 2018',
-                  style: TextStyle(
-                    color: Color(0xff827daa),
-                    fontSize: 16,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
-                const Text(
-                  'Monthly Sales',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 2),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 37,
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 16.0, left: 6.0),
-                    child: LineChart(
-                      isShowingMainData ? sampleData1() : sampleData2(),
-                      swapAnimationDuration: const Duration(milliseconds: 250),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-              ],
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.refresh,
-                color: Colors.white.withOpacity(isShowingMainData ? 1.0 : 0.5),
-              ),
-              onPressed: () {
-                setState(() {
-                  isShowingMainData = !isShowingMainData;
-                });
-              },
-            )
-          ],
+        child: TableCalendar(
+          calendarController: _calendarController,
         ),
       ),
     );

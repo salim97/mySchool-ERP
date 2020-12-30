@@ -39,7 +39,7 @@ class TeachersViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Employee_Code": element.employee_code,
-        "Name": element.first_name + " " + element.last_name,
+        "Name": element.full_name ,
         "Incharge_Class": element.incharge_class,
         "Subjects_Handling": element.subjects_handling,
         "Phone": element.phone,
@@ -68,7 +68,7 @@ class TeachersViewModel extends BaseViewModel {
   onView(id) async {
     TeacherModel tm = listTeacherModel.firstWhere((element) => element.id == id);
     String description = "";
-    description += "Full Name :" + tm.first_name + "\n";
+    description += "Full Name :" + tm.full_name + "\n";
     description += "Date of birth :" + "tm?.date_of_birth" + "\n";
     description += "Phone Number :" + "tm?.phone" + "\n";
     description += "Position :" + "tm?.current_position" + "\n";
@@ -104,7 +104,7 @@ class TeachersViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     Iterable<TeacherModel> ltm = listTeacherModel.where((element) {
-      if (element.first_name.contains(query) ||
+      if (element.full_name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
           // element.phone.contains(query) ||
@@ -121,7 +121,7 @@ class TeachersViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Employee_Code": element.employee_code,
-        "Name": element.first_name + " " + element.last_name,
+        "Name": element.full_name,
         "Incharge_Class": element.incharge_class,
         "Subjects_Handling": element.subjects_handling,
         "Phone": element.phone,

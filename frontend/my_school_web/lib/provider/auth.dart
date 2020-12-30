@@ -22,6 +22,7 @@ class AuthProvider with ChangeNotifier {
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController name = TextEditingController();
+  String userProfileImage = "";
 
   AuthProvider.initialize() {
     _fireSetUp();
@@ -91,8 +92,7 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  updateUserData(Map<String, dynamic> data) async {
-  }
+  updateUserData(Map<String, dynamic> data) async {}
 
   // _onStateChanged(User firebaseUser) async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
