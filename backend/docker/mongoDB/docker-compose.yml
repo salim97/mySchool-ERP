@@ -2,7 +2,7 @@ version: '3'
 services:
   mongodb:
     image: mongo:latest
-    container_name: "my-mongo-container-0511PM"
+    container_name: "MonogoDB-School-ERP"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
