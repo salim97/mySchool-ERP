@@ -4,9 +4,9 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
-  firebaseCloudMessagingToken: {
-    type: String,
-  },
+  firebaseCloudMessagingToken: String,
+  loggedAt: Date,
+  loggedWithIP: String,
   name: {
     type: String,
     required: [true, 'Please tell us your name!']
