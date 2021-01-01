@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.my_school_android">
+
+<!-- android:usesCleartextTraffic="true" <= this to allow app to use http -->
    <application
+        android:usesCleartextTraffic="true"
         android:label="my_school_android"
         android:icon="@mipmap/ic_launcher">
         <activity

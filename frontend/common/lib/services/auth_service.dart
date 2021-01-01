@@ -8,64 +8,95 @@ import 'package:logger/logger.dart';
 import '../rest_api.dart';
 
 abstract class AuthService {
-  Future<Map> login({String email, String password});
-  Future<Map> signup(UserModel userModel);
-  Future<bool> signout();
+  UserModel userModel;
+  Future<Response> login({String email, String password});
+  Future<Response> signup(UserModel userModel);
+  Future<Response> logout();
+  Future<Response> me();
 }
 
 class FakeAuthService implements AuthService {
+  UserModel userModel;
   @override
-  Future<Map> login({String email, String password}) async {
-    UserModel userModel = new UserModel();
-    userModel.token = sha256.convert(utf8.encode(email + password)).toString();
+  Future<Response> login({String email, String password}) async {
+    userModel = new UserModel();
     userModel.email = email;
-    userModel.id = 1;
+    userModel.id = "1";
     userModel.role = "admin";
-
-    return userModel.toJson();
+    return Response(statusCode: 200);
   }
 
   @override
-  Future<bool> signout() async {
+  Future<Response> logout() async {
     await Future.delayed(Duration(seconds: 2), () {
       return;
     });
-    return true;
+    return Response(statusCode: 200);
+    ;
   }
 
   @override
-  Future<Map> signup(UserModel userModel) {
+  Future<Response> signup(UserModel userModel) {
     // TODO: implement signup
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Response> me() {
+    // TODO: implement me
     throw UnimplementedError();
   }
 }
 
 class AuthServiceImpl extends RestAPI implements AuthService {
-  @override
-  Future<Map> login({String email, String password}) {
-    // TODO: implement login
-    throw UnimplementedError();
-  }
 
+  UserModel userModel;
   @override
-  Future<bool> signout() {
-    // TODO: implement signout
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Map> signup(UserModel userModel) async {
+  Future<Response> login({String email, String password}) async {
     Response response = await myDioPOST(
-      url: "127.0.0.1:3000/auth/signup",
+      url: serverIP + "/api/v1/auth/login",
       data: {
-        "name": userModel.fullName,
-        "auth_type": userModel.auth_type,
+        "email": email,
+        "password": password,
+      },
+    );
+    if (response.statusCode == 200) {
+      userModel = new UserModel.fromJson(response.data["data"]["user"]);
+    }
+    return response;
+  }
+
+  @override
+  Future<Response> logout() async {
+    Response response = await myDioGET(
+      url: serverIP + "/api/v1/auth/logout",
+    );
+    return response;
+  }
+
+  @override
+  Future<Response> signup(UserModel userModel) async {
+    Response response = await myDioPOST(
+      url: serverIP + "/api/v1/auth/signup",
+      data: {
+        "name": userModel.name,
         "email": userModel.email,
         "password": userModel.password,
+        "passwordConfirm": userModel.password,
         "role": userModel.role,
       },
     );
-    var l = new Logger();
-    l.d(response.data);
+    return response;
+  }
+
+  @override
+  Future<Response> me() async {
+    Response response = await myDioGET(
+      url: serverIP + "/api/v1/auth/me",
+    );
+    if (response.statusCode == 200) {
+      userModel = new UserModel.fromJson(response.data["data"]["data"]);
+    }
+    return response;
   }
 }

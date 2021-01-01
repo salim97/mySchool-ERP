@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     return MaterialApp(
-      initialRoute: auto_router.Routes.homeView,
+      initialRoute: auto_router.Routes.loginView,
       navigatorKey: locator<NavigationService>().navigatorKey,
       onGenerateRoute: auto_router.Router().onGenerateRoute,
       debugShowCheckedModeBanner: false,

@@ -1,7 +1,6 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
 import 'package:my_school_android/ui/widgets/MyAppBarWidget.dart';
 import 'package:stacked/stacked.dart';
 import 'dart:convert';

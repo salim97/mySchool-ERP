@@ -1,25 +1,30 @@
 import 'dart:io';
+import 'package:cookie_jar/cookie_jar.dart';
 
 import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
 
-const SERVER_NAME = "http://127.0.0.1"; //your server's ip address
 const DEBUG_HTTP = true; //print http responses from server
 
 class RestAPI {
+  String serverIP = "http://127.0.0.1:3000";
+  // String serverIP = "http://10.0.2.2:3000";
+  CookieJar cookieJar = CookieJar();
   Dio dio = new Dio();
   Response lastResponse;
   Logger logger = new Logger();
-  String _token;
+
   static const String _defaultContentType = "application/json";
   RestAPI() {
+    dio.interceptors.add(CookieManager(cookieJar));
     init();
   }
   init() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _token = prefs.getString('token') ?? null;
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // _token = prefs.getString('token') ?? null;
     // prefs.setString(authTokenKey, token);
   }
 
@@ -34,14 +39,10 @@ class RestAPI {
         url,
         queryParameters: queryParameters,
         options: Options(
-          contentType: contentType, // or whatever
-          headers: {
-            "Authorization": "Bearer " + _token,
-          },
           // followRedirects: false,
-          // validateStatus: (status) {
-          //   return status < 500;
-          // },
+          validateStatus: (status) {
+            return status <= 500;
+          },
         ),
       );
       if (DEBUG_HTTP) {
@@ -64,7 +65,7 @@ class RestAPI {
       dynamic data,
       Map<String, dynamic> queryParameters,
       String contentType = _defaultContentType,
-      bool isAuthKeyRequeried = false}) async {
+      }) async {
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -74,21 +75,17 @@ class RestAPI {
       }
       Response response;
       Map<String, dynamic> headers;
-      if (isAuthKeyRequeried)
-        headers = {
-          "Authorization": "Bearer " + _token,
-        };
+
       response = await dio.post(
         url,
         data: data,
         queryParameters: queryParameters,
         options: Options(
           contentType: contentType, // or whatever
-          headers: headers,
           // followRedirects: false,
-          // validateStatus: (status) {
-          //   return status < 500;
-          // },
+          validateStatus: (status) {
+            return status <= 500;
+          },
           // connectTimeout: 5000,
           // receiveTimeout: 5000,
           // sendTimeout: 5000,
@@ -109,7 +106,7 @@ class RestAPI {
     }
   }
 
-  Future<Response> myDioPUT(
+  Future<Response> myDioPATCH(
       {String url, dynamic data, Map<String, dynamic> queryParameters, String contentType = _defaultContentType}) async {
     try {
       if (DEBUG_HTTP) {
@@ -117,19 +114,16 @@ class RestAPI {
         print("url = " + url);
       }
       Response response;
-      response = await dio.put(
+      response = await dio.patch(
         url,
         data: data,
         queryParameters: queryParameters,
         options: Options(
           contentType: contentType, // or whatever
-          headers: {
-            "Authorization": "Bearer " + _token,
+          validateStatus: (status) {
+            return status <= 500;
           },
-          // followRedirects: false,
-          // validateStatus: (status) {
-          //   return status < 500;
-          // },
+
         ),
       );
       if (DEBUG_HTTP) {

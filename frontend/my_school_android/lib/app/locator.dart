@@ -1,4 +1,4 @@
-// flutter pub run build_runner build
+// flutter pub get ; flutter pub run build_runner build --delete-conflicting-outputs
 
 import 'package:common/common.dart';
 import 'package:get_it/get_it.dart';
@@ -18,4 +18,5 @@ void setupLocator() {
   locator.registerLazySingleton<TeacherService>(() => FakeTeacherService());
   locator.registerLazySingleton<StudentService>(() => FakeStudentService());
   locator.registerLazySingleton<WorkingHoursService>(() => FakeWorkingHoursService());
+  locator.registerLazySingleton<AuthService>(() => AuthServiceImpl());
 }

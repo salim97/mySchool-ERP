@@ -13,8 +13,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+
   var _formKey = GlobalKey<FormState>();
   String user;
   String email;
@@ -22,14 +21,15 @@ class _LoginViewState extends State<LoginView> {
   String password = '123456';
   bool isResponse = false;
 
-  Future<String> getEmail(String user) async {
-
-  }
+  Future<String> getEmail(String user) async {}
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<LoginViewModel>.reactive(
       viewModelBuilder: () => LoginViewModel(),
+      onModelReady: (model) {
+        model.init();
+      },
       builder: (
         BuildContext context,
         LoginViewModel model,
@@ -75,7 +75,7 @@ class _LoginViewState extends State<LoginView> {
                               child: TextFormField(
                                 keyboardType: TextInputType.text,
                                 style: textStyle,
-                                controller: emailController,
+                                controller: model.emailController,
                                 validator: (String value) {
                                   if (value.isEmpty) {
                                     return 'please enter a valid email';
@@ -98,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
                                 obscureText: true,
                                 keyboardType: TextInputType.visiblePassword,
                                 style: textStyle,
-                                controller: passwordController,
+                                controller: model.passwordController,
                                 validator: (String value) {
                                   if (value.isEmpty) {
                                     return 'please enter a valid password';
@@ -142,51 +142,7 @@ class _LoginViewState extends State<LoginView> {
                                   style: Theme.of(context).textTheme.headline.copyWith(color: Colors.white),
                                 ),
                               ),
-                              onTap: () async {
-                                final NavigationService _navigationService = locator<NavigationService>();
-                                _navigationService.replaceWith(Routes.homeView);
-
-                                String email = emailController.text;
-                                String password = passwordController.text;
-                                // final AuthService authService = locator<AuthService>();
-                                // Map json = await authService.login(email: email, password: password);
-                                // var logger = Logger();
-
-                                // logger.d(json);
-                                // print(json);
-//                             if(email.length > 5 && password.length > 5){
-//                               setState(() {
-//                                 isResponse = true;
-//                               });
-//                               Login(email, password).getData(context).then((result)=>{
-// //                                if(result){
-// //                                  debugPrint('success')
-// //                                }
-//                               });
-//                             }else{
-//                               setState(() {
-//                                 isResponse = false;
-//                               });
-//                               Utils.showToast('invalid email and password');
-//                             }
-//                            setState(() {
-//                              if (_formKey.currentState.validate()) {
-//
-//                                Utils.showToast('${emailController.text}  ${passwordController.text}');
-//
-//                                String email = emailController.text;
-//                                String password = passwordController.text;
-//
-//                                debugPrint('$email  $password');
-//
-//                                Login(email, password).getData(context).then((result)=>{
-//                                  if(result){
-//                                    debugPrint('success')
-//                                  }
-//                                });
-//                              }
-//                            });
-                              },
+                              onTap: model.onLoginClicked,
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),

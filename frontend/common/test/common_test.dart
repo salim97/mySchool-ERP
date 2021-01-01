@@ -3,58 +3,69 @@ import 'dart:io';
 import 'package:common/common.dart';
 import 'package:common/models/user_model.dart';
 import 'package:common/services/teacher_service.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:common/common.dart';
 import 'package:logger/logger.dart';
 
-void main() {
-  test('main', () {
-    AuthServiceImpl authServiceImpl = new AuthServiceImpl();
-     authServiceImpl.signup(UserModel(
-      fullName: "full name",
-      auth_type: "email",
-      email: "email@email.com",
-      password: "password",
-      role: "student",
-    )).then((value) {
-expect(true, true);
-    });
+void main() async {
+  AuthServiceImpl _authService = new AuthServiceImpl();
+  var response = await _authService.login(
+    email: "admin1@email.com",
+    password: "azerty2020",
+  );
 
-    /*
-    var logger = new Logger();
-    FakeTeacherService fakeTeacherService = new FakeTeacherService();
-    Directory current = Directory.current;
-    // logger.d(current);
-    {
-      var dir = new Directory(current.path + "\\lib\\models");
-      List contents = dir.listSync();
-      for (var fileOrDir in contents) {
-        if (fileOrDir is File && !fileOrDir.path.contains(".g.dart")) {
-          String fileName = fileOrDir.path.split("\\").last;
-          print("export './models/" + fileName + "';");
-        }
-      }
-    }
+  var l = new Logger();
+  l.d(response.statusCode);
+  l.d(_authService.userModel.toJson());
 
-        {
-      var dir = new Directory(current.path + "\\lib\\services");
-      List contents = dir.listSync();
-      for (var fileOrDir in contents) {
-        if (fileOrDir is File && !fileOrDir.path.contains(".g.dart")) {
-          String fileName = fileOrDir.path.split("\\").last;
-          print("export './services/" + fileName + "';");
-        }
-      }
-    }
-    expect(true, true);
-*/
-    
+    Response r;
 
-//     final calculator = Calculator();
-//     expect(calculator.addOne(2), 3);
-//     expect(calculator.addOne(-7), -6);
-//     expect(calculator.addOne(0), 1);
-//     expect(() => calculator.addOne(null), throwsNoSuchMethodError);
-  });
+    r = await _authService.me();
+    l.d(r.statusCode);
+
+    r = await _authService.logout();
+    l.d(r.statusCode);
+
+    r = await _authService.me();
+    l.d(r.statusCode);
+    l.d(r.data);
+
+//   test('main', () {
+//     /*
+//     var logger = new Logger();
+//     FakeTeacherService fakeTeacherService = new FakeTeacherService();
+//     Directory current = Directory.current;
+//     // logger.d(current);
+//     {
+//       var dir = new Directory(current.path + "\\lib\\models");
+//       List contents = dir.listSync();
+//       for (var fileOrDir in contents) {
+//         if (fileOrDir is File && !fileOrDir.path.contains(".g.dart")) {
+//           String fileName = fileOrDir.path.split("\\").last;
+//           print("export './models/" + fileName + "';");
+//         }
+//       }
+//     }
+
+//         {
+//       var dir = new Directory(current.path + "\\lib\\services");
+//       List contents = dir.listSync();
+//       for (var fileOrDir in contents) {
+//         if (fileOrDir is File && !fileOrDir.path.contains(".g.dart")) {
+//           String fileName = fileOrDir.path.split("\\").last;
+//           print("export './services/" + fileName + "';");
+//         }
+//       }
+//     }
+//     expect(true, true);
+// */
+
+// //     final calculator = Calculator();
+// //     expect(calculator.addOne(2), 3);
+// //     expect(calculator.addOne(-7), -6);
+// //     expect(calculator.addOne(0), 1);
+// //     expect(() => calculator.addOne(null), throwsNoSuchMethodError);
+//   });
 }

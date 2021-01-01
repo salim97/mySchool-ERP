@@ -8,15 +8,22 @@ part 'user_model.g.dart';
   includeIfNull: false,
 )
 class UserModel {
-  int id;
-  String fullName;
+  @JsonKey(name: '_id')
+  String id;
+  String name;
   String email;
-  String auth_type;
   String password;
-  String token;
   String role;
+  String photo;
 
-  UserModel({this.id, this.fullName, this.email, this.auth_type, this.password, this.token, this.role});
+  UserModel({
+    this.id,
+    this.name,
+    this.email,
+    this.role,
+    this.photo,
+    this.password,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
   Map<String, dynamic> toJson() => _$UserModelToJson(this);

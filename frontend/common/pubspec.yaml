@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   dio: ^3.0.10
+  dio_cookie_manager: ^1.0.0
   stack_trace: ^1.9.3
   shared_preferences: ^0.5.8
   logger: ^0.7.0+2
