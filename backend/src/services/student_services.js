@@ -17,23 +17,27 @@ getOne = factory.getOne(thisModel);
 createOne = factory.createOne(thisModel);
 // updateOne = factory.updateOne(thisModel);
 updateOne = catchAsync(async (req, res, next) => {
-  // check if request is valid
-  if (!req.body.user || !req.body.user._id) {
-    return next(new AppError('USER ID IS NULL', 404));
-  }
   //check if documents exists
   const old_doc_student = await thisModel.findById(req.params.id);
   if (!old_doc_student) {
     return next(new AppError('No student document found with that USER ID', 404));
   }
-  const old_doc_user = await userAccount.findById(req.body.user._id);
-  if (!old_doc_user) {
-    return next(new AppError('No user document found with that USER ID', 404));
+
+  if (req.body.user) {
+    if (!req.body.user._id) {
+      return next(new AppError('USER ID IS NULL', 404));
+    }
+
+    const old_doc_user = await userAccount.findById(req.body.user._id);
+    if (!old_doc_user) {
+      return next(new AppError('No user document found with that USER ID', 404));
+    }
+    //don't allow request edit other user account, check student if he is related to user account
+    if (old_doc_student.user.id != req.body.user._id) {
+      return next(new AppError('you are trying to edit other user account', 404));
+    }
   }
-  //don't allow request edit other user account, check student if he is related to user account
-  if (old_doc_student.user.id != req.body.user._id) {
-    return next(new AppError('you are trying to edit other user account', 404));
-  }
+
 
 
   //update doc
@@ -44,14 +48,16 @@ updateOne = catchAsync(async (req, res, next) => {
   if (!new_doc_Student) {
     return next(new AppError('No document found with that ID', 404));
   }
-  //filter and update
-  const filteredBody = filterObj(req.body.user, 'name', 'email');
-  const new_doc_user = await userAccount.findByIdAndUpdate(req.body.user._id, filteredBody, {
-    new: true,
-    runValidators: true
-  });
-  new_doc_Student.user = new_doc_user;
-
+  if (req.body.user) {
+    //filter and update
+    const filteredBody = filterObj(req.body.user, 'name', 'email');
+    const new_doc_user = await userAccount.findByIdAndUpdate(req.body.user._id, filteredBody, {
+      new: true,
+      runValidators: true
+    });
+    new_doc_Student.user = new_doc_user;
+  }
+  
   res.status(200).json({
     status: 'success',
     data: {
@@ -62,7 +68,7 @@ updateOne = catchAsync(async (req, res, next) => {
 
 // deleteOne = factory.deleteOne(parent);
 deleteOne = catchAsync(async (req, res, next) => {
-  
+
   const doc = await thisModel.findByIdAndDelete(req.params.id);
   // const docStudent = await student.findById(req.params.id);
 
