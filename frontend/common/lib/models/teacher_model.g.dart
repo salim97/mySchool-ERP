@@ -8,7 +8,7 @@ part of 'teacher_model.dart';
 
 TeacherModel _$TeacherModelFromJson(Map<String, dynamic> json) {
   return TeacherModel(
-    id: json['id'] as int,
+    id: json['_id'] as String,
     gender: json['gender'] as String,
     full_name: json['full_name'] as String,
     date_of_birth: json['date_of_birth'] as String,
@@ -19,8 +19,6 @@ TeacherModel _$TeacherModelFromJson(Map<String, dynamic> json) {
     city_name: json['city_name'] as String,
     country: json['country'] as String,
     pin_code: json['pin_code'] as String,
-    email_address: json['email_address'] as String,
-    username: json['username'] as String,
     joining_date: json['joining_date'] as String,
     leaving_date: json['leaving_date'] as String,
     current_position: json['current_position'] as String,
@@ -28,13 +26,12 @@ TeacherModel _$TeacherModelFromJson(Map<String, dynamic> json) {
     working_hours: json['working_hours'] as String,
     subjects_handling: json['subjects_handling'] as String,
     incharge_class: json['incharge_class'] as String,
-    password: json['password'] as String,
   );
 }
 
 Map<String, dynamic> _$TeacherModelToJson(TeacherModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'gender': instance.gender,
       'full_name': instance.full_name,
       'date_of_birth': instance.date_of_birth,
@@ -47,9 +44,6 @@ Map<String, dynamic> _$TeacherModelToJson(TeacherModel instance) =>
       'city_name': instance.city_name,
       'country': instance.country,
       'pin_code': instance.pin_code,
-      'email_address': instance.email_address,
-      'username': instance.username,
-      'password': instance.password,
       'joining_date': instance.joining_date,
       'leaving_date': instance.leaving_date,
       'current_position': instance.current_position,

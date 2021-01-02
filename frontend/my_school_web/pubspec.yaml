@@ -29,20 +29,27 @@ dependencies:
   charts_flutter: ^0.9.0
   provider: ^4.3.2+2
   responsive_table: ^0.1.1+8
-  shared_preferences: ^0.5.12+4
   flutter_spinkit: ^4.1.2+1
   material_design_icons_flutter: ^4.0.5755
   stacked: ^1.7.1+1
   # stacked_services: ^0.4.4+3
   stacked_services: ^0.6.0+1 
   # stacked_services: 0.5.4+5 
-  logger: ^0.7.0+2
   auto_route: ^0.6.9
   injectable: ^0.4.0+1
   datetime_picker_formfield: ^1.0.0
   table_calendar: ^2.3.3
-  common:
-    path: ../common
+
+  dio: ^3.0.10
+  dio_cookie_manager: ^1.0.0
+  pretty_dio_logger: ^1.1.1
+  shared_preferences: ^0.5.12+4
+  logger: ^0.7.0+2
+  # common:
+  #   path: ../common
+  stack_trace: ^1.9.3
+  json_serializable: ^3.5.1
+  json_annotation: 
 
 dev_dependencies:
   flutter_test:

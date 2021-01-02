@@ -9,7 +9,7 @@ const parentSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         required: [true, 'parent must belong to a User account!']
-      },
+    },
     children: [
         {
             type: mongoose.Schema.ObjectId,
@@ -26,7 +26,7 @@ const parentSchema = new mongoose.Schema({
     },
     date_of_birth: {
         type: Date,
-        required: [true, 'A personal must have a date of birth'],
+        // required: [true, 'A personal must have a date of birth'],
     },
     phone: {
         type: String,
@@ -45,7 +45,7 @@ parentSchema.pre(/^find/, function (next) {
         select: 'name email photo role'
     }).populate({
         path: 'children',
-        select: 'date_of_birth user'
+        select: 'date_of_birth user gender phone'
     });
     next();
 });

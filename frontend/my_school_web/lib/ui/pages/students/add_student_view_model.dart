@@ -1,4 +1,5 @@
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_web/app/locator.dart';
@@ -9,12 +10,11 @@ import 'package:stacked_services/stacked_services.dart';
 class AddStudentViewModel extends BaseViewModel {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final StudentService studentService = locator<StudentService>();
-  final StudentModel studentModel = new StudentModel();
+  final AuthService authService = locator<AuthService>();
+  StudentModel studentModel = new StudentModel();
+  get editOnly => this.studentModel.id == null ? true : false;
   //personal details
   String selectedGender = "Male";
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController middleNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
   TextEditingController dateOfBirthController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController qualificationController = TextEditingController();
@@ -37,11 +37,7 @@ class AddStudentViewModel extends BaseViewModel {
 
   fillUI(StudentModel studentModel) {
     this.studentModel.id = studentModel.id;
-    if(studentModel.gender != null)
-    selectedGender = studentModel.gender ;
-    firstNameController.text = studentModel.first_name;
-    middleNameController.text = studentModel.middle_name;
-    lastNameController.text = studentModel.last_name;
+    if (studentModel.gender != null) selectedGender = studentModel.gender;
     dateOfBirthController.text = studentModel.date_of_birth;
     phoneController.text = studentModel.phone;
     // qualificationController.text = teacherModel.qualification;
@@ -51,10 +47,10 @@ class AddStudentViewModel extends BaseViewModel {
     countryController.text = studentModel.country;
     pinCodeController.text = studentModel.pin_code;
 
-    emailAddressController.text = studentModel.email_address;
-    usernameController.text = studentModel.username;
-    passwordController.text = studentModel.password;
-    confirmPasswordController.text = studentModel.password;
+    emailAddressController.text = studentModel.userAccount.email;
+    usernameController.text = studentModel.userAccount.name;
+    passwordController.text = studentModel.userAccount.password;
+    confirmPasswordController.text = studentModel.userAccount.password;
 
     joiningDateController.text = studentModel.joining_date;
     leavingDateController.text = studentModel.leaving_date;
@@ -71,14 +67,10 @@ class AddStudentViewModel extends BaseViewModel {
     // final _bottomSheetService = locator<BottomSheetService>();
     // var response = await _bottomSheetService.showBottomSheet(title: "zab el kbir", description: "zebi vrai kbir");
     // print(response?.confirmed);
-
   }
 
-  onSubmitClicked() {
-    studentModel.gender = selectedGender;
-    studentModel.first_name = firstNameController.text;
-    studentModel.middle_name = middleNameController.text;
-    studentModel.last_name = lastNameController.text;
+  onSubmitClicked() async {
+    studentModel.gender = selectedGender.toLowerCase();
     studentModel.date_of_birth = dateOfBirthController.text;
     studentModel.phone = phoneController.text;
     // studentModel.qualification = qualificationController.text;
@@ -88,9 +80,10 @@ class AddStudentViewModel extends BaseViewModel {
     studentModel.country = countryController.text;
     studentModel.pin_code = pinCodeController.text;
 
-    studentModel.email_address = emailAddressController.text;
-    studentModel.username = usernameController.text;
-    studentModel.password = passwordController.text;
+    studentModel.userAccount.email = emailAddressController.text;
+    studentModel.userAccount.name = usernameController.text;
+    studentModel.userAccount.password = passwordController.text;
+    studentModel.userAccount.role = "student";
 
     studentModel.joining_date = joiningDateController.text;
     studentModel.leaving_date = leavingDateController.text;
@@ -99,15 +92,45 @@ class AddStudentViewModel extends BaseViewModel {
     studentModel.working_hours = workingHoursController.text;
 
     Logger log = Logger();
-    log.d(studentModel.toJson());
-    studentService.add(studentModel);
-    if (formKey.currentState.validate()) {
-      print("validated");
+
+    // if (formKey.currentState.validate()) {
+    //   print("validated");
+    // } else {
+    //   print("Not validated");
+    // }
+
+    Response response;
+    if (studentModel.id == null) {
+      print("new");
+      response = await authService.signup(UserModel(
+        name: studentModel.userAccount.name,
+        password: studentModel.userAccount.password,
+        role: studentModel.userAccount.role,
+        email: studentModel.userAccount.email,
+      ));
+      // log.i(response.data);
+      // print(response.statusCode);
+
+      studentModel.userAccount.id = response.data["data"]["user"]["_id"];
+      response = await studentService.add(studentModel);
     } else {
-      print("Not validated");
+      print("update");
+      response = await authService.updateUser(studentModel.userAccount);
+      print(response.data);
+      print(response.statusCode);
+
+      response = await studentService.update(studentModel);
+      // print(response.data);
+      // print(response.statusCode);
     }
-    // locator<NavigationService>().navigateTo(Routes.addTeacherView);
-    locator<NavigationService>().back();
+
+    if (response.statusCode == 201 || response.statusCode == 200) {
+      locator<NavigationService>().back();
+    } else {
+      // log.i(response.data);
+      // print(response.statusCode);
+    }
+    //locator<NavigationService>().navigateTo(Routes.addTeacherView);
   }
 
   onGenderChanged(value) {

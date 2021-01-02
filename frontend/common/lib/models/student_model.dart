@@ -1,3 +1,4 @@
+import 'package:common/models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'student_model.g.dart';
@@ -7,8 +8,11 @@ part 'student_model.g.dart';
   fieldRename: FieldRename.none,
 )
 class StudentModel {
-  int id;
-  int parent_id;
+  @JsonKey(name: '_id')
+  String id;
+  @JsonKey(ignore: true)
+  UserModel userAccount = new UserModel();
+  String parent_id;
   // personal details
   String gender;
   String first_name;
@@ -23,11 +27,6 @@ class StudentModel {
   String city_name;
   String country;
   String pin_code;
-
-// account information:
-  String email_address;
-  String username;
-  String password;
 
 // school details:
   String joining_date;
@@ -50,15 +49,22 @@ class StudentModel {
       this.city_name,
       this.country,
       this.pin_code,
-      this.email_address,
-      this.username,
-      this.password,
       this.joining_date,
       this.leaving_date,
       this.current_position,
       this.rollNo,
       this.working_hours});
 
-  factory StudentModel.fromJson(Map<String, dynamic> json) => _$StudentModelFromJson(json);
-  Map<String, dynamic> toJson() => _$StudentModelToJson(this);
+  factory StudentModel.fromJson(Map<String, dynamic> json) {
+    StudentModel studentModel = _$StudentModelFromJson(json);
+    studentModel.userAccount = UserModel.fromJson(json["user"]);
+    return studentModel;
+  }
+
+  Map<String, dynamic> toJson() {
+    // return _$StudentModelToJson(this);
+    Map<String, dynamic> map = _$StudentModelToJson(this);
+    map["user"] = userAccount.id;
+    return map;
+  }
 }

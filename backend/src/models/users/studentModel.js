@@ -25,7 +25,7 @@ const studentSchema = new mongoose.Schema({
   },
   date_of_birth: {
     type: Date,
-    required: [true, 'A personal must have a date of birth'],
+    //required: [true, 'A personal must have a date of birth'],
   },
   phone: {
     type: String,

@@ -1,6 +1,10 @@
 import 'dart:math';
 
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
+import 'package:cookie_jar/cookie_jar.dart';
+
+import 'package:dio/dio.dart';
+import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
 import 'package:my_school_web/provider/app_provider.dart';
@@ -17,6 +21,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class StudentsViewModel extends BaseViewModel {
   final StudentService studentService = locator<StudentService>();
+  final AuthService authService = locator<AuthService>();
   List<StudentModel> listStudentModel;
   StudentsViewModel() {}
 
@@ -33,19 +38,26 @@ class StudentsViewModel extends BaseViewModel {
   onRefresh() async {
     isLoading = true;
     notifyListeners();
-    listStudentModel = await studentService.getAll();
-    source.clear();
-    listStudentModel.forEach((element) {
-      source.add({
-        "ID": element.id,
-        "Roll No.": element.rollNo,
-        "Full Name": element.first_name + " " + element.last_name,
-        "Parent": element.parent_id,
-        "Street Address": element.street_address,
-        "Phone": element.phone,
-        "Action": element.id
+
+    Response response = await studentService.getAll();
+
+    if (response.statusCode == 200) {
+      listStudentModel = studentService.listStudentModel;
+      source.clear();
+
+      listStudentModel.forEach((element) {
+        source.add({
+          "ID": element.id,
+          "Roll No.": element.rollNo,
+          "Full Name": element.userAccount.name,
+          "Parent": element.parent_id,
+          "Street Address": element.street_address,
+          "Phone": element.phone,
+          "Action": element.id
+        });
       });
-    });
+    }
+
     // source.addAll(_generateData(n: 1000));
     isLoading = false;
     notifyListeners();
@@ -59,7 +71,7 @@ class StudentsViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     Iterable<StudentModel> ltm = listStudentModel.where((element) {
-      if (element.first_name.contains(query) ||
+      if (element.userAccount.name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
           // element.phone.contains(query) ||
@@ -76,7 +88,7 @@ class StudentsViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Roll No.": element.rollNo,
-        "Full Name": element.first_name + " " + element.last_name,
+        "Full Name": element.userAccount.name ,
         "Parent": element.parent_id,
         "Street Address": element.street_address,
         "Phone": element.phone,
@@ -88,8 +100,9 @@ class StudentsViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  onCreateNew() {
-    locator<NavigationService>().navigateTo(Routes.addStudentView);
+  onCreateNew() async {
+    await locator<NavigationService>().navigateTo(Routes.addStudentView);
+    onRefresh();
   }
 
   onEdit(id) async {
@@ -101,7 +114,7 @@ class StudentsViewModel extends BaseViewModel {
   onView(id) async {
     StudentModel tm = listStudentModel.firstWhere((element) => element.id == id);
     String description = "";
-    description += "Full Name :" + tm.first_name + "\n";
+    description += "Full Name :" + tm.userAccount.name + "\n";
     description += "Date of birth :" + "tm?.date_of_birth" + "\n";
     description += "Phone Number :" + "tm?.phone" + "\n";
     description += "Position :" + "tm?.current_position" + "\n";
@@ -128,10 +141,8 @@ class StudentsViewModel extends BaseViewModel {
         cancelButtonTitle: "NO");
     if (response == null) return;
     if (response.confirmed) {
-      studentService.delete(id);
+      studentService.delete(StudentModel(id: id));
       onRefresh();
     }
   }
-
-
 }

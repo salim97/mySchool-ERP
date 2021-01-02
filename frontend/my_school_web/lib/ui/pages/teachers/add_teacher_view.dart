@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/router.gr.dart';
@@ -88,7 +88,6 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                     children: <Widget>[
                                       addRadioButton(btnValue: 0, title: 'Male', onChanged: model.onGenderChanged),
                                       addRadioButton(btnValue: 1, title: 'Female', onChanged: model.onGenderChanged),
-                                      addRadioButton(btnValue: 2, title: 'Others', onChanged: model.onGenderChanged),
                                     ],
                                   ),
                                 ],
@@ -395,7 +394,7 @@ class _AddTeacherViewState extends State<AddTeacherView> {
     );
   }
 
-  List gender = ["Male", "Female", "Other"];
+  List gender = ["Male", "Female"];
   String select = "Male";
   Row addRadioButton({int btnValue, String title, Function(dynamic) onChanged}) {
     return Row(

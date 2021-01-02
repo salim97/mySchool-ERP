@@ -9,28 +9,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:common/common.dart';
 import 'package:logger/logger.dart';
 
+import 'testList.dart';
+
 void main() async {
-  AuthServiceImpl _authService = new AuthServiceImpl();
-  var response = await _authService.login(
-    email: "admin1@email.com",
-    password: "azerty2020",
-  );
-
-  var l = new Logger();
-  l.d(response.statusCode);
-  l.d(_authService.userModel.toJson());
-
-    Response r;
-
-    r = await _authService.me();
-    l.d(r.statusCode);
-
-    r = await _authService.logout();
-    l.d(r.statusCode);
-
-    r = await _authService.me();
-    l.d(r.statusCode);
-    l.d(r.data);
+  
+  await testAuthService();
+  // await testStudentService();
+  // await testParentService();
 
 //   test('main', () {
 //     /*

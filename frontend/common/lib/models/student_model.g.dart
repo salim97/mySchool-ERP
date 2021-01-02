@@ -8,8 +8,8 @@ part of 'student_model.dart';
 
 StudentModel _$StudentModelFromJson(Map<String, dynamic> json) {
   return StudentModel(
-    id: json['id'] as int,
-    parent_id: json['parent_id'] as int,
+    id: json['_id'] as String,
+    parent_id: json['parent_id'] as String,
     gender: json['gender'] as String,
     first_name: json['first_name'] as String,
     middle_name: json['middle_name'] as String,
@@ -21,9 +21,6 @@ StudentModel _$StudentModelFromJson(Map<String, dynamic> json) {
     city_name: json['city_name'] as String,
     country: json['country'] as String,
     pin_code: json['pin_code'] as String,
-    email_address: json['email_address'] as String,
-    username: json['username'] as String,
-    password: json['password'] as String,
     joining_date: json['joining_date'] as String,
     leaving_date: json['leaving_date'] as String,
     current_position: json['current_position'] as String,
@@ -34,7 +31,7 @@ StudentModel _$StudentModelFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$StudentModelToJson(StudentModel instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      '_id': instance.id,
       'parent_id': instance.parent_id,
       'gender': instance.gender,
       'first_name': instance.first_name,
@@ -47,9 +44,6 @@ Map<String, dynamic> _$StudentModelToJson(StudentModel instance) =>
       'city_name': instance.city_name,
       'country': instance.country,
       'pin_code': instance.pin_code,
-      'email_address': instance.email_address,
-      'username': instance.username,
-      'password': instance.password,
       'joining_date': instance.joining_date,
       'leaving_date': instance.leaving_date,
       'current_position': instance.current_position,

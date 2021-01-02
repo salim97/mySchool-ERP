@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_web/app/locator.dart';
@@ -37,8 +37,7 @@ class AddTeacherViewModel extends BaseViewModel {
 
   fillUI(TeacherModel teacherModel) {
     this.teacherModel.id = teacherModel.id;
-    if(teacherModel.gender != null)
-    selectedGender = teacherModel.gender ;
+    if (teacherModel.gender != null) selectedGender = teacherModel.gender;
     // firstNameController.text = teacherModel.first_name;
     // middleNameController.text = teacherModel.middle_name;
     // lastNameController.text = teacherModel.last_name;
@@ -51,10 +50,8 @@ class AddTeacherViewModel extends BaseViewModel {
     countryController.text = teacherModel.country;
     pinCodeController.text = teacherModel.pin_code;
 
-    emailAddressController.text = teacherModel.email_address;
-    usernameController.text = teacherModel.username;
-    passwordController.text = teacherModel.password;
-    confirmPasswordController.text = teacherModel.password;
+    emailAddressController.text = teacherModel.userAccount.email;
+    usernameController.text = teacherModel.userAccount.name;
 
     joiningDateController.text = teacherModel.joining_date;
     leavingDateController.text = teacherModel.leaving_date;
@@ -71,7 +68,6 @@ class AddTeacherViewModel extends BaseViewModel {
     // final _bottomSheetService = locator<BottomSheetService>();
     // var response = await _bottomSheetService.showBottomSheet(title: "zab el kbir", description: "zebi vrai kbir");
     // print(response?.confirmed);
-
   }
 
   onSubmitClicked() {
@@ -88,9 +84,9 @@ class AddTeacherViewModel extends BaseViewModel {
     teacherModel.country = countryController.text;
     teacherModel.pin_code = pinCodeController.text;
 
-    teacherModel.email_address = emailAddressController.text;
-    teacherModel.username = usernameController.text;
-    teacherModel.password = passwordController.text;
+    teacherModel.userAccount.email = emailAddressController.text;
+    teacherModel.userAccount.name = usernameController.text;
+    teacherModel.userAccount.password = passwordController.text;
 
     teacherModel.joining_date = joiningDateController.text;
     teacherModel.leaving_date = leavingDateController.text;

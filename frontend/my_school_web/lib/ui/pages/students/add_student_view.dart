@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/router.gr.dart';
@@ -31,7 +31,19 @@ class _AddStudentViewState extends State<AddStudentView> {
       viewModelBuilder: () => AddStudentViewModel(),
       onModelReady: (model) {
         final StudentModel studentModel = ModalRoute.of(context).settings.arguments;
-        if (studentModel != null) model.fillUI(studentModel);
+        if (studentModel != null) {
+          model.fillUI(studentModel);
+          model.studentModel = studentModel;
+        } else {
+          var now = new DateTime.now();
+          String random = now.millisecondsSinceEpoch.toString();
+          model.streetAddressController.text = random;
+          model.phoneController.text = random;
+          model.usernameController.text = random;
+          model.emailAddressController.text = random + "@email.com";
+          model.passwordController.text = "azerty2020";
+          model.confirmPasswordController.text = "azerty2020";
+        }
       },
       builder: (
         BuildContext context,
@@ -88,23 +100,10 @@ class _AddStudentViewState extends State<AddStudentView> {
                                     children: <Widget>[
                                       addRadioButton(btnValue: 0, title: 'Male', onChanged: model.onGenderChanged),
                                       addRadioButton(btnValue: 1, title: 'Female', onChanged: model.onGenderChanged),
-                                      addRadioButton(btnValue: 2, title: 'Others', onChanged: model.onGenderChanged),
                                     ],
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                  child:
-                                      userInputText(title: "First Name", textEditingController: model.firstNameController, mustFill: true)),
-                              Flexible(child: userInputText(title: "Middle Name", textEditingController: model.middleNameController)),
-                              Flexible(
-                                  child:
-                                      userInputText(title: "Last Name", textEditingController: model.lastNameController, mustFill: true)),
                             ],
                           ),
                           Row(
@@ -189,48 +188,56 @@ class _AddStudentViewState extends State<AddStudentView> {
                                       return "Please enter a valid email address";
                                     }
                                   }),
-                              userInputText(title: "Username", textEditingController: model.usernameController, mustFill: true),
-                              userInputText(
-                                  title: "Password",
-                                  textEditingController: model.passwordController,
-                                  mustFill: true,
-                                  obscureText: _obscureText,
-                                  onValidator: (value) {
-                                    if (value.length < 5) {
-                                      return "Password must be at least 5 characters long.";
-                                    }
-                                    if (model.passwordController.text != value) {
-                                      return "Please enter same password.";
-                                    }
-                                  }),
-                              userInputText(
-                                  title: "ConfirmPassword",
-                                  textEditingController: model.confirmPasswordController,
-                                  mustFill: true,
-                                  obscureText: _obscureText,
-                                  onValidator: (value) {
-                                    if (value.length < 5) {
-                                      return "Password must be at least 5 characters long.";
-                                    }
-                                    if (model.passwordController.text != value) {
-                                      return "Please enter same password.";
-                                    }
-                                  }),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: RaisedButton(
-                                  color: Colors.green,
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureText = !_obscureText;
-                                    });
-                                  },
-                                  child: Text(
-                                    _obscureText ? "Show Password" : "Hide Password",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              )
+                              !model.editOnly
+                                  ? Container()
+                                  : userInputText(title: "Username", textEditingController: model.usernameController, mustFill: true),
+                              !model.editOnly
+                                  ? Container()
+                                  : userInputText(
+                                      title: "Password",
+                                      textEditingController: model.passwordController,
+                                      mustFill: true,
+                                      obscureText: _obscureText,
+                                      onValidator: (value) {
+                                        if (value.length < 5) {
+                                          return "Password must be at least 5 characters long.";
+                                        }
+                                        if (model.passwordController.text != value) {
+                                          return "Please enter same password.";
+                                        }
+                                      }),
+                              !model.editOnly
+                                  ? Container()
+                                  : userInputText(
+                                      title: "ConfirmPassword",
+                                      textEditingController: model.confirmPasswordController,
+                                      mustFill: true,
+                                      obscureText: _obscureText,
+                                      onValidator: (value) {
+                                        if (value.length < 5) {
+                                          return "Password must be at least 5 characters long.";
+                                        }
+                                        if (model.passwordController.text != value) {
+                                          return "Please enter same password.";
+                                        }
+                                      }),
+                              !model.editOnly
+                                  ? Container()
+                                  : Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: RaisedButton(
+                                        color: Colors.green,
+                                        onPressed: () {
+                                          setState(() {
+                                            _obscureText = !_obscureText;
+                                          });
+                                        },
+                                        child: Text(
+                                          _obscureText ? "Show Password" : "Hide Password",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    )
                             ])),
                       ),
                       Expanded(
@@ -394,7 +401,7 @@ class _AddStudentViewState extends State<AddStudentView> {
     );
   }
 
-  List gender = ["Male", "Female", "Other"];
+  List gender = ["Male", "Female"];
   String select = "Male";
   Row addRadioButton({int btnValue, String title, Function(dynamic) onChanged}) {
     return Row(

@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
+import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
 import 'package:my_school_web/provider/app_provider.dart';
@@ -33,19 +34,23 @@ class TeachersViewModel extends BaseViewModel {
   onRefresh() async {
     isLoading = true;
     notifyListeners();
-    listTeacherModel = await teacherService.getAll();
-    source.clear();
-    listTeacherModel.forEach((element) {
-      source.add({
-        "ID": element.id,
-        "Employee_Code": element.employee_code,
-        "Name": element.full_name ,
-        "Incharge_Class": element.incharge_class,
-        "Subjects_Handling": element.subjects_handling,
-        "Phone": element.phone,
-        "Action": element.id
+    Response response = await teacherService.getAll();
+    if (response.statusCode == 200) {
+      listTeacherModel = teacherService.listStudentModel;
+      source.clear();
+      listTeacherModel.forEach((element) {
+        source.add({
+          "ID": element.id,
+          "Employee_Code": element.employee_code,
+          "Name": element.userAccount.name,
+          "Incharge_Class": element.incharge_class,
+          "Subjects_Handling": element.subjects_handling,
+          "Phone": element.phone,
+          "Action": element.id
+        });
       });
-    });
+    }
+
     // source.addAll(_generateData(n: 1000));
     isLoading = false;
     notifyListeners();
@@ -68,7 +73,7 @@ class TeachersViewModel extends BaseViewModel {
   onView(id) async {
     TeacherModel tm = listTeacherModel.firstWhere((element) => element.id == id);
     String description = "";
-    description += "Full Name :" + tm.full_name + "\n";
+    description += "Full Name :" + tm.userAccount.name + "\n";
     description += "Date of birth :" + "tm?.date_of_birth" + "\n";
     description += "Phone Number :" + "tm?.phone" + "\n";
     description += "Position :" + "tm?.current_position" + "\n";
@@ -104,7 +109,7 @@ class TeachersViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     Iterable<TeacherModel> ltm = listTeacherModel.where((element) {
-      if (element.full_name.contains(query) ||
+      if (element.userAccount.name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
           // element.phone.contains(query) ||
@@ -121,7 +126,7 @@ class TeachersViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Employee_Code": element.employee_code,
-        "Name": element.full_name,
+        "Name": element.userAccount.name,
         "Incharge_Class": element.incharge_class,
         "Subjects_Handling": element.subjects_handling,
         "Phone": element.phone,
