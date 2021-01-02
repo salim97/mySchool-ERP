@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:my_school_web/app/locator.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:my_school_web/provider/app_provider.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
@@ -8,14 +10,14 @@ import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
 import 'package:stacked/stacked.dart';
 
-import 'students_view_model.dart';
+import 'parents_view_model.dart';
 
-class StudentsView extends StatefulWidget {
+class ParentsView extends StatefulWidget {
   @override
-  _StudentsViewState createState() => _StudentsViewState();
+  _ParentsViewState createState() => _ParentsViewState();
 }
 
-class _StudentsViewState extends State<StudentsView> {
+class _ParentsViewState extends State<ParentsView> {
   List<int> _perPages = [5, 10, 15, 100];
   int _total = 100;
   int _currentPerPage;
@@ -30,10 +32,12 @@ class _StudentsViewState extends State<StudentsView> {
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<StudentsViewModel>.reactive(
-        viewModelBuilder: () => StudentsViewModel(),
+    return ViewModelBuilder<ParentsViewModel>.reactive(
+        viewModelBuilder: () => ParentsViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
+          // model.authService = Provider.of<AppProvider>(context, listen: false).authService;
+          // model.parentService = Provider.of<AppProvider>(context, listen: false).parentService;
             model.onRefresh();
         },
         builder: (context, model, child) {
@@ -249,5 +253,4 @@ class _StudentsViewState extends State<StudentsView> {
           ]));
         });
   }
-
 }

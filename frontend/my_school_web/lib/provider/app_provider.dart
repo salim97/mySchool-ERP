@@ -1,5 +1,7 @@
 import 'package:my_school_web/app/helpers/costants.dart';
 import 'package:flutter/material.dart';
+import 'package:my_school_web/app/locator.dart';
+import 'package:my_school_web/common/common.dart';
 
 // enum DisplayedPage { HOME, PRODUCTS, ORDERS, USERS, BRANDS, CATEGORIES }
 // enum DisplayedPageForAdmin { Dashboard, Teachers, Students, Parents, Classes, Attendance }
@@ -7,10 +9,15 @@ import 'package:flutter/material.dart';
 class AppProvider with ChangeNotifier {
   Map sideMenu;
   String currentPage;
-  // OrderModel _orderModel = null;
-  double revenue = 0;
+
+  ParentService parentService;
+  StudentModel studentModel;
+  AuthService authService;
 
   AppProvider.init() {
+    // parentService = locator<ParentService>();
+    // studentModel = locator<StudentModel>();
+    // authService = locator<AuthService>();
     sideMenu = menuAdmin;
     _getRevenue();
     changeCurrentPage(sideMenu.keys.first);
@@ -21,7 +28,5 @@ class AppProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void _getRevenue() async {
-
-  }
+  void _getRevenue() async {}
 }

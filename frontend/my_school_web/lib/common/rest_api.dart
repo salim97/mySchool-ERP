@@ -71,6 +71,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -115,6 +116,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -167,6 +169,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -212,6 +215,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");

@@ -31,13 +31,12 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(),
         onModelReady: (model) async {
-          final AuthService _authService = locator<AuthService>();
-          var response = await _authService.login(
-            email: "admin@email.com",
-            password: "azerty2020",
-          );
-          // var l = new Logger();
-          // l.d(response.data);
+          // final AuthService _authService = locator<AuthService>();
+          // await _authService.login(
+          //   email: "admin@email.com",
+          //   password: "azerty2020",
+          // );
+
         },
         builder: (context, model, child) {
           return Scaffold(
@@ -69,8 +68,9 @@ class _HomeViewState extends State<HomeView> {
                         child: Navigator(
                             key: locator<NavigationService>().navigatorKey,
                             onGenerateRoute: auto_router.Router().onGenerateRoute,
-                            // initialRoute: auto_router.Routes.dashboardView
                             initialRoute: auto_router.Routes.dashboardView
+                            // initialRoute: auto_router.Routes.addParentView
+                            // initialRoute: auto_router.Routes.parentsView
                             // initialRoute: "Dashboard",
                             ),
                       )

@@ -11,16 +11,17 @@ import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
+import 'setup_bottom_sheet_ui.dart';
 import 'ui/pages/home/home_view.dart';
 import './app/router.gr.dart' as auto_router;
 import 'package:stacked_services/stacked_services.dart';
 import 'setup_dialog_ui.dart';
-
-
-
+import 'ui/pages/splash/splash_view.dart';
+const bool production = false;
 void main() {
   setupLocator();
   setupDialogUi();
+  setupBottomSheetUi();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: AppProvider.init()),
     ChangeNotifierProvider.value(value: AuthProvider.initialize()),
@@ -50,10 +51,10 @@ class AppPagesController extends StatelessWidget {
   Widget build(BuildContext context) {
     AuthProvider authProvider = Provider.of<AuthProvider>(context);
     print(authProvider.status.toString());
-    return HomeView();
+
     switch (authProvider.status) {
       case Status.Uninitialized:
-        return Loading();
+        return SplashView();
       case Status.Unauthenticated:
       case Status.Authenticating:
         return LoginView();

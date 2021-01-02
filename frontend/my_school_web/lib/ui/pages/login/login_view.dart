@@ -1,5 +1,8 @@
+import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
+import 'package:my_school_web/common/common.dart';
+import 'package:my_school_web/main.dart';
 import 'package:my_school_web/provider/auth.dart';
 
 import 'package:my_school_web/ui/widgets/custom_text.dart';
@@ -22,6 +25,10 @@ class LoginView extends StatelessWidget {
         viewModelBuilder: () => LoginViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
+       
+          // if (production)
+
+
         },
         builder: (context, model, child) {
           return Container(
@@ -108,15 +115,16 @@ class LoginView extends StatelessWidget {
                                   decoration: BoxDecoration(color: Colors.indigo),
                                   child: FlatButton(
                                     onPressed: () async {
-                                      // if (!await authProvider.signIn()) {
-                                      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Login failed!")));
-                                      //   return;
-                                      // }
-                                      // authProvider.clearController();
-
-                                      //locator<NavigationService>().globalNavigateTo("LayoutRoute", context);??
-                                      // Navigator.of(context).pushNamed("LayoutRoute"); ??
-                                      locator<NavigationService>().navigateTo(Routes.homeView);
+                                      authProvider.status = Status.Authenticating;
+                                      authProvider.notifyListeners();
+                                      Response response = await locator<AuthService>()
+                                          .login(email: authProvider.email.text, password: authProvider.password.text);
+                                      if (response.statusCode == 200) {
+                                        authProvider.status = Status.Authenticated;
+                                      } else {
+                                        authProvider.status = Status.Unauthenticated;
+                                      }
+                                      authProvider.notifyListeners();
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(vertical: 4),

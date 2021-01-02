@@ -9,26 +9,20 @@ import 'package:my_school_web/ui/pages/WorkingHours/working_hours_view.dart';
 import 'package:my_school_web/ui/pages/dashboard/dashboard_view.dart';
 import 'package:my_school_web/ui/pages/home/home_view.dart';
 import 'package:my_school_web/ui/pages/login/login_view.dart';
+import 'package:my_school_web/ui/pages/parents/add_parent_view.dart';
+import 'package:my_school_web/ui/pages/parents/parents_view.dart';
+import 'package:my_school_web/ui/pages/parents/select_child_view.dart';
+import 'package:my_school_web/ui/pages/splash/splash_view.dart';
 import 'package:my_school_web/ui/pages/students/add_student_view.dart';
 import 'package:my_school_web/ui/pages/students/students_view.dart';
 import 'package:my_school_web/ui/pages/teachers/add_teacher_view.dart';
 import 'package:my_school_web/ui/pages/teachers/teachers_view.dart';
 import 'package:my_school_web/ui/pages/todo_page.dart';
 
-// @MaterialAutoRouter()
-// class $Routes {
-//   @initial
-//   DashboardView dashboardView;
-//   TeachersView teachersView;
-//   AddTeacherView addTeacherView;
-//   HomeView homeView;
-//   LoginView loginView;
-//   AppPagesController appPagesController;
-// }
-
 // Defining routes and global transitions
 @CustomAutoRouter(
   routes: <AutoRoute>[
+    MaterialRoute(page: SplashView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: AppPagesController),
     MaterialRoute(page: HomeView),
@@ -37,6 +31,9 @@ import 'package:my_school_web/ui/pages/todo_page.dart';
     MaterialRoute(page: AddTeacherView),
     MaterialRoute(page: StudentsView),
     MaterialRoute(page: AddStudentView),
+    MaterialRoute(page: ParentsView),
+    MaterialRoute(page: AddParentView),
+    MaterialRoute(page: SelectStudentView),
     MaterialRoute(page: WorkingHoursView),
     MaterialRoute(page: ToDoPage),
   ],
@@ -45,26 +42,3 @@ import 'package:my_school_web/ui/pages/todo_page.dart';
 )
 class $Router {}
 
-// Route<dynamic> generateRoute(RouteSettings settings) {
-//   print('generateRoute: ${settings.name}');
-//   switch (settings.name) {
-//     case "Dashboard":
-//       return _getPageRoute(DashboardView());
-//     case "Teachers":
-//       return _getPageRoute(TeachersView());
-//     case "AddTeacherView":
-//       return _getPageRoute(AddTeacherView());
-//     case "LoginRoute":
-//       return _getPageRoute(LoginView());
-//     case "LayoutRoute":
-//       return _getPageRoute(HomeView());
-//     case "PageControllerRoute":
-//       return _getPageRoute(AppPagesController());
-//   }
-// }
-
-// PageRoute _getPageRoute(Widget child) {
-//   return MaterialPageRoute(
-//     builder: (context) => child,
-//   );
-// }

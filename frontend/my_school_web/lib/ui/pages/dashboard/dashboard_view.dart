@@ -1,3 +1,4 @@
+import 'package:my_school_web/provider/app_provider.dart';
 import 'package:my_school_web/ui/widgets/cards/cards_list.dart';
 import 'package:my_school_web/ui/widgets/custom_text.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';
@@ -5,6 +6,7 @@ import 'package:my_school_web/ui/widgets/charts/sales_chart.dart';
 import 'package:my_school_web/ui/widgets/top_buyer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import 'dashboard_view_model.dart';
@@ -12,6 +14,8 @@ import 'dashboard_view_model.dart';
 class DashboardView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+        final AppProvider appProvider = Provider.of<AppProvider>(context);
+
     return ViewModelBuilder<DashboardViewModel>.reactive(
         viewModelBuilder: () => DashboardViewModel(),
         onModelReady: (model) {
@@ -20,9 +24,9 @@ class DashboardView extends StatelessWidget {
         builder: (context, model, child) {
           return ListView(
             children: [
-              PageHeader(
-                text: "TABLEAU DE BORD",
-              ),
+            PageHeader(
+              text: appProvider.currentPage,
+            ),
               CardsList(),
               Padding(
                 padding: const EdgeInsets.all(14),

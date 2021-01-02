@@ -34,9 +34,7 @@ class _TeachersViewState extends State<TeachersView> {
         viewModelBuilder: () => TeachersViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
-          Future.delayed(Duration(seconds: 1), () {
             model.onRefresh();
-          });
         },
         builder: (context, model, child) {
           List<DatatableHeader> headers = [

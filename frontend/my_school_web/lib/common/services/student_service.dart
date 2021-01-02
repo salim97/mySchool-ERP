@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:math';
 
-
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 
@@ -14,11 +13,13 @@ abstract class StudentService extends RestAPI {
   Future<Response> update(StudentModel studentModel);
   Future<List<StudentModel>> search(String query);
   Future<Response> delete(StudentModel id);
+  String secret;
 }
 
 class StudentServiceImpl extends RestAPI implements StudentService {
   @override
   List<StudentModel> listStudentModel = new List<StudentModel>();
+
 
   @override
   Future<Response> add(StudentModel studentModel) async {
@@ -39,7 +40,7 @@ class StudentServiceImpl extends RestAPI implements StudentService {
     );
     // logger.d(response.data);
     // logger.d(response.statusCode);
-    if (response.statusCode == 200 ) {
+    if (response.statusCode == 200) {
       List<dynamic> list = response.data["data"]["data"];
       listStudentModel.clear();
       list.forEach((element) {
@@ -83,6 +84,9 @@ class StudentServiceImpl extends RestAPI implements StudentService {
     }
     return response;
   }
+
+  @override
+  String secret;
 }
 
 // class FakeStudentService extends RestAPI implements StudentService {

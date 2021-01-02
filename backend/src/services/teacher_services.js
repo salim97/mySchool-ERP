@@ -1,4 +1,4 @@
-const teacher = require('../models/users/teacherModel');
+const thisModel = require('../models/users/teacherModel');
 const userAccount = require('../models/users/userModel');
 const factory = require('../controllers/handlerFactory');
 const catchAsync = require('./../utils/catchAsync');
@@ -11,17 +11,17 @@ filterObj = (obj, ...allowedFields) => {
   return newObj;
 };
 
-getAll = factory.getAll(teacher);
-getOne = factory.getOne(teacher);
-createOne = factory.createOne(teacher);
-// updateOne = factory.updateOne(student);
+getAll = factory.getAll(thisModel);
+getOne = factory.getOne(thisModel);
+createOne = factory.createOne(thisModel);
+// updateOne = factory.updateOne(thisModel);
 updateOne = catchAsync(async (req, res, next) => {
   // check if request is valid
   if (!req.body.user || !req.body.user._id) {
     return next(new AppError('USER ID IS NULL', 404));
   }
   //check if documents exists
-  const old_doc_teacher = await teacher.findById(req.params.id);
+  const old_doc_teacher = await thisModel.findById(req.params.id);
   if (!old_doc_teacher) {
     return next(new AppError('No teacher document found with that USER ID', 404));
   }
@@ -36,7 +36,7 @@ updateOne = catchAsync(async (req, res, next) => {
 
 
   //update doc
-  const new_doc_teacher = await teacher.findByIdAndUpdate(req.params.id, req.body, {
+  const new_doc_teacher = await thisModel.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
     runValidators: true
   });
@@ -62,7 +62,7 @@ updateOne = catchAsync(async (req, res, next) => {
 // deleteOne = factory.deleteOne(parent);
 deleteOne = catchAsync(async (req, res, next) => {
   
-  const doc = await teacher.findByIdAndDelete(req.params.id);
+  const doc = await thisModel.findByIdAndDelete(req.params.id);
   // const docStudent = await teacher.findById(req.params.id);
 
   if (!doc) {

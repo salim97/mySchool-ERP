@@ -8,12 +8,12 @@ enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class AuthProvider with ChangeNotifier {
   // User _user;
-  Status _status = Status.Authenticated;
+  Status status = Status.Uninitialized;
   // UserModel _userModel;
 
 //  getter
   // UserModel get userModel => _userModel;
-  Status get status => _status;
+  // Status get status => _status;
   // User get user => _user;
 
   // public variables
@@ -25,6 +25,9 @@ class AuthProvider with ChangeNotifier {
   String userProfileImage = "";
 
   AuthProvider.initialize() {
+    email.text = "admin@email.com";
+    password.text = "azerty2020";
+    notifyListeners();
     _fireSetUp();
   }
 

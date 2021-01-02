@@ -5,17 +5,18 @@ import 'package:my_school_web/app/router.gr.dart';
 import 'package:my_school_web/provider/app_provider.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
-import 'package:responsive_table/ResponsiveDatatable.dart';
+import 'package:responsive_table/DatatableHeader.dart';
+import 'package:responsive_table/responsive_table.dart';
 import 'package:stacked/stacked.dart';
 import 'package:intl/intl.dart';
-import 'add_teacher_view_model.dart';
+import 'add_parent_view_model.dart';
 
-class AddTeacherView extends StatefulWidget {
+class AddParentView extends StatefulWidget {
   @override
-  _AddTeacherViewState createState() => _AddTeacherViewState();
+  _AddParentViewState createState() => _AddParentViewState();
 }
 
-class _AddTeacherViewState extends State<AddTeacherView> {
+class _AddParentViewState extends State<AddParentView> {
   @override
   void initState() {
     super.initState();
@@ -27,17 +28,18 @@ class _AddTeacherViewState extends State<AddTeacherView> {
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<AddTeacherViewModel>.reactive(
-      viewModelBuilder: () => AddTeacherViewModel(),
+    return ViewModelBuilder<AddParentViewModel>.reactive(
+      viewModelBuilder: () => AddParentViewModel(),
       onModelReady: (model) {
-        final TeacherModel teacherModel = ModalRoute.of(context).settings.arguments;
-        if (teacherModel != null) {
-          model.fillUI(teacherModel);
-          model.teacherModel = teacherModel;
+       
+        final ParentModel parentModel = ModalRoute.of(context).settings.arguments;
+        if (parentModel != null) {
+          model.fillUI(parentModel);
+          model.parentModel = parentModel;
+           model.onChildRefresh();
         } else {
           var now = new DateTime.now();
           String random = now.millisecondsSinceEpoch.toString();
-          model.streetAddressController.text = random;
           model.phoneController.text = random;
           model.usernameController.text = random;
           model.emailAddressController.text = random + "@email.com";
@@ -47,9 +49,51 @@ class _AddTeacherViewState extends State<AddTeacherView> {
       },
       builder: (
         BuildContext context,
-        AddTeacherViewModel model,
+        AddParentViewModel model,
         Widget child,
       ) {
+        List<DatatableHeader> headers = [
+          DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
+          DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
+          DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.center),
+          DatatableHeader(text: "Email", value: "Email", show: true, sortable: true, textAlign: TextAlign.center),
+          DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+          DatatableHeader(
+              flex: 2,
+              text: "Action",
+              value: "Action",
+              show: true,
+              sortable: false,
+              sourceBuilder: (value, row) {
+                return Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.remove_red_eye),
+                        onPressed: () async {
+                          await model.onChildView(value);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.edit),
+                        onPressed: () async {
+                          await model.onChildEdit(value);
+                        },
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () async {
+                          await model.onChildDelete(value);
+                        },
+                      )
+                    ],
+                  ),
+                );
+              },
+              textAlign: TextAlign.center),
+        ];
+
         return Container(
           margin: EdgeInsets.all(10),
           padding: EdgeInsets.all(0),
@@ -114,7 +158,6 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                 child:
                                     userInputText(title: "Phone", hintText: "0X XXXX XXXX", textEditingController: model.phoneController),
                               ),
-                              Flexible(child: userInputText(title: "Qualification", textEditingController: model.qualificationController)),
                             ],
                           ),
                           Row(children: <Widget>[
@@ -134,29 +177,70 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  "Address",
+                                  "Children",
                                   style: TextStyle(fontSize: 24.0),
                                 ),
                               )
                             ],
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                child: userInputText(
-                                    title: "Street Address", textEditingController: model.streetAddressController, mustFill: true),
+                          SingleChildScrollView(
+                              child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
+                            PageHeader(
+                              text: appProvider.currentPage,
+                            ),
+                            Container(
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.all(0),
+                              child: Card(
+                                elevation: 1,
+                                shadowColor: Colors.black,
+                                clipBehavior: Clip.none,
+                                child: ResponsiveDatatable(
+                                  title: Row(
+                                    children: [
+                                      RaisedButton.icon(
+                                        onPressed: () {
+                                          model.onChildRefresh();
+                                        },
+                                        icon: Icon(
+                                          Icons.refresh,
+                                          color: Colors.white,
+                                        ),
+                                        label: Text(
+                                          "Refresh",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        color: Colors.blue,
+                                      ),
+                                      SizedBox(
+                                        width: 25,
+                                      ),
+                                      RaisedButton.icon(
+                                        onPressed: () {
+                                          model.onChildCreateNew();
+                                        },
+                                        icon: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ),
+                                        label: Text(
+                                          "Create New",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        color: Colors.blue,
+                                      )
+                                    ],
+                                  ),
+                                  headers: headers,
+                                  source: model.source,
+                                  selecteds: model.selecteds,
+                                  showSelect: model.showSelect,
+                                  autoHeight: true,
+                                  isLoading: model.isLoading,
+                                ),
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(child: userInputText(title: "City Name", textEditingController: model.cityNameController)),
-                              Flexible(child: userInputText(title: "Country", textEditingController: model.countryController)),
-                              Flexible(child: userInputText(title: "Pin Code", textEditingController: model.pinCodeController)),
-                            ],
-                          ),
+                            ),
+                          ]))
                         ],
                       )),
                   Row(
@@ -221,21 +305,23 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                           return "Please enter same password.";
                                         }
                                       }),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: RaisedButton(
-                                  color: Colors.green,
-                                  onPressed: () {
-                                    setState(() {
-                                      _obscureText = !_obscureText;
-                                    });
-                                  },
-                                  child: Text(
-                                    _obscureText ? "Show Password" : "Hide Password",
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                              )
+                              !model.editOnly
+                                  ? Container()
+                                  : Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: RaisedButton(
+                                        color: Colors.green,
+                                        onPressed: () {
+                                          setState(() {
+                                            _obscureText = !_obscureText;
+                                          });
+                                        },
+                                        child: Text(
+                                          _obscureText ? "Show Password" : "Hide Password",
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                    )
                             ])),
                       ),
                       Expanded(
@@ -256,17 +342,17 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                   )
                                 ],
                               ),
-                              userInputDate(title: "Joining Date", textEditingController: model.joiningDateController),
-                              userInputDate(title: "Leaving Date", textEditingController: model.leavingDateController),
-                              userInputText(title: "Current Position", textEditingController: model.currentPositionController),
-                              Row(
-                                children: [
-                                  Flexible(
-                                      child: userInputText(title: "Employee Code", textEditingController: model.employeeCodeController)),
-                                  Flexible(
-                                      child: userInputText(title: "Working Hours", textEditingController: model.workingHoursController)),
-                                ],
-                              ),
+                              // userInputDate(title: "Joining Date", textEditingController: model.joiningDateController),
+                              // userInputDate(title: "Leaving Date", textEditingController: model.leavingDateController),
+                              // userInputText(title: "Current Position", textEditingController: model.currentPositionController),
+                              // Row(
+                              //   children: [
+                              //     Flexible(
+                              //         child: userInputText(title: "Employee Code", textEditingController: model.employeeCodeController)),
+                              //     Flexible(
+                              //         child: userInputText(title: "Working Hours", textEditingController: model.workingHoursController)),
+                              //   ],
+                              // ),
                               Row(
                                 children: [
                                   Padding(
@@ -288,7 +374,6 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                       color: Colors.black,
                                       onPressed: () {
                                         model.onBackClicked();
-                                        //Navigator.of(context).pushNamed(Routes.teachersView);
                                       },
                                       child: Text(
                                         "Back",

@@ -29,7 +29,7 @@ class AuthServiceImpl extends RestAPI implements AuthService {
       isAuthEnabled: false,
     );
     if (response.statusCode == 200) {
-      setToken(response.data["token"]);
+      await setToken(response.data["token"]);
       userModel = new UserModel.fromJson(response.data["data"]["user"]);
       // final cookies = response.headers.map['set-cookie'];
       // if (cookies.isNotEmpty) {
