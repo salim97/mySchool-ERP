@@ -18,6 +18,7 @@ import 'package:stacked_services/stacked_services.dart';
 
 class TeachersViewModel extends BaseViewModel {
   final TeacherService teacherService = locator<TeacherService>();
+  final AuthService authService = locator<AuthService>();
   List<TeacherModel> listTeacherModel;
   TeachersViewModel() {}
 
@@ -60,8 +61,10 @@ class TeachersViewModel extends BaseViewModel {
     // });
   }
 
-  onCreateNew() {
-    locator<NavigationService>().navigateTo(Routes.addTeacherView);
+  onCreateNew() async {
+
+    await locator<NavigationService>().navigateTo(Routes.addTeacherView);
+    onRefresh();
   }
 
   onEdit(id) async {
@@ -100,8 +103,8 @@ class TeachersViewModel extends BaseViewModel {
         cancelButtonTitle: "NO");
     if (response == null) return;
     if (response.confirmed) {
-      teacherService.delete(id);
-      onRefresh();
+      await teacherService.delete(TeacherModel(id: id));
+      await onRefresh();
     }
   }
 

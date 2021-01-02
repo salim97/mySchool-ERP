@@ -91,8 +91,7 @@ class AddStudentViewModel extends BaseViewModel {
     studentModel.rollNo = employeeCodeController.text;
     studentModel.working_hours = workingHoursController.text;
 
-    Logger log = Logger();
-
+ 
     // if (formKey.currentState.validate()) {
     //   print("validated");
     // } else {

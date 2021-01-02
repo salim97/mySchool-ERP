@@ -70,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
                             key: locator<NavigationService>().navigatorKey,
                             onGenerateRoute: auto_router.Router().onGenerateRoute,
                             // initialRoute: auto_router.Routes.dashboardView
-                            initialRoute: auto_router.Routes.studentsView
+                            initialRoute: auto_router.Routes.dashboardView
                             // initialRoute: "Dashboard",
                             ),
                       )

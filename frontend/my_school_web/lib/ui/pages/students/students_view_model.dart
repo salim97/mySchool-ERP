@@ -67,39 +67,6 @@ class StudentsViewModel extends BaseViewModel {
     // });
   }
 
-  onSearch(query) async {
-    isLoading = true;
-    notifyListeners();
-    Iterable<StudentModel> ltm = listStudentModel.where((element) {
-      if (element.userAccount.name.contains(query) ||
-          // element.middle_name.contains(query) ||
-          // element.last_name.contains(query) ||
-          // element.phone.contains(query) ||
-          // element.first_name.contains(query) ||
-          // element.first_name.contains(query) ||
-          // element.first_name.contains(query) ||
-          element.phone.contains(query)) {
-        return true;
-      }
-      return false;
-    });
-    source.clear();
-    ltm.forEach((element) {
-      source.add({
-        "ID": element.id,
-        "Roll No.": element.rollNo,
-        "Full Name": element.userAccount.name ,
-        "Parent": element.parent_id,
-        "Street Address": element.street_address,
-        "Phone": element.phone,
-        "Action": element.id
-      });
-    });
-    // source.addAll(_generateData(n: 1000));
-    isLoading = false;
-    notifyListeners();
-  }
-
   onCreateNew() async {
     await locator<NavigationService>().navigateTo(Routes.addStudentView);
     onRefresh();
@@ -141,8 +108,43 @@ class StudentsViewModel extends BaseViewModel {
         cancelButtonTitle: "NO");
     if (response == null) return;
     if (response.confirmed) {
-      studentService.delete(StudentModel(id: id));
-      onRefresh();
+      await studentService.delete(StudentModel(id: id));
+      await onRefresh();
     }
   }
+
+  
+  onSearch(query) async {
+    isLoading = true;
+    notifyListeners();
+    Iterable<StudentModel> ltm = listStudentModel.where((element) {
+      if (element.userAccount.name.contains(query) ||
+          // element.middle_name.contains(query) ||
+          // element.last_name.contains(query) ||
+          // element.phone.contains(query) ||
+          // element.first_name.contains(query) ||
+          // element.first_name.contains(query) ||
+          // element.first_name.contains(query) ||
+          element.phone.contains(query)) {
+        return true;
+      }
+      return false;
+    });
+    source.clear();
+    ltm.forEach((element) {
+      source.add({
+        "ID": element.id,
+        "Roll No.": element.rollNo,
+        "Full Name": element.userAccount.name ,
+        "Parent": element.parent_id,
+        "Street Address": element.street_address,
+        "Phone": element.phone,
+        "Action": element.id
+      });
+    });
+    // source.addAll(_generateData(n: 1000));
+    isLoading = false;
+    notifyListeners();
+  }
+
 }

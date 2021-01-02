@@ -36,7 +36,6 @@ class StudentModel {
       {this.id,
       this.parent_id,
       this.gender,
-
       this.date_of_birth,
       this.blood_group,
       this.phone,
@@ -52,8 +51,9 @@ class StudentModel {
 
   factory StudentModel.fromJson(Map<String, dynamic> json) {
     StudentModel studentModel = _$StudentModelFromJson(json);
-    if(json["user"] != null)
-    studentModel.userAccount = UserModel.fromJson(json["user"]);
+    if (json["user"] != null) {
+      studentModel.userAccount = UserModel.fromJson(json["user"]);
+    }
     return studentModel;
   }
 

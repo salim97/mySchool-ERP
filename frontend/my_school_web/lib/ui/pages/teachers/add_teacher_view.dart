@@ -31,7 +31,19 @@ class _AddTeacherViewState extends State<AddTeacherView> {
       viewModelBuilder: () => AddTeacherViewModel(),
       onModelReady: (model) {
         final TeacherModel teacherModel = ModalRoute.of(context).settings.arguments;
-        if (teacherModel != null) model.fillUI(teacherModel);
+        if (teacherModel != null) {
+          model.fillUI(teacherModel);
+          model.teacherModel = teacherModel;
+        } else {
+          var now = new DateTime.now();
+          String random = now.millisecondsSinceEpoch.toString();
+          model.streetAddressController.text = random;
+          model.phoneController.text = random;
+          model.usernameController.text = random;
+          model.emailAddressController.text = random + "@email.com";
+          model.passwordController.text = "azerty2020";
+          model.confirmPasswordController.text = "azerty2020";
+        }
       },
       builder: (
         BuildContext context,
@@ -92,18 +104,6 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                   ),
                                 ],
                               ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Flexible(
-                                  child:
-                                      userInputText(title: "First Name", textEditingController: model.firstNameController, mustFill: true)),
-                              Flexible(child: userInputText(title: "Middle Name", textEditingController: model.middleNameController)),
-                              Flexible(
-                                  child:
-                                      userInputText(title: "Last Name", textEditingController: model.lastNameController, mustFill: true)),
                             ],
                           ),
                           Row(
@@ -188,8 +188,12 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                       return "Please enter a valid email address";
                                     }
                                   }),
-                              userInputText(title: "Username", textEditingController: model.usernameController, mustFill: true),
-                              userInputText(
+                              !model.editOnly
+                                  ? Container()
+                                  : userInputText(title: "Username", textEditingController: model.usernameController, mustFill: true),
+                               !model.editOnly
+                                  ? Container()
+                                  :userInputText(
                                   title: "Password",
                                   textEditingController: model.passwordController,
                                   mustFill: true,
@@ -202,7 +206,9 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                       return "Please enter same password.";
                                     }
                                   }),
-                              userInputText(
+                               !model.editOnly
+                                  ? Container()
+                                  :userInputText(
                                   title: "ConfirmPassword",
                                   textEditingController: model.confirmPasswordController,
                                   mustFill: true,

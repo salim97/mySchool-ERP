@@ -34,7 +34,9 @@ class _TeachersViewState extends State<TeachersView> {
         viewModelBuilder: () => TeachersViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
-          model.onRefresh();
+          Future.delayed(Duration(seconds: 1), () {
+            model.onRefresh();
+          });
         },
         builder: (context, model, child) {
           List<DatatableHeader> headers = [
@@ -97,19 +99,40 @@ class _TeachersViewState extends State<TeachersView> {
                 clipBehavior: Clip.none,
                 child: ResponsiveDatatable(
                   title: !model.isSearch
-                      ? RaisedButton.icon(
-                          onPressed: () {
-                            model.onCreateNew();
-                          },
-                          icon: Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                          label: Text(
-                            "Create New",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                          color: Colors.blue,
+                      ? Row(
+                          children: [
+                            RaisedButton.icon(
+                              onPressed: () {
+                                model.onRefresh();
+                              },
+                              icon: Icon(
+                                Icons.refresh,
+                                color: Colors.white,
+                              ),
+                              label: Text(
+                                "Refresh",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              color: Colors.blue,
+                            ),
+                            SizedBox(
+                              width: 25,
+                            ),
+                            RaisedButton.icon(
+                              onPressed: () {
+                                model.onCreateNew();
+                              },
+                              icon: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                              ),
+                              label: Text(
+                                "Create New",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              color: Colors.blue,
+                            )
+                          ],
                         )
                       : null,
                   actions: [
