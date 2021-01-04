@@ -45,6 +45,7 @@ updateOne = catchAsync(async (req, res, next) => {
   if (!new_doc_teacher) {
     return next(new AppError('No document found with that ID', 404));
   }
+  
   if (req.body.user) {
     //filter and update
     const filteredBody = filterObj(req.body.user, 'name', 'email');
@@ -54,6 +55,7 @@ updateOne = catchAsync(async (req, res, next) => {
     });
     new_doc_teacher.user = new_doc_user;
   }
+
   res.status(200).json({
     status: 'success',
     data: {

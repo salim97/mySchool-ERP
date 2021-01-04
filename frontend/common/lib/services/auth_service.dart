@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-import 'package:common/models/user_model.dart';
 import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
+import '../common.dart';
 import '../rest_api.dart';
 
 abstract class AuthService extends RestAPI {
@@ -29,7 +29,7 @@ class AuthServiceImpl extends RestAPI implements AuthService {
       isAuthEnabled: false,
     );
     if (response.statusCode == 200) {
-      setToken(response.data["token"]);
+      await setToken(response.data["token"]);
       userModel = new UserModel.fromJson(response.data["data"]["user"]);
       // final cookies = response.headers.map['set-cookie'];
       // if (cookies.isNotEmpty) {
@@ -89,6 +89,7 @@ class AuthServiceImpl extends RestAPI implements AuthService {
     }
     return response;
   }
+
 }
 
 // class FakeAuthService extends RestAPI implements AuthService {

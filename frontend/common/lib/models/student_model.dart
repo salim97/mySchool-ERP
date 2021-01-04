@@ -1,5 +1,5 @@
-import 'package:common/models/user_model.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'user_model.dart';
 
 part 'student_model.g.dart';
 
@@ -15,13 +15,10 @@ class StudentModel {
   String parent_id;
   // personal details
   String gender;
-  String first_name;
-  String middle_name;
-  String last_name;
   String date_of_birth;
   String blood_group;
   String phone;
-  get name => first_name + " " + middle_name + " " + last_name;
+
 // address:
   String street_address;
   String city_name;
@@ -39,9 +36,6 @@ class StudentModel {
       {this.id,
       this.parent_id,
       this.gender,
-      this.first_name,
-      this.middle_name,
-      this.last_name,
       this.date_of_birth,
       this.blood_group,
       this.phone,
@@ -57,14 +51,16 @@ class StudentModel {
 
   factory StudentModel.fromJson(Map<String, dynamic> json) {
     StudentModel studentModel = _$StudentModelFromJson(json);
-    studentModel.userAccount = UserModel.fromJson(json["user"]);
+    if (json["user"] != null) {
+      studentModel.userAccount = UserModel.fromJson(json["user"]);
+    }
     return studentModel;
   }
 
   Map<String, dynamic> toJson() {
     // return _$StudentModelToJson(this);
     Map<String, dynamic> map = _$StudentModelToJson(this);
-    map["user"] = userAccount.id;
+    map["user"] = userAccount.toJson();
     return map;
   }
 }

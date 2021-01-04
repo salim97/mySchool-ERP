@@ -4,11 +4,12 @@ import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:logger/logger.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-const DEBUG_HTTP = true; //print http responses from server
+const DEBUG_HTTP = false; //print http responses from server
 
 class RestAPI {
   String serverIP = "http://127.0.0.1:3000";
@@ -21,6 +22,18 @@ class RestAPI {
   static const String _defaultContentType = "application/json";
   RestAPI() {
     // dio.interceptors.add(CookieManager(PersistCookieJar(dir: "./cookies")));
+    // dio.interceptors.add(PrettyDioLogger());
+// customization
+    dio.interceptors.add(PrettyDioLogger(
+      request: false,
+      requestHeader: false,
+      requestBody: true,
+      responseBody: true,
+      responseHeader: false,
+      error: true,
+      compact: false,
+      maxWidth: 120,
+    ));
     if (!kIsWeb) {
       dio.interceptors.add(CookieManager(CookieJar()));
     } else {
@@ -58,6 +71,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -102,6 +116,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -132,8 +147,9 @@ class RestAPI {
         ),
       );
       if (DEBUG_HTTP) {
-        // print("response.statusCode = " + response?.statusCode.toString());
+        print("response.statusCode = " + response?.statusCode.toString());
         print("response.data = " + response?.data.toString());
+        // logger.d(response.data,null, null);
       }
       lastResponse = response;
       return response;
@@ -153,6 +169,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
@@ -198,6 +215,7 @@ class RestAPI {
     String contentType = _defaultContentType,
     bool isAuthEnabled = true,
   }) async {
+    if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
       if (DEBUG_HTTP) {
         print("-------------------- " + Trace.current().frames[1].member + "----------------------------");

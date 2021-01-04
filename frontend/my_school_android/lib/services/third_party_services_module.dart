@@ -4,6 +4,8 @@
 import 'package:injectable/injectable.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import 'FirebaseRemoteConfig.dart';
+
 
 
 @module
@@ -16,4 +18,6 @@ abstract class ThirdPartyServicesModule {
   SnackbarService get snackbarService;
   @lazySingleton
   BottomSheetService get bottomSheetService;
+  @lazySingleton
+  FirebaseRemoteConfig get firebaseRemoteConfig;
 }

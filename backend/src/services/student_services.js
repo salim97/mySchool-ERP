@@ -27,7 +27,7 @@ updateOne = catchAsync(async (req, res, next) => {
     if (!req.body.user._id) {
       return next(new AppError('USER ID IS NULL', 404));
     }
-
+    //check if documents exists
     const old_doc_user = await userAccount.findById(req.body.user._id);
     if (!old_doc_user) {
       return next(new AppError('No user document found with that USER ID', 404));
@@ -57,7 +57,7 @@ updateOne = catchAsync(async (req, res, next) => {
     });
     new_doc_Student.user = new_doc_user;
   }
-  
+
   res.status(200).json({
     status: 'success',
     data: {

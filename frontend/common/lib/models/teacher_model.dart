@@ -16,6 +16,7 @@ class TeacherModel {
   // personal details
   String gender;
   String full_name;
+  String email_address;
   String date_of_birth;
   String blood_group;
   String phone;
@@ -37,8 +38,9 @@ class TeacherModel {
 
   TeacherModel({
     this.id,
-    this.gender,
+    this.email_address,
     this.full_name,
+    this.gender,
     this.date_of_birth,
     this.blood_group,
     this.phone,
@@ -58,12 +60,14 @@ class TeacherModel {
 
   factory TeacherModel.fromJson(Map<String, dynamic> json) {
     TeacherModel teacherModel = _$TeacherModelFromJson(json);
-    teacherModel.userAccount = UserModel.fromJson(json["user"]);
+    if (json["user"] != null) {
+      teacherModel.userAccount = UserModel.fromJson(json["user"]);
+    }
     return teacherModel;
   }
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = _$TeacherModelToJson(this);
-    map["user"] = userAccount.id;
+    map["user"] = userAccount.toJson();
     return map;
   }
 }

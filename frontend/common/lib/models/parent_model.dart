@@ -34,7 +34,9 @@ class ParentModel {
 
   factory ParentModel.fromJson(Map<String, dynamic> json) {
     ParentModel parentModel = _$ParentModelFromJson(json);
-    parentModel.userAccount = UserModel.fromJson(json["user"]);
+    if (json["user"] != null) {
+      parentModel.userAccount = UserModel.fromJson(json["user"]);
+    }
     List<dynamic> children_ids = json["children"];
     children_ids.forEach((element) {
       parentModel.children.add(StudentModel.fromJson(element));
@@ -43,10 +45,10 @@ class ParentModel {
   }
   Map<String, dynamic> toJson() {
     Map<String, dynamic> map = _$ParentModelToJson(this);
-    map["user"] = userAccount.id;
-    var children_ids = new List<String>();
+    map["user"] = userAccount.toJson();
+    var children_ids = new List<dynamic>();
     children.forEach((element) {
-      children_ids.add(element.id);
+      children_ids.add(element.toJson());
     });
     map["children"] = children_ids;
     return map;

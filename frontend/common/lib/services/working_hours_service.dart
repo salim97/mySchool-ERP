@@ -1,11 +1,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:common/common.dart';
-import 'package:common/models/student_model.dart';
-import 'package:common/models/user_model.dart';
-import 'package:common/rest_api.dart';
 import 'package:crypto/crypto.dart';
+
+import '../common.dart';
 
 abstract class WorkingHoursService {
   Future<List<WorkingHoursModel>> getAll();

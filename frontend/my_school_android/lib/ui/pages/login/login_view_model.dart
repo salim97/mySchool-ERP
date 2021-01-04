@@ -1,8 +1,10 @@
 import 'package:common/common.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_android/app/locator.dart';
+import 'package:my_school_android/services/FirebaseRemoteConfig.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -20,6 +22,10 @@ class LoginViewModel extends BaseViewModel {
 
   var l = new Logger();
   onLoginClicked() async {
+    final FirebaseRemoteConfig firebaseRemoteConfig = locator<FirebaseRemoteConfig>();
+    await firebaseRemoteConfig.synchroniseWithFirebase();
+    print("backendURL= " + firebaseRemoteConfig.backendURL);
+    return;
     // _navigationService.replaceWith(Routes.homeView);
 
     Response response = await _authService.login(

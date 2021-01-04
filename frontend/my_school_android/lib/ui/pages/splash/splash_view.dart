@@ -22,7 +22,6 @@ class _SplashViewState extends State<SplashView> with SingleTickerProviderStateM
   void initState() {
     super.initState();
 
-    Route route;
     controller = AnimationController(duration: Duration(seconds: 3), vsync: this);
     animation = Tween(begin: 30.0, end: 90.0).animate(controller);
     controller.forward();
