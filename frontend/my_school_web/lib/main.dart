@@ -17,7 +17,9 @@ import './app/router.gr.dart' as auto_router;
 import 'package:stacked_services/stacked_services.dart';
 import 'setup_dialog_ui.dart';
 import 'ui/pages/splash/splash_view.dart';
+
 const bool production = false;
+const String currentVersion = "version of 2021-01-04 02:52 PM";
 void main() {
   setupLocator();
   setupDialogUi();

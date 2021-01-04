@@ -8,7 +8,8 @@ enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class AuthProvider with ChangeNotifier {
   // User _user;
-  Status status = Status.Uninitialized;
+  // Status status = Status.Uninitialized;
+  Status status = Status.Unauthenticated;
   // UserModel _userModel;
 
 //  getter

@@ -25,10 +25,8 @@ class LoginView extends StatelessWidget {
         viewModelBuilder: () => LoginViewModel(),
         onModelReady: (model) {
           // Do something once your model is initialized
-       
+
           // if (production)
-
-
         },
         builder: (context, model, child) {
           return Container(
@@ -51,6 +49,14 @@ class LoginView extends StatelessWidget {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              CustomText(
+                                text: currentVersion,
+                                size: 18,
+                                weight: FontWeight.normal,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
                               CustomText(
                                 text: "LOGIN",
                                 size: 22,
