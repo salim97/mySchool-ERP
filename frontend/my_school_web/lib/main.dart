@@ -19,7 +19,7 @@ import 'setup_dialog_ui.dart';
 import 'ui/pages/splash/splash_view.dart';
 
 const bool production = false;
-const String currentVersion = "version of 2021-01-04 03:03 PM";
+const String currentVersion = "version of 2021-01-04 03:16 PM";
 void main() {
   setupLocator();
   setupDialogUi();
