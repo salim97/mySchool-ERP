@@ -12,8 +12,9 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 const DEBUG_HTTP = false; //print http responses from server
 
 class RestAPI {
-  String serverIP = "http://127.0.0.1:3000";
+  // String serverIP = "http://127.0.0.1:3000";
   // String serverIP = "http://10.0.2.2:3000";
+  String serverIP = "http://temporaryurl.ddnsking.com:3000";
   // CookieJar cookieJar = CookieJar();
   Dio dio = new Dio();
   Response lastResponse;

@@ -7,6 +7,7 @@ services:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
       MONGO_INITDB_DATABASE: mymongodbtest01
+      MONGO_DATABASE: mongodb://$MONGO_INITDB_ROOT_USERNAME:$MONGO_INITDB_ROOT_PASSWORD@127.0.0.1:27017/$MONGO_INITDB_DATABASE?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
     ports:
       - "27017-27019:27017-27019"
     volumes:

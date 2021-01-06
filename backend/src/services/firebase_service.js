@@ -117,7 +117,7 @@ async function runFirebaseRemoteConfig() {
 
 
 }
-runFirebaseRemoteConfig();
+// runFirebaseRemoteConfig();
 
 
 
