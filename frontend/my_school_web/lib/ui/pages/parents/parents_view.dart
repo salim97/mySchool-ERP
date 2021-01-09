@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/locator.dart';
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:my_school_web/provider/app_provider.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +38,7 @@ class _ParentsViewState extends State<ParentsView> {
           // Do something once your model is initialized
           // model.authService = Provider.of<AppProvider>(context, listen: false).authService;
           // model.parentService = Provider.of<AppProvider>(context, listen: false).parentService;
-            model.onRefresh();
+          model.onRefresh();
         },
         builder: (context, model, child) {
           List<DatatableHeader> headers = [

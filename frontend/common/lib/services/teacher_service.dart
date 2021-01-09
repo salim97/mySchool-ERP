@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import '../common.dart';
-import '../rest_api.dart';
 
 abstract class TeacherService {
   List<TeacherModel> listStudentModel;

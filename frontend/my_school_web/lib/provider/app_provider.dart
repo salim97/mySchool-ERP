@@ -1,7 +1,7 @@
+import 'package:common/common.dart';
 import 'package:my_school_web/app/helpers/costants.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/locator.dart';
-import 'package:my_school_web/common/common.dart';
 
 // enum DisplayedPage { HOME, PRODUCTS, ORDERS, USERS, BRANDS, CATEGORIES }
 // enum DisplayedPageForAdmin { Dashboard, Teachers, Students, Parents, Classes, Attendance }

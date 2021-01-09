@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_web/app/router.dart';

@@ -67,17 +67,19 @@ updateOne = catchAsync(async (req, res, next) => {
 // deleteOne = factory.deleteOne(parent);
 deleteOne = catchAsync(async (req, res, next) => {
 
-  const doc = await thisModel.findByIdAndDelete(req.params.id);
+  // const doc = await thisModel.findByIdAndDelete(req.params.id);
+  const doc = await thisModel.findOneAndDelete(req.params.id);
+  
   // const docStudent = await teacher.findById(req.params.id);
 
   if (!doc) {
     return next(new AppError('No document found with that ID', 404));
   }
 
-  if (doc.user.id) {
-    await userAccount.findByIdAndDelete(doc.user.id);
-    // await userAccount.findByIdAndUpdate(doc.user.id, { active: false });
-  }
+  // if (doc.user.id) {
+  //   await userAccount.findByIdAndDelete(doc.user.id);
+  //   // await userAccount.findByIdAndUpdate(doc.user.id, { active: false });
+  // }
 
   res.status(204).json({
     status: 'success',

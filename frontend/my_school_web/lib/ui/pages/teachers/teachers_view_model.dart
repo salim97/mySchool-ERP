@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
@@ -62,7 +62,6 @@ class TeachersViewModel extends BaseViewModel {
   }
 
   onCreateNew() async {
-
     await locator<NavigationService>().navigateTo(Routes.addTeacherView);
     onRefresh();
   }

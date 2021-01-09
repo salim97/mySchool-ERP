@@ -1,4 +1,4 @@
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/router.gr.dart';
@@ -31,12 +31,11 @@ class _AddParentViewState extends State<AddParentView> {
     return ViewModelBuilder<AddParentViewModel>.reactive(
       viewModelBuilder: () => AddParentViewModel(),
       onModelReady: (model) {
-       
         final ParentModel parentModel = ModalRoute.of(context).settings.arguments;
         if (parentModel != null) {
           model.fillUI(parentModel);
           model.parentModel = parentModel;
-           model.onChildRefresh();
+          model.onChildRefresh();
         } else {
           var now = new DateTime.now();
           String random = now.millisecondsSinceEpoch.toString();

@@ -51,6 +51,15 @@ parentSchema.pre(/^find/, function (next) {
 });
 
 
+const userModel = require('./userModel');
+parentSchema.post('findOneAndDelete',async function(doc){
+    if (doc.user._id) {
+        const user = this
+        // await userModel.findOneAndDelete({_id:doc.user._id})
+        await userModel.deleteOne({_id:doc.user._id})
+
+    }
+})
 
 const Parent = mongoose.model('Parents', parentSchema);
 

@@ -5,7 +5,6 @@ import 'package:crypto/crypto.dart';
 import 'package:dio/dio.dart';
 
 import '../common.dart';
-import '../rest_api.dart';
 
 abstract class StudentService extends RestAPI {
   List<StudentModel> listStudentModel;

@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 
 import 'package:dio/dio.dart';
@@ -60,7 +60,6 @@ class ParentsViewModel extends BaseViewModel {
 
     isLoading = false;
     notifyListeners();
-
   }
 
   onCreateNew() async {
@@ -109,7 +108,6 @@ class ParentsViewModel extends BaseViewModel {
     }
   }
 
-  
   onSearch(query) async {
     isLoading = true;
     notifyListeners();
@@ -131,7 +129,7 @@ class ParentsViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Roll No.": "element.rollNo",
-        "Full Name": element.userAccount.name ,
+        "Full Name": element.userAccount.name,
         "Parent": "element.parent_id",
         "Street Address": "element.street_address",
         "Phone": element.phone,
@@ -142,5 +140,4 @@ class ParentsViewModel extends BaseViewModel {
     isLoading = false;
     notifyListeners();
   }
-
 }

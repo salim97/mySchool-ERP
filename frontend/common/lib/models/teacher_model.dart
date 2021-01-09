@@ -15,8 +15,7 @@ class TeacherModel {
   UserModel userAccount = new UserModel();
   // personal details
   String gender;
-  String full_name;
-  String email_address;
+
   String date_of_birth;
   String blood_group;
   String phone;
@@ -38,8 +37,6 @@ class TeacherModel {
 
   TeacherModel({
     this.id,
-    this.email_address,
-    this.full_name,
     this.gender,
     this.date_of_birth,
     this.blood_group,

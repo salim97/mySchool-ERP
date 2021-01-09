@@ -1,8 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
-import 'package:my_school_web/common/common.dart';
-import 'package:my_school_web/common/models/student_model.dart';
-import 'package:my_school_web/common/services/student_service.dart';
+import 'package:common/common.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 

@@ -9,11 +9,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-const DEBUG_HTTP = false; //print http responses from server
+const DEBUG_HTTP = true; //print http responses from server
 
 class RestAPI {
   String serverIP = "http://127.0.0.1:3000";
   // String serverIP = "http://10.0.2.2:3000";
+  // String serverIP = "http://temporaryurl.ddnsking.com:3000";
   // CookieJar cookieJar = CookieJar();
   Dio dio = new Dio();
   Response lastResponse;
@@ -24,16 +25,17 @@ class RestAPI {
     // dio.interceptors.add(CookieManager(PersistCookieJar(dir: "./cookies")));
     // dio.interceptors.add(PrettyDioLogger());
 // customization
-    dio.interceptors.add(PrettyDioLogger(
-      request: false,
-      requestHeader: false,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: false,
-      error: true,
-      compact: false,
-      maxWidth: 120,
-    ));
+    if (DEBUG_HTTP)
+      dio.interceptors.add(PrettyDioLogger(
+        request: false,
+        requestHeader: false,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: false,
+        maxWidth: 120,
+      ));
     if (!kIsWeb) {
       dio.interceptors.add(CookieManager(CookieJar()));
     } else {
@@ -73,10 +75,10 @@ class RestAPI {
   }) async {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
-      if (DEBUG_HTTP) {
-        print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
-        print("url = " + url);
-      }
+      // if (DEBUG_HTTP) {
+      //   print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
+      //   print("url = " + url);
+      // }
       Map<String, dynamic> headers;
       if (isAuthEnabled)
         headers = {
@@ -94,11 +96,11 @@ class RestAPI {
           },
         ),
       );
-      if (DEBUG_HTTP) {
-        // logger.d(response);
-        print("response.statusCode = " + response.statusCode.toString());
-        print("response.data = " + response.data.toString());
-      }
+      // if (DEBUG_HTTP) {
+      //   // logger.d(response);
+      //   print("response.statusCode = " + response.statusCode.toString());
+      //   print("response.data = " + response.data.toString());
+      // }
       lastResponse = response;
       return response;
     } on DioError catch (e) {
@@ -118,12 +120,12 @@ class RestAPI {
   }) async {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
-      if (DEBUG_HTTP) {
-        print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
-        print("request.url = " + url);
-        print("request.queryParameters = " + queryParameters.toString());
-        print("request.data = " + data.toString());
-      }
+      // if (DEBUG_HTTP) {
+      //   print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
+      //   print("request.url = " + url);
+      //   print("request.queryParameters = " + queryParameters.toString());
+      //   print("request.data = " + data.toString());
+      // }
       Response response;
       Map<String, dynamic> headers;
       if (isAuthEnabled)
@@ -146,11 +148,11 @@ class RestAPI {
           // sendTimeout: 5000,
         ),
       );
-      if (DEBUG_HTTP) {
-        print("response.statusCode = " + response?.statusCode.toString());
-        print("response.data = " + response?.data.toString());
-        // logger.d(response.data,null, null);
-      }
+      // if (DEBUG_HTTP) {
+      //   print("response.statusCode = " + response?.statusCode.toString());
+      //   print("response.data = " + response?.data.toString());
+      //   // logger.d(response.data,null, null);
+      // }
       lastResponse = response;
       return response;
     } catch (e) {
@@ -171,10 +173,10 @@ class RestAPI {
   }) async {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
-      if (DEBUG_HTTP) {
-        print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
-        print("url = " + url);
-      }
+      // if (DEBUG_HTTP) {
+      //   print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
+      //   print("url = " + url);
+      // }
       Map<String, dynamic> headers;
       if (isAuthEnabled)
         headers = {
@@ -193,12 +195,12 @@ class RestAPI {
           },
         ),
       );
-      if (DEBUG_HTTP) {
-        print("response.statusCode = " + response.statusCode.toString());
-        print("request.queryParameters = " + response.request.queryParameters.toString());
-        print("request.data = " + response.request.data.toString());
-        print("response.data = " + response.data.toString());
-      }
+      // if (DEBUG_HTTP) {
+      //   print("response.statusCode = " + response.statusCode.toString());
+      //   print("request.queryParameters = " + response.request.queryParameters.toString());
+      //   print("request.data = " + response.request.data.toString());
+      //   print("response.data = " + response.data.toString());
+      // }
       lastResponse = response;
       return response;
     } on DioError catch (e) {
@@ -217,10 +219,10 @@ class RestAPI {
   }) async {
     if (prefs == null) prefs = await SharedPreferences.getInstance();
     try {
-      if (DEBUG_HTTP) {
-        print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
-        print("url = " + url);
-      }
+      // if (DEBUG_HTTP) {
+      //   print("-------------------- " + Trace.current().frames[1].member + "----------------------------");
+      //   print("url = " + url);
+      // }
       Map<String, dynamic> headers;
       if (isAuthEnabled)
         headers = {
@@ -238,11 +240,11 @@ class RestAPI {
           },
         ),
       );
-      if (DEBUG_HTTP) {
-        // logger.d(response);
-        print("response.statusCode = " + response.statusCode.toString());
-        print("response.data = " + response.data.toString());
-      }
+      // if (DEBUG_HTTP) {
+      //   // logger.d(response);
+      //   print("response.statusCode = " + response.statusCode.toString());
+      //   print("response.data = " + response.data.toString());
+      // }
       lastResponse = response;
       return response;
     } on DioError catch (e) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:my_school_web/provider/app_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/DatatableHeader.dart';
@@ -21,8 +21,7 @@ class _SelectStudentViewState extends State<SelectStudentView> {
     return ViewModelBuilder<SelectStudentViewModel>.reactive(
         viewModelBuilder: () => SelectStudentViewModel(),
         onModelReady: (model) {
-
-            model.onRefresh();
+          model.onRefresh();
         },
         builder: (context, model, child) {
           List<DatatableHeader> headers = [

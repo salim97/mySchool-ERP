@@ -1,4 +1,4 @@
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -91,7 +91,6 @@ class AddStudentViewModel extends BaseViewModel {
     studentModel.rollNo = employeeCodeController.text;
     studentModel.working_hours = workingHoursController.text;
 
- 
     // if (formKey.currentState.validate()) {
     //   print("validated");
     // } else {

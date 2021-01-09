@@ -65,6 +65,16 @@ studentSchema.pre(/^find/, function (next) {
   next();
 });
 
+const userModel = require('./userModel');
+studentSchema.post('findOneAndDelete',async function(doc){
+    if (doc.user._id) {
+        const user = this
+        // await userModel.findOneAndDelete({_id:doc.user._id})
+        await userModel.deleteOne({_id:doc.user._id})
+
+    }
+})
+
 const Student = mongoose.model('Students', studentSchema);
 
 module.exports = Student;

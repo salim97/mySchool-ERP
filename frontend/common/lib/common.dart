@@ -20,3 +20,5 @@ export './services/student_service.dart';
 export './services/subject_model.dart';
 export './services/teacher_service.dart';
 export './services/working_hours_service.dart';
+
+export 'rest_api.dart';

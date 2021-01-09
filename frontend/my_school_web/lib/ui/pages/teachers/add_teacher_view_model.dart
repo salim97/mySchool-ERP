@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_web/app/locator.dart';
@@ -12,7 +12,7 @@ class AddTeacherViewModel extends BaseViewModel {
   final TeacherService teacherService = locator<TeacherService>();
   final AuthService authService = locator<AuthService>();
   TeacherModel teacherModel = new TeacherModel();
-    get editOnly => this.teacherModel.id == null ? true : false;
+  get editOnly => this.teacherModel.id == null ? true : false;
   //personal details
   String selectedGender = "Male";
   TextEditingController dateOfBirthController = TextEditingController();
@@ -129,8 +129,6 @@ class AddTeacherViewModel extends BaseViewModel {
       // log.i(response.data);
       // print(response.statusCode);
     }
-
-   
   }
 
   onGenderChanged(value) {

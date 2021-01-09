@@ -1,5 +1,5 @@
 // flutter pub run build_runner clean
-// flutter pub run build_runner build --delete-conflicting-outputs
+//  flutter pub get ; flutter pub run build_runner build --delete-conflicting-outputs
 
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';

@@ -1,11 +1,11 @@
-// flutter pub run build_runner build
+//  flutter pub get ; flutter pub run build_runner build --delete-conflicting-outputs
 
-import 'package:my_school_web/common/common.dart';
+import 'package:common/common.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-import 'package:my_school_web/common/common.dart';
 
-import 'locator.iconfig.dart';
+import 'locator.config.dart';
+// import 'locator.iconfig.dart';
 
 final locator = GetIt.instance;
 
