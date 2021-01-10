@@ -10,6 +10,10 @@ const parentSchema = new mongoose.Schema({
         ref: 'User',
         required: [true, 'parent must belong to a User account!']
     },
+    name: {
+        type: String,
+        required: [true, 'A personal must have a name'],
+    },
     children: [
         {
             type: mongoose.Schema.ObjectId,

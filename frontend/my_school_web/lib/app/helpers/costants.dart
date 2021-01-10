@@ -19,7 +19,7 @@ Map menuAdmin = {
   "Classes": {
     "icon": MdiIcons.newspaper,
     "children": {
-      "Classes": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Classes": {"route name": "/class-room-view", "icon": MdiIcons.minus, "children": null},
       "Subjects": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
       "Subject Mark Fields": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
       "Marks": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},

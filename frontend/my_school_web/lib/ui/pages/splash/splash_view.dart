@@ -4,7 +4,7 @@ import 'dart:async';
 
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:my_school_web/main.dart';
 import 'package:my_school_web/provider/auth.dart';
 import 'package:provider/provider.dart';

@@ -22,7 +22,7 @@ const bool production = false;
 const String currentVersion = "version of 2021-01-06 12:13 PM";
 void main() {
   setupLocator();
-  setupDialogUi();
+  // setupDialogUi();
   setupBottomSheetUi();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider.value(value: AppProvider.init()),
@@ -40,9 +40,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
+      // navigatorKey: locator<DialogService>().navigatorKey,
       // navigatorKey: locator<NavigationService>().navigatorKey,
       initialRoute: auto_router.Routes.appPagesController,
       onGenerateRoute: auto_router.Router().onGenerateRoute,
+      //key: locator<DialogService>().navigatorKey,
       // home: AppPagesController(),
     );
   }

@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
@@ -8,6 +8,7 @@ import 'package:my_school_web/provider/auth.dart';
 import 'package:my_school_web/ui/widgets/custom_text.dart';
 import 'package:my_school_web/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:my_school_web/ui/widgets/myWidgets/myDialog.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -121,6 +122,21 @@ class LoginView extends StatelessWidget {
                                   decoration: BoxDecoration(color: Colors.indigo),
                                   child: FlatButton(
                                     onPressed: () async {
+                                      // DialogService _dialogService = await locator<DialogService>();
+                                      // await _dialogService.showDialog(
+                                      //   title: 'Test Dialog Title',
+                                      //   description: 'Test Dialog Description',
+                                      //   dialogPlatform: DialogPlatform.Cupertino,
+                                      // );
+                                      dynamic rr = await MyDialogs.timeTableAdd(
+                                        context: context,
+                                        roomList: ["a", "b"],
+                                        subjectList: ["c", "d", "e", "f"],
+                                        teacherList: ["sdfsdf", "sdf"],
+                                      );
+                                      print(rr);
+                                      return;
+
                                       authProvider.status = Status.Authenticating;
                                       authProvider.notifyListeners();
                                       Response response = await locator<AuthService>()
@@ -163,9 +179,9 @@ class LoginView extends StatelessWidget {
                                       color: Colors.grey,
                                     ),
                                     GestureDetector(
-                                        onTap: () {
+                                        onTap: () async {
                                           // locator<NavigationService>().globalNavigateTo("RegistrationRoute", context);
-                                          Navigator.of(context).pushNamed("RegistrationRoute");
+                                          // Navigator.of(context).pushNamed("RegistrationRoute");
                                         },
                                         child: CustomText(
                                           text: "Sign up here. ",

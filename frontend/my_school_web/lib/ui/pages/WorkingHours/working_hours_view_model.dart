@@ -1,9 +1,10 @@
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:intl/intl.dart';
 
 class WorkingHoursViewModel extends BaseViewModel {
   final WorkingHoursService workingHoursService = locator<WorkingHoursService>();
@@ -28,14 +29,15 @@ class WorkingHoursViewModel extends BaseViewModel {
   onRefresh() async {
     isLoading = true;
     notifyListeners();
-    listWorkingHoursModel = await workingHoursService.getAll();
+    await workingHoursService.getAll();
+    listWorkingHoursModel = workingHoursService.list;
     source.clear();
     listWorkingHoursModel.forEach((element) {
       source.add({
         "ID": element.id,
         "Class Hour": element.class_hour_name,
-        "Begin Time": element.from,
-        "End Time": element.to,
+        "Begin Time": element.startTime,
+        "End Time": element.endTime,
         "Type": element.type,
         "Action": element.id
       });
@@ -48,8 +50,8 @@ class WorkingHoursViewModel extends BaseViewModel {
     //locator<NavigationService>().navigateTo(Routes.addTeacherView);
     workingHoursService.add(WorkingHoursModel(
       class_hour_name: classHourNameController?.text,
-      from: fromController?.text,
-      to: toController?.text,
+      startTime: fromController?.text,
+      endTime: toController?.text,
       type: typeController?.text,
     ));
     onRefresh();

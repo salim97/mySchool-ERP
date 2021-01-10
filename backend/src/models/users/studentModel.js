@@ -8,8 +8,13 @@ const studentSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: 'User',
+    autopopulate: true,
     required: [true, 'student must belong to a User account!']
   },
+  name: {
+    type: String,
+    required: [true, 'A personal must have a name'],
+},
   parent: {
     type: mongoose.Schema.ObjectId,
     ref: 'Parents',
@@ -57,22 +62,24 @@ const studentSchema = new mongoose.Schema({
     toObject: { virtuals: true }
   });
 
-studentSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'user',
-    select: 'name email photo role'
-  });
-  next();
-});
+studentSchema.plugin(require('mongoose-autopopulate'));
+
+// studentSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'user',
+//     select: 'name email photo role'
+//   });
+//   next();
+// });
 
 const userModel = require('./userModel');
-studentSchema.post('findOneAndDelete',async function(doc){
-    if (doc.user._id) {
-        const user = this
-        // await userModel.findOneAndDelete({_id:doc.user._id})
-        await userModel.deleteOne({_id:doc.user._id})
+studentSchema.post('findOneAndDelete', async function (doc) {
+  if (doc.user._id) {
+    const user = this
+    // await userModel.findOneAndDelete({_id:doc.user._id})
+    await userModel.deleteOne({ _id: doc.user._id })
 
-    }
+  }
 })
 
 const Student = mongoose.model('Students', studentSchema);

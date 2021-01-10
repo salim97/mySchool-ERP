@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
@@ -22,15 +22,17 @@ class TeachersViewModel extends BaseViewModel {
   List<TeacherModel> listTeacherModel;
   TeachersViewModel() {}
 
-  bool isSearch = false;
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
-  List<Map<String, dynamic>> selecteds = List<Map<String, dynamic>>();
-  String selectableKey = "id";
-
-  String sortColumn;
-  bool sortAscending = true;
-  bool showSelect = true;
   bool isLoading = true;
+
+  List<DatatableHeader> headers = [
+    DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
+    DatatableHeader(text: "Employee Code", value: "Employee_Code", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Name", value: "Name", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Incharge Class", value: "Incharge_Class", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Subjects Handling", value: "Subjects_Handling", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+  ];
 
   onRefresh() async {
     isLoading = true;
@@ -43,7 +45,7 @@ class TeachersViewModel extends BaseViewModel {
         source.add({
           "ID": element.id,
           "Employee_Code": element.employee_code,
-          "Name": element.userAccount.name,
+          "Name": element.name,
           "Incharge_Class": element.incharge_class,
           "Subjects_Handling": element.subjects_handling,
           "Phone": element.phone,
@@ -72,27 +74,6 @@ class TeachersViewModel extends BaseViewModel {
     await onRefresh();
   }
 
-  onView(id) async {
-    TeacherModel tm = listTeacherModel.firstWhere((element) => element.id == id);
-    String description = "";
-    description += "Full Name :" + tm.userAccount.name + "\n";
-    description += "Date of birth :" + "tm?.date_of_birth" + "\n";
-    description += "Phone Number :" + "tm?.phone" + "\n";
-    description += "Position :" + "tm?.current_position" + "\n";
-    description += "Address :" + "tm?.street_address" + "\n";
-    description += "Joining Date :" + "tm?.joining_date" + "\n";
-    description += "Working Hours :" + "tm?.working_hours" + "\n";
-    description += "Gender :" + "tm?.gender" + "\n";
-    description += "Email :" + "tm?.email_address" + "\n";
-    description += "Blood Group :" + "tm?.blood_group" + "\n";
-    description += "Qualification :" + " tm?.qualification" + "\n";
-    description += "Leaving Date :" + "tm?.leaving_date" + "\n";
-    description += "Employee Code :" + tm.employee_code + "\n";
-
-    final _bottomSheetService = locator<BottomSheetService>();
-    await _bottomSheetService.showBottomSheet(title: "INFO", description: description);
-  }
-
   onDelete(id) async {
     final _bottomSheetService = locator<BottomSheetService>();
     var response = await _bottomSheetService.showBottomSheet(
@@ -111,7 +92,7 @@ class TeachersViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     Iterable<TeacherModel> ltm = listTeacherModel.where((element) {
-      if (element.userAccount.name.contains(query) ||
+      if (element.name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
           // element.phone.contains(query) ||
@@ -128,7 +109,7 @@ class TeachersViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Employee_Code": element.employee_code,
-        "Name": element.userAccount.name,
+        "Name": element.name,
         "Incharge_Class": element.incharge_class,
         "Subjects_Handling": element.subjects_handling,
         "Phone": element.phone,

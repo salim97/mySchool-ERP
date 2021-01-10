@@ -1,22 +1,10 @@
-import 'dart:math';
-
-import 'package:common/common.dart';
-import 'package:cookie_jar/cookie_jar.dart';
-
+import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
-import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
-import 'package:my_school_web/provider/app_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 import 'package:flutter/material.dart';
-import 'package:my_school_web/provider/app_provider.dart';
-import 'package:my_school_web/ui/widgets/page_header.dart';
-import 'package:provider/provider.dart';
-import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:responsive_table/responsive_table.dart';
-import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class StudentsViewModel extends BaseViewModel {
@@ -25,22 +13,23 @@ class StudentsViewModel extends BaseViewModel {
   List<StudentModel> listStudentModel;
   StudentsViewModel() {}
 
-  bool isSearch = false;
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
-  List<Map<String, dynamic>> selecteds = List<Map<String, dynamic>>();
-  String selectableKey = "id";
 
-  String sortColumn;
-  bool sortAscending = true;
-  bool showSelect = true;
-  bool isLoading = true;
+  bool isLoading = false;
+
+  List<DatatableHeader> headers = [
+    DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
+    DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Parent", value: "Parent", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Street Address", value: "Street Address", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+  ];
 
   onRefresh() async {
     isLoading = true;
     notifyListeners();
-
     Response response = await studentService.getAll();
-
     if (response.statusCode == 200) {
       listStudentModel = studentService.listStudentModel;
       source.clear();
@@ -49,7 +38,7 @@ class StudentsViewModel extends BaseViewModel {
         source.add({
           "ID": element.id,
           "Roll No.": element.rollNo,
-          "Full Name": element.userAccount.name,
+          "Full Name": element.name,
           "Parent": element.parent_id,
           "Street Address": element.street_address,
           "Phone": element.phone,
@@ -57,14 +46,8 @@ class StudentsViewModel extends BaseViewModel {
         });
       });
     }
-
-    // source.addAll(_generateData(n: 1000));
     isLoading = false;
     notifyListeners();
-
-    // Future.delayed(Duration(seconds: 0)).then((value) async {
-
-    // });
   }
 
   onCreateNew() async {
@@ -76,27 +59,6 @@ class StudentsViewModel extends BaseViewModel {
     StudentModel tm = listStudentModel.firstWhere((element) => element.id == id);
     await locator<NavigationService>().navigateTo(Routes.addStudentView, arguments: tm);
     await onRefresh();
-  }
-
-  onView(id) async {
-    StudentModel tm = listStudentModel.firstWhere((element) => element.id == id);
-    String description = "";
-    description += "Full Name :" + tm.userAccount.name + "\n";
-    description += "Date of birth :" + "tm?.date_of_birth" + "\n";
-    description += "Phone Number :" + "tm?.phone" + "\n";
-    description += "Position :" + "tm?.current_position" + "\n";
-    description += "Address :" + "tm?.street_address" + "\n";
-    description += "Joining Date :" + "tm?.joining_date" + "\n";
-    description += "Working Hours :" + "tm?.working_hours" + "\n";
-    description += "Gender :" + "tm?.gender" + "\n";
-    description += "Email :" + "tm?.email_address" + "\n";
-    description += "Blood Group :" + "tm?.blood_group" + "\n";
-    description += "Qualification :" + " tm?.qualification" + "\n";
-    description += "Leaving Date :" + "tm?.leaving_date" + "\n";
-    description += "Employee Code :" + tm.rollNo + "\n";
-
-    final _bottomSheetService = locator<BottomSheetService>();
-    await _bottomSheetService.showBottomSheet(title: "INFO", description: description);
   }
 
   onDelete(id) async {
@@ -114,10 +76,9 @@ class StudentsViewModel extends BaseViewModel {
   }
 
   onSearch(query) async {
-    isLoading = true;
-    notifyListeners();
+    print(query);
     Iterable<StudentModel> ltm = listStudentModel.where((element) {
-      if (element.userAccount.name.contains(query) ||
+      if (element.name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
           // element.phone.contains(query) ||
@@ -134,15 +95,13 @@ class StudentsViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Roll No.": element.rollNo,
-        "Full Name": element.userAccount.name,
+        "Full Name": element.name,
         "Parent": element.parent_id,
         "Street Address": element.street_address,
         "Phone": element.phone,
         "Action": element.id
       });
     });
-    // source.addAll(_generateData(n: 1000));
-    isLoading = false;
     notifyListeners();
   }
 }

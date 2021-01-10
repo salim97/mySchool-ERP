@@ -10,6 +10,10 @@ const teacherSchema = new mongoose.Schema({
         ref: 'User',
         required: [true, 'teacher must belong to a User account!']
       },
+      name: {
+        type: String,
+        required: [true, 'A personal must have a name'],
+    },
     gender: {
         type: String,
         required: [true, 'A personal must have a gender'],
@@ -75,7 +79,18 @@ teacherSchema.post('findOneAndDelete',async function(doc){
 
     }
 })
+// https://stackoverflow.com/questions/11904159/automatically-remove-referencing-objects-on-deletion-in-mongodb
+// teacherSchema.pre('findOneAndDelete',async function(next){
+//     const doc = this
+//     if (doc.user._id) {
+      
+//         // await userModel.findOneAndDelete({_id:doc.user._id})
+//         // await userModel.deleteOne({_id:doc.user._id})
+//         person.model('User').deleteOne({ _id: doc.user._id }, next);
 
-const Teacher = mongoose.model('Teachers', teacherSchema);
+//     }
+// })
+
+const Teacher = mongoose.model('teachers', teacherSchema);
 
 module.exports = Teacher;

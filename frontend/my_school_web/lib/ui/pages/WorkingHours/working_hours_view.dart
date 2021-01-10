@@ -1,13 +1,14 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/provider/app_provider.dart';
+import 'package:my_school_web/ui/widgets/myWidgets/myInputWidget.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:responsive_table/DatatableHeader.dart';
 import 'package:responsive_table/ResponsiveDatatable.dart';
 import 'package:stacked/stacked.dart';
 import 'working_hours_view_model.dart';
-import 'package:intl/intl.dart';
+
 
 class WorkingHoursView extends StatefulWidget {
   @override
@@ -85,10 +86,10 @@ class _WorkingHoursViewState extends State<WorkingHoursView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Flexible(child: userInputText(title: "Class Hour Name", textEditingController: model.classHourNameController)),
-                        Flexible(child: userInputTime(title: "From", textEditingController: model.fromController)),
-                        Flexible(child: userInputTime(title: "To", textEditingController: model.toController)),
-                        Flexible(child: userInputText(title: "Type", textEditingController: model.typeController)),
+                        Flexible(child: MyInputWidget.userInputText(title: "Class Hour Name", textEditingController: model.classHourNameController)),
+                        Flexible(child: MyInputWidget.userInputTime(title: "From", textEditingController: model.fromController)),
+                        Flexible(child: MyInputWidget.userInputTime(title: "To", textEditingController: model.toController)),
+                        Flexible(child: MyInputWidget.userInputText(title: "Type", textEditingController: model.typeController)),
                       ],
                     ),
                     Padding(
@@ -168,94 +169,5 @@ class _WorkingHoursViewState extends State<WorkingHoursView> {
         });
   }
 
-  Widget userInputText(
-      {String title,
-      String hintText,
-      TextEditingController textEditingController,
-      bool mustFill = false,
-      Function(String) onValidator = null,
-      bool obscureText = false}) {
-    if (hintText == null) hintText = title;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: Row(
-                children: [
-                  Text(title),
-                  mustFill
-                      ? Text(
-                          " *",
-                          style: TextStyle(color: Colors.red),
-                        )
-                      : Container(),
-                ],
-              )),
-          TextFormField(
-            obscureText: obscureText,
-            controller: textEditingController,
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: new OutlineInputBorder(borderSide: new BorderSide(color: Colors.black)),
-            ),
-            validator: mustFill == true
-                ? onValidator == null
-                    ? (value) {
-                        if (value.isEmpty) {
-                          return "Please provide a " + title;
-                        }
-                      }
-                    : onValidator
-                : null,
-          )
-        ],
-      ),
-    );
-  }
 
-  Widget userInputTime({
-    String title,
-    String hintText,
-    TextEditingController textEditingController,
-    bool mustFill = false,
-  }) {
-    if (hintText == null) hintText = title;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: Row(
-                children: [
-                  Text(title),
-                  mustFill
-                      ? Text(
-                          " *",
-                          style: TextStyle(color: Colors.red),
-                        )
-                      : Container(),
-                ],
-              )),
-          DateTimeField(
-            controller: textEditingController,
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: new OutlineInputBorder(borderSide: new BorderSide(color: Colors.black)),
-            ),
-            format: DateFormat("HH:mm"),
-            onShowPicker: (context, currentValue) async {
-              final time = await showTimePicker(
-                context: context,
-                initialTime: TimeOfDay.fromDateTime(currentValue ?? DateTime.now()),
-              );
-              return DateTimeField.convert(time);
-            },
-          ),
-        ],
-      ),
-    );
-  }
 }

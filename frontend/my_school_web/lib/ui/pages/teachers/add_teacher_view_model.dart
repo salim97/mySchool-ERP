@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_web/app/locator.dart';
@@ -51,7 +51,7 @@ class AddTeacherViewModel extends BaseViewModel {
     pinCodeController.text = teacherModel.pin_code;
 
     emailAddressController.text = teacherModel.userAccount.email;
-    usernameController.text = teacherModel.userAccount.name;
+    usernameController.text = teacherModel.name;
 
     joiningDateController.text = teacherModel.joining_date;
     leavingDateController.text = teacherModel.leaving_date;
@@ -82,7 +82,7 @@ class AddTeacherViewModel extends BaseViewModel {
     teacherModel.pin_code = pinCodeController.text;
 
     teacherModel.userAccount.email = emailAddressController.text;
-    teacherModel.userAccount.name = usernameController.text;
+    teacherModel.name = usernameController.text;
     teacherModel.userAccount.password = passwordController.text;
     teacherModel.userAccount.role = "teacher";
 
@@ -101,7 +101,7 @@ class AddTeacherViewModel extends BaseViewModel {
     if (teacherModel.id == null) {
       print("new");
       response = await authService.signup(UserModel(
-        name: teacherModel.userAccount.name,
+        fcmToken: teacherModel.userAccount.fcmToken,
         password: teacherModel.userAccount.password,
         role: teacherModel.userAccount.role,
         email: teacherModel.userAccount.email,

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -37,7 +37,7 @@ class SelectStudentViewModel extends BaseViewModel {
         source.add({
           "ID": element.id,
           "Roll No.": element.rollNo,
-          "Full Name": element.userAccount.name,
+          "Full Name": element.name,
           "Street Address": element.street_address,
           "Phone": element.phone,
           "Action": element.id
@@ -63,7 +63,7 @@ class SelectStudentViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     Iterable<StudentModel> ltm = listStudentModel.where((element) {
-      if (element.userAccount.name.contains(query) ||
+      if (element.name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
           // element.phone.contains(query) ||
@@ -80,7 +80,7 @@ class SelectStudentViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Roll No.": element.rollNo,
-        "Full Name": element.userAccount.name,
+        "Full Name": element.name,
         "Street Address": element.street_address,
         "Phone": element.phone,
         "Action": element.id

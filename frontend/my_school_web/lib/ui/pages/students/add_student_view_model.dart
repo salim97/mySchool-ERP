@@ -1,4 +1,4 @@
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
@@ -48,7 +48,7 @@ class AddStudentViewModel extends BaseViewModel {
     pinCodeController.text = studentModel.pin_code;
 
     emailAddressController.text = studentModel.userAccount.email;
-    usernameController.text = studentModel.userAccount.name;
+    usernameController.text = studentModel.name;
     passwordController.text = studentModel.userAccount.password;
     confirmPasswordController.text = studentModel.userAccount.password;
 
@@ -81,7 +81,7 @@ class AddStudentViewModel extends BaseViewModel {
     studentModel.pin_code = pinCodeController.text;
 
     studentModel.userAccount.email = emailAddressController.text;
-    studentModel.userAccount.name = usernameController.text;
+    studentModel.name = usernameController.text;
     studentModel.userAccount.password = passwordController.text;
     studentModel.userAccount.role = "student";
 
@@ -101,7 +101,7 @@ class AddStudentViewModel extends BaseViewModel {
     if (studentModel.id == null) {
       print("new");
       response = await authService.signup(UserModel(
-        name: studentModel.userAccount.name,
+        fcmToken: studentModel.userAccount.fcmToken,
         password: studentModel.userAccount.password,
         role: studentModel.userAccount.role,
         email: studentModel.userAccount.email,

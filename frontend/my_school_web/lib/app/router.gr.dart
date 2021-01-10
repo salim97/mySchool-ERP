@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 
 import '../main.dart';
 import '../ui/pages/WorkingHours/working_hours_view.dart';
+import '../ui/pages/academics/classRoom/classRoom_view.dart';
 import '../ui/pages/dashboard/dashboard_view.dart';
 import '../ui/pages/home/home_view.dart';
 import '../ui/pages/login/login_view.dart';
@@ -39,6 +40,7 @@ class Routes {
   static const String selectStudentView = '/select-student-view';
   static const String workingHoursView = '/working-hours-view';
   static const String toDoPage = '/to-do-page';
+  static const String classRoomView = '/class-room-view';
   static const all = <String>{
     splashView,
     loginView,
@@ -54,6 +56,7 @@ class Routes {
     selectStudentView,
     workingHoursView,
     toDoPage,
+    classRoomView,
   };
 }
 
@@ -75,6 +78,7 @@ class Router extends RouterBase {
     RouteDef(Routes.selectStudentView, page: SelectStudentView),
     RouteDef(Routes.workingHoursView, page: WorkingHoursView),
     RouteDef(Routes.toDoPage, page: ToDoPage),
+    RouteDef(Routes.classRoomView, page: ClassRoomView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -163,6 +167,12 @@ class Router extends RouterBase {
     ToDoPage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const ToDoPage(),
+        settings: data,
+      );
+    },
+    ClassRoomView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => ClassRoomView(),
         settings: data,
       );
     },

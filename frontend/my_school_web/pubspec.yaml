@@ -48,11 +48,12 @@ dependencies:
   pretty_dio_logger: ^1.1.1
   shared_preferences: ^0.5.12+4
   logger: ^0.7.0+2
-  common:
-    path: ../common
+  # common:
+  #   path: ../common
   stack_trace: ^1.9.3
   json_serializable: ^3.5.1
   json_annotation: ^3.1.1
+  dropdown_search: ^0.4.8
 
 dev_dependencies:
   flutter_test:

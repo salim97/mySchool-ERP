@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_web/app/router.dart';
@@ -10,6 +11,7 @@ import 'package:my_school_web/app/router.gr.dart' as auto_router;
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+import '../../../setup_dialog_ui.dart';
 import 'home_view_model.dart';
 
 class HomeView extends StatefulWidget {
@@ -23,6 +25,7 @@ class _HomeViewState extends State<HomeView> {
   @override
   void initState() {
     super.initState();
+    setupDialogUi();
   }
 
   @override
@@ -30,12 +33,11 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(),
         onModelReady: (model) async {
-          // final AuthService _authService = locator<AuthService>();
-          // await _authService.login(
-          //   email: "admin@email.com",
-          //   password: "azerty2020",
-          // );
-
+          final AuthService _authService = locator<AuthService>();
+          await _authService.login(
+            email: "admin@email.com",
+            password: "azerty2020",
+          );
         },
         builder: (context, model, child) {
           return Scaffold(
@@ -66,8 +68,10 @@ class _HomeViewState extends State<HomeView> {
                       Expanded(
                         child: Navigator(
                             key: locator<NavigationService>().navigatorKey,
+                            // key: locator<DialogService>().navigatorKey,
                             onGenerateRoute: auto_router.Router().onGenerateRoute,
-                            initialRoute: auto_router.Routes.dashboardView
+                            initialRoute: auto_router.Routes.classRoomView
+
                             // initialRoute: auto_router.Routes.addParentView
                             // initialRoute: auto_router.Routes.parentsView
                             // initialRoute: "Dashboard",

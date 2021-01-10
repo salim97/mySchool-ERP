@@ -1,5 +1,4 @@
-
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/locator.dart';
@@ -45,7 +44,7 @@ class AddParentViewModel extends BaseViewModel {
     // qualificationController.text = teacherModel.qualification;
 
     emailAddressController.text = studentModel.userAccount.email;
-    usernameController.text = studentModel.userAccount.name;
+    usernameController.text = studentModel.name;
     passwordController.text = studentModel.userAccount.password;
     confirmPasswordController.text = studentModel.userAccount.password;
 
@@ -68,7 +67,7 @@ class AddParentViewModel extends BaseViewModel {
     // studentModel.qualification = qualificationController.text;
 
     parentModel.userAccount.email = emailAddressController.text;
-    parentModel.userAccount.name = usernameController.text;
+    parentModel.name = usernameController.text;
     parentModel.userAccount.password = passwordController.text;
     parentModel.userAccount.role = "parent";
 
@@ -82,7 +81,7 @@ class AddParentViewModel extends BaseViewModel {
     if (parentModel.id == null) {
       print("new");
       response = await authService.signup(UserModel(
-        name: parentModel.userAccount.name,
+        fcmToken: parentModel.userAccount.fcmToken,
         password: parentModel.userAccount.password,
         role: parentModel.userAccount.role,
         email: parentModel.userAccount.email,
@@ -123,7 +122,7 @@ class AddParentViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Roll No.": "element.rollNo",
-        "Full Name": element.userAccount.name,
+        "Full Name": element.name,
         "Email": element.userAccount.email,
         "Phone": element.phone,
         "Action": element.id
@@ -160,7 +159,7 @@ class AddParentViewModel extends BaseViewModel {
   onChildView(id) async {
     StudentModel tm = parentModel.children.firstWhere((element) => element.id == id);
     String description = "";
-    description += "Full Name :" + tm.userAccount.name + "\n";
+    description += "Full Name :" + tm.name + "\n";
     description += "Date of birth :" + "tm?.date_of_birth" + "\n";
     description += "Phone Number :" + tm.phone + "\n";
     description += "Position :" + "tm?.current_position" + "\n";

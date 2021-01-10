@@ -11,11 +11,19 @@ const cors = require('cors')
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
-const authService = require('./services/auth_services');
-const studentService = require('./services/student_services');
-const teacherService = require('./services/teacher_services');
-const parentService = require('./services/parent_services');
+const authService = require('./services/users/auth_services');
+const studentService = require('./services/users/student_services');
+const teacherService = require('./services/users/teacher_services');
+const parentService = require('./services/users/parent_services');
 const firebaseService = require('./services/firebase_service');
+
+const workinghours_service = require('./services/academics/workinghours_service');
+const classRoom_service = require('./services/academics/classRoom_service');
+const group_service = require('./services/academics/group_service');
+const section_service = require('./services/academics/section_service');
+const subject_service = require('./services/academics/subject_service');
+const teacherSubject_service = require('./services/academics/teacherSubject_service');
+const timeTable_service = require('./services/academics/timeTable_service');
 
 const app = express();
 
@@ -82,7 +90,13 @@ app.use('/api/v1/students', studentService);
 app.use('/api/v1/parents', parentService);
 app.use('/api/v1/teachers', teacherService);
 app.use('/api/v1/notify', firebaseService);
-
+app.use('/api/v1/academics/classRoom_service', classRoom_service);
+app.use('/api/v1/academics/group_service', group_service);
+app.use('/api/v1/academics/section_service', section_service);
+app.use('/api/v1/academics/subject_service', subject_service);
+app.use('/api/v1/academics/teacherSubject_service', teacherSubject_service);
+app.use('/api/v1/academics/timeTable_service', timeTable_service);
+app.use('/api/v1/academics/workinghours_service', workinghours_service);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

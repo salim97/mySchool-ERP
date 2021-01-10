@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:common/common.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 
 import 'package:dio/dio.dart';
@@ -25,15 +25,17 @@ class ParentsViewModel extends BaseViewModel {
   List<ParentModel> listParentModel;
   ParentsViewModel() {}
 
-  bool isSearch = false;
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
-  List<Map<String, dynamic>> selecteds = List<Map<String, dynamic>>();
-  String selectableKey = "id";
-
-  String sortColumn;
-  bool sortAscending = true;
-  bool showSelect = true;
   bool isLoading = true;
+
+  List<DatatableHeader> headers = [
+    DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
+    DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Parent", value: "Parent", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Street Address", value: "Street Address", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+  ];
 
   onRefresh() async {
     isLoading = true;
@@ -49,7 +51,7 @@ class ParentsViewModel extends BaseViewModel {
         source.add({
           "ID": element.id,
           "Roll No.": "element.rollNo",
-          "Full Name": element.userAccount.name,
+          "Full Name": element.name,
           "Parent": "element.parent_id",
           "Street Address": "element.street_address",
           "Phone": element.phone,
@@ -73,27 +75,6 @@ class ParentsViewModel extends BaseViewModel {
     await onRefresh();
   }
 
-  onView(id) async {
-    ParentModel tm = listParentModel.firstWhere((element) => element.id == id);
-    String description = "";
-    description += "Full Name :" + tm.userAccount.name + "\n";
-    description += "Date of birth :" + "tm?.date_of_birth" + "\n";
-    description += "Phone Number :" + "tm?.phone" + "\n";
-    description += "Position :" + "tm?.current_position" + "\n";
-    description += "Address :" + "tm?.street_address" + "\n";
-    description += "Joining Date :" + "tm?.joining_date" + "\n";
-    description += "Working Hours :" + "tm?.working_hours" + "\n";
-    description += "Gender :" + "tm?.gender" + "\n";
-    description += "Email :" + "tm?.email_address" + "\n";
-    description += "Blood Group :" + "tm?.blood_group" + "\n";
-    description += "Qualification :" + " tm?.qualification" + "\n";
-    description += "Leaving Date :" + "tm?.leaving_date" + "\n";
-    description += "Employee Code :" + "tm.rollNo" + "\n";
-
-    final _bottomSheetService = locator<BottomSheetService>();
-    await _bottomSheetService.showBottomSheet(title: "INFO", description: description);
-  }
-
   onDelete(id) async {
     final _bottomSheetService = locator<BottomSheetService>();
     var response = await _bottomSheetService.showBottomSheet(
@@ -112,7 +93,7 @@ class ParentsViewModel extends BaseViewModel {
     isLoading = true;
     notifyListeners();
     Iterable<ParentModel> ltm = listParentModel.where((element) {
-      if (element.userAccount.name.contains(query) ||
+      if (element.name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||
           // element.phone.contains(query) ||
@@ -129,7 +110,7 @@ class ParentsViewModel extends BaseViewModel {
       source.add({
         "ID": element.id,
         "Roll No.": "element.rollNo",
-        "Full Name": element.userAccount.name,
+        "Full Name": element.name,
         "Parent": "element.parent_id",
         "Street Address": "element.street_address",
         "Phone": element.phone,

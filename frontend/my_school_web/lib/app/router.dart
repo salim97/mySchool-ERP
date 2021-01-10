@@ -6,6 +6,7 @@ import 'package:auto_route/auto_route_annotations.dart';
 
 import 'package:my_school_web/main.dart';
 import 'package:my_school_web/ui/pages/WorkingHours/working_hours_view.dart';
+import 'package:my_school_web/ui/pages/academics/classRoom/classRoom_view.dart';
 import 'package:my_school_web/ui/pages/dashboard/dashboard_view.dart';
 import 'package:my_school_web/ui/pages/home/home_view.dart';
 import 'package:my_school_web/ui/pages/login/login_view.dart';
@@ -36,6 +37,7 @@ import 'package:my_school_web/ui/pages/todo_page.dart';
     MaterialRoute(page: SelectStudentView),
     MaterialRoute(page: WorkingHoursView),
     MaterialRoute(page: ToDoPage),
+    MaterialRoute(page: ClassRoomView),
   ],
   transitionsBuilder: TransitionsBuilders.zoomIn,
   durationInMilliseconds: 400,
