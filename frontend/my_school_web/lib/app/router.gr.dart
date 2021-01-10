@@ -10,20 +10,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
-import '../ui/pages/WorkingHours/working_hours_view.dart';
-import '../ui/pages/academics/classRoom/classRoom_view.dart';
-import '../ui/pages/dashboard/dashboard_view.dart';
-import '../ui/pages/home/home_view.dart';
-import '../ui/pages/login/login_view.dart';
-import '../ui/pages/parents/add_parent_view.dart';
-import '../ui/pages/parents/parents_view.dart';
-import '../ui/pages/parents/select_child_view.dart';
-import '../ui/pages/splash/splash_view.dart';
-import '../ui/pages/students/add_student_view.dart';
-import '../ui/pages/students/students_view.dart';
-import '../ui/pages/teachers/add_teacher_view.dart';
-import '../ui/pages/teachers/teachers_view.dart';
-import '../ui/pages/todo_page.dart';
+import '../ui/pages/WorkingHours/working_hours.view.dart';
+import '../ui/pages/academics/classRoom/classRoom.view.dart';
+import '../ui/pages/dashboard/dashboard.view.dart';
+import '../ui/pages/home/home.view.dart';
+import '../ui/pages/login/login.view.dart';
+import '../ui/pages/parents/add_parent.view.dart';
+import '../ui/pages/parents/parents.view.dart';
+import '../ui/pages/parents/select_child.view.dart';
+import '../ui/pages/splash/splash.view.dart';
+import '../ui/pages/students/add_student.view.dart';
+import '../ui/pages/students/students.view.dart';
+import '../ui/pages/teachers/add_teacher.view.dart';
+import '../ui/pages/teachers/teachers.view.dart';
+import '../ui/pages/todo_page.view.dart';
 
 class Routes {
   static const String splashView = '/splash-view';

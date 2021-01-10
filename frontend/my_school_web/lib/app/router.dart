@@ -5,20 +5,20 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
 
 import 'package:my_school_web/main.dart';
-import 'package:my_school_web/ui/pages/WorkingHours/working_hours_view.dart';
-import 'package:my_school_web/ui/pages/academics/classRoom/classRoom_view.dart';
-import 'package:my_school_web/ui/pages/dashboard/dashboard_view.dart';
-import 'package:my_school_web/ui/pages/home/home_view.dart';
-import 'package:my_school_web/ui/pages/login/login_view.dart';
-import 'package:my_school_web/ui/pages/parents/add_parent_view.dart';
-import 'package:my_school_web/ui/pages/parents/parents_view.dart';
-import 'package:my_school_web/ui/pages/parents/select_child_view.dart';
-import 'package:my_school_web/ui/pages/splash/splash_view.dart';
-import 'package:my_school_web/ui/pages/students/add_student_view.dart';
-import 'package:my_school_web/ui/pages/students/students_view.dart';
-import 'package:my_school_web/ui/pages/teachers/add_teacher_view.dart';
-import 'package:my_school_web/ui/pages/teachers/teachers_view.dart';
-import 'package:my_school_web/ui/pages/todo_page.dart';
+import 'package:my_school_web/ui/pages/WorkingHours/working_hours.view.dart';
+import 'package:my_school_web/ui/pages/academics/classRoom/classRoom.view.dart';
+import 'package:my_school_web/ui/pages/dashboard/dashboard.view.dart';
+import 'package:my_school_web/ui/pages/home/home.view.dart';
+import 'package:my_school_web/ui/pages/login/login.view.dart';
+import 'package:my_school_web/ui/pages/parents/add_parent.view.dart';
+import 'package:my_school_web/ui/pages/parents/parents.view.dart';
+import 'package:my_school_web/ui/pages/parents/select_child.view.dart';
+import 'package:my_school_web/ui/pages/splash/splash.view.dart';
+import 'package:my_school_web/ui/pages/students/add_student.view.dart';
+import 'package:my_school_web/ui/pages/students/students.view.dart';
+import 'package:my_school_web/ui/pages/teachers/add_teacher.view.dart';
+import 'package:my_school_web/ui/pages/teachers/teachers.view.dart';
+import 'package:my_school_web/ui/pages/todo_page.view.dart';
 
 // Defining routes and global transitions
 @CustomAutoRouter(

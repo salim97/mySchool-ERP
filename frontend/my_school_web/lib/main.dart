@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:my_school_web/ui/pages/login/login_view.dart';
-import 'package:my_school_web/provider/app_provider.dart';
-import 'package:my_school_web/provider/auth.dart';
+import 'package:my_school_web/ui/pages/login/login.view.dart';
+import 'package:my_school_web/provider/app.provider.dart';
+import 'package:my_school_web/provider/auth.provider.dart';
 
 import 'package:my_school_web/ui/widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +12,11 @@ import 'package:stacked_services/stacked_services.dart';
 
 import 'app/locator.dart';
 import 'setup_bottom_sheet_ui.dart';
-import 'ui/pages/home/home_view.dart';
+import 'ui/pages/home/home.view.dart';
 import './app/router.gr.dart' as auto_router;
 import 'package:stacked_services/stacked_services.dart';
 import 'setup_dialog_ui.dart';
-import 'ui/pages/splash/splash_view.dart';
+import 'ui/pages/splash/splash.view.dart';
 
 const bool production = false;
 const String currentVersion = "version of 2021-01-06 12:13 PM";

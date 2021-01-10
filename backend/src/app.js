@@ -9,21 +9,21 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const cors = require('cors')
 const AppError = require('./utils/appError');
-const globalErrorHandler = require('./controllers/errorController');
+const globalErrorHandler = require('./controllers/error.controller');
 
-const authService = require('./services/users/auth_services');
-const studentService = require('./services/users/student_services');
-const teacherService = require('./services/users/teacher_services');
-const parentService = require('./services/users/parent_services');
-const firebaseService = require('./services/firebase_service');
+const authService = require('./services/users/auth.services');
+const studentService = require('./services/users/student.services');
+const teacherService = require('./services/users/teacher.services');
+const parentService = require('./services/users/parent.services');
+const firebaseService = require('./services/firebase.service');
 
-const workinghours_service = require('./services/academics/workinghours_service');
-const classRoom_service = require('./services/academics/classRoom_service');
-const group_service = require('./services/academics/group_service');
-const section_service = require('./services/academics/section_service');
-const subject_service = require('./services/academics/subject_service');
-const teacherSubject_service = require('./services/academics/teacherSubject_service');
-const timeTable_service = require('./services/academics/timeTable_service');
+const workinghours_service = require('./services/academics/workinghours.service');
+const classRoom_service = require('./services/academics/classRoom.service');
+const group_service = require('./services/academics/group.service');
+const section_service = require('./services/academics/section.service');
+const subject_service = require('./services/academics/subject.service');
+const teacherSubject_service = require('./services/academics/teacherSubject.service');
+const timeTable_service = require('./services/academics/timeTable.service');
 
 const app = express();
 

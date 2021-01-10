@@ -77,8 +77,6 @@ class _MyTableViewState extends State<MyTableView> {
 
   @override
   Widget build(BuildContext context) {
-    print("build");
-    print(widget.source);
     return Container(
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(0),

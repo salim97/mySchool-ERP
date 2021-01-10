@@ -1,4 +1,4 @@
-import 'package:my_school_web/provider/app_provider.dart';
+import 'package:my_school_web/provider/app.provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

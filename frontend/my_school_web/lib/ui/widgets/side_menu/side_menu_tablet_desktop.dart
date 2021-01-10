@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:my_school_web/app/locator.dart';
-import 'package:my_school_web/provider/app_provider.dart';
+import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/ui/widgets/navbar/navbar_logo.dart';
 import 'package:my_school_web/ui/widgets/side_menu/side_menu_item.dart';
 import 'package:flutter/material.dart';
