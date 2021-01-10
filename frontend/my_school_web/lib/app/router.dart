@@ -18,7 +18,7 @@ import 'package:my_school_web/ui/pages/students/add_student.view.dart';
 import 'package:my_school_web/ui/pages/students/students.view.dart';
 import 'package:my_school_web/ui/pages/teachers/add_teacher.view.dart';
 import 'package:my_school_web/ui/pages/teachers/teachers.view.dart';
-import 'package:my_school_web/ui/pages/todo_page.view.dart';
+import 'package:my_school_web/ui/pages/error_page/todo.view.dart';
 
 // Defining routes and global transitions
 @CustomAutoRouter(

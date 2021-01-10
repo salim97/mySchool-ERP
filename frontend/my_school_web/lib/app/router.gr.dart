@@ -23,7 +23,7 @@ import '../ui/pages/students/add_student.view.dart';
 import '../ui/pages/students/students.view.dart';
 import '../ui/pages/teachers/add_teacher.view.dart';
 import '../ui/pages/teachers/teachers.view.dart';
-import '../ui/pages/todo_page.view.dart';
+import '../ui/pages/error_page/todo.view.dart';
 
 class Routes {
   static const String splashView = '/splash-view';
