@@ -6,20 +6,21 @@ import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-import 'classRoom.view.model.dart';
+import 'section.view.model.dart';
 
-class ClassRoomView extends StatefulWidget {
+
+class SectionView extends StatefulWidget {
   @override
-  _ClassRoomViewState createState() => _ClassRoomViewState();
+  _SectionViewState createState() => _SectionViewState();
 }
 
-class _ClassRoomViewState extends State<ClassRoomView> {
+class _SectionViewState extends State<SectionView> {
   @override
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<ClassRoomViewModel>.reactive(
-      viewModelBuilder: () => ClassRoomViewModel(),
+    return ViewModelBuilder<SectionViewModel>.reactive(
+      viewModelBuilder: () => SectionViewModel(),
       onModelReady: (model) {
         // Do something once your model is initialized
         model.onRefresh();
@@ -54,14 +55,9 @@ class _ClassRoomViewState extends State<ClassRoomView> {
                           children: [
                             Flexible(
                                 child: MyInputWidget.userInputText(
-                              title: "Room name",
-                              textEditingController: model.roomNameController,
+                              title: "Section*",
+                              textEditingController: model.nameController,
                             )),
-                            Flexible(
-                                child: MyInputWidget.userInputText(
-                              title: "Capacity",
-                              textEditingController: model.capacityController,
-                            ))
                           ],
                         ),
                         Row(

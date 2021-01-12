@@ -18,6 +18,7 @@ exports.deleteOne = Model =>
 
 exports.updateOne = Model =>
   catchAsync(async (req, res, next) => {
+    // req.body.lastUpdateAt = new Date().toISOString();
     const doc = await Model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
@@ -37,7 +38,7 @@ exports.updateOne = Model =>
 
 exports.createOne = Model =>
   catchAsync(async (req, res, next) => {
-
+    req.body.createdAt = new Date().toISOString();
     const doc = await Model.create(req.body);
 
     res.status(201).json({

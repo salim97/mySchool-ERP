@@ -17,6 +17,7 @@ class GroupServiceImpl extends RestAPI implements GroupService {
   String endPointURL;
   GroupServiceImpl() {
     endPointURL = serverIP + "/api/v1/academics/group_service";
+    list = new List<GroupModel>();
   }
   @override
   Future<Response> add(GroupModel model) async {

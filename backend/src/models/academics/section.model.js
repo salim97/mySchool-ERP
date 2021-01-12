@@ -17,6 +17,12 @@ const sectionSchema = new mongoose.Schema({
   });
 
 
+const groupModel = require('./group.model');
+sectionSchema.post('findOneAndDelete', async function (doc) {
+    await groupModel.deleteMany({ section: doc._id })
+})
+
+
 const section = mongoose.model('section', sectionSchema);
 
 module.exports = section;

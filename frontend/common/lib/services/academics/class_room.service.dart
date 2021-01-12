@@ -14,6 +14,7 @@ abstract class ClassRoomService extends RestAPI {
 class ClassRoomServiceImpl extends RestAPI implements ClassRoomService {
   @override
   List<ClassRoomModel> list;
+  ClassRoomModel model;
   String endPointURL;
   ClassRoomServiceImpl() {
     endPointURL = serverIP + "/api/v1/academics/classRoom_service";

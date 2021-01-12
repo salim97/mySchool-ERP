@@ -10,6 +10,7 @@ const groupSchema = new mongoose.Schema({
     required: [true, 'A group must have a name'],
   },
   section: {
+    autopopulate: true,
     type: mongoose.Schema.ObjectId,
     ref: 'section',
     required: [true, 'group must belong to a section!']
@@ -23,6 +24,7 @@ const groupSchema = new mongoose.Schema({
     toObject: { virtuals: true }
   });
 
+  groupSchema.plugin(require('mongoose-autopopulate'));
 
 const group = mongoose.model('group', groupSchema);
 

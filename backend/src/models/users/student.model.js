@@ -75,7 +75,6 @@ studentSchema.plugin(require('mongoose-autopopulate'));
 const userModel = require('./user.model');
 studentSchema.post('findOneAndDelete', async function (doc) {
   if (doc.user._id) {
-    const user = this
     // await userModel.findOneAndDelete({_id:doc.user._id})
     await userModel.deleteOne({ _id: doc.user._id })
 

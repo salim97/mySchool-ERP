@@ -10,8 +10,8 @@ part 'time_table.model.g.dart';
 )
 class TimeTableModel {
   @JsonKey(name: '_id')
-  final String id;
-  final String createdAt;
+   String id;
+   String createdAt;
   GroupModel groupid;
   SectionModel sectionid;
   TimeTableModel({

@@ -1,4 +1,6 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myInputWidget.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myTableView.dart';
@@ -6,20 +8,20 @@ import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-import 'classRoom.view.model.dart';
+import 'teacherSubject.view.model.dart';
 
-class ClassRoomView extends StatefulWidget {
+class TeacherSubjectView extends StatefulWidget {
   @override
-  _ClassRoomViewState createState() => _ClassRoomViewState();
+  _TeacherSubjectViewState createState() => _TeacherSubjectViewState();
 }
 
-class _ClassRoomViewState extends State<ClassRoomView> {
+class _TeacherSubjectViewState extends State<TeacherSubjectView> {
   @override
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<ClassRoomViewModel>.reactive(
-      viewModelBuilder: () => ClassRoomViewModel(),
+    return ViewModelBuilder<TeacherSubjectViewModel>.reactive(
+      viewModelBuilder: () => TeacherSubjectViewModel(),
       onModelReady: (model) {
         // Do something once your model is initialized
         model.onRefresh();
@@ -43,7 +45,7 @@ class _ClassRoomViewState extends State<ClassRoomView> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "Add Class Room",
+                                "Assign Teacher to Subject",
                                 style: TextStyle(fontSize: 24.0),
                               ),
                             )
@@ -53,15 +55,33 @@ class _ClassRoomViewState extends State<ClassRoomView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Flexible(
-                                child: MyInputWidget.userInputText(
-                              title: "Room name",
-                              textEditingController: model.roomNameController,
-                            )),
+                              child: DropdownSearch<TeacherModel>(
+                                maxHeight: 300,
+                                selectedItem: model.currentModel.teacherid,
+                                items: model.teacherService.list,
+                                itemAsString: (TeacherModel u) => u.name,
+                                label: "Teacher Name*",
+                                onChanged: (item) async {
+                                  model.currentModel.teacherid = item;
+                                  model.notifyListeners();
+                                },
+                                showSearchBox: true,
+                              ),
+                            ),
                             Flexible(
-                                child: MyInputWidget.userInputText(
-                              title: "Capacity",
-                              textEditingController: model.capacityController,
-                            ))
+                              child: DropdownSearch<SubjectModel>(
+                                maxHeight: 300,
+                                selectedItem: model.currentModel.subjectid,
+                                items: model.subjectService.list,
+                                itemAsString: (SubjectModel u) => u.name,
+                                label: "Subject Name*",
+                                onChanged: (item) async {
+                                  model.currentModel.subjectid = item;
+                                  model.notifyListeners();
+                                },
+                                showSearchBox: true,
+                              ),
+                            )
                           ],
                         ),
                         Row(

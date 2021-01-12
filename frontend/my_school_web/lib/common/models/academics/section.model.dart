@@ -8,9 +8,9 @@ part 'section.model.g.dart';
 )
 class SectionModel {
   @JsonKey(name: '_id')
-  final String id;
-  final String name;
-  final String createdAt;
+   String id;
+   String name;
+   String createdAt;
   SectionModel({
     this.id,
     this.name,

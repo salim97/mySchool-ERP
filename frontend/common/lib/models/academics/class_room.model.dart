@@ -8,10 +8,10 @@ part 'class_room.model.g.dart';
 )
 class ClassRoomModel {
   @JsonKey(name: '_id')
-  final String id;
-  final String room_number;
-  final int capacity;
-  final String createdAt;
+   String id;
+   String room_number;
+   int capacity;
+   String createdAt;
   ClassRoomModel({
     this.room_number,
     this.capacity,

@@ -20,11 +20,14 @@ Map menuAdmin = {
     "icon": MdiIcons.newspaper,
     "children": {
       "Classes": {"route name": "/class-room-view", "icon": MdiIcons.minus, "children": null},
-      "Subjects": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
-      "Subject Mark Fields": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
-      "Marks": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
-      "Exams": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
-      "Time Table": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      "Groups": {"route name": "/group-view", "icon": MdiIcons.minus, "children": null},
+      "Sections": {"route name": "/section-view", "icon": MdiIcons.minus, "children": null},
+      "Subjects": {"route name": "/subject-view", "icon": MdiIcons.minus, "children": null},
+      "Teacher Subject": {"route name": "/teacher-subject-view", "icon": MdiIcons.minus, "children": null},
+      "Time Table": {"route name": "/time-table-view", "icon": MdiIcons.minus, "children": null},
+      // "Subject Mark Fields": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      // "Marks": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
+      // "Exams": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
     }
   },
   "Attendance": {

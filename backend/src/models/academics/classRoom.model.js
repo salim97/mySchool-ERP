@@ -5,6 +5,7 @@ const classRoomSchema = new mongoose.Schema({
     type: Date,
     default: Date.now()
   },
+
   room_number: {
     type: String,
     required: [true, 'A Class Room must have a room number'],

@@ -17,6 +17,7 @@ class SubjectServiceImpl extends RestAPI implements SubjectService {
   String endPointURL;
   SubjectServiceImpl() {
     endPointURL = serverIP + "/api/v1/academics/subject_service";
+    list = new List<SubjectModel>();
   }
   @override
   Future<Response> add(SubjectModel model) async {

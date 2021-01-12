@@ -9,8 +9,8 @@ part 'teacher_subject.model.g.dart';
 )
 class TeacherSubjectModel {
   @JsonKey(name: '_id')
-  final String id;
-  final String createdAt;
+   String id;
+   String createdAt;
   TeacherModel teacherid;
   SubjectModel subjectid;
   TeacherSubjectModel({

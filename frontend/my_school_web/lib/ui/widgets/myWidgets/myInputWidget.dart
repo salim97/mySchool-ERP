@@ -1,15 +1,17 @@
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-class MyInputWidget{
+
+class MyInputWidget {
+  static Widget userInputText({
+    String title,
+    String hintText,
+    TextEditingController textEditingController,
+    bool mustFill = false,
+    Function(String) onValidator = null,
+    bool obscureText = false,
   
-  static Widget userInputText(
-      {String title,
-      String hintText,
-      TextEditingController textEditingController,
-      bool mustFill = false,
-      Function(String) onValidator = null,
-      bool obscureText = false}) {
+  }) {
     if (hintText == null) hintText = title;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -93,5 +95,4 @@ class MyInputWidget{
       ),
     );
   }
-
 }

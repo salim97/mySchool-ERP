@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import '../../common.dart';
 
 abstract class TeacherService {
-  List<TeacherModel> listStudentModel;
+  List<TeacherModel> list;
   Future<Response> getAll();
   Future<Response> add(TeacherModel teacherModel);
   Future<Response> update(TeacherModel teacherModel);
@@ -12,7 +12,7 @@ abstract class TeacherService {
 
 class TeacherServiceImpl extends RestAPI implements TeacherService {
   @override
-  List<TeacherModel> listStudentModel = new List<TeacherModel>();
+  List<TeacherModel> list = new List<TeacherModel>();
 
   @override
   Future<Response> add(TeacherModel teacherModel) async {
@@ -32,10 +32,10 @@ class TeacherServiceImpl extends RestAPI implements TeacherService {
       url: serverIP + "/api/v1/teachers",
     );
     if (response.statusCode == 200) {
-      List<dynamic> list = response.data["data"]["data"];
-      listStudentModel.clear();
-      list.forEach((element) {
-        listStudentModel.add(TeacherModel.fromJson(element));
+      List<dynamic> temp = response.data["data"]["data"];
+      list.clear();
+      temp.forEach((element) {
+        list.add(TeacherModel.fromJson(element));
       });
     }
     return response;
@@ -47,7 +47,7 @@ class TeacherServiceImpl extends RestAPI implements TeacherService {
       url: serverIP + "/api/v1/teachers/" + teacherModel.id,
     );
     if (response.statusCode == 204) {
-      listStudentModel.removeWhere((element) => element.id == teacherModel.id);
+      list.removeWhere((element) => element.id == teacherModel.id);
     }
     return response;
   }
@@ -55,7 +55,7 @@ class TeacherServiceImpl extends RestAPI implements TeacherService {
   @override
   Future<List<TeacherModel>> search(String query) {
     List<TeacherModel> selected = new List<TeacherModel>();
-    listStudentModel.forEach((element) {
+    list.forEach((element) {
       if (element.name.contains(query)) selected.add(element);
       // if (element.userAccount.email.contains(query)) selected.add(element);
       if (element.phone.contains(query)) selected.add(element);

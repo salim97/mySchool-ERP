@@ -17,6 +17,7 @@ class TimeTableServiceImpl extends RestAPI implements TimeTableService {
   String endPointURL;
   TimeTableServiceImpl() {
     endPointURL = serverIP + "/api/v1/academics/timeTable_service";
+    list = new List<TimeTableModel>();
   }
   @override
   Future<Response> add(TimeTableModel model) async {

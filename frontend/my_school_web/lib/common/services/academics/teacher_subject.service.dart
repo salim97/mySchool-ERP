@@ -17,6 +17,7 @@ class TeacherSubjectServiceImpl extends RestAPI implements TeacherSubjectService
   String endPointURL;
   TeacherSubjectServiceImpl() {
     endPointURL = serverIP + "/api/v1/academics/teacherSubject_service";
+    list = new List<TeacherSubjectModel>();
   }
   @override
   Future<Response> add(TeacherSubjectModel model) async {

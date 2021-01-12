@@ -12,7 +12,13 @@ import 'package:flutter/material.dart';
 import '../main.dart';
 import '../ui/pages/WorkingHours/working_hours.view.dart';
 import '../ui/pages/academics/classRoom/classRoom.view.dart';
+import '../ui/pages/academics/group/group.view.dart';
+import '../ui/pages/academics/section/section.view.dart';
+import '../ui/pages/academics/subject/subject.view.dart';
+import '../ui/pages/academics/teacherSubject/teacherSubject.view.dart';
+import '../ui/pages/academics/timeTable/timeTable.view.dart';
 import '../ui/pages/dashboard/dashboard.view.dart';
+import '../ui/pages/error_page/todo.view.dart';
 import '../ui/pages/home/home.view.dart';
 import '../ui/pages/login/login.view.dart';
 import '../ui/pages/parents/add_parent.view.dart';
@@ -23,7 +29,6 @@ import '../ui/pages/students/add_student.view.dart';
 import '../ui/pages/students/students.view.dart';
 import '../ui/pages/teachers/add_teacher.view.dart';
 import '../ui/pages/teachers/teachers.view.dart';
-import '../ui/pages/error_page/todo.view.dart';
 
 class Routes {
   static const String splashView = '/splash-view';
@@ -41,6 +46,11 @@ class Routes {
   static const String workingHoursView = '/working-hours-view';
   static const String toDoPage = '/to-do-page';
   static const String classRoomView = '/class-room-view';
+  static const String groupView = '/group-view';
+  static const String sectionView = '/section-view';
+  static const String subjectView = '/subject-view';
+  static const String teacherSubjectView = '/teacher-subject-view';
+  static const String timeTableView = '/time-table-view';
   static const all = <String>{
     splashView,
     loginView,
@@ -57,6 +67,11 @@ class Routes {
     workingHoursView,
     toDoPage,
     classRoomView,
+    groupView,
+    sectionView,
+    subjectView,
+    teacherSubjectView,
+    timeTableView,
   };
 }
 
@@ -79,6 +94,11 @@ class Router extends RouterBase {
     RouteDef(Routes.workingHoursView, page: WorkingHoursView),
     RouteDef(Routes.toDoPage, page: ToDoPage),
     RouteDef(Routes.classRoomView, page: ClassRoomView),
+    RouteDef(Routes.groupView, page: GroupView),
+    RouteDef(Routes.sectionView, page: SectionView),
+    RouteDef(Routes.subjectView, page: SubjectView),
+    RouteDef(Routes.teacherSubjectView, page: TeacherSubjectView),
+    RouteDef(Routes.timeTableView, page: TimeTableView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -173,6 +193,36 @@ class Router extends RouterBase {
     ClassRoomView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => ClassRoomView(),
+        settings: data,
+      );
+    },
+    GroupView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => GroupView(),
+        settings: data,
+      );
+    },
+    SectionView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SectionView(),
+        settings: data,
+      );
+    },
+    SubjectView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => SubjectView(),
+        settings: data,
+      );
+    },
+    TeacherSubjectView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => TeacherSubjectView(),
+        settings: data,
+      );
+    },
+    TimeTableView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => TimeTableView(),
         settings: data,
       );
     },

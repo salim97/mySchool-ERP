@@ -19,7 +19,6 @@ import 'package:stacked_services/stacked_services.dart';
 class TeachersViewModel extends BaseViewModel {
   final TeacherService teacherService = locator<TeacherService>();
   final AuthService authService = locator<AuthService>();
-  List<TeacherModel> listTeacherModel;
   TeachersViewModel() {}
 
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
@@ -39,9 +38,9 @@ class TeachersViewModel extends BaseViewModel {
     notifyListeners();
     Response response = await teacherService.getAll();
     if (response.statusCode == 200) {
-      listTeacherModel = teacherService.listStudentModel;
+     
       source.clear();
-      listTeacherModel.forEach((element) {
+      teacherService.list.forEach((element) {
         source.add({
           "ID": element.id,
           "Employee_Code": element.employee_code,
@@ -69,7 +68,7 @@ class TeachersViewModel extends BaseViewModel {
   }
 
   onEdit(id) async {
-    TeacherModel tm = listTeacherModel.firstWhere((element) => element.id == id);
+    TeacherModel tm = teacherService.list.firstWhere((element) => element.id == id);
     await locator<NavigationService>().navigateTo(Routes.addTeacherView, arguments: tm);
     await onRefresh();
   }
@@ -91,7 +90,7 @@ class TeachersViewModel extends BaseViewModel {
   onSearch(query) async {
     isLoading = true;
     notifyListeners();
-    Iterable<TeacherModel> ltm = listTeacherModel.where((element) {
+    Iterable<TeacherModel> ltm = teacherService.list.where((element) {
       if (element.name.contains(query) ||
           // element.middle_name.contains(query) ||
           // element.last_name.contains(query) ||

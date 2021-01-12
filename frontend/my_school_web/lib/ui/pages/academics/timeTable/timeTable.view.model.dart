@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:responsive_table/responsive_table.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class ClassRoomViewModel extends BaseViewModel {
+class TimeTableViewModel extends BaseViewModel {
   // services
   final ClassRoomService currentService = locator<ClassRoomService>();
   final AuthService authService = locator<AuthService>();

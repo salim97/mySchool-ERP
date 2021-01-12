@@ -17,6 +17,7 @@ class WorkingHoursServiceImpl extends RestAPI implements WorkingHoursService {
   String endPointURL;
   WorkingHoursServiceImpl() {
     endPointURL = serverIP + "/api/v1/academics/workinghours_service";
+    list = new List<WorkingHoursModel>();
   }
   @override
   Future<Response> add(WorkingHoursModel model) async {

@@ -1,4 +1,6 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myInputWidget.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myTableView.dart';
@@ -6,20 +8,20 @@ import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-import 'classRoom.view.model.dart';
+import 'group.view.model.dart';
 
-class ClassRoomView extends StatefulWidget {
+class GroupView extends StatefulWidget {
   @override
-  _ClassRoomViewState createState() => _ClassRoomViewState();
+  _GroupViewState createState() => _GroupViewState();
 }
 
-class _ClassRoomViewState extends State<ClassRoomView> {
+class _GroupViewState extends State<GroupView> {
   @override
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<ClassRoomViewModel>.reactive(
-      viewModelBuilder: () => ClassRoomViewModel(),
+    return ViewModelBuilder<GroupViewModel>.reactive(
+      viewModelBuilder: () => GroupViewModel(),
       onModelReady: (model) {
         // Do something once your model is initialized
         model.onRefresh();
@@ -58,10 +60,19 @@ class _ClassRoomViewState extends State<ClassRoomView> {
                               textEditingController: model.roomNameController,
                             )),
                             Flexible(
-                                child: MyInputWidget.userInputText(
-                              title: "Capacity",
-                              textEditingController: model.capacityController,
-                            ))
+                              child: DropdownSearch<SectionModel>(
+                                maxHeight: 300,
+                                selectedItem: model.currentModel.section,
+                                items: model.sectionService.list,
+                                itemAsString: (SectionModel u) => u.name,
+                                label: "Section*",
+                                onChanged: (item) async {
+                                  model.currentModel.section = item;
+                                  model.notifyListeners();
+                                },
+                                showSearchBox: true,
+                              ),
+                            )
                           ],
                         ),
                         Row(

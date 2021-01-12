@@ -6,20 +6,21 @@ import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
-import 'classRoom.view.model.dart';
+import 'timeTable.view.model.dart';
 
-class ClassRoomView extends StatefulWidget {
+
+class TimeTableView extends StatefulWidget {
   @override
-  _ClassRoomViewState createState() => _ClassRoomViewState();
+  _TimeTableViewState createState() => _TimeTableViewState();
 }
 
-class _ClassRoomViewState extends State<ClassRoomView> {
+class _TimeTableViewState extends State<TimeTableView> {
   @override
   Widget build(BuildContext context) {
     final AppProvider appProvider = Provider.of<AppProvider>(context);
 
-    return ViewModelBuilder<ClassRoomViewModel>.reactive(
-      viewModelBuilder: () => ClassRoomViewModel(),
+    return ViewModelBuilder<TimeTableViewModel>.reactive(
+      viewModelBuilder: () => TimeTableViewModel(),
       onModelReady: (model) {
         // Do something once your model is initialized
         model.onRefresh();

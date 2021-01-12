@@ -9,9 +9,9 @@ part 'group.model.g.dart';
 )
 class GroupModel {
   @JsonKey(name: '_id')
-  final String id;
-  final String name;
-  final String createdAt;
+   String id;
+   String name;
+   String createdAt;
   SectionModel section;
   GroupModel({
     this.id,

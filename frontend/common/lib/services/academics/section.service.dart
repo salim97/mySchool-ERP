@@ -17,6 +17,7 @@ class SectionServiceImpl extends RestAPI implements SectionService {
   String endPointURL;
   SectionServiceImpl() {
     endPointURL = serverIP + "/api/v1/academics/section_service";
+    list = new List<SectionModel>();
   }
   @override
   Future<Response> add(SectionModel model) async {
