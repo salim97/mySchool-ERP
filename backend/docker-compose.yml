@@ -2,7 +2,7 @@ version: '3'
 services:
   mongodb:
     image: mongo:latest
-    container_name: "MonogoDB-School-ERP-New"
+    container_name: "MonogoDB-School-ERP"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: rootpassword
@@ -15,23 +15,23 @@ services:
       - ./.docker/mongodb/initdb.d/:/docker-entrypoint-initdb.d/
       - ./.docker/mongodb/data/db/:/data/db/
       - ./.docker/mongodb/data/log/:/var/log/mongodb/
-  nodejs: #docker run -it -v ${PWD}:/work -w /work -p 5002:5000 aimvector/nodejs:1.0.0 /bin/sh
-    container_name: myNodeJScontainerName
-    image: node:14.15-alpine
-    depends_on:
-      - mongodb
-    build: 
-      context: .
-      target: debug
-    #working_dir: /work      #comment out for build.target:prod
-    #entrypoint: /bin/sh     #comment out for build.target:prod
-    #stdin_open: true        #comment out for build.target:prod
-    #tty: true               #comment out for build.target:prod
-    volumes:
-    - .:/work/
-    ports:
-      - 3000:3000
-      - 9229:9229            #debug port
-    links:
-      - mongodb
+  # nodejs: #docker run -it -v ${PWD}:/work -w /work -p 5002:5000 aimvector/nodejs:1.0.0 /bin/sh
+  #   container_name: "NodeJS-School-ERP"
+  #   image: node:14.15-alpine
+  #   depends_on:
+  #     - mongodb
+  #   build: 
+  #     context: .
+  #     target: debug
+  #   #working_dir: /work      #comment out for build.target:prod
+  #   #entrypoint: /bin/sh     #comment out for build.target:prod
+  #   #stdin_open: true        #comment out for build.target:prod
+  #   #tty: true               #comment out for build.target:prod
+  #   volumes:
+  #   - .:/work/
+  #   ports:
+  #     - 3000:3000
+  #     - 9229:9229            #debug port
+  #   links:
+  #     - mongodb
   
