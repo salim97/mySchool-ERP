@@ -27,14 +27,9 @@ const timeTable_service = require('./services/academics/timeTable.service');
 
 const app = express();
 
-app.set('view engine', 'pug');
-app.set('views', path.join(__dirname, 'views'));
 
 // Implement CORS
 app.use(cors());
-// // 1) GLOBAL MIDDLEWARES
-// // Serving static files
-// app.use(express.static(path.join(__dirname, 'public')));
 
 // Set security HTTP headers
 app.use(helmet());
@@ -65,16 +60,18 @@ app.use(xss());
 
 // Prevent parameter pollution
 app.use(
-  hpp({
-    whitelist: [
-      'duration',
-      'ratingsQuantity',
-      'ratingsAverage',
-      'maxGroupSize',
-      'difficulty',
-      'price'
-    ]
-  })
+  hpp(
+  //   {
+  //   whitelist: [
+  //     'duration',
+  //     'ratingsQuantity',
+  //     'ratingsAverage',
+  //     'maxGroupSize',
+  //     'difficulty',
+  //     'price'
+  //   ]
+  // }
+  )
 );
 
 // Test middleware
