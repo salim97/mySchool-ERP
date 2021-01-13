@@ -1,4 +1,6 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myInputWidget.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myTableView.dart';
@@ -7,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import 'timeTable.view.model.dart';
-
 
 class TimeTableView extends StatefulWidget {
   @override
@@ -44,7 +45,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "Add Class Room",
+                                "Create Class Routine",
                                 style: TextStyle(fontSize: 24.0),
                               ),
                             )
@@ -54,15 +55,50 @@ class _TimeTableViewState extends State<TimeTableView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Flexible(
-                                child: MyInputWidget.userInputText(
-                              title: "Room name",
-                              textEditingController: model.roomNameController,
-                            )),
+                              child: DropdownSearch<TeacherSubjectModel>(
+                                maxHeight: 300,
+                                selectedItem: model.teacherSubjectModel_subject,
+                                items: model.teacherSubjectService.list,
+                                itemAsString: (TeacherSubjectModel u) => u.subjectid?.name ?? "null",
+                                label: "Select Subject*",
+                                onChanged: (item) async {
+                                  model.teacherSubjectModel_subject = item;
+                                  model.notifyListeners();
+                                },
+                                showSearchBox: true,
+                              ),
+                            ),
                             Flexible(
-                                child: MyInputWidget.userInputText(
-                              title: "Capacity",
-                              textEditingController: model.capacityController,
-                            ))
+                              child: DropdownSearch<TeacherSubjectModel>(
+                                maxHeight: 300,
+                                selectedItem: model.teacherSubjectModel_teacher,
+                                items: model.teacherSubjectService.list,
+                                // items: model.teacherSubjectService.list
+                                //     .where((element) => element.subjectid.id == model.teacherSubjectModel_subject.subjectid.id)
+                                //     .toList(),
+                                itemAsString: (TeacherSubjectModel u) => u.teacherid?.name ?? "null",
+                                label: "Teacher*",
+                                onChanged: (item) async {
+                                  model.teacherSubjectModel_teacher = item;
+                                  model.notifyListeners();
+                                },
+                                showSearchBox: true,
+                              ),
+                            ),
+                            Flexible(
+                              child: DropdownSearch<ClassRoomModel>(
+                                maxHeight: 300,
+                                // selectedItem: model.classRoomService.list,
+                                items: model.classRoomService.list,
+                                itemAsString: (ClassRoomModel u) => u.room_number,
+                                label: "Select Room*",
+                                onChanged: (item) async {
+                                  model.classRoomModel = item;
+                                  model.notifyListeners();
+                                },
+                                showSearchBox: true,
+                              ),
+                            ),
                           ],
                         ),
                         Row(
@@ -111,16 +147,60 @@ class _TimeTableViewState extends State<TimeTableView> {
           PageHeader(
             text: appProvider.currentPage,
           ),
-          MyTableView(
-            isLoading: model.isLoading,
-            source: model.source,
-            headers: model.headers,
-            onRefresh: model.onRefresh,
-            onCreateNew: model.onCreateNew,
-            onEdit: model.onEdit,
-            onDelete: model.onDelete,
-            onSearch: model.onSearch,
-          ),
+          Container(
+            margin: EdgeInsets.all(10),
+            padding: EdgeInsets.all(0),
+            child: Card(
+              elevation: 1,
+              shadowColor: Colors.black,
+              clipBehavior: Clip.none,
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      RaisedButton.icon(
+                        onPressed: () {
+                          model.onRefresh();
+                        },
+                        icon: Icon(
+                          Icons.refresh,
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          "Refresh",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Colors.blue,
+                      ),
+                      SizedBox(
+                        width: 25,
+                      ),
+                      RaisedButton.icon(
+                        onPressed: () {
+                          model.onCreateNew();
+                        },
+                        icon: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          "Create New",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        color: Colors.blue,
+                      )
+                    ],
+                  ),
+                  Table(
+//          defaultColumnWidth:
+//              FixedColumnWidth(MediaQuery.of(context).size.width / 3),
+                    border: TableBorder.all(color: Colors.black26, width: 1, style: BorderStyle.none),
+                    children: model.listTableRow,
+                  ),
+                ],
+              ),
+            ),
+          )
         ]));
       },
     );

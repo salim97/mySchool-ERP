@@ -25,6 +25,7 @@ class ClassRoomServiceImpl extends RestAPI implements ClassRoomService {
     Response response = await myDioPOST(
       url: endPointURL,
       data: model.toJson(),
+      
     );
     if (response.statusCode == 200) {
       // userModel = new UserModel.fromJson(response.data["data"]["user"]);
