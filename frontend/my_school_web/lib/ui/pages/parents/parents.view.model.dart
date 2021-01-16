@@ -31,10 +31,10 @@ class ParentsViewModel extends BaseViewModel {
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
     DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Parent", value: "Parent", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Street Address", value: "Street Address", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Parent", value: "Parent", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Street Address", value: "Street Address", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.left),
   ];
 
   onRefresh() async {

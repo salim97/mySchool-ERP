@@ -14,7 +14,6 @@ class GroupViewModel extends BaseViewModel {
 
   final SectionService sectionService = locator<SectionService>();
 
-
   // edit line widget to add or edit data
   TextEditingController roomNameController = TextEditingController();
   TextEditingController capacityController = TextEditingController();
@@ -26,7 +25,7 @@ class GroupViewModel extends BaseViewModel {
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
     DatatableHeader(text: "Group", value: "Group", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Section", value: "Section", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Section", value: "Section", show: true, sortable: true, textAlign: TextAlign.left),
   ];
 
   onRefresh() async {

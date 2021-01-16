@@ -1,4 +1,7 @@
+import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:my_school_web/app/helpers/app_colors.dart';
 import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myInputWidget.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myTableView.dart';
@@ -7,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
 
 import 'section.view.model.dart';
-
 
 class SectionView extends StatefulWidget {
   @override
@@ -45,9 +47,20 @@ class _SectionViewState extends State<SectionView> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 "Add Class Room",
-                                style: TextStyle(fontSize: 24.0),
+                                style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold,),
                               ),
-                            )
+                            ),
+                            Expanded(child: Container()),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: IconButton(
+                                icon: Icon(
+                                  Icons.close,
+                                  color: Colors.black,
+                                ),
+                                onPressed: model.onCancel,
+                              ),
+                            ),
                           ],
                         ),
                         Row(
@@ -58,42 +71,46 @@ class _SectionViewState extends State<SectionView> {
                               title: "Section*",
                               textEditingController: model.nameController,
                             )),
-                          ],
-                        ),
-                        Row(
-                          children: [
                             Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: RaisedButton.icon(
-                                onPressed: () {
-                                  model.onCancel();
+                              padding: const EdgeInsets.all(12.0),
+                              child: ArgonButton(
+                                height: 50,
+                                width: 100,
+                                borderRadius: 5.0,
+                                borderSide: BorderSide(color: MyTheme.accents_check, width: 2.0),
+                                color: Colors.white, //MyTheme.accents_check,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, //Center Row contents horizontally,
+                                  crossAxisAlignment: CrossAxisAlignment.center, //Center Row contents vertically,
+
+                                  children: [
+                                    Icon(
+                                      Icons.check,
+                                      color: MyTheme.accents_check,
+                                    ),
+                                    Text(
+                                      "valid",
+                                      style: TextStyle(color: MyTheme.accents_check, fontSize: 18, fontWeight: FontWeight.w700),
+                                    ),
+                                  ],
+                                ),
+                                loader: Container(
+                                  padding: EdgeInsets.all(10),
+                                  child: SpinKitRotatingCircle(
+                                    color: MyTheme.accents_check,
+                                    // size: loaderWidth ,
+                                  ),
+                                ),
+                                onTap: (startLoading, stopLoading, btnState) async {
+                                  startLoading();
+                                  await Future.delayed(Duration(seconds: 1));
+                                  try {
+                                    await model.onValid();
+                                  } catch (e) {
+                                    stopLoading();
+                                  }
+                                  stopLoading();
                                 },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
-                                label: Text(
-                                  "cancel",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                color: Colors.blue,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: RaisedButton.icon(
-                                onPressed: () {
-                                  model.onValid();
-                                },
-                                icon: Icon(
-                                  Icons.add,
-                                  color: Colors.white,
-                                ),
-                                label: Text(
-                                  "valid",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                color: Colors.blue,
                               ),
                             ),
                           ],

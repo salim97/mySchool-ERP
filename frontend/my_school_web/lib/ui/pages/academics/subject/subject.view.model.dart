@@ -26,8 +26,8 @@ class SubjectViewModel extends BaseViewModel {
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
     DatatableHeader(text: "Subject", value: "Subject", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Subject Type", value: "Subject Type", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Subject Code", value: "Subject Code", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Subject Type", value: "Subject Type", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Subject Code", value: "Subject Code", show: true, sortable: true, textAlign: TextAlign.left),
   ];
 
   onRefresh() async {

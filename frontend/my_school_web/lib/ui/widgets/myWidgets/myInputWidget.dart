@@ -6,36 +6,37 @@ class MyInputWidget {
   static Widget userInputText({
     String title,
     String hintText,
+    String labelText,
     TextEditingController textEditingController,
     bool mustFill = false,
     Function(String) onValidator = null,
     bool obscureText = false,
-  
   }) {
     if (hintText == null) hintText = title;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: Row(
-                children: [
-                  Text(title),
-                  mustFill
-                      ? Text(
-                          " *",
-                          style: TextStyle(color: Colors.red),
-                        )
-                      : Container(),
-                ],
-              )),
+          // Align(
+          //     alignment: AlignmentDirectional.centerStart,
+          //     child: Row(
+          //       children: [
+          //         Text(title),
+          //         mustFill
+          //             ? Text(
+          //                 " *",
+          //                 style: TextStyle(color: Colors.red),
+          //               )
+          //             : Container(),
+          //       ],
+          //     )),
           TextFormField(
             obscureText: obscureText,
             controller: textEditingController,
             decoration: InputDecoration(
-              hintText: hintText,
-              border: new OutlineInputBorder(borderSide: new BorderSide(color: Colors.black)),
+              // hintText: hintText,
+              labelText: mustFill ? hintText + " * " : hintText,
+              border: OutlineInputBorder(),
             ),
             validator: mustFill == true
                 ? onValidator == null

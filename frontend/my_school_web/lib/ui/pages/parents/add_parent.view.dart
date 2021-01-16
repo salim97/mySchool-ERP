@@ -57,9 +57,9 @@ class _AddParentViewState extends State<AddParentView> {
         List<DatatableHeader> headers = [
           DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
           DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
-          DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.center),
-          DatatableHeader(text: "Email", value: "Email", show: true, sortable: true, textAlign: TextAlign.center),
-          DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+          DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.left),
+          DatatableHeader(text: "Email", value: "Email", show: true, sortable: true, textAlign: TextAlign.left),
+          DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.left),
           DatatableHeader(
               flex: 2,
               text: "Action",
@@ -93,7 +93,7 @@ class _AddParentViewState extends State<AddParentView> {
                   ),
                 );
               },
-              textAlign: TextAlign.center),
+              textAlign: TextAlign.left),
         ];
 
         return Container(

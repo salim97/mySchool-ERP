@@ -27,10 +27,10 @@ class TeachersViewModel extends BaseViewModel {
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
     DatatableHeader(text: "Employee Code", value: "Employee_Code", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Name", value: "Name", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Incharge Class", value: "Incharge_Class", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Subjects Handling", value: "Subjects_Handling", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Name", value: "Name", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Incharge Class", value: "Incharge_Class", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Subjects Handling", value: "Subjects_Handling", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.left),
   ];
 
   onRefresh() async {
@@ -38,7 +38,6 @@ class TeachersViewModel extends BaseViewModel {
     notifyListeners();
     Response response = await teacherService.getAll();
     if (response.statusCode == 200) {
-     
       source.clear();
       teacherService.list.forEach((element) {
         source.add({

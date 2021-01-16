@@ -20,9 +20,9 @@ class WorkingHoursViewModel extends BaseViewModel {
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
     DatatableHeader(text: "Class Hour", value: "Class Hour", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Begin Time", value: "Begin Time", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "End Time", value: "End Time", show: true, sortable: true, textAlign: TextAlign.center),
-    DatatableHeader(text: "Type", value: "Type", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Begin Time", value: "Begin Time", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "End Time", value: "End Time", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "Type", value: "Type", show: true, sortable: true, textAlign: TextAlign.left),
   ];
 
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
@@ -75,7 +75,7 @@ class WorkingHoursViewModel extends BaseViewModel {
     fromController.text = null;
     toController.text = null;
     typeController.text = null;
-    
+
     isAddElementVisible = false;
     notifyListeners();
   }

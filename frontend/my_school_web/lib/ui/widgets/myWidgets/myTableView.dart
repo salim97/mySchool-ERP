@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_school_web/app/helpers/app_colors.dart';
 import 'package:responsive_table/DatatableHeader.dart';
 import 'package:responsive_table/responsive_table.dart';
 
@@ -45,15 +46,16 @@ class _MyTableViewState extends State<MyTableView> {
     // TODO: implement initState
     super.initState();
     widget.headers.add(DatatableHeader(
-      flex: 2,
+      flex: 1,
       text: "Action",
+      textAlign: TextAlign.right,
       value: "Action",
       show: true,
       sortable: false,
       sourceBuilder: (value, row) {
         return Container(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               IconButton(
                 icon: Icon(Icons.edit),
@@ -71,7 +73,6 @@ class _MyTableViewState extends State<MyTableView> {
           ),
         );
       },
-      textAlign: TextAlign.center,
     ));
   }
 
@@ -103,7 +104,7 @@ class _MyTableViewState extends State<MyTableView> {
                         "Refresh",
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.blue,
+                      color: MyTheme.primary_button,
                     ),
                     SizedBox(
                       width: 25,
@@ -120,7 +121,7 @@ class _MyTableViewState extends State<MyTableView> {
                         "Create New",
                         style: TextStyle(color: Colors.white),
                       ),
-                      color: Colors.blue,
+                      color: MyTheme.primary_button,
                     )
                   ],
                 )

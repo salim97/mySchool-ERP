@@ -25,7 +25,7 @@ class TeacherSubjectViewModel extends BaseViewModel {
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
     DatatableHeader(text: "Subject Name", value: "Subject", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Teacher Name", value: "Teacher", show: true, sortable: true, textAlign: TextAlign.center),
+    DatatableHeader(text: "Teacher Name", value: "Teacher", show: true, sortable: true, textAlign: TextAlign.left),
   ];
 
   onRefresh() async {

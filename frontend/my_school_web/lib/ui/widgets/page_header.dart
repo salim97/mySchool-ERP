@@ -10,10 +10,10 @@ class PageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return      Row(
       children: [
-        SizedBox(width: 30,),
+        // SizedBox(width: 30,),
         Padding(
           padding: const EdgeInsets.all(14),
-          child: CustomText(text: text, size: 40, weight: FontWeight.bold, color: Colors.grey,),
+          child: CustomText(text: text, size: 40, weight: FontWeight.bold, color: Colors.black,),
         ),
       ],
     );
