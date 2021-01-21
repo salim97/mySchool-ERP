@@ -22,6 +22,7 @@ class LoginViewModel extends BaseViewModel {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
   Future selectNotification(String payload) async {
     await flutterLocalNotificationsPlugin.cancelAll();
@@ -40,8 +41,8 @@ class LoginViewModel extends BaseViewModel {
         new NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
       0,
-      'new message arived',
-      'i want ${message['data']['title']} for ${message['data']['price']}',
+      message["notification"]["title"],
+      message["notification"]["body"],
       platformChannelSpecifics,
       payload: 'Default_Sound',
     );
