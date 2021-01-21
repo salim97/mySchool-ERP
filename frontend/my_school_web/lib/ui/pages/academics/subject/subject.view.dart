@@ -48,7 +48,10 @@ class _SubjectViewState extends State<SubjectView> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 "Add Subject",
-                                style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold,),
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             Expanded(child: Container()),
@@ -139,9 +142,7 @@ class _SubjectViewState extends State<SubjectView> {
                   ),
                 )
               : Container(),
-          PageHeader(
-            text: appProvider.currentPage,
-          ),
+          PageHeader(),
           MyTableView(
             isLoading: model.isLoading,
             source: model.source,

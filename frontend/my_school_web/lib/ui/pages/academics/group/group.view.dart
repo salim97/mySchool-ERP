@@ -139,9 +139,7 @@ class _GroupViewState extends State<GroupView> {
                   ),
                 )
               : Container(),
-          PageHeader(
-            text: appProvider.currentPage,
-          ),
+          PageHeader(),
           MyTableView(
             isLoading: model.isLoading,
             source: model.source,

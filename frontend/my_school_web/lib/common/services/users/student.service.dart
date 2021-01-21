@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import '../../common.dart';
 
 abstract class StudentService extends RestAPI {
-  List<StudentModel> listStudentModel;
+  List<StudentModel> list;
   Future<Response> getAll();
   Future<Response> add(StudentModel studentModel);
   Future<Response> update(StudentModel studentModel);
@@ -14,7 +14,7 @@ abstract class StudentService extends RestAPI {
 
 class StudentServiceImpl extends RestAPI implements StudentService {
   @override
-  List<StudentModel> listStudentModel = new List<StudentModel>();
+  List<StudentModel> list = new List<StudentModel>();
 
 
   @override
@@ -38,9 +38,9 @@ class StudentServiceImpl extends RestAPI implements StudentService {
     // logger.d(response.statusCode);
     if (response.statusCode == 200) {
       List<dynamic> list = response.data["data"]["data"];
-      listStudentModel.clear();
+      list.clear();
       list.forEach((element) {
-        listStudentModel.add(StudentModel.fromJson(element));
+        list.add(StudentModel.fromJson(element));
       });
     }
     return response;
@@ -52,7 +52,7 @@ class StudentServiceImpl extends RestAPI implements StudentService {
       url: serverIP + "/api/v1/students/" + studentModel.id,
     );
     if (response.statusCode == 204) {
-      listStudentModel.removeWhere((element) => element.id == studentModel.id);
+      list.removeWhere((element) => element.id == studentModel.id);
     }
     return response;
   }
@@ -60,7 +60,7 @@ class StudentServiceImpl extends RestAPI implements StudentService {
   @override
   Future<List<StudentModel>> search(String query) {
     List<StudentModel> selected = new List<StudentModel>();
-    listStudentModel.forEach((element) {
+    list.forEach((element) {
       if (element.name.contains(query)) selected.add(element);
       // if (element.userAccount.email.contains(query)) selected.add(element);
       if (element.phone.contains(query)) selected.add(element);
@@ -86,11 +86,11 @@ class StudentServiceImpl extends RestAPI implements StudentService {
 }
 
 // class FakeStudentService extends RestAPI implements StudentService {
-//   List<StudentModel> listStudentModel = new List<StudentModel>();
+//   List<StudentModel> list = new List<StudentModel>();
 //   FakeStudentService() {
 //     for (int i = 0; i < 15; i++) {
 //       int randomInt = Random().nextInt(99999999);
-//       listStudentModel.add(new StudentModel(
+//       list.add(new StudentModel(
 //         id: randomInt.toString(),
 //         parent_id: randomInt.toString(),
 //         rollNo: randomInt.toString(),
@@ -102,20 +102,20 @@ class StudentServiceImpl extends RestAPI implements StudentService {
 //   }
 //   @override
 //   Future<Response> add(StudentModel studentModel) {
-//     listStudentModel.add(studentModel);
+//     list.add(studentModel);
 //     return Future<Response>.value(new Response(statusCode: 200));
 //   }
 
 //   @override
 //   Future<Response> getAll() {
-//     // liststudentModel.clear();
+//     // list.clear();
 //     return Future<Response>.value(new Response(statusCode: 200));
 //   }
 
 //   @override
 //   Future<List<StudentModel>> search(String query) {
 //     List<StudentModel> selected = new List<StudentModel>();
-//     listStudentModel.forEach((element) {
+//     list.forEach((element) {
 //       if (element.phone.contains(query)) selected.add(element);
 //       // if (element.name.contains(query)) selected.add(element);
 //     });
@@ -124,17 +124,17 @@ class StudentServiceImpl extends RestAPI implements StudentService {
 
 //   @override
 //   Future<Response> delete(StudentModel id) {
-//     print(listStudentModel.length);
-//     // for (int i = 0; i < liststudentModel.length; i++) {
-//     //   if (liststudentModel.elementAt(i).id == id) {
-//     //     liststudentModel.removeAt(i);
+//     print(list.length);
+//     // for (int i = 0; i < list.length; i++) {
+//     //   if (list.elementAt(i).id == id) {
+//     //     list.removeAt(i);
 //     //   }
 //     // }
-//     listStudentModel.removeWhere((element) {
+//     list.removeWhere((element) {
 //       print(element.id.toString() + " == " + id.toString());
 //       return element.id == id;
 //     });
-//     print(listStudentModel.length);
+//     print(list.length);
 //     return Future<Response>.value(new Response(statusCode: 200));
 //   }
 

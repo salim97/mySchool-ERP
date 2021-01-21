@@ -1,16 +1,70 @@
-import 'package:my_school_web/ui/widgets/side_menu/side_menu_mobile.dart';
-import 'package:my_school_web/ui/widgets/side_menu/side_menu_tablet_desktop.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:my_school_web/app/locator.dart';
+import 'package:my_school_web/provider/app.provider.dart';
+import 'package:my_school_web/ui/widgets/navbar/navbar_logo.dart';
+import 'package:my_school_web/ui/widgets/side_menu/side_menu_item.dart';
 import 'package:flutter/material.dart';
-import 'package:responsive_builder/responsive_builder.dart';
+import 'package:my_school_web/ui/widgets/side_menu/side_menu_item_with_sub_item.dart';
+import 'package:provider/provider.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class SideMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ScreenTypeLayout(
-      // breakpoints: ScreenBreakpoints(tablet: 600, desktop: 1460, watch: 300),
-      breakpoints: ScreenBreakpoints( desktop: 600, watch: 300),
-      mobile: SideMenuMobile(),
-      desktop: SideMenuTabletDesktop(),
+    final AppProvider appProvider = Provider.of<AppProvider>(context);
+    Map menuJSON = appProvider.sideMenu;
+    List<Widget> menuWidget = new List<Widget>();
+    menuWidget.add(NavBarLogo());
+    menuJSON.forEach((key1, value1) {
+      if (value1["children"] == null) {
+        menuWidget.add(
+          SideMenuItemDesktop(
+            icon: value1["icon"],
+            text: key1,
+            active: appProvider.currentPage == key1,
+            onTap: () {
+              locator<NavigationService>().replaceWith(value1["route name"]);
+            },
+          ),
+        );
+        return;
+      }
+
+      List<Widget> subItems = new List<Widget>();
+      Map children = value1["children"];
+      children.forEach((key2, value2) {
+        subItems.add(
+          SideMenuItemDesktop(
+            icon: value2["icon"],
+            text: key2,
+            active: appProvider.currentPage == key2,
+            onTap: () {
+              locator<NavigationService>().replaceWith(value2["route name"]);
+            },
+          ),
+        );
+      });
+      menuWidget.add(SideMenuItemWidthSubItemDesktop(
+        icon: value1["icon"],
+        text: key1,
+        active: appProvider.currentPage == key,
+        children: subItems,
+      ));
+    });
+
+    return Container(
+      decoration: BoxDecoration(color: Colors.white,
+          // gradient: LinearGradient(
+          //   colors: [Colors.indigo, Colors.indigo.shade600],
+          // ),
+          boxShadow: [BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)]),
+      width: 250,
+      child: Container(
+        child: ListView(
+          children: menuWidget,
+        ),
+      ),
     );
   }
 }

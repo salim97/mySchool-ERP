@@ -122,21 +122,7 @@ class LoginView extends StatelessWidget {
                                   decoration: BoxDecoration(color: Colors.indigo),
                                   child: FlatButton(
                                     onPressed: () async {
-                                      // DialogService _dialogService = await locator<DialogService>();
-                                      // await _dialogService.showDialog(
-                                      //   title: 'Test Dialog Title',
-                                      //   description: 'Test Dialog Description',
-                                      //   dialogPlatform: DialogPlatform.Cupertino,
-                                      // );
-                                      dynamic rr = await MyDialogs.timeTableAdd(
-                                        context: context,
-                                        roomList: ["a", "b"],
-                                        subjectList: ["c", "d", "e", "f"],
-                                        teacherList: ["sdfsdf", "sdf"],
-                                      );
-                                      print(rr);
-                                      return;
-
+                               
                                       authProvider.status = Status.Authenticating;
                                       authProvider.notifyListeners();
                                       Response response = await locator<AuthService>()

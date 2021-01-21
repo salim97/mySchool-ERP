@@ -30,9 +30,7 @@ class _StudentsViewState extends State<StudentsView> {
         builder: (context, model, child) {
           return SingleChildScrollView(
               child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
-            PageHeader(
-              text: appProvider.currentPage,
-            ),
+            PageHeader(),
             MyTableView(
               isLoading: model.isLoading,
               source: model.source,

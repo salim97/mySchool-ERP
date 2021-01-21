@@ -47,7 +47,10 @@ class _SectionViewState extends State<SectionView> {
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
                                 "Add Class Room",
-                                style: TextStyle(fontSize: 24.0,fontWeight: FontWeight.bold,),
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                             Expanded(child: Container()),
@@ -120,9 +123,7 @@ class _SectionViewState extends State<SectionView> {
                   ),
                 )
               : Container(),
-          PageHeader(
-            text: appProvider.currentPage,
-          ),
+          PageHeader(),
           MyTableView(
             isLoading: model.isLoading,
             source: model.source,

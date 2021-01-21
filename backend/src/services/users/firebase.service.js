@@ -2,15 +2,13 @@
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require("../../school-erp-ef01f-firebase-adminsdk-8nouk-98c56d46f6.json");
+var serviceAccount = require("../../../school-erp-ef01f-firebase-adminsdk-8nouk-98c56d46f6.json");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
-const student = require('../models/users/student.model');
-const catchAsync = require('../utils/catchAsync');
-const AppError = require('../utils/appError');
-const factory = require('../controllers/handlerFactory');
+
+
 // const catchAsync = require('./../utils/catchAsync');
 getLocalIP = async () => {
     const { networkInterfaces } = require('os');
@@ -42,16 +40,14 @@ getExternalIP = async () => {
 }
 
 
-
-
 async function runFirebaseRemoteConfig() {
     console.log('runFirebaseRemoteConfig');
 
     var localIP = await getLocalIP();
-    localIP = localIP+":3000"
+    localIP = localIP + ":3000"
     console.log("localIP = " + localIP);
     var externalIP = await getExternalIP();
-    externalIP = externalIP+":3000"
+    externalIP = externalIP + ":3000"
     console.log("externalIP = " + externalIP);
 
     var config = admin.remoteConfig();
@@ -121,40 +117,85 @@ async function runFirebaseRemoteConfig() {
 
 
 
+
+const thisModel = require('../../models/users/notification.model');
+const factory = require('../../controllers/handlerFactory');
+const catchAsync = require('../../utils/catchAsync');
+const AppError = require('../../utils/appError');
+
+
 notify = catchAsync(async (req, res, next) => {
     // return tokenValidator.validate(req, res, next)
-    console.log("nik sowa");
-    const { title, body, registrationToken } = req.body;
+    const { topic, title, message, registrationTokens } = req.body;
+    console.log("topic");
+    console.log(topic);
+    topic.forEach(element => {
+        var package = {
+            topic: element,
+            notification: {
+                title: title,
+                body: message
+            },
+            // data: {
+            //     key: 'value',
+            // },
+            // token: registrationToken
+        };
 
-    var message = {
-        notification: {
-            title: title,
-            body: body
-        },
-        data: {
-            key: 'value',
-        },
-        token: registrationToken
-    };
-
-
-    var response = await admin.messaging().send(message);
-
-    res.status(200).json({
-        status: 'success',
-        data: response
+        admin.messaging().send(package).then((response) => {
+            // Response is a message ID string.
+            console.log('Successfully sent message:', response);
+        }).catch((error) => {
+            console.log('Error sending message:', error);
+        });
     });
 
 
+    // res.status(200).json({
+    //     status: 'success',
+    //     data: firebaseResponse
+    // });
+
+    req.body.createdAt = new Date().toISOString();
+    req.body.senderInfo = req.user;
+    const doc = await thisModel.create(req.body);
+
+    res.status(200).json({
+        status: 'success',
+        data: {
+            data: doc
+        },
+    });
 });
 
+
+
+getAll = catchAsync(async (req, res, next) => {
+    let filter = {};
+    if (req.user.role == "teacher") filter = { topic: "all_teachers" };
+    if (req.user.role == "student") filter = { topic: "all_students" };
+    if (req.user.role == "parent") filter = { topic: "all_parents" };
+    // const doc = await features.query.explain();
+    const doc = await thisModel.find(filter);
+
+    // SEND RESPONSE
+    res.status(200).json({
+        status: 'success',
+        results: doc.length,
+        data: {
+            data: doc
+        }
+    });
+});
+
+deleteOne = factory.deleteOne(thisModel);
 
 //-----------------------------------------------------------------------------
 //      CURD(create, update, read, delete)
 //-----------------------------------------------------------------------------
 const express = require('express');
 
-const authController = require('../controllers/auth.controller');
+const authController = require('../../controllers/auth.controller');
 
 const router = express.Router({ mergeParams: true });
 
@@ -162,6 +203,11 @@ router.use(authController.protect);
 
 router
     .route('/')
+    .get(authController.restrictTo('admin', 'teacher', 'student', 'parent'), getAll)
     .post(authController.restrictTo('admin'), notify);
+
+router
+    .route('/:id')
+    .delete(authController.restrictTo('admin'), deleteOne);
 
 module.exports = router;

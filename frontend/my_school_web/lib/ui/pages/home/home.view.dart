@@ -24,13 +24,12 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  String initialRoute = auto_router.Routes.classRoomView;
+  String initialRoute = auto_router.Routes.notificationView;
 
   @override
   void initState() {
     super.initState();
     setupDialogUi();
-    Provider.of<AppProvider>(context, listen: false).changeCurrentPage(initialRoute);
   }
 
   @override
@@ -48,21 +47,7 @@ class _HomeViewState extends State<HomeView> {
           return Scaffold(
             // key: _key,
             backgroundColor: Colors.white,
-            drawer: Container(
-              color: Colors.white,
-              child: ListView(
-                children: [
-                  UserAccountsDrawerHeader(
-                    accountEmail: Text("abc@gmail.com"),
-                    accountName: Text("Nom Prenom"),
-                  ),
-                  ListTile(
-                    title: Text("Lessons"),
-                    leading: Icon(Icons.book),
-                  )
-                ],
-              ),
-            ),
+
             body: Row(
               children: [
                 SideMenu(),

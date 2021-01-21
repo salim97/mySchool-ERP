@@ -34,14 +34,12 @@ class _ParentsViewState extends State<ParentsView> {
           // Do something once your model is initialized
           // model.authService = Provider.of<AppProvider>(context, listen: false).authService;
           // model.parentService = Provider.of<AppProvider>(context, listen: false).parentService;
-          model.onRefresh();
+          // model.onRefresh();
         },
         builder: (context, model, child) {
           return SingleChildScrollView(
               child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
-            PageHeader(
-              text: appProvider.currentPage,
-            ),
+            PageHeader(),
             MyTableView(
               source: model.source,
               headers: model.headers,

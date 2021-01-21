@@ -6,10 +6,10 @@ class HomeViewModel extends BaseViewModel {
   final PushNotificationService _pushNotificationService = locator<PushNotificationService>();
 
   Future handleStartUpLogic() async {
-    await _pushNotificationService.initialise();
-    String token = await _pushNotificationService.fcm.getToken();
-    print("token");
-    print(token);
+    // await _pushNotificationService.initialise();
+    // String token = await _pushNotificationService.fcm.getToken();
+    // print("token");
+    // print(token);
     // ...
   }
 }

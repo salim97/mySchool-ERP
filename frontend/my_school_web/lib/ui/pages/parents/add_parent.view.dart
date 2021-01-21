@@ -105,9 +105,7 @@ class _AddParentViewState extends State<AddParentView> {
               child: Column(
                 // shrinkWrap: true,
                 children: [
-                  PageHeader(
-                    text: appProvider.currentPage,
-                  ),
+                  PageHeader(),
                   Card(
                       elevation: 10,
                       shadowColor: Colors.black,
@@ -187,9 +185,7 @@ class _AddParentViewState extends State<AddParentView> {
                           ),
                           SingleChildScrollView(
                               child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
-                            PageHeader(
-                              text: appProvider.currentPage,
-                            ),
+                            PageHeader(),
                             Container(
                               margin: EdgeInsets.all(10),
                               padding: EdgeInsets.all(0),

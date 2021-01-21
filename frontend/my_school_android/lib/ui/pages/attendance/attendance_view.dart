@@ -1,8 +1,8 @@
-import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
+import 'package:my_school_android/common/common.dart';
 import 'package:my_school_android/ui/widgets/MyAppBarWidget.dart';
 import 'package:my_school_android/ui/widgets/MyUtils.dart';
 import 'package:stacked/stacked.dart';

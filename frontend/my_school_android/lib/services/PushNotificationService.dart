@@ -11,22 +11,6 @@ class PushNotificationService {
       fcm.requestNotificationPermissions(IosNotificationSettings());
     }
 
-    fcm.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        var l = new Logger();
-        l.d(message);
-        print("onMessage: $message");
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        var l = new Logger();
-        l.d(message);
-        print("onLaunch: $message");
-      },
-      onResume: (Map<String, dynamic> message) async {
-        var l = new Logger();
-        l.d(message);
-        print("onResume: $message");
-      },
-    );
+
   }
 }

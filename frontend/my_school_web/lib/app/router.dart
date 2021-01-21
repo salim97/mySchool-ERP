@@ -5,6 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:auto_route/auto_route_annotations.dart';
 
 import 'package:my_school_web/main.dart';
+import 'package:my_school_web/ui/pages/Notification/notification.view.dart';
 import 'package:my_school_web/ui/pages/WorkingHours/working_hours.view.dart';
 import 'package:my_school_web/ui/pages/academics/classRoom/classRoom.view.dart';
 import 'package:my_school_web/ui/pages/academics/group/group.view.dart';
@@ -31,7 +32,6 @@ import 'package:my_school_web/ui/pages/error_page/todo.view.dart';
     MaterialRoute(page: SplashView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: AppPagesController),
-    MaterialRoute(page: HomeView),
     MaterialRoute(page: DashboardView),
     MaterialRoute(page: TeachersView),
     MaterialRoute(page: AddTeacherView),
@@ -48,6 +48,7 @@ import 'package:my_school_web/ui/pages/error_page/todo.view.dart';
     MaterialRoute(page: SubjectView),
     MaterialRoute(page: TeacherSubjectView),
     MaterialRoute(page: TimeTableView),
+    MaterialRoute(page: NotificationView),
   ],
   transitionsBuilder: TransitionsBuilders.zoomIn,
   durationInMilliseconds: 400,

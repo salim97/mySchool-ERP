@@ -19,7 +19,6 @@ class ClassRoomView extends StatefulWidget {
 class _ClassRoomViewState extends State<ClassRoomView> {
   @override
   Widget build(BuildContext context) {
-    final AppProvider appProvider = Provider.of<AppProvider>(context);
 
     return ViewModelBuilder<ClassRoomViewModel>.reactive(
       viewModelBuilder: () => ClassRoomViewModel(),
@@ -153,9 +152,7 @@ class _ClassRoomViewState extends State<ClassRoomView> {
             clipBehavior: Clip.none,
             child: Column(
               children: [
-                PageHeader(
-                  text: appProvider.currentPage,
-                ),
+                PageHeader(),
                 MyTableView(
                   isLoading: model.isLoading,
                   source: model.source,

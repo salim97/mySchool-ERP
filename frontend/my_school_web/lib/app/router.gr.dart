@@ -10,6 +10,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../main.dart';
+import '../ui/pages/Notification/notification.view.dart';
 import '../ui/pages/WorkingHours/working_hours.view.dart';
 import '../ui/pages/academics/classRoom/classRoom.view.dart';
 import '../ui/pages/academics/group/group.view.dart';
@@ -19,7 +20,6 @@ import '../ui/pages/academics/teacherSubject/teacherSubject.view.dart';
 import '../ui/pages/academics/timeTable/timeTable.view.dart';
 import '../ui/pages/dashboard/dashboard.view.dart';
 import '../ui/pages/error_page/todo.view.dart';
-import '../ui/pages/home/home.view.dart';
 import '../ui/pages/login/login.view.dart';
 import '../ui/pages/parents/add_parent.view.dart';
 import '../ui/pages/parents/parents.view.dart';
@@ -34,7 +34,6 @@ class Routes {
   static const String splashView = '/splash-view';
   static const String loginView = '/login-view';
   static const String appPagesController = '/app-pages-controller';
-  static const String homeView = '/home-view';
   static const String dashboardView = '/dashboard-view';
   static const String teachersView = '/teachers-view';
   static const String addTeacherView = '/add-teacher-view';
@@ -51,11 +50,11 @@ class Routes {
   static const String subjectView = '/subject-view';
   static const String teacherSubjectView = '/teacher-subject-view';
   static const String timeTableView = '/time-table-view';
+  static const String notificationView = '/notification-view';
   static const all = <String>{
     splashView,
     loginView,
     appPagesController,
-    homeView,
     dashboardView,
     teachersView,
     addTeacherView,
@@ -72,6 +71,7 @@ class Routes {
     subjectView,
     teacherSubjectView,
     timeTableView,
+    notificationView,
   };
 }
 
@@ -82,7 +82,6 @@ class Router extends RouterBase {
     RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.appPagesController, page: AppPagesController),
-    RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.dashboardView, page: DashboardView),
     RouteDef(Routes.teachersView, page: TeachersView),
     RouteDef(Routes.addTeacherView, page: AddTeacherView),
@@ -99,6 +98,7 @@ class Router extends RouterBase {
     RouteDef(Routes.subjectView, page: SubjectView),
     RouteDef(Routes.teacherSubjectView, page: TeacherSubjectView),
     RouteDef(Routes.timeTableView, page: TimeTableView),
+    RouteDef(Routes.notificationView, page: NotificationView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -118,12 +118,6 @@ class Router extends RouterBase {
     AppPagesController: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => AppPagesController(),
-        settings: data,
-      );
-    },
-    HomeView: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => HomeView(),
         settings: data,
       );
     },
@@ -223,6 +217,12 @@ class Router extends RouterBase {
     TimeTableView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => TimeTableView(),
+        settings: data,
+      );
+    },
+    NotificationView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => NotificationView(),
         settings: data,
       );
     },

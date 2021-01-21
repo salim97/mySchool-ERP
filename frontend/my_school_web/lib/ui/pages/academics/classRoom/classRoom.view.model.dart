@@ -20,7 +20,7 @@ class ClassRoomViewModel extends BaseViewModel {
   //tableview needs this variables
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
   bool isLoading = false;
-  bool isAddElementVisible = true;
+  bool isAddElementVisible = false;
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
     DatatableHeader(text: "Room Number", value: "room_number", show: true, sortable: true, textAlign: TextAlign.left),
@@ -61,9 +61,9 @@ class ClassRoomViewModel extends BaseViewModel {
     currentModel.room_number = roomNameController.text;
     currentModel.capacity = int.parse(capacityController.text);
     if (currentModel.id == null) {
-      currentService.add(currentModel);
+      await currentService.add(currentModel);
     } else {
-      currentService.update(currentModel);
+      await currentService.update(currentModel);
     }
     await onRefresh();
     await onCancel();

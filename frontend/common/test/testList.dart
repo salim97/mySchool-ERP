@@ -49,17 +49,17 @@ testStudentService() async {
   response = await _studentService.getAll();
   l.d(response.data);
   l.d(response.statusCode);
-  _studentService.listStudentModel.forEach((element) {
+  _studentService.list.forEach((element) {
     l.i("element.toJson()");
     l.i(element.toJson());
     // l.i(element.userAccount.toJson());
   });
   return;
-  _studentService.listStudentModel.first.city_name = "city dayra ki zebi";
-  response = await _studentService.update(_studentService.listStudentModel.first);
+  _studentService.list.first.city_name = "city dayra ki zebi";
+  response = await _studentService.update(_studentService.list.first);
   l.d(response.data);
   l.d(response.statusCode);
-  _studentService.listStudentModel.forEach((element) {
+  _studentService.list.forEach((element) {
     l.i("element.toJson()");
     l.i(element.toJson());
     // l.i(element.userAccount.toJson());
@@ -99,17 +99,17 @@ testParentService() async {
   response = await _studentService.getAll();
   l.d(response.data);
   l.d(response.statusCode);
-  _studentService.listParentModel.forEach((element) {
+  _studentService.list.forEach((element) {
     l.i("element.toJson()");
     l.i(element.toJson());
     // l.i(element.userAccount.toJson());
   });
 
-  _studentService.listParentModel.first.children.add(StudentModel(id: "5fef6bc609c4b7250cde9498"));
-  response = await _studentService.update(_studentService.listParentModel.first);
+  _studentService.list.first.children.add(StudentModel(id: "5fef6bc609c4b7250cde9498"));
+  response = await _studentService.update(_studentService.list.first);
   l.d(response.data);
   l.d(response.statusCode);
-  _studentService.listParentModel.forEach((element) {
+  _studentService.list.forEach((element) {
     l.i("element.toJson()");
     l.i(element.toJson());
 

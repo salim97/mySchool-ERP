@@ -19,26 +19,7 @@ class StudentTeacherView extends StatefulWidget {
 
 class _StudentTeacherViewState extends State<StudentTeacherView> with SingleTickerProviderStateMixin {
   List<TeacherModel> teachers = [
-    TeacherModel(
-      full_name: "teacher name 01",
-      email_address: "email@email.com",
-      phone: "05XX XX XX XX",
-    ),
-    TeacherModel(
-      full_name: "teacher name 01",
-      email_address: "email@email.com",
-      phone: "06XX XX XX XX",
-    ),
-    TeacherModel(
-      full_name: "teacher name 01",
-      email_address: "email@email.com",
-      phone: "07XX XX XX XX",
-    ),
-    TeacherModel(
-      full_name: "teacher name 01",
-      email_address: "email@email.com",
-      phone: "05XX XX XX XX",
-    ),
+
   ];
 
   int mId;
@@ -139,10 +120,10 @@ class StudentTeacherRowLayout extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: Text(teacher.full_name, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 10.0)),
+                child: Text(teacher.name, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 10.0)),
               ),
               Expanded(
-                child: Text(teacher.email_address, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 10.0)),
+                child: Text(teacher.userAccount.email, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 10.0)),
               ),
               Expanded(
                 child:

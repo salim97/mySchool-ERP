@@ -6,7 +6,7 @@ import '../../common.dart';
 import '../../rest_api.dart';
 
 abstract class ParentService {
-  List<ParentModel> listParentModel;
+  List<ParentModel> list;
   ParentModel parentModel;
   Future<Response> getAll();
   Future<Response> add(ParentModel parentModel);
@@ -17,7 +17,7 @@ abstract class ParentService {
 
 class ParentServiceImpl extends RestAPI implements ParentService {
   @override
-  List<ParentModel> listParentModel = new List<ParentModel>();
+  List<ParentModel> list = new List<ParentModel>();
 
   @override
   Future<Response> add(ParentModel parentModel) async {
@@ -38,9 +38,9 @@ class ParentServiceImpl extends RestAPI implements ParentService {
     );
     if (response.statusCode == 200) {
       List<dynamic> list = response.data["data"]["data"];
-      listParentModel.clear();
+      list.clear();
       list.forEach((element) {
-        listParentModel.add(ParentModel.fromJson(element));
+        list.add(ParentModel.fromJson(element));
       });
     }
     return response;
@@ -52,7 +52,7 @@ class ParentServiceImpl extends RestAPI implements ParentService {
       url: serverIP + "/api/v1/parents/" + parentModel.id,
     );
     if (response.statusCode == 204) {
-      listParentModel.removeWhere((element) => element.id == parentModel.id);
+      list.removeWhere((element) => element.id == parentModel.id);
     }
     return response;
   }
@@ -60,7 +60,7 @@ class ParentServiceImpl extends RestAPI implements ParentService {
   @override
   Future<List<ParentModel>> search(String query) {
     List<ParentModel> selected = new List<ParentModel>();
-    listParentModel.forEach((element) {
+    list.forEach((element) {
       if (element.name.contains(query)) selected.add(element);
       // if (element.userAccount.email.contains(query)) selected.add(element);
       if (element.phone.contains(query)) selected.add(element);
@@ -86,11 +86,11 @@ class ParentServiceImpl extends RestAPI implements ParentService {
 }
 
 // class FakeParentService implements ParentService {
-//   List<ParentModel> listParentModel = new List<ParentModel>();
+//   List<ParentModel> list = new List<ParentModel>();
 //   FakeParentService() {
 //     for (int i = 0; i < 15; i++) {
 //       int randomInt = Random().nextInt(99999999);
-//       listParentModel.add(new ParentModel(
+//       list.add(new ParentModel(
 //         id: randomInt.toString(),
 //         phone: "06" + randomInt.toString(),
 //       ));
@@ -98,20 +98,20 @@ class ParentServiceImpl extends RestAPI implements ParentService {
 //   }
 //   @override
 //   Future<Response> add(ParentModel parentModel) {
-//     listParentModel.add(parentModel);
+//     list.add(parentModel);
 //     return Future<Response>.value(new Response(statusCode: 200));
 //   }
 
 //   @override
 //   Future<Response> getAll() {
-//     // listParentModel.clear();
+//     // list.clear();
 //     return Future<Response>.value(new Response(statusCode: 200));
 //   }
 
 //   @override
 //   Future<List<ParentModel>> search(String query) {
 //     List<ParentModel> selected = new List<ParentModel>();
-//     listParentModel.forEach((element) {
+//     list.forEach((element) {
 //       if (element.phone.contains(query)) selected.add(element);
 //       // if (element.name.contains(query)) selected.add(element);
 //     });
@@ -120,17 +120,17 @@ class ParentServiceImpl extends RestAPI implements ParentService {
 
 //   @override
 //   Future<Response> delete(int id) {
-//     print(listParentModel.length);
-//     // for (int i = 0; i < listParentModel.length; i++) {
-//     //   if (listParentModel.elementAt(i).id == id) {
-//     //     listParentModel.removeAt(i);
+//     print(list.length);
+//     // for (int i = 0; i < list.length; i++) {
+//     //   if (list.elementAt(i).id == id) {
+//     //     list.removeAt(i);
 //     //   }
 //     // }
-//     listParentModel.removeWhere((element) {
+//     list.removeWhere((element) {
 //       print(element.id.toString() + " == " + id.toString());
 //       return element.id == id;
 //     });
-//     print(listParentModel.length);
+//     print(list.length);
 //     return Future<Response>.value(new Response(statusCode: 200));
 //   }
 

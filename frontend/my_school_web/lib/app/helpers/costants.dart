@@ -13,7 +13,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 Map menuAdmin = {
   "Dashboard": {"route name": "/dashboard-view", "icon": MdiIcons.desktopMacDashboard, "children": null},
-  "teachers": {"route name": "/teachers-view", "icon": MdiIcons.accountTie, "children": null},
+  "Teachers": {"route name": "/teachers-view", "icon": MdiIcons.accountTie, "children": null},
   "Students": {"route name": "/students-view", "icon": MdiIcons.account, "children": null},
   "Parents": {"route name": "/parents-view", "icon": MdiIcons.humanFemaleGirl, "children": null},
   "Classes": {
@@ -38,7 +38,7 @@ Map menuAdmin = {
     }
   },
   "Events": {"route name": "/to-do-page", "icon": MdiIcons.calendar, "children": null},
-  "Notify": {"route name": "/to-do-page", "icon": MdiIcons.bell, "children": null},
+  "Notify": {"route name": "/notification-view", "icon": MdiIcons.bell, "children": null},
   "General Settings": {
     "icon": MdiIcons.cog,
     "children": {

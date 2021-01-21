@@ -14,6 +14,9 @@ class _NoticeViewState extends State<NoticeView> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<NoticeViewModel>.reactive(
       viewModelBuilder: () => NoticeViewModel(),
+      onModelReady: (model) {
+        model.onRefresh();
+      },
       builder: (
         BuildContext context,
         NoticeViewModel model,
@@ -24,16 +27,14 @@ class _NoticeViewState extends State<NoticeView> {
           backgroundColor: Colors.white,
           body: Container(
             margin: EdgeInsets.all(15.0),
-            child: SingleChildScrollView(
-                          child: Column(
-                children: <Widget>[
-                  noticeItem(title: "Notice board title 01", subTitle: "2020-12-27"),
-                  noticeItem(title: "Notice board title 02", subTitle: "2020-12-27"),
-                  noticeItem(title: "Notice board title 03", subTitle: "2020-12-27"),
-                  noticeItem(title: "Notice board title 04", subTitle: "2020-12-27"),
-                  noticeItem(title: "Notice board title 05", subTitle: "2020-12-27"),
-                ],
-              ),
+            child: ListView.builder(
+              itemCount: model.currentService.list.length,
+              itemBuilder: (BuildContext context, int index) {
+                return noticeItem(
+                  title: model.currentService.list.elementAt(index).title,
+                  subTitle: model.currentService.list.elementAt(index).message,
+                );
+              },
             ),
           ),
         );

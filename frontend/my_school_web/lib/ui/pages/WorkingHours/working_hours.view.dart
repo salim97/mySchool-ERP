@@ -71,8 +71,8 @@ class _WorkingHoursViewState extends State<WorkingHoursView> {
                                     model.typeController.text = item;
                                     model.notifyListeners();
                                   },
-                                 mode: Mode.MENU,
-                                //  validator: ,
+                                  mode: Mode.MENU,
+                                  //  validator: ,
                                 ),
                               ),
                             ],
@@ -120,9 +120,7 @@ class _WorkingHoursViewState extends State<WorkingHoursView> {
                     ),
                   )
                 : Container(),
-            PageHeader(
-              text: appProvider.currentPage,
-            ),
+            PageHeader(),
             MyTableView(
               isLoading: model.isLoading,
               source: model.source,

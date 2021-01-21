@@ -7,10 +7,12 @@ export './models/academics/subject.model.dart';
 export './models/academics/teacher_subject.model.dart';
 export './models/academics/time_table.model.dart';
 export './models/academics/working_hours.model.dart';
+export './models/academics/attendance.model.dart';
 export './models/users/parent.model.dart';
 export './models/users/student.model.dart';
 export './models/users/teacher.model.dart';
 export './models/users/user.model.dart';
+export './models/users/notification.model.dart';
 
 export './services/academics/class_room.service.dart';
 export './services/academics/group.service.dart';
@@ -23,9 +25,6 @@ export './services/users/auth.service.dart';
 export './services/users/parent.service.dart';
 export './services/users/student.service.dart';
 export './services/users/teacher.service.dart';
-
-
-
-
+export './services/users/notification.service.dart';
 
 export 'rest_api.dart';

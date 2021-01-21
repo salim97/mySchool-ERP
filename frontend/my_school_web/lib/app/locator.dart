@@ -1,5 +1,6 @@
 //  flutter pub get ; flutter pub run build_runner build --delete-conflicting-outputs
 
+import 'package:flutter/cupertino.dart';
 import 'package:my_school_web/common/common.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
@@ -25,4 +26,5 @@ void setupLocator() {
   locator.registerLazySingleton<TeacherSubjectService>(() => TeacherSubjectServiceImpl());
   locator.registerLazySingleton<TimeTableService>(() => TimeTableServiceImpl());
   locator.registerLazySingleton<WorkingHoursService>(() => WorkingHoursServiceImpl());
+  locator.registerLazySingleton<NotificationService>(() => NotificationServiceImpl());
 }

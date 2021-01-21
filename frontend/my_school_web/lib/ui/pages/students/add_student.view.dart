@@ -59,9 +59,7 @@ class _AddStudentViewState extends State<AddStudentView> {
               child: Column(
                 // shrinkWrap: true,
                 children: [
-                  PageHeader(
-                    text: appProvider.currentPage,
-                  ),
+                  PageHeader(),
                   Card(
                       elevation: 10,
                       shadowColor: Colors.black,

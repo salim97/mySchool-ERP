@@ -31,7 +31,7 @@ class StudentsViewModel extends BaseViewModel {
     notifyListeners();
     Response response = await studentService.getAll();
     if (response.statusCode == 200) {
-      listStudentModel = studentService.listStudentModel;
+      listStudentModel = studentService.list;
       source.clear();
 
       listStudentModel.forEach((element) {

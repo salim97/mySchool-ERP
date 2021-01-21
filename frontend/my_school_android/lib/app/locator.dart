@@ -15,8 +15,17 @@ void setupLocator() {
   // locator.registerLazySingleton(() => NavigationService());
   $initGetIt(locator);
   locator.registerLazySingleton(() => PushNotificationService());
+  
   locator.registerLazySingleton<TeacherService>(() => TeacherServiceImpl());
   locator.registerLazySingleton<StudentService>(() => StudentServiceImpl());
-  locator.registerLazySingleton<WorkingHoursService>(() => FakeWorkingHoursService());
+  locator.registerLazySingleton<ParentService>(() => ParentServiceImpl());
   locator.registerLazySingleton<AuthService>(() => AuthServiceImpl());
+  locator.registerLazySingleton<ClassRoomService>(() => ClassRoomServiceImpl());
+  locator.registerLazySingleton<GroupService>(() => GroupServiceImpl());
+  locator.registerLazySingleton<SectionService>(() => SectionServiceImpl());
+  locator.registerLazySingleton<SubjectService>(() => SubjectServiceImpl());
+  locator.registerLazySingleton<TeacherSubjectService>(() => TeacherSubjectServiceImpl());
+  locator.registerLazySingleton<TimeTableService>(() => TimeTableServiceImpl());
+  locator.registerLazySingleton<WorkingHoursService>(() => WorkingHoursServiceImpl());
+  locator.registerLazySingleton<NotificationService>(() => NotificationServiceImpl());
 }

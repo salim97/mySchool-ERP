@@ -19,46 +19,7 @@ class SubjectView extends StatefulWidget {
 
 class _SubjectViewState extends State<SubjectView> {
   List<SubjectModel> subjects = [
-    SubjectModel(
-      name: "English",
-      teacher_name: "teacher name 01",
-      type: "Theory",
-    ),
-    SubjectModel(
-      name: "Science",
-      teacher_name: "teacher name 02",
-      type: "Practical",
-    ),
-    SubjectModel(
-      name: "General Maths",
-      teacher_name: "teacher name 03",
-      type: "Theory",
-    ),
-    SubjectModel(
-      name: "Biology",
-      teacher_name: "teacher name 04",
-      type: "Practical",
-    ),
-    SubjectModel(
-      name: "English",
-      teacher_name: "teacher name 01",
-      type: "Theory",
-    ),
-    SubjectModel(
-      name: "Science",
-      teacher_name: "teacher name 02",
-      type: "Practical",
-    ),
-    SubjectModel(
-      name: "General Maths",
-      teacher_name: "teacher name 03",
-      type: "Theory",
-    ),
-    SubjectModel(
-      name: "Biology",
-      teacher_name: "teacher name 04",
-      type: "Practical",
-    ),
+
   ];
 
   @override
@@ -130,7 +91,7 @@ class SubjectRowLayout extends StatelessWidget {
                 child: Text(subject.name, style: Theme.of(context).textTheme.display1),
               ),
               Expanded(
-                child: Text(subject.teacher_name, style: Theme.of(context).textTheme.display1),
+                child: Text(subject.name, style: Theme.of(context).textTheme.display1),
               ),
               Expanded(
                 child: Text(subject.type, style: Theme.of(context).textTheme.display1),

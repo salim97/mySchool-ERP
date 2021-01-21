@@ -27,10 +27,10 @@ class SelectStudentViewModel extends BaseViewModel {
 
     if (response.statusCode == 200) {
       parentService.parentModel.children.forEach((element) {
-        studentService.listStudentModel.removeWhere((e) => e.id == element.id);
+        studentService.list.removeWhere((e) => e.id == element.id);
       });
       //
-      listStudentModel = studentService.listStudentModel;
+      listStudentModel = studentService.list;
       source.clear();
 
       listStudentModel.forEach((element) {
@@ -49,7 +49,7 @@ class SelectStudentViewModel extends BaseViewModel {
   }
 
   onTapRow(data) {
-    StudentModel child = studentService.listStudentModel.firstWhere((element) => element.id == data["ID"]);
+    StudentModel child = studentService.list.firstWhere((element) => element.id == data["ID"]);
     parentService.parentModel.children.add(child);
     // print(child.toJson());
     locator<NavigationService>().back();

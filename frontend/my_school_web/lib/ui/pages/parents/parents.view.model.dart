@@ -44,7 +44,7 @@ class ParentsViewModel extends BaseViewModel {
     Response response = await parentService.getAll();
 
     if (response.statusCode == 200) {
-      listParentModel = parentService.listParentModel;
+      listParentModel = parentService.list;
       source.clear();
 
       listParentModel.forEach((element) {

@@ -57,18 +57,22 @@ class _MyTableViewState extends State<MyTableView> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              IconButton(
-                icon: Icon(Icons.edit),
-                onPressed: () async {
-                  await widget.onEdit(value);
-                },
-              ),
-              IconButton(
-                icon: Icon(Icons.delete),
-                onPressed: () async {
-                  await widget.onDelete(value);
-                },
-              )
+              widget.onEdit != null
+                  ? IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: () async {
+                        await widget.onEdit(value);
+                      },
+                    )
+                  : Container(),
+              widget.onDelete != null
+                  ? IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () async {
+                        await widget.onDelete(value);
+                      },
+                    )
+                  : Container(),
             ],
           ),
         );

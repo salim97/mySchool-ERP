@@ -9,7 +9,7 @@ import '../../rest_api.dart';
 
 abstract class AuthService extends RestAPI {
   UserModel userModel;
-  Future<Response> login({String email, String password});
+  Future<Response> login({String email, String password, String fcm});
   Future<Response> signup(UserModel userModel);
   Future<Response> logout();
   Future<Response> me();
@@ -19,10 +19,11 @@ abstract class AuthService extends RestAPI {
 class AuthServiceImpl extends RestAPI implements AuthService {
   UserModel userModel;
   @override
-  Future<Response> login({String email, String password}) async {
+  Future<Response> login({String email, String password, String fcm}) async {
     Response response = await myDioPOST(
       url: serverIP + "/api/v1/auth/login",
       data: {
+        "fcm": fcm,
         "email": email,
         "password": password,
       },
@@ -89,7 +90,6 @@ class AuthServiceImpl extends RestAPI implements AuthService {
     }
     return response;
   }
-
 }
 
 // class FakeAuthService extends RestAPI implements AuthService {

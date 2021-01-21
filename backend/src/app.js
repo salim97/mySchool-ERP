@@ -15,7 +15,7 @@ const authService = require('./services/users/auth.services');
 const studentService = require('./services/users/student.services');
 const teacherService = require('./services/users/teacher.services');
 const parentService = require('./services/users/parent.services');
-const firebaseService = require('./services/firebase.service');
+const firebaseService = require('./services/users/firebase.service');
 
 const workinghours_service = require('./services/academics/workinghours.service');
 const classRoom_service = require('./services/academics/classRoom.service');
