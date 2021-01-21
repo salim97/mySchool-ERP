@@ -26,8 +26,8 @@ class _TimeTableViewState extends State<TimeTableView> {
     return ViewModelBuilder<TimeTableViewModel>.reactive(
       viewModelBuilder: () => TimeTableViewModel(),
       onModelReady: (model) {
-        // Do something once your model is initialized
-        model.onRefresh();
+        // Do some thing once your model is initialized
+          model.onRefresh();
       },
       builder: (context, model, child) {
         return SingleChildScrollView(
@@ -48,11 +48,11 @@ class _TimeTableViewState extends State<TimeTableView> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                model.currentSelectedDay +
+                                model.currentOneTimeTable.day +
                                     ", " +
-                                    model.currentSelectedWorkingHours.startTime +
+                                    model.currentOneTimeTable.workingHoursModel.startTime +
                                     " - " +
-                                    model.currentSelectedWorkingHours.endTime,
+                                    model.currentOneTimeTable.workingHoursModel.endTime,
                                 style: TextStyle(
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.bold,
@@ -80,38 +80,39 @@ class _TimeTableViewState extends State<TimeTableView> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownSearch<TeacherSubjectModel>(
                                   maxHeight: 300,
-                                  selectedItem: model.teacherSubjectModel_subject,
+                                  // selectedItem: model.currentOneTimeTable.teacherSubjectModel,
                                   items: model.teacherSubjectService.list,
-                                  itemAsString: (TeacherSubjectModel u) => u.subjectid?.name ?? "null",
-                                  label: "Select Subject*",
+                                  itemAsString: (TeacherSubjectModel u) => u.subjectid.name + " - " + u.teacherid.name,
+                                  label: "Select Subject - Teacher *",
                                   onChanged: (item) async {
-                                    model.teacherSubjectModel_subject = item;
+                                    model.currentOneTimeTable.teacherSubjectModel = item;
+                                    // model.teacherSubjectModel_subject = item;
                                     model.notifyListeners();
                                   },
                                   showSearchBox: true,
                                 ),
                               ),
                             ),
-                            Flexible(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: DropdownSearch<TeacherSubjectModel>(
-                                  maxHeight: 300,
-                                  selectedItem: model.teacherSubjectModel_teacher,
-                                  items: model.teacherSubjectService.list,
-                                  // items: model.teacherSubjectService.list
-                                  //     .where((element) => element.subjectid.id == model.teacherSubjectModel_subject.subjectid.id)
-                                  //     .toList(),
-                                  itemAsString: (TeacherSubjectModel u) => u.teacherid?.name ?? "null",
-                                  label: "Teacher*",
-                                  onChanged: (item) async {
-                                    model.teacherSubjectModel_teacher = item;
-                                    model.notifyListeners();
-                                  },
-                                  showSearchBox: true,
-                                ),
-                              ),
-                            ),
+                            // Flexible(
+                            //   child: Padding(
+                            //     padding: const EdgeInsets.all(8.0),
+                            //     child: DropdownSearch<TeacherSubjectModel>(
+                            //       maxHeight: 300,
+                            //       selectedItem: model.teacherSubjectModel_teacher,
+                            //       items: model.teacherSubjectService.list,
+                            //       // items: model.teacherSubjectService.list
+                            //       //     .where((element) => element.subjectid.id == model.teacherSubjectModel_subject.subjectid.id)
+                            //       //     .toList(),
+                            //       itemAsString: (TeacherSubjectModel u) => u.teacherid?.name ?? "null",
+                            //       label: "Teacher*",
+                            //       onChanged: (item) async {
+                            //         model.teacherSubjectModel_teacher = item;
+                            //         model.notifyListeners();
+                            //       },
+                            //       showSearchBox: true,
+                            //     ),
+                            //   ),
+                            // ),
                             Flexible(
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -122,7 +123,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                   itemAsString: (ClassRoomModel u) => u.room_number,
                                   label: "Select Room*",
                                   onChanged: (item) async {
-                                    model.classRoomModel = item;
+                                    model.currentOneTimeTable.classRoomModel = item;
                                     model.notifyListeners();
                                   },
                                   showSearchBox: true,
@@ -160,8 +161,8 @@ class _TimeTableViewState extends State<TimeTableView> {
                                   ),
                                 ),
                                 onTap: (startLoading, stopLoading, btnState) async {
+                               
                                   startLoading();
-                                  await Future.delayed(Duration(seconds: 1));
                                   try {
                                     await model.onValid();
                                   } catch (e) {
@@ -209,18 +210,18 @@ class _TimeTableViewState extends State<TimeTableView> {
                       ),
                       SizedBox(
                         width: 300,
-                        child: DropdownSearch<GroupModel>(
+                        child: DropdownSearch<TimeTableModel>(
                           mode: Mode.MENU,
                           //showSelectedItem: true,
-                          itemAsString: (GroupModel u) => u.section.name + " - " + u.name,
+                          itemAsString: (TimeTableModel u) => u.groupid.section.name + " - " + u.groupid.name,
                           items: model.currentService.list.map((element) {
-                            return element.groupid;
+                            return element;
                           }).toList(),
-                          label: "Add Destination",
+                          label: "Time Table of",
                           onChanged: (value) {
-                            print(value.id);
-                            print(value.name);
-                            print(value.section.name);
+                            model.currentModel = value;
+                            model.notifyListeners();
+                            model.timeTableRefresh();
                           },
                         ),
                       ),

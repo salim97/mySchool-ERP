@@ -23,6 +23,16 @@ class TimeTableModel {
   factory TimeTableModel.fromJson(Map<String, dynamic> json) {
     TimeTableModel model = _$TimeTableModelFromJson(json);
     if (json["groupid"] != null) model.groupid = GroupModel.fromJson(json["groupid"]);
+    List<dynamic> children_ids = json["children"];
+    children_ids.forEach((element) {
+      OneTimeTable ott = new OneTimeTable();
+      ott.workingHoursModel = WorkingHoursModel.fromJson(element["workingHoursid"]);
+      ott.classRoomModel = ClassRoomModel.fromJson(element["classRoomid"]);
+      ott.teacherSubjectModel = TeacherSubjectModel.fromJson(element["teacherSubjectid"]);
+      ott.day = element["day"];
+      if (model.children == null) model.children = new List<OneTimeTable>();
+      model.children.add(ott);
+    });
 
     return model;
   }

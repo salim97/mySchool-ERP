@@ -12,25 +12,21 @@ class TimeTableViewModel extends BaseViewModel {
   final TimeTableService currentService = locator<TimeTableService>();
   final AuthService authService = locator<AuthService>();
   TimeTableModel currentModel = new TimeTableModel();
+  OneTimeTable currentOneTimeTable = new OneTimeTable();
 
   final WorkingHoursService workingHoursService = locator<WorkingHoursService>();
   final TeacherSubjectService teacherSubjectService = locator<TeacherSubjectService>();
   final ClassRoomService classRoomService = locator<ClassRoomService>();
-  TeacherSubjectModel teacherSubjectModel_subject = new TeacherSubjectModel();
-  TeacherSubjectModel teacherSubjectModel_teacher = new TeacherSubjectModel();
-  ClassRoomModel classRoomModel = new ClassRoomModel();
+  // TeacherSubjectModel teacherSubjectModel_subject = new TeacherSubjectModel();
+  // TeacherSubjectModel teacherSubjectModel_teacher = new TeacherSubjectModel();
+  // ClassRoomModel classRoomModel = new ClassRoomModel();
 
   //tableview needs this variables
   bool isAddElementVisible = false;
   List<TableRow> listTableRow = new List<TableRow>();
   List<String> days = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-  String currentSelectedDay;
-  WorkingHoursModel currentSelectedWorkingHours;
-
-
-  onRefresh() async {
-    await currentService.getAll();
-    await workingHoursService.getAll();
+  timeTableRefresh() async {
+    listTableRow.clear();
     listTableRow.add(TableRow(children: [
       TableCell(child: Center(child: Text(''))),
     ]));
@@ -41,6 +37,7 @@ class TimeTableViewModel extends BaseViewModel {
     });
 
     for (int i = 0; i < workingHoursService.list.length; i++) {
+      if (workingHoursService.list.elementAt(i).type == "Pause") continue;
       listTableRow.add(
         TableRow(children: [
           TableCell(
@@ -51,67 +48,91 @@ class TimeTableViewModel extends BaseViewModel {
           )),
         ]),
       );
-      for (int j = 0; j < 7; j++)
+      for (int j = 0; j < 7; j++) {
+        bool skip = false;
+        if (currentModel.children != null)
+          currentModel.children.forEach((element) {
+            if (element.workingHoursModel.id == workingHoursService.list.elementAt(i).id && element.day == days.elementAt(j)) {
+              skip = true;
+              listTableRow.last.children.add(
+                TableCell(
+                    child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                      child: Container(
+                    height: 70,
+                    width: 100,
+                    child: Column(
+                      children: [
+                        Text(element.classRoomModel.room_number),
+                        Text(element.teacherSubjectModel.subjectid.name),
+                        Text(element.teacherSubjectModel.teacherid.name),
+                      ],
+                    ),
+                  )),
+                )),
+              );
+            }
+          });
+        if (skip) continue;
+        if (workingHoursService.list.elementAt(i).type == "Pause") continue;
         listTableRow.last.children.add(
           TableCell(
               child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Center(
-                child: workingHoursService.list.elementAt(i).type == "Pause"
-                    ? Container(
-                        height: 30,
-                      )
-                    : FloatingActionButton(
-                        mini: true,
-                        child: Icon(Icons.add),
-                        onPressed: () {
-                          onCreateNew();
-                          currentSelectedDay = days.elementAt(j);
-                          currentSelectedWorkingHours = workingHoursService.list.elementAt(i);
-                          print(currentSelectedDay);
-                          print(currentSelectedWorkingHours.toJson());
-                        },
-                      )),
+                child: FloatingActionButton(
+              mini: true,
+              child: Icon(Icons.add),
+              onPressed: () {
+                onCreateNew();
+                currentOneTimeTable.day = days.elementAt(j);
+                currentOneTimeTable.workingHoursModel = workingHoursService.list.elementAt(i);
+              },
+            )),
           )),
         );
+      }
     }
     notifyListeners();
+  }
+
+  onRefresh() async {
+    await currentService.getAll();
+    await workingHoursService.getAll();
+
     await teacherSubjectService.getAll();
     await classRoomService.getAll();
-    Response response = await currentService.getAll();
-    if (response.statusCode == 200) {
-      currentService.list.forEach((element) {});
-    }
+    notifyListeners();
   }
 
   onCreateNew() async {
-    currentModel.id = null;
-    teacherSubjectModel_subject.id = null;
-    teacherSubjectModel_teacher.id = null;
-    classRoomModel.id = null;
+    currentOneTimeTable.teacherSubjectModel.id = null;
+    currentOneTimeTable.classRoomModel.id = null;
 
     isAddElementVisible = true;
     notifyListeners();
   }
 
   onValid() async {
-    // currentModel.room_number = roomNameController.text;
-    // currentModel.capacity = int.parse(capacityController.text);
-    // if (currentModel.id == null) {
-    //   currentService.add(currentModel);
-    // } else {
-    //   currentService.update(currentModel);
-    // }
+    print("ZEBI");
+    if (currentModel.children == null) currentModel.children = new List<OneTimeTable>();
+    currentModel.children.add(currentOneTimeTable);
+    print(currentModel.toJson());
+    await currentService.update(currentModel);
+    timeTableRefresh();
+    await onCancel();
     // await onRefresh();
-    // await onCancel();
   }
 
   onCancel() async {
-    // currentModel.id = null;
-    // roomNameController.text = "";
-    // capacityController.text = "";
-    // isAddElementVisible = false;
-    // notifyListeners();
+    currentModel.id = null;
+    currentOneTimeTable.teacherSubjectModel.id = null;
+    currentOneTimeTable.classRoomModel.id = null;
+    currentOneTimeTable.workingHoursModel.id = null;
+
+    isAddElementVisible = false;
+    notifyListeners();
   }
 
   onEdit(id) async {

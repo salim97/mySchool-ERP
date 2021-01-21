@@ -27,7 +27,7 @@ class RestAPI {
 // customization
     if (DEBUG_HTTP)
       dio.interceptors.add(PrettyDioLogger(
-        request: false,
+        request: true,
         requestHeader: false,
         requestBody: true,
         responseBody: true,
