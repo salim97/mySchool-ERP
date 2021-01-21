@@ -10,10 +10,11 @@ part 'time_table.model.g.dart';
 )
 class TimeTableModel {
   @JsonKey(name: '_id')
-   String id;
-   String createdAt;
+  String id;
+  String createdAt;
   GroupModel groupid;
-  SectionModel sectionid;
+  @JsonKey(ignore: true)
+  List<OneTimeTable> children;
   TimeTableModel({
     this.id,
     this.createdAt,
@@ -22,7 +23,6 @@ class TimeTableModel {
   factory TimeTableModel.fromJson(Map<String, dynamic> json) {
     TimeTableModel model = _$TimeTableModelFromJson(json);
     if (json["groupid"] != null) model.groupid = GroupModel.fromJson(json["groupid"]);
-    if (json["sectionid"] != null) model.sectionid = SectionModel.fromJson(json["sectionid"]);
 
     return model;
   }
@@ -31,7 +31,23 @@ class TimeTableModel {
     // return _$StudentModelToJson(this);
     Map<String, dynamic> map = _$TimeTableModelToJson(this);
     map["groupid"] = groupid.toJson();
-    map["sectionid"] = sectionid.toJson();
+    var children_temp = new List<dynamic>();
+    children.forEach((element) {
+      var t = new Map<String, dynamic>();
+      t["workingHoursid"] = element.workingHoursModel.toJson();
+      t["classRoomid"] = element.classRoomModel.toJson();
+      t["teacherSubjectid"] = element.teacherSubjectModel.toJson();
+      t["day"] = element.day;
+      children_temp.add(t);
+    });
+    map["children"] = children_temp;
     return map;
   }
+}
+
+class OneTimeTable {
+  String day = "";
+  WorkingHoursModel workingHoursModel = new WorkingHoursModel();
+  ClassRoomModel classRoomModel = new ClassRoomModel();
+  TeacherSubjectModel teacherSubjectModel = new TeacherSubjectModel();
 }

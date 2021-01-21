@@ -39,6 +39,7 @@ exports.updateOne = Model =>
 exports.createOne = Model =>
   catchAsync(async (req, res, next) => {
     req.body.createdAt = new Date().toISOString();
+    delete req.body._id // <= if body contains id = null then mongodb will returns document with id = null and that is an issue for related document
     const doc = await Model.create(req.body);
 
     res.status(201).json({

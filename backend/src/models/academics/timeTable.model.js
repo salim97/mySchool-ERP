@@ -11,20 +11,9 @@ const timeTableSchema = new mongoose.Schema({
         autopopulate: true,
         required: [true, 'groupid must belong to a group!']
     },
-    sectionid: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'section',
-        autopopulate: true,
-        required: [true, 'sectionid must belong to a section!']
-    },
+
     children: [
         {
-            workingHoursid: {
-                type: mongoose.Schema.ObjectId,
-                ref: 'workingHours',
-                autopopulate: true,
-                required: [true, 'workingHoursid must belong to a workingHours!']
-            },
             day: {
                 type: String,
                 required: [true, 'A personal must have a gender'],
@@ -33,6 +22,13 @@ const timeTableSchema = new mongoose.Schema({
                     message: 'day must one of this elements: saturday, sunday, monday, tuesday, wednesday, thursday, friday'
                 }
             },
+            workingHoursid: {
+                type: mongoose.Schema.ObjectId,
+                ref: 'workingHours',
+                autopopulate: true,
+                required: [true, 'workingHoursid must belong to a workingHours!']
+            },
+
             classRoomid: {
                 type: mongoose.Schema.ObjectId,
                 ref: 'classRoom',
@@ -55,6 +51,9 @@ const timeTableSchema = new mongoose.Schema({
     });
 
 timeTableSchema.plugin(require('mongoose-autopopulate'));
+
+
+
 
 const timeTable = mongoose.model('timeTable', timeTableSchema);
 

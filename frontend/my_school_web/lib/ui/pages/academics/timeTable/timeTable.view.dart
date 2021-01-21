@@ -48,7 +48,11 @@ class _TimeTableViewState extends State<TimeTableView> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Text(
-                                "Create Class Routine",
+                                model.currentSelectedDay +
+                                    ", " +
+                                    model.currentSelectedWorkingHours.startTime +
+                                    " - " +
+                                    model.currentSelectedWorkingHours.endTime,
                                 style: TextStyle(
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.bold,
@@ -72,48 +76,57 @@ class _TimeTableViewState extends State<TimeTableView> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Flexible(
-                              child: DropdownSearch<TeacherSubjectModel>(
-                                maxHeight: 300,
-                                selectedItem: model.teacherSubjectModel_subject,
-                                items: model.teacherSubjectService.list,
-                                itemAsString: (TeacherSubjectModel u) => u.subjectid?.name ?? "null",
-                                label: "Select Subject*",
-                                onChanged: (item) async {
-                                  model.teacherSubjectModel_subject = item;
-                                  model.notifyListeners();
-                                },
-                                showSearchBox: true,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropdownSearch<TeacherSubjectModel>(
+                                  maxHeight: 300,
+                                  selectedItem: model.teacherSubjectModel_subject,
+                                  items: model.teacherSubjectService.list,
+                                  itemAsString: (TeacherSubjectModel u) => u.subjectid?.name ?? "null",
+                                  label: "Select Subject*",
+                                  onChanged: (item) async {
+                                    model.teacherSubjectModel_subject = item;
+                                    model.notifyListeners();
+                                  },
+                                  showSearchBox: true,
+                                ),
                               ),
                             ),
                             Flexible(
-                              child: DropdownSearch<TeacherSubjectModel>(
-                                maxHeight: 300,
-                                selectedItem: model.teacherSubjectModel_teacher,
-                                items: model.teacherSubjectService.list,
-                                // items: model.teacherSubjectService.list
-                                //     .where((element) => element.subjectid.id == model.teacherSubjectModel_subject.subjectid.id)
-                                //     .toList(),
-                                itemAsString: (TeacherSubjectModel u) => u.teacherid?.name ?? "null",
-                                label: "Teacher*",
-                                onChanged: (item) async {
-                                  model.teacherSubjectModel_teacher = item;
-                                  model.notifyListeners();
-                                },
-                                showSearchBox: true,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropdownSearch<TeacherSubjectModel>(
+                                  maxHeight: 300,
+                                  selectedItem: model.teacherSubjectModel_teacher,
+                                  items: model.teacherSubjectService.list,
+                                  // items: model.teacherSubjectService.list
+                                  //     .where((element) => element.subjectid.id == model.teacherSubjectModel_subject.subjectid.id)
+                                  //     .toList(),
+                                  itemAsString: (TeacherSubjectModel u) => u.teacherid?.name ?? "null",
+                                  label: "Teacher*",
+                                  onChanged: (item) async {
+                                    model.teacherSubjectModel_teacher = item;
+                                    model.notifyListeners();
+                                  },
+                                  showSearchBox: true,
+                                ),
                               ),
                             ),
                             Flexible(
-                              child: DropdownSearch<ClassRoomModel>(
-                                maxHeight: 300,
-                                // selectedItem: model.classRoomService.list,
-                                items: model.classRoomService.list,
-                                itemAsString: (ClassRoomModel u) => u.room_number,
-                                label: "Select Room*",
-                                onChanged: (item) async {
-                                  model.classRoomModel = item;
-                                  model.notifyListeners();
-                                },
-                                showSearchBox: true,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: DropdownSearch<ClassRoomModel>(
+                                  maxHeight: 300,
+                                  // selectedItem: model.classRoomService.list,
+                                  items: model.classRoomService.list,
+                                  itemAsString: (ClassRoomModel u) => u.room_number,
+                                  label: "Select Room*",
+                                  onChanged: (item) async {
+                                    model.classRoomModel = item;
+                                    model.notifyListeners();
+                                  },
+                                  showSearchBox: true,
+                                ),
                               ),
                             ),
                             Padding(
@@ -194,20 +207,35 @@ class _TimeTableViewState extends State<TimeTableView> {
                       SizedBox(
                         width: 25,
                       ),
-                      RaisedButton.icon(
-                        onPressed: () {
-                          model.onCreateNew();
-                        },
-                        icon: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
-                        label: Text(
-                          "Create New",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        color: Colors.blue,
-                      )
+                      // SizedBox(
+                      //   width: 300,
+                      //   child: DropdownSearch<String>(
+                      //     mode: Mode.MENU,
+                      //     showSelectedItem: true,
+                      //     items: ["all_teachers", "all_students", "all_parents"],
+                      //     label: "Add Destination",
+                      //     onChanged: (value) {
+                      //       if (!model.selectedItems.contains(value)) {
+                      //         model.selectedItems.add(value);
+                      //         model.notifyListeners();
+                      //       }
+                      //     },
+                      //   ),
+                      // ),
+                      // RaisedButton.icon(
+                      //   onPressed: () {
+                      //     model.onCreateNew();
+                      //   },
+                      //   icon: Icon(
+                      //     Icons.add,
+                      //     color: Colors.white,
+                      //   ),
+                      //   label: Text(
+                      //     "Create New",
+                      //     style: TextStyle(color: Colors.white),
+                      //   ),
+                      //   color: Colors.blue,
+                      // )
                     ],
                   ),
                   Table(

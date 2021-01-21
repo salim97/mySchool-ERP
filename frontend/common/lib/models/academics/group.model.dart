@@ -31,6 +31,7 @@ class GroupModel {
     // return _$StudentModelToJson(this);
     Map<String, dynamic> map = _$GroupModelToJson(this);
     map["section"] = section.toJson();
+    // map["section"] = section.id;
     return map;
   }
 }

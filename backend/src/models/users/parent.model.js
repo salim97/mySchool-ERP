@@ -61,7 +61,6 @@ parentSchema.post('findOneAndDelete',async function(doc){
         const user = this
         // await userModel.findOneAndDelete({_id:doc.user._id})
         await userModel.deleteOne({_id:doc.user._id})
-
     }
 })
 

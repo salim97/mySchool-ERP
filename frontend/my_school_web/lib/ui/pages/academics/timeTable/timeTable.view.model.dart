@@ -13,6 +13,7 @@ class TimeTableViewModel extends BaseViewModel {
   final AuthService authService = locator<AuthService>();
   TimeTableModel currentModel = new TimeTableModel();
 
+  final WorkingHoursService workingHoursService = locator<WorkingHoursService>();
   final TeacherSubjectService teacherSubjectService = locator<TeacherSubjectService>();
   final ClassRoomService classRoomService = locator<ClassRoomService>();
   TeacherSubjectModel teacherSubjectModel_subject = new TeacherSubjectModel();
@@ -22,40 +23,53 @@ class TimeTableViewModel extends BaseViewModel {
   //tableview needs this variables
   bool isAddElementVisible = false;
   List<TableRow> listTableRow = new List<TableRow>();
-
+  List<String> days = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+  String currentSelectedDay;
+  WorkingHoursModel currentSelectedWorkingHours;
   onRefresh() async {
+    await workingHoursService.getAll();
     listTableRow.add(TableRow(children: [
       TableCell(child: Center(child: Text(''))),
-      TableCell(child: Center(child: Text('samedi'))),
-      TableCell(child: Center(child: Text('dimanche'))),
-      TableCell(child: Center(child: Text('lundi'))),
-      TableCell(child: Center(child: Text('mardi'))),
-      TableCell(child: Center(child: Text('mercredi'))),
-      TableCell(child: Center(child: Text('jeudi'))),
-      TableCell(child: Center(child: Text('vendredi'))),
     ]));
-    for (int i = 1; i < 5; i++) {
-      listTableRow.add(TableRow(children: [
-        TableCell(child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(child: Text(i.toString())),
-        )),
-      ]));
-      for (int i = 0; i < 7; i++)
+    days.forEach((element) {
+      listTableRow.last.children.add(
+        TableCell(child: Center(child: Text(element))),
+      );
+    });
+
+    for (int i = 0; i < workingHoursService.list.length; i++) {
+      listTableRow.add(
+        TableRow(children: [
+          TableCell(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: Text(workingHoursService.list.elementAt(i).startTime + " - " + workingHoursService.list.elementAt(i).endTime)),
+          )),
+        ]),
+      );
+      for (int j = 0; j < 7; j++)
         listTableRow.last.children.add(
           TableCell(
-            
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Center(
-                    child: FloatingActionButton(
-                      mini: true,
-            child: Icon(Icons.add),
-            onPressed: () {
-                print("zebi");
-            },
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+                child: workingHoursService.list.elementAt(i).type == "Pause"
+                    ? Container(
+                        height: 30,
+                      )
+                    : FloatingActionButton(
+                        mini: true,
+                        child: Icon(Icons.add),
+                        onPressed: () {
+                          onCreateNew();
+                          currentSelectedDay = days.elementAt(j);
+                          currentSelectedWorkingHours = workingHoursService.list.elementAt(i);
+                          print(currentSelectedDay);
+                          print(currentSelectedWorkingHours.toJson());
+                        },
+                      )),
           )),
-              )),
         );
     }
     notifyListeners();
