@@ -26,7 +26,10 @@ class TimeTableViewModel extends BaseViewModel {
   List<String> days = ['saturday', 'sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
   String currentSelectedDay;
   WorkingHoursModel currentSelectedWorkingHours;
+
+
   onRefresh() async {
+    await currentService.getAll();
     await workingHoursService.getAll();
     listTableRow.add(TableRow(children: [
       TableCell(child: Center(child: Text(''))),

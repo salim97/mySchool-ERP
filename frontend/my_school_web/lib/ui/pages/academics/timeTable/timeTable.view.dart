@@ -207,21 +207,23 @@ class _TimeTableViewState extends State<TimeTableView> {
                       SizedBox(
                         width: 25,
                       ),
-                      // SizedBox(
-                      //   width: 300,
-                      //   child: DropdownSearch<String>(
-                      //     mode: Mode.MENU,
-                      //     showSelectedItem: true,
-                      //     items: ["all_teachers", "all_students", "all_parents"],
-                      //     label: "Add Destination",
-                      //     onChanged: (value) {
-                      //       if (!model.selectedItems.contains(value)) {
-                      //         model.selectedItems.add(value);
-                      //         model.notifyListeners();
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
+                      SizedBox(
+                        width: 300,
+                        child: DropdownSearch<GroupModel>(
+                          mode: Mode.MENU,
+                          //showSelectedItem: true,
+                          itemAsString: (GroupModel u) => u.section.name + " - " + u.name,
+                          items: model.currentService.list.map((element) {
+                            return element.groupid;
+                          }).toList(),
+                          label: "Add Destination",
+                          onChanged: (value) {
+                            print(value.id);
+                            print(value.name);
+                            print(value.section.name);
+                          },
+                        ),
+                      ),
                       // RaisedButton.icon(
                       //   onPressed: () {
                       //     model.onCreateNew();

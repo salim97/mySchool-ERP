@@ -8,7 +8,7 @@ const groupSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'A group must have a name'],
-    unique: true,
+    // unique: true,
   },
   section: {
     autopopulate: true,
