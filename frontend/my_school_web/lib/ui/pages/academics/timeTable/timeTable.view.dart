@@ -27,7 +27,8 @@ class _TimeTableViewState extends State<TimeTableView> {
       viewModelBuilder: () => TimeTableViewModel(),
       onModelReady: (model) {
         // Do some thing once your model is initialized
-          model.onRefresh();
+        model.onRefresh();
+
       },
       builder: (context, model, child) {
         return SingleChildScrollView(
@@ -80,9 +81,10 @@ class _TimeTableViewState extends State<TimeTableView> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownSearch<TeacherSubjectModel>(
                                   maxHeight: 300,
-                                  // selectedItem: model.currentOneTimeTable.teacherSubjectModel,
+                                  selectedItem: model.currentOneTimeTable.teacherSubjectModel,
                                   items: model.teacherSubjectService.list,
-                                  itemAsString: (TeacherSubjectModel u) => u.subjectid.name + " - " + u.teacherid.name,
+                                  itemAsString: (TeacherSubjectModel u) =>
+                                      u.subjectid == null ? "" : (u.subjectid.name + " - " + u.teacherid.name),
                                   label: "Select Subject - Teacher *",
                                   onChanged: (item) async {
                                     model.currentOneTimeTable.teacherSubjectModel = item;
@@ -118,9 +120,9 @@ class _TimeTableViewState extends State<TimeTableView> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownSearch<ClassRoomModel>(
                                   maxHeight: 300,
-                                  // selectedItem: model.classRoomService.list,
+                                  selectedItem: model.currentOneTimeTable.classRoomModel,
                                   items: model.classRoomService.list,
-                                  itemAsString: (ClassRoomModel u) => u.room_number,
+                                  itemAsString: (ClassRoomModel u) => u == null ? "" : u.room_number ?? "",
                                   label: "Select Room*",
                                   onChanged: (item) async {
                                     model.currentOneTimeTable.classRoomModel = item;
@@ -161,11 +163,11 @@ class _TimeTableViewState extends State<TimeTableView> {
                                   ),
                                 ),
                                 onTap: (startLoading, stopLoading, btnState) async {
-                               
                                   startLoading();
                                   try {
                                     await model.onValid();
                                   } catch (e) {
+                                    print(e);
                                     stopLoading();
                                   }
                                   stopLoading();
@@ -212,11 +214,9 @@ class _TimeTableViewState extends State<TimeTableView> {
                         width: 300,
                         child: DropdownSearch<TimeTableModel>(
                           mode: Mode.MENU,
-                          //showSelectedItem: true,
-                          itemAsString: (TimeTableModel u) => u.groupid.section.name + " - " + u.groupid.name,
-                          items: model.currentService.list.map((element) {
-                            return element;
-                          }).toList(),
+                          
+                          itemAsString: (TimeTableModel u) =>  u.groupid.section.name + " - " + u.groupid.name,
+                          items: model.currentService.list.map((element) => element).toList(),
                           label: "Time Table of",
                           onChanged: (value) {
                             model.currentModel = value;

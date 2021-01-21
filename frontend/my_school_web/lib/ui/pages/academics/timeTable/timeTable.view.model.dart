@@ -60,13 +60,38 @@ class TimeTableViewModel extends BaseViewModel {
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                       child: Container(
-                    height: 70,
+                    // height: 70,
                     width: 100,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(element.classRoomModel.room_number),
                         Text(element.teacherSubjectModel.subjectid.name),
                         Text(element.teacherSubjectModel.teacherid.name),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                Icons.edit,
+                                color: Colors.blue,
+                              ),
+                              onPressed: () async {
+                                await onEdit(element);
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                              ),
+                              onPressed: () async {
+                                await onDelete(element);
+                              },
+                            )
+                          ],
+                        )
                       ],
                     ),
                   )),
@@ -85,9 +110,10 @@ class TimeTableViewModel extends BaseViewModel {
               mini: true,
               child: Icon(Icons.add),
               onPressed: () {
-                onCreateNew();
                 currentOneTimeTable.day = days.elementAt(j);
                 currentOneTimeTable.workingHoursModel = workingHoursService.list.elementAt(i);
+                notifyListeners();
+                onCreateNew();
               },
             )),
           )),
@@ -103,60 +129,71 @@ class TimeTableViewModel extends BaseViewModel {
 
     await teacherSubjectService.getAll();
     await classRoomService.getAll();
+
     notifyListeners();
   }
 
   onCreateNew() async {
-    currentOneTimeTable.teacherSubjectModel.id = null;
-    currentOneTimeTable.classRoomModel.id = null;
-
+    // currentModel.id = null;
+    currentOneTimeTable.teacherSubjectModel.subjectid = null;
+    currentOneTimeTable.teacherSubjectModel.teacherid = null;
+    currentOneTimeTable.classRoomModel.room_number = null;
     isAddElementVisible = true;
     notifyListeners();
   }
 
+  onCancel() async {
+    // currentModel.id = null;
+    // currentOneTimeTable.workingHoursModel.id = null;
+    currentOneTimeTable.teacherSubjectModel.subjectid = null;
+    currentOneTimeTable.teacherSubjectModel.teacherid = null;
+    currentOneTimeTable.classRoomModel = null;
+
+    isAddElementVisible = false;
+    notifyListeners();
+  }
+
   onValid() async {
-    print("ZEBI");
     if (currentModel.children == null) currentModel.children = new List<OneTimeTable>();
+    currentModel.children.removeWhere(
+        (element) => element.day == currentOneTimeTable.day && element.workingHoursModel.id == currentOneTimeTable.workingHoursModel.id);
     currentModel.children.add(currentOneTimeTable);
-    print(currentModel.toJson());
+
     await currentService.update(currentModel);
     timeTableRefresh();
     await onCancel();
     // await onRefresh();
   }
 
-  onCancel() async {
-    currentModel.id = null;
-    currentOneTimeTable.teacherSubjectModel.id = null;
-    currentOneTimeTable.classRoomModel.id = null;
-    currentOneTimeTable.workingHoursModel.id = null;
+  onEdit(child) async {
+    currentOneTimeTable = child;
+    currentOneTimeTable.classRoomModel = child.classRoomModel;
+    currentOneTimeTable.teacherSubjectModel.teacherid = child.teacherSubjectModel.teacherid;
+    currentOneTimeTable.teacherSubjectModel.subjectid = child.teacherSubjectModel.subjectid;
 
-    isAddElementVisible = false;
+    print("currentModel.id");
+    print(currentModel.id);
+    isAddElementVisible = true;
     notifyListeners();
+    // await locator<NavigationService>().navigateTo(Routes.addStudentView, arguments: tm);
+    // await onRefresh();
   }
 
-  onEdit(id) async {
-    // currentModel = currentService.list.firstWhere((element) => element.id == id);
-    // roomNameController.text = currentModel.room_number;
-    // capacityController.text = currentModel.capacity.toString();
-    // isAddElementVisible = true;
-    // notifyListeners();
-    // // await locator<NavigationService>().navigateTo(Routes.addStudentView, arguments: tm);
-    // // await onRefresh();
-  }
-
-  onDelete(id) async {
-    // final _bottomSheetService = locator<BottomSheetService>();
-    // var response = await _bottomSheetService.showBottomSheet(
-    //     title: "Are you sure you want delete this record ?",
-    //     description: "click on Yes to confirm suppresion of the record",
-    //     confirmButtonTitle: "YES",
-    //     cancelButtonTitle: "NO");
-    // if (response == null) return;
-    // if (response.confirmed) {
-    //   await currentService.delete(ClassRoomModel(id: id));
-    //   await onRefresh();
-    // }
+  onDelete(child) async {
+    final _bottomSheetService = locator<BottomSheetService>();
+    var response = await _bottomSheetService.showBottomSheet(
+        title: "Are you sure you want delete this record ?",
+        description: "click on Yes to confirm suppresion of the record",
+        confirmButtonTitle: "YES",
+        cancelButtonTitle: "NO");
+    if (response == null) return;
+    if (response.confirmed) {
+      print(currentModel.children.remove(child));
+      await currentService.update(currentModel);
+      // await currentService.delete(ClassRoomModel(id: id));
+      // await onRefresh();
+      await timeTableRefresh();
+    }
   }
 
   onSearch(query) async {
