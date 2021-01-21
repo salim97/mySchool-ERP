@@ -3,6 +3,7 @@
 
 <!-- android:usesCleartextTraffic="true" <= this to allow app to use http -->
    <application
+        android:name=".Application"
         android:usesCleartextTraffic="true"
         android:label="my_school_android"
         android:icon="@mipmap/ic_launcher">
@@ -39,11 +40,12 @@
               <action android:name="FLUTTER_NOTIFICATION_CLICK" />
               <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
             android:name="flutterEmbedding"
-            android:value="2" />
+            android:value="1" />
     </application>
 </manifest>

@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:logger/logger.dart';
 import 'package:my_school_android/app/locator.dart';
 import 'package:my_school_android/app/router.gr.dart';
@@ -10,6 +11,10 @@ import 'package:my_school_android/services/PushNotificationService.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
+Future<dynamic> myBackgroundHandler(Map<String, dynamic> message) {
+  return LoginViewModel()._showNotification(message);
+}
+
 class LoginViewModel extends BaseViewModel {
   final PushNotificationService _pushNotificationService = locator<PushNotificationService>();
   final NavigationService _navigationService = locator<NavigationService>();
@@ -17,10 +22,41 @@ class LoginViewModel extends BaseViewModel {
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+  Future selectNotification(String payload) async {
+    await flutterLocalNotificationsPlugin.cancelAll();
+  }
+
+  Future _showNotification(Map<String, dynamic> message) async {
+    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
+      'channel id',
+      'channel name',
+      'channel desc',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    var platformChannelSpecifics =
+        new NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      'new message arived',
+      'i want ${message['data']['title']} for ${message['data']['price']}',
+      platformChannelSpecifics,
+      payload: 'Default_Sound',
+    );
+  }
 
   init() async {
+    var initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    var initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings, onSelectNotification: selectNotification);
+
     await _pushNotificationService.initialise();
+
     _pushNotificationService.fcm.configure(
+        onBackgroundMessage: myBackgroundHandler,
       onMessage: (Map<String, dynamic> message) async {
         var l = new Logger();
         l.d(message);

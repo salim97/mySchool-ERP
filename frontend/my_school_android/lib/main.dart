@@ -15,6 +15,8 @@ import 'setup_bottom_sheet_ui.dart';
 void main() {
   setupLocator();
   setupBottomSheetUi();
+
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider.value(value: AppProvider.init()),

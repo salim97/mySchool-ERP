@@ -53,6 +53,7 @@ dependencies:
   # firebase services
   firebase_remote_config: ^0.4.3
   firebase_messaging: ^7.0.3
+  flutter_local_notifications: ^3.0.1+7
   dio: ^3.0.10
   common:
     path: ../common
