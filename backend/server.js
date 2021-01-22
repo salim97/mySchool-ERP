@@ -23,10 +23,23 @@ mongoose
   })
   .then(() => console.log('DB connection successful!'));
 
+
+const fs = require("fs");
+const https = require("https");
+
+const keysDir = "cert/";
+const options = {
+  key  : fs.readFileSync(keysDir + "key.pem"),
+  ca   : fs.readFileSync(keysDir + "csr.pem"),
+  cert : fs.readFileSync(keysDir + "cert.pem")
+};
+
+https.createServer(options, app).listen(3000);
+
 const port = process.env.PORT || 3000;
-const server = app.listen(port, () => {
-  console.log(`App running on port ${port}...`);
-});
+// const server = app.listen(port, () => {
+//   console.log(`App running on port ${port}...`);
+// });
 
 process.on('unhandledRejection', err => {
   console.log('zebi');
