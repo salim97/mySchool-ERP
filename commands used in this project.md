@@ -1,14 +1,13 @@
-
-#frontend web
+# Frontend web
 flutter clean
 flutter build web
 http-server .\build\web\ -p 80 
 
-#frontend android
+# Frontend android
 flutter clean
 flutter build apk
 
-#backend
+# Backend
 ## to start mongoDB container
 docker-compose up 
 ## to start nodejs
@@ -19,7 +18,7 @@ npm install
 npm install -g nodemon
 
 
-#azure
+# Azure
 ## login to azure container registry
 docker login  myschoolerp.azurecr.io 
 # password you find it in, go to azure home page then to container registry => access keys
@@ -31,7 +30,7 @@ docker run -d -p 3000:3000 myschoolerp.azurecr.io/node-docker-demo
 docker push myschoolerp.azurecr.io/node-docker-demo:latest
 # go to app service => container settings => enable continuous deployment, this will refresh app service each time you push a docker container to azure container registry
 
-#firebase 
+# Firebase 
 ## assign remote firebase to local folder
 firebase init
 ## pushing local web artifacts to firebase hosting
