@@ -27,7 +27,6 @@ const timeTable_service = require('./services/academics/timeTable.service');
 
 const app = express();
 
-
 // Implement CORS
 app.use(cors());
 
@@ -45,7 +44,7 @@ const limiter = rateLimit({
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again in an hour!'
 });
-// app.use('/api', limiter);
+// app.use('/api', limiter); // TODO: uncomment this on production 
 
 // Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
@@ -95,6 +94,12 @@ app.use('/api/v1/academics/teacherSubject_service', teacherSubject_service);
 app.use('/api/v1/academics/timeTable_service', timeTable_service);
 app.use('/api/v1/academics/workinghours_service', workinghours_service);
 
+// Serving static files
+app.use(express.static(path.join(__dirname, '../public')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
+
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
@@ -102,3 +107,7 @@ app.all('*', (req, res, next) => {
 app.use(globalErrorHandler);
 
 module.exports = app;
+
+
+
+

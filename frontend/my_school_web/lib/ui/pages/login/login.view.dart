@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:my_school_web/common/common.dart';
 import 'package:dio/dio.dart';
 import 'package:my_school_web/app/locator.dart';
@@ -122,7 +124,7 @@ class LoginView extends StatelessWidget {
                                   decoration: BoxDecoration(color: Colors.indigo),
                                   child: FlatButton(
                                     onPressed: () async {
-                               
+
                                       authProvider.status = Status.Authenticating;
                                       authProvider.notifyListeners();
                                       Response response = await locator<AuthService>()

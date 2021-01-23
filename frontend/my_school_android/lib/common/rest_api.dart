@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/adapter.dart';
+import 'package:dio/adapter_browser.dart';
 
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
@@ -15,7 +16,8 @@ const DEBUG_HTTP = true; //print http responses from server
 class RestAPI {
   // String serverIP = "http://127.0.0.1:3000";
   // String serverIP = "http://10.0.2.2:3000";
-  String serverIP = "http://temporaryurl.ddnsking.com:3000";
+  // String serverIP = "http://temporaryurl.ddnsking.com:3000";
+  String serverIP = "https://myschoolerp.azurewebsites.net";
   // CookieJar cookieJar = CookieJar();
   Dio dio = new Dio();
   Response lastResponse;
@@ -23,11 +25,6 @@ class RestAPI {
   SharedPreferences prefs;
   static const String _defaultContentType = "application/json";
   RestAPI() {
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate = (HttpClient client) {
-      client.badCertificateCallback = (X509Certificate cert, String host, int port) => true;
-      return client;
-    };
-
     // dio.interceptors.add(CookieManager(PersistCookieJar(dir: "./cookies")));
     // dio.interceptors.add(PrettyDioLogger());
 // customization
