@@ -7,6 +7,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class NotificationViewModel extends BaseViewModel {
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
   // services
   final NotificationService currentService = locator<NotificationService>();
   final AuthService authService = locator<AuthService>();

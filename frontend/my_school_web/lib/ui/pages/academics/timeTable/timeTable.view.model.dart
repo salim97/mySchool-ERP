@@ -8,6 +8,7 @@ import 'package:responsive_table/responsive_table.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class TimeTableViewModel extends BaseViewModel {
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   // services
   final TimeTableService currentService = locator<TimeTableService>();
   final AuthService authService = locator<AuthService>();
@@ -134,32 +135,40 @@ class TimeTableViewModel extends BaseViewModel {
   }
 
   onCreateNew({day, workingHoursModel}) async {
-    isAddElementVisible = false;
-    notifyListeners();
-    await Future.delayed(Duration(milliseconds: 300));
+    await onCancel();
     currentOneTimeTable.day = day;
     currentOneTimeTable.workingHoursModel = workingHoursModel;
     // currentModel.id = null;
-    currentOneTimeTable.teacherSubjectModel.subjectid = null;
-    currentOneTimeTable.teacherSubjectModel.teacherid = null;
-    currentOneTimeTable.classRoomModel.room_number = null;
+
     isAddElementVisible = true;
     notifyListeners();
   }
 
   onCancel() async {
-    // currentModel.id = null;
-    // currentOneTimeTable.workingHoursModel.id = null;
-    // currentOneTimeTable.teacherSubjectModel.subjectid = null;
-    // currentOneTimeTable.teacherSubjectModel.teacherid = null;
-    // currentOneTimeTable.classRoomModel = null;
+    currentOneTimeTable.classRoomModel = null;
+    currentOneTimeTable.teacherSubjectModel = null;
+    dropdownErrorTeacherSubjectModel = null;
+    dropdownErrorClassRoomModel = null;
 
     isAddElementVisible = false;
     notifyListeners();
     await Future.delayed(Duration(milliseconds: 300));
   }
 
+  String dropdownErrorTeacherSubjectModel = null;
+  String dropdownErrorClassRoomModel = null;
   onValid() async {
+    bool isEverythinISOkey = true;
+    if (currentOneTimeTable.teacherSubjectModel == null) {
+      dropdownErrorTeacherSubjectModel = "select teacher subject";
+      isEverythinISOkey = false;
+    }
+    if (currentOneTimeTable.classRoomModel == null) {
+      dropdownErrorClassRoomModel = "select class room";
+      isEverythinISOkey = false;
+    }
+    notifyListeners();
+    if (!isEverythinISOkey) return;
     if (currentModel.children == null) currentModel.children = new List<OneTimeTable>();
     currentModel.children.removeWhere(
         (element) => element.day == currentOneTimeTable.day && element.workingHoursModel.id == currentOneTimeTable.workingHoursModel.id);
@@ -167,29 +176,17 @@ class TimeTableViewModel extends BaseViewModel {
 
     await currentService.update(currentModel);
     timeTableRefresh();
-    await onCancel();
+     onCancel();
     // await onRefresh();
   }
 
-  get getSelectedTeacherSubject {
-    print("=====================");
-    return currentOneTimeTable.teacherSubjectModel;
-  }
+  onEdit(OneTimeTable child) async {
+    await onCancel();
+    currentOneTimeTable.classRoomModel = ClassRoomModel.fromJson(child.classRoomModel.toJson());
+    currentOneTimeTable.teacherSubjectModel = TeacherSubjectModel.fromJson(child.teacherSubjectModel.toJson());
+    currentOneTimeTable.workingHoursModel = WorkingHoursModel.fromJson(child.workingHoursModel.toJson());
+    currentOneTimeTable.day = child.day;
 
-  onEdit(child) async {
-    isAddElementVisible = false;
-    notifyListeners();
-    await Future.delayed(Duration(milliseconds: 300));
-    currentOneTimeTable = child;
-    currentOneTimeTable.classRoomModel = child.classRoomModel;
-    currentOneTimeTable.teacherSubjectModel.teacherid = child.teacherSubjectModel.teacherid;
-    currentOneTimeTable.teacherSubjectModel.subjectid = child.teacherSubjectModel.subjectid;
-    // currentOneTimeTable.day = child.day;
-    // currentOneTimeTable.workingHoursModel = child.workingHoursModel;
-    print("currentModel.id");
-    print(currentModel.id);
-    print(currentOneTimeTable.classRoomModel.room_number);
-    print(currentOneTimeTable.teacherSubjectModel.teacherid.name);
     isAddElementVisible = true;
     notifyListeners();
     // await locator<NavigationService>().navigateTo(Routes.addStudentView, arguments: tm);

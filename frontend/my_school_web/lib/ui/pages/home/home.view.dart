@@ -107,7 +107,8 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.android, color: Colors.white),
-                  Text("Available on the PlayStore"),
+                  SizedBox(width: 5,),
+                  Text("Available on the PlayStore", style: TextStyle(color: Colors.white),),
                 ],
               ),
               onPressed: () {
