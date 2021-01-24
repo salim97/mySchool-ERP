@@ -16,7 +16,7 @@ Map menuAdmin = {
   "Teachers": {"route name": "/teachers-view", "icon": MdiIcons.accountTie, "children": null},
   "Students": {"route name": "/students-view", "icon": MdiIcons.account, "children": null},
   "Parents": {"route name": "/parents-view", "icon": MdiIcons.humanFemaleGirl, "children": null},
-  "Classes": {
+  "Academics": {
     "icon": MdiIcons.newspaper,
     "children": {
       "Classes": {"route name": "/class-room-view", "icon": MdiIcons.minus, "children": null},

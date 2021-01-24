@@ -81,7 +81,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownSearch<TeacherSubjectModel>(
                                   maxHeight: 300,
-                                  selectedItem: model.currentOneTimeTable.teacherSubjectModel,
+                                  selectedItem: model.getSelectedTeacherSubject,
                                   items: model.teacherSubjectService.list,
                                   itemAsString: (TeacherSubjectModel u) =>
                                       u.subjectid == null ? "" : (u.subjectid.name + " - " + u.teacherid.name),
@@ -91,6 +91,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                     // model.teacherSubjectModel_subject = item;
                                     model.notifyListeners();
                                   },
+                                  
                                   showSearchBox: true,
                                 ),
                               ),

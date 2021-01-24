@@ -110,10 +110,10 @@ class TimeTableViewModel extends BaseViewModel {
               mini: true,
               child: Icon(Icons.add),
               onPressed: () {
-                currentOneTimeTable.day = days.elementAt(j);
-                currentOneTimeTable.workingHoursModel = workingHoursService.list.elementAt(i);
-                notifyListeners();
-                onCreateNew();
+                onCreateNew(
+                  day: days.elementAt(j),
+                  workingHoursModel: workingHoursService.list.elementAt(i),
+                );
               },
             )),
           )),
@@ -133,7 +133,12 @@ class TimeTableViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  onCreateNew() async {
+  onCreateNew({day, workingHoursModel}) async {
+    isAddElementVisible = false;
+    notifyListeners();
+    await Future.delayed(Duration(milliseconds: 300));
+    currentOneTimeTable.day = day;
+    currentOneTimeTable.workingHoursModel = workingHoursModel;
     // currentModel.id = null;
     currentOneTimeTable.teacherSubjectModel.subjectid = null;
     currentOneTimeTable.teacherSubjectModel.teacherid = null;
@@ -145,12 +150,13 @@ class TimeTableViewModel extends BaseViewModel {
   onCancel() async {
     // currentModel.id = null;
     // currentOneTimeTable.workingHoursModel.id = null;
-    currentOneTimeTable.teacherSubjectModel.subjectid = null;
-    currentOneTimeTable.teacherSubjectModel.teacherid = null;
-    currentOneTimeTable.classRoomModel = null;
+    // currentOneTimeTable.teacherSubjectModel.subjectid = null;
+    // currentOneTimeTable.teacherSubjectModel.teacherid = null;
+    // currentOneTimeTable.classRoomModel = null;
 
     isAddElementVisible = false;
     notifyListeners();
+    await Future.delayed(Duration(milliseconds: 300));
   }
 
   onValid() async {
@@ -165,14 +171,25 @@ class TimeTableViewModel extends BaseViewModel {
     // await onRefresh();
   }
 
+  get getSelectedTeacherSubject {
+    print("=====================");
+    return currentOneTimeTable.teacherSubjectModel;
+  }
+
   onEdit(child) async {
+    isAddElementVisible = false;
+    notifyListeners();
+    await Future.delayed(Duration(milliseconds: 300));
     currentOneTimeTable = child;
     currentOneTimeTable.classRoomModel = child.classRoomModel;
     currentOneTimeTable.teacherSubjectModel.teacherid = child.teacherSubjectModel.teacherid;
     currentOneTimeTable.teacherSubjectModel.subjectid = child.teacherSubjectModel.subjectid;
-
+    // currentOneTimeTable.day = child.day;
+    // currentOneTimeTable.workingHoursModel = child.workingHoursModel;
     print("currentModel.id");
     print(currentModel.id);
+    print(currentOneTimeTable.classRoomModel.room_number);
+    print(currentOneTimeTable.teacherSubjectModel.teacherid.name);
     isAddElementVisible = true;
     notifyListeners();
     // await locator<NavigationService>().navigateTo(Routes.addStudentView, arguments: tm);
@@ -188,6 +205,8 @@ class TimeTableViewModel extends BaseViewModel {
         cancelButtonTitle: "NO");
     if (response == null) return;
     if (response.confirmed) {
+      isAddElementVisible = false;
+      notifyListeners();
       print(currentModel.children.remove(child));
       await currentService.update(currentModel);
       // await currentService.delete(ClassRoomModel(id: id));

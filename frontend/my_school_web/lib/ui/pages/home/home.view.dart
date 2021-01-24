@@ -10,6 +10,7 @@ import 'package:my_school_web/ui/widgets/side_menu/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/app/router.gr.dart' as auto_router;
 import 'package:provider/provider.dart';
+import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -17,14 +18,12 @@ import '../../../setup_dialog_ui.dart';
 import 'home.view.model.dart';
 
 class HomeView extends StatefulWidget {
-  // final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
-
   @override
   _HomeViewState createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  String initialRoute = auto_router.Routes.parentsView;
+  String initialRoute = auto_router.Routes.timeTableView;
 
   @override
   void initState() {
@@ -44,39 +43,80 @@ class _HomeViewState extends State<HomeView> {
           );
         },
         builder: (context, model, child) {
-          return Scaffold(
-            // key: _key,
-            backgroundColor: Colors.white,
+          return ScreenTypeLayout(
+            mobile: Scaffold(
+              body:  mobile(),
+            ),
+            desktop: Scaffold(
+              // key: _key,
+              backgroundColor: Colors.white,
 
-            body: Row(
-              children: [
-                SideMenu(),
-                Expanded(
-                  child: Column(
-                    children: [
-                      NavigationBar(),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.all(10),
-                          padding: EdgeInsets.all(0),
-                          child: Navigator(
-                            key: locator<NavigationService>().navigatorKey,
-                            // key: locator<DialogService>().navigatorKey,
-                            onGenerateRoute: auto_router.Router().onGenerateRoute,
-                            initialRoute: initialRoute,
+              body: Row(
+                children: [
+                  SideMenu(),
+                  Expanded(
+                    child: Column(
+                      children: [
+                        NavigationBar(),
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.all(0),
+                            child: Navigator(
+                              key: locator<NavigationService>().navigatorKey,
+                              // key: locator<DialogService>().navigatorKey,
+                              onGenerateRoute: auto_router.Router().onGenerateRoute,
+                              initialRoute: initialRoute,
 
-                            // initialRoute: auto_router.Routes.addParentView
-                            // initialRoute: auto_router.Routes.parentsView
-                            // initialRoute: "Dashboard",
+                              // initialRoute: auto_router.Routes.addParentView
+                              // initialRoute: auto_router.Routes.parentsView
+                              // initialRoute: "Dashboard",
+                            ),
                           ),
-                        ),
-                      )
-                    ],
-                  ),
-                )
-              ],
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           );
         });
+  }
+
+  Widget mobile() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Image.asset("assets/images/logo.png"),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "for better user expirance we recommand to use android version of this app",
+            style: TextStyle(fontSize: 24.0),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: SizedBox(
+            width: 300,
+            child: RaisedButton(
+              color: Colors.green,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.android, color: Colors.white),
+                  Text("Available on the PlayStore"),
+                ],
+              ),
+              onPressed: () {
+                print("goto playstore");
+              },
+            ),
+          ),
+        )
+      ],
+    );
   }
 }
