@@ -18,7 +18,6 @@ import 'package:my_school_web/ui/pages/home/home.view.dart';
 import 'package:my_school_web/ui/pages/login/login.view.dart';
 import 'package:my_school_web/ui/pages/parents/add_parent.view.dart';
 import 'package:my_school_web/ui/pages/parents/parents.view.dart';
-import 'package:my_school_web/ui/pages/parents/select_child.view.dart';
 import 'package:my_school_web/ui/pages/splash/splash.view.dart';
 import 'package:my_school_web/ui/pages/students/add_student.view.dart';
 import 'package:my_school_web/ui/pages/students/students.view.dart';
@@ -39,7 +38,6 @@ import 'package:my_school_web/ui/pages/error_page/todo.view.dart';
     MaterialRoute(page: AddStudentView),
     MaterialRoute(page: ParentsView),
     MaterialRoute(page: AddParentView),
-    MaterialRoute(page: SelectStudentView),
     MaterialRoute(page: WorkingHoursView),
     MaterialRoute(page: ToDoPage),
     MaterialRoute(page: ClassRoomView),

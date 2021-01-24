@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
 import 'package:my_school_web/setup_bottom_sheet_ui.dart';
+import 'package:responsive_table/DatatableHeader.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -13,6 +14,8 @@ class AddParentViewModel extends BaseViewModel {
   final AuthService authService = locator<AuthService>();
   ParentModel parentModel = new ParentModel();
   get editOnly => this.parentModel.id == null ? true : false;
+
+  final StudentService studentService = locator<StudentService>();
 
   bool isSearch = false;
   List<Map<String, dynamic>> source = List<Map<String, dynamic>>();
@@ -52,12 +55,7 @@ class AddParentViewModel extends BaseViewModel {
   }
 
   onBackClicked() async {
-    // locator<NavigationService>().navigateTo(Routes.addTeacherView);
     locator<NavigationService>().back();
-
-    // final _bottomSheetService = locator<BottomSheetService>();
-    // var response = await _bottomSheetService.showBottomSheet(title: "zab el kbir", description: "zebi vrai kbir");
-    // print(response?.confirmed);
   }
 
   onSubmitClicked() async {
@@ -112,6 +110,7 @@ class AddParentViewModel extends BaseViewModel {
   }
 
   onChildRefresh() async {
+    // await studentService.getAll();
     isLoading = true;
     notifyListeners();
 
@@ -119,62 +118,12 @@ class AddParentViewModel extends BaseViewModel {
     source.clear();
 
     children.forEach((element) {
-      source.add({
-        "ID": element.id,
-        "Roll No.": "element.rollNo",
-        "Full Name": element.name,
-        "Email": element.userAccount.email,
-        "Phone": element.phone,
-        "Action": element.id
-      });
+      source.add(
+          {"ID": element.id, "Full Name": element.name, "Email": element.userAccount.email, "Phone": element.phone, "Action": element.id});
     });
 
     isLoading = false;
     notifyListeners();
-  }
-
-  onChildCreateNew() async {
-    // var now = new DateTime.now();
-    //       String random = now.millisecondsSinceEpoch.toString();
-    // var tmp = StudentModel(
-    //   id: random,
-    //   phone: random,
-    //   rollNo: random,
-    // );
-    // tmp.userAccount.email = random+"@email.com";
-    // tmp.userAccount.name = random;
-    // parentModel.children.add(tmp);
-
-    parentService.parentModel = parentModel;
-    await locator<NavigationService>().navigateTo(Routes.selectStudentView);
-    await onChildRefresh();
-  }
-
-  onChildEdit(id) async {
-    // ParentModel tm = listParentModel.firstWhere((element) => element.id == id);
-    // await locator<NavigationService>().navigateTo(Routes.addStudentView, arguments: tm);
-    // await onRefresh();
-  }
-
-  onChildView(id) async {
-    StudentModel tm = parentModel.children.firstWhere((element) => element.id == id);
-    String description = "";
-    description += "Full Name :" + tm.name + "\n";
-    description += "Date of birth :" + "tm?.date_of_birth" + "\n";
-    description += "Phone Number :" + tm.phone + "\n";
-    description += "Position :" + "tm?.current_position" + "\n";
-    description += "Address :" + "tm?.street_address" + "\n";
-    description += "Joining Date :" + "tm?.joining_date" + "\n";
-    description += "Working Hours :" + "tm?.working_hours" + "\n";
-    description += "Gender :" + "tm?.gender" + "\n";
-    description += "Email :" + tm.userAccount.email + "\n";
-    description += "Blood Group :" + "tm?.blood_group" + "\n";
-    description += "Qualification :" + " tm?.qualification" + "\n";
-    description += "Leaving Date :" + "tm?.leaving_date" + "\n";
-    description += "Employee Code :" + "tm.rollNo" + "\n";
-
-    final _bottomSheetService = locator<BottomSheetService>();
-    await _bottomSheetService.showBottomSheet(title: "INFO", description: description);
   }
 
   onChildDelete(id) async {

@@ -24,7 +24,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  String initialRoute = auto_router.Routes.dashboardView;
+  String initialRoute = auto_router.Routes.parentsView;
 
   @override
   void initState() {

@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:my_school_web/common/common.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,6 @@ class _AddParentViewState extends State<AddParentView> {
 
   @override
   Widget build(BuildContext context) {
-    final AppProvider appProvider = Provider.of<AppProvider>(context);
 
     return ViewModelBuilder<AddParentViewModel>.reactive(
       viewModelBuilder: () => AddParentViewModel(),
@@ -56,7 +56,6 @@ class _AddParentViewState extends State<AddParentView> {
       ) {
         List<DatatableHeader> headers = [
           DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
-          DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
           DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.left),
           DatatableHeader(text: "Email", value: "Email", show: true, sortable: true, textAlign: TextAlign.left),
           DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.left),
@@ -71,18 +70,6 @@ class _AddParentViewState extends State<AddParentView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(
-                        icon: Icon(Icons.remove_red_eye),
-                        onPressed: () async {
-                          await model.onChildView(value);
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.edit),
-                        onPressed: () async {
-                          await model.onChildEdit(value);
-                        },
-                      ),
                       IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () async {
@@ -105,7 +92,7 @@ class _AddParentViewState extends State<AddParentView> {
               child: Column(
                 // shrinkWrap: true,
                 children: [
-                  PageHeader(),
+                  PageHeader( title: "Add New Parent",),
                   Card(
                       elevation: 10,
                       shadowColor: Colors.black,
@@ -185,7 +172,6 @@ class _AddParentViewState extends State<AddParentView> {
                           ),
                           SingleChildScrollView(
                               child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
-                            PageHeader(),
                             Container(
                               margin: EdgeInsets.all(10),
                               padding: EdgeInsets.all(0),
@@ -213,18 +199,21 @@ class _AddParentViewState extends State<AddParentView> {
                                       SizedBox(
                                         width: 25,
                                       ),
-                                      RaisedButton.icon(
-                                        onPressed: onChildCreateNew(model),
-                                        icon: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
+                                      SizedBox(
+                                        width: 300,
+                                        child: DropdownSearch<StudentModel>(
+                                          maxHeight: 300,
+                                          // selectedItem: model.currentModel.section,
+                                          items: model.studentService.list,
+                                          itemAsString: (StudentModel u) => u.name,
+                                          label: "Add Student as child*",
+                                          onChanged: (item) async {
+                                            model.parentModel.children.add(item);
+                                            model.onChildRefresh();
+                                          },
+                                          showSearchBox: true,
                                         ),
-                                        label: Text(
-                                          "Create New",
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        color: Colors.blue,
-                                      )
+                                      ),
                                     ],
                                   ),
                                   headers: headers,

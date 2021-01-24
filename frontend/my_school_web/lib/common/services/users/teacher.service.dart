@@ -32,9 +32,9 @@ class TeacherServiceImpl extends RestAPI implements TeacherService {
       url: serverIP + "/api/v1/teachers",
     );
     if (response.statusCode == 200) {
-      List<dynamic> temp = response.data["data"]["data"];
+      List<dynamic> _temp = response.data["data"]["data"];
       list.clear();
-      temp.forEach((element) {
+      _temp.forEach((element) {
         list.add(TeacherModel.fromJson(element));
       });
     }

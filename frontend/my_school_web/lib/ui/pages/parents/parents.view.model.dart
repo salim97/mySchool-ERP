@@ -30,10 +30,10 @@ class ParentsViewModel extends BaseViewModel {
 
   List<DatatableHeader> headers = [
     DatatableHeader(text: "ID", value: "ID", show: false, sortable: true, textAlign: TextAlign.right),
-    DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
+    // DatatableHeader(text: "Roll No.", value: "Roll No.", show: true, sortable: true, textAlign: TextAlign.left),
     DatatableHeader(text: "Full Name", value: "Full Name", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Parent", value: "Parent", show: true, sortable: true, textAlign: TextAlign.left),
-    DatatableHeader(text: "Street Address", value: "Street Address", show: true, sortable: true, textAlign: TextAlign.left),
+    DatatableHeader(text: "children", value: "children", show: true, sortable: true, textAlign: TextAlign.left),
+    // DatatableHeader(text: "Street Address", value: "Street Address", show: true, sortable: true, textAlign: TextAlign.left),
     DatatableHeader(text: "Phone", value: "Phone", show: true, sortable: true, textAlign: TextAlign.left),
   ];
 
@@ -48,12 +48,20 @@ class ParentsViewModel extends BaseViewModel {
       source.clear();
 
       listParentModel.forEach((element) {
+        String childrenNames = "";
+        if (element.children != null) {
+          element.children.forEach((child) {
+            childrenNames += child.name.toString() + " , ";
+          });
+          if (childrenNames.isNotEmpty) childrenNames = childrenNames.substring(0, childrenNames.length - 2);
+        }
+
         source.add({
           "ID": element.id,
-          "Roll No.": "element.rollNo",
+          // "Roll No.": "element.rollNo",
           "Full Name": element.name,
-          "Parent": "element.parent_id",
-          "Street Address": "element.street_address",
+          "children": childrenNames,
+          // "Street Address": "element.street_address",
           "Phone": element.phone,
           "Action": element.id
         });
@@ -65,6 +73,7 @@ class ParentsViewModel extends BaseViewModel {
   }
 
   onCreateNew() async {
+    await locator<StudentService>().getAll();
     await locator<NavigationService>().navigateTo(Routes.addParentView);
     onRefresh();
   }

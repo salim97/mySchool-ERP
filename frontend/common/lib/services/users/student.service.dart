@@ -37,9 +37,9 @@ class StudentServiceImpl extends RestAPI implements StudentService {
     // logger.d(response.data);
     // logger.d(response.statusCode);
     if (response.statusCode == 200) {
-      List<dynamic> list = response.data["data"]["data"];
+      List<dynamic> _temp = response.data["data"]["data"];
       list.clear();
-      list.forEach((element) {
+      _temp.forEach((element) {
         list.add(StudentModel.fromJson(element));
       });
     }

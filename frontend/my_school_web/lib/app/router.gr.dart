@@ -23,7 +23,6 @@ import '../ui/pages/error_page/todo.view.dart';
 import '../ui/pages/login/login.view.dart';
 import '../ui/pages/parents/add_parent.view.dart';
 import '../ui/pages/parents/parents.view.dart';
-import '../ui/pages/parents/select_child.view.dart';
 import '../ui/pages/splash/splash.view.dart';
 import '../ui/pages/students/add_student.view.dart';
 import '../ui/pages/students/students.view.dart';
@@ -41,7 +40,6 @@ class Routes {
   static const String addStudentView = '/add-student-view';
   static const String parentsView = '/parents-view';
   static const String addParentView = '/add-parent-view';
-  static const String selectStudentView = '/select-student-view';
   static const String workingHoursView = '/working-hours-view';
   static const String toDoPage = '/to-do-page';
   static const String classRoomView = '/class-room-view';
@@ -62,7 +60,6 @@ class Routes {
     addStudentView,
     parentsView,
     addParentView,
-    selectStudentView,
     workingHoursView,
     toDoPage,
     classRoomView,
@@ -89,7 +86,6 @@ class Router extends RouterBase {
     RouteDef(Routes.addStudentView, page: AddStudentView),
     RouteDef(Routes.parentsView, page: ParentsView),
     RouteDef(Routes.addParentView, page: AddParentView),
-    RouteDef(Routes.selectStudentView, page: SelectStudentView),
     RouteDef(Routes.workingHoursView, page: WorkingHoursView),
     RouteDef(Routes.toDoPage, page: ToDoPage),
     RouteDef(Routes.classRoomView, page: ClassRoomView),
@@ -163,15 +159,6 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    SelectStudentView: (data) {
-      final args = data.getArgs<SelectStudentViewArguments>(
-        orElse: () => SelectStudentViewArguments(),
-      );
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => SelectStudentView(key: args.key),
-        settings: data,
-      );
-    },
     WorkingHoursView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => WorkingHoursView(),
@@ -227,14 +214,4 @@ class Router extends RouterBase {
       );
     },
   };
-}
-
-/// ************************************************************************
-/// Arguments holder classes
-/// *************************************************************************
-
-/// SelectStudentView arguments holder class
-class SelectStudentViewArguments {
-  final Key key;
-  SelectStudentViewArguments({this.key});
 }

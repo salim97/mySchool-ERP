@@ -17,8 +17,10 @@ const parentSchema = new mongoose.Schema({
     children: [
         {
             type: mongoose.Schema.ObjectId,
+            autopopulate: true,
             ref: 'Students'
         }
+
     ],
     gender: {
         type: String,
@@ -43,26 +45,27 @@ const parentSchema = new mongoose.Schema({
         toObject: { virtuals: true }
     });
 
+parentSchema.plugin(require('mongoose-autopopulate'));
+
+
 parentSchema.pre(/^find/, function (next) {
     this.populate({
         path: 'user',
         select: 'name email photo role'
-    }).populate({
-        path: 'children',
-        select: 'date_of_birth user gender phone'
     });
     next();
 });
 
 
 const userModel = require('./user.model');
-parentSchema.post('findOneAndDelete',async function(doc){
+parentSchema.post('findOneAndDelete', async function (doc) {
     if (doc.user._id) {
         const user = this
         // await userModel.findOneAndDelete({_id:doc.user._id})
-        await userModel.deleteOne({_id:doc.user._id})
+        await userModel.deleteOne({ _id: doc.user._id })
     }
 })
+
 
 const Parent = mongoose.model('Parents', parentSchema);
 

@@ -1,10 +1,19 @@
 # Frontend web
+## delete build folder
 flutter clean
+## generate boilerplate code
+flutter pub get ; flutter pub run build_runner build --delete-conflicting-outputs 
+## build web artifacts
 flutter build web
+## move web artifacts to backend folder for hosting ( docker junction issue )
+Xcopy .\build\web\ ..\..\backend\public /E /H /C /I
+## host web artifacts locally
 http-server .\build\web\ -p 80 
 
 # Frontend android
+## delete build folder
 flutter clean
+## build android apk
 flutter build apk
 
 # Backend
@@ -36,4 +45,6 @@ firebase init
 ## pushing local web artifacts to firebase hosting
 firebase deploy --only hosting 
 
+#git .gitignore issue ....
+git rm -r --cached .\build\
 

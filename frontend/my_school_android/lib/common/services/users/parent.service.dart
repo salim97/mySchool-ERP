@@ -37,9 +37,9 @@ class ParentServiceImpl extends RestAPI implements ParentService {
       url: serverIP + "/api/v1/parents",
     );
     if (response.statusCode == 200) {
-      List<dynamic> list = response.data["data"]["data"];
+      List<dynamic> _temp = response.data["data"]["data"];
       list.clear();
-      list.forEach((element) {
+      _temp.forEach((element) {
         list.add(ParentModel.fromJson(element));
       });
     }

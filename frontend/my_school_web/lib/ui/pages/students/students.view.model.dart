@@ -33,7 +33,6 @@ class StudentsViewModel extends BaseViewModel {
     if (response.statusCode == 200) {
       listStudentModel = studentService.list;
       source.clear();
-
       listStudentModel.forEach((element) {
         source.add({
           "ID": element.id,
