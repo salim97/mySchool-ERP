@@ -1,11 +1,11 @@
 {
-  "name": "School_ERP_backend",
+  "name": "School-ERP-backend",
   "version": "1.0.0",
   "description": "School ERP backend API using node.js",
   "main": "./src/server.js",
   "scripts": {
     "start": "node ./src/server.js",
-    "start.dev": "nodemon --legacy-watch ./src/server.js"
+    "dev": "nodemon --legacy-watch ./src/server.js"
   },
   "author": "Benabadji Salim",
   "license": "ISC",

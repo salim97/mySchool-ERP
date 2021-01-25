@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/adapter.dart';
@@ -16,7 +17,15 @@ const DEBUG_HTTP = true; //print http responses from server
 class RestAPI {
   // String serverIP = "http://127.0.0.1:3000";
   // String serverIP = "http://10.0.2.2:3000";
-  String serverIP = "http://temporaryurl.ddnsking.com:3000";
+  String _serverIP = "http://temporaryurl.ddnsking.com:3000";
+
+  String get serverIP {
+    // String url = window.location.href.split("/#").first;
+    // print("serverIP");
+    // print(serverIP);
+    return window.location.href.split("/#").first;
+  }
+
   // String serverIP = "https://myschoolerp.azurewebsites.net";
   // CookieJar cookieJar = CookieJar();
   Dio dio = new Dio();

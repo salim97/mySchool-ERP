@@ -16,10 +16,10 @@ const app = require('./app');
 //   process.env.DATABASE_PASSWORD
 // );
 const NODEJS_PORT = process.env.NODEJS_PORT || 3000;
-const MONGO_INITDB_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME ;
-const MONGO_INITDB_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD ;
-const MONGO_INITDB_URL = process.env.MONGO_INITDB_URL ;
-const MONGO_INITDB_DATABASE = process.env.MONGO_INITDB_DATABASE ;
+const MONGO_INITDB_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
+const MONGO_INITDB_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
+const MONGO_INITDB_URL = process.env.MONGO_INITDB_URL;
+const MONGO_INITDB_DATABASE = process.env.MONGO_INITDB_DATABASE;
 const MONGODB_BASE_ADDRESS = `DATABASE=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_URL}:27017/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`
 // const MONGODB_BASE_ADDRESS = process.env.DATABASE;
 
@@ -28,13 +28,30 @@ console.log("how zebi")
 console.log("how zebi")
 
 
-// mongoose
-//   .connect(MONGODB_BASE_ADDRESS, {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false
-//   })
-//   .then(() => console.log('DB connection successful!'));
+mongoose
+  .connect(MONGODB_BASE_ADDRESS, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+    useFindAndModify: false
+  })
+  .then(() =>  {
+    const userModel = require('./models/users/user.model');
+    userModel.estimatedDocumentCount().then( (estimate) => {
+      console.log(`Estimated number of documents in the movies collection: ${estimate}`);
+       if(estimate == 0)
+       {
+         userModel.create({
+          email: "admin@email.com",
+          password: "azerty2020",
+          passwordConfirm: "azerty2020",
+          role: "admin" 
+        });
+       } 
+    });
+   
+    return console.log('DB connection successful!');
+  });
 
 
 const server = app.listen(NODEJS_PORT, () => {
