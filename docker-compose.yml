@@ -4,11 +4,12 @@ services:
     image: node:14.15-alpine
     container_name: "NodeJS-School-ERP"
     build: 
-      context: .
+      context: ./backend/
     depends_on:
       - mydatabase
     volumes:
-      - ./:/usr/src/app
+      - ./backend/:/usr/src/app
+      - ./frontend/my_school_web/build/web:/usr/src/app/public
       - /usr/src/app/node_modules # this make nodemon restart faster, Remove this if you have pure JS dependencies
     ports:
       - "80:3000"

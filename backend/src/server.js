@@ -23,17 +23,18 @@ const MONGO_INITDB_DATABASE = process.env.MONGO_INITDB_DATABASE ;
 const MONGODB_BASE_ADDRESS = `DATABASE=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_URL}:27017/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`
 // const MONGODB_BASE_ADDRESS = process.env.DATABASE;
 
-// console.log(MONGODB_BASE_ADDRESS)
-// console.log("how zebi")
+console.log(MONGODB_BASE_ADDRESS)
+console.log("how zebi")
+console.log("how zebi")
 
 
-mongoose
-  .connect(MONGODB_BASE_ADDRESS, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-    useFindAndModify: false
-  })
-  .then(() => console.log('DB connection successful!'));
+// mongoose
+//   .connect(MONGODB_BASE_ADDRESS, {
+//     useNewUrlParser: true,
+//     useCreateIndex: true,
+//     useFindAndModify: false
+//   })
+//   .then(() => console.log('DB connection successful!'));
 
 
 const server = app.listen(NODEJS_PORT, () => {
