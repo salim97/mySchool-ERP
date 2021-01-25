@@ -1,17 +1,13 @@
 {
-  "name": "natours",
+  "name": "School_ERP_backend",
   "version": "1.0.0",
-  "description": "Learning node, express and mongoDB",
-  "main": "./src/app.js",
+  "description": "School ERP backend API using node.js",
+  "main": "./src/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js",
-    "debug": "ndb server.js",
-    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
-    "build:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js"
+    "start": "node ./src/server.js",
+    "start.dev": "nodemon --legacy-watch ./src/server.js"
   },
-  "author": "Jonas Schmedtmann",
+  "author": "Benabadji Salim",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -45,6 +41,7 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
+    "nodemon": "^2.0.7",
     "parcel-bundler": "^1.12.4",
     "prettier": "^1.17.0"
   },

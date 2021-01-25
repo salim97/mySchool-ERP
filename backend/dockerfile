@@ -1,37 +1,15 @@
 
-FROM node:alpine
+FROM node:14.15-alpine 
 
-WORKDIR /usr/app
+# Create app directory
+WORKDIR /usr/src/app
 
-COPY package*.json ./
-
+# Install dependencies
+COPY package.json .
 RUN npm install
 
+# Bundle app source
 COPY . .
 
-CMD ["npm", "start"]
 
-# FROM node:14.15-alpine as debug
-
-# WORKDIR /work/
-
-# # Expose the port 3000
-# EXPOSE 3000
-
-# COPY ./package.json /work/package.json
-# RUN npm install
-# RUN npm install -g nodemon
-
-# # COPY . .
-# COPY . /work/src/
-
-# ENTRYPOINT [ "nodemon","--inspect=0.0.0.0", "./server.js" ]
-
-# # FROM node:14.1-alpine as prod
-
-# # WORKDIR /work/
-# # COPY ./src/package.json /work/package.json
-# # RUN npm install
-# # COPY ./src/ /work/
-
-# # CMD node .
+ENTRYPOINT [ "npm", "run", "start.dev" ]
