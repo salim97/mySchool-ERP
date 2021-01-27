@@ -1,0 +1,49 @@
+# Use docker build the container image
+## docker build -t flutter-web-builder .
+# If you have some problem during cache, you can clean cache by this
+## docker build --no-cache -t flutter-web-builder .
+# Run the docker image with localhost 80 port.
+## docker run -d -p 80:80 flutter-web-builder
+
+FROM ubuntu:20.04
+
+# Prerequisites
+# RUN apt-get update && apt-get install -y unzip xz-utils git openssh-client curl && apt-get upgrade -y && rm -rf /var/cache/apt
+RUN apt-get update 
+RUN apt-get install -y unzip xz-utils git openssh-client curl python3
+RUN apt-get clean
+
+# Install flutter beta
+# check this site https://flutter.dev/docs/development/tools/sdk/releases?tab=linux
+RUN curl -L https://storage.googleapis.com/flutter_infra/releases/beta/linux/flutter_linux_1.24.0-10.2.pre-beta.tar.xz | tar -C /opt -xJ
+# COPY ./flutter_linux_1.24.0-10.2.pre-beta.tar.xz .
+# RUN cat flutter_linux_1.24.0-10.2.pre-beta.tar.xz | tar -C /opt -xJ  
+ENV PATH "$PATH:/opt/flutter/bin"
+
+
+# Run flutter doctor
+RUN flutter doctor
+# Enable flutter web
+# RUN flutter channel master
+# RUN flutter upgrade
+RUN flutter config --enable-web
+
+# Create app directory
+WORKDIR /usr/src/app
+
+# Bundle app source
+COPY ./my_school_web .
+
+#update the version
+# RUN echo "const String currentVersion = " \""version of" $(date +"%Y-%m-%d %H:%M")\" ";" > ./lib/currentVersion.dart
+
+# Install dependencies
+RUN flutter pub get
+
+# RUN flutter build web
+
+
+# build web artifacts
+CMD [ "sh", "myBuild.sh" ]
+# CMD [ "python3", "-m", "http.server", "80", "--directory", "build/web/" ]
+# CMD [ "sleep", "999999" ]

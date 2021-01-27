@@ -1,0 +1,12 @@
+version: '3'
+services:
+  Flutter-WEB-Builder: 
+    image: ubuntu:20.04
+    container_name: "Flutter-WEB-Builder"
+    build: 
+      context: ./frontend/
+    volumes:
+      - ./frontend/my_school_web:/usr/src/app
+      - ./Flutter-WEB-App:/usr/src/app/build/web
+
+  

@@ -11,22 +11,20 @@ process.on('uncaughtException', err => {
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 
-// const DB = process.env.DATABASE.replace(
-//   '<PASSWORD>',
-//   process.env.DATABASE_PASSWORD
-// );
+
 const NODEJS_PORT = process.env.NODEJS_PORT || 3000;
 const MONGO_INITDB_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME;
 const MONGO_INITDB_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD;
 const MONGO_INITDB_URL = process.env.MONGO_INITDB_URL;
 const MONGO_INITDB_DATABASE = process.env.MONGO_INITDB_DATABASE;
-const MONGODB_BASE_ADDRESS = `DATABASE=mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_URL}:27017/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`
-// const MONGODB_BASE_ADDRESS = process.env.DATABASE;
+var MONGODB_BASE_ADDRESS = "";
+if (process.env.NODE_ENV === 'development') {
+  MONGODB_BASE_ADDRESS = `mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_URL}:27017/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`
+} 
 
-console.log(MONGODB_BASE_ADDRESS)
-console.log("how zebi")
-console.log("how zebi")
-
+if (process.env.NODE_ENV === 'production') {
+  MONGODB_BASE_ADDRESS = process.env.DATABASE;
+} 
 
 mongoose
   .connect(MONGODB_BASE_ADDRESS, {
@@ -38,7 +36,8 @@ mongoose
   .then(() =>  {
     const userModel = require('./models/users/user.model');
     userModel.estimatedDocumentCount().then( (estimate) => {
-      console.log(`Estimated number of documents in the movies collection: ${estimate}`);
+      console.log(MONGODB_BASE_ADDRESS);
+      console.log(`Estimated number of documents in the user collection: ${estimate}`);
        if(estimate == 0)
        {
          userModel.create({
@@ -65,8 +64,6 @@ process.on('unhandledRejection', err => {
     process.exit(1);
   });
 });
-
-
 
 
 

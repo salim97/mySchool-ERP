@@ -31,9 +31,9 @@
 .pub-cache/
 .pub/
 
+# !build/web/ 
 # build/
-
-# !/build/web/ # exception
+# exception
 
 # Web related
 lib/generated_plugin_registrant.dart

@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:my_school_web/theme.dart';
 import 'package:my_school_web/ui/pages/login/login.view.dart';
 import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/provider/auth.provider.dart';
@@ -16,11 +18,15 @@ import 'ui/pages/home/home.view.dart';
 import './app/router.gr.dart' as auto_router;
 import 'package:stacked_services/stacked_services.dart';
 import 'setup_dialog_ui.dart';
+import 'currentVersion.dart';
 import 'ui/pages/splash/splash.view.dart';
 
 const bool production = false;
-const String currentVersion = "version of 2021-01-25 7:53 PM";
+
 void main() {
+  print(currentVersion);
+  print("ZEBI 4:33");
+
   setupLocator();
   // setupDialogUi();
   setupBottomSheetUi();
@@ -36,7 +42,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -48,6 +53,26 @@ class MyApp extends StatelessWidget {
       // home: AppPagesController(),
     );
   }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return AdaptiveTheme(
+  //     light: MyTheme.lightThemeData,
+  //     dark: MyTheme.darkThemeData,
+  //     initial: AdaptiveThemeMode.light,
+  //     builder: (theme, darkTheme) => MaterialApp(
+  //       debugShowCheckedModeBanner: false,
+  //       theme: ThemeData(
+  //         primarySwatch: Colors.green,
+  //       ),
+  //       // navigatorKey: locator<DialogService>().navigatorKey,
+  //       // navigatorKey: locator<NavigationService>().navigatorKey,
+  //       initialRoute: auto_router.Routes.appPagesController,
+  //       onGenerateRoute: auto_router.Router().onGenerateRoute,
+  //       //key: locator<DialogService>().navigatorKey,
+  //       // home: AppPagesController(),
+  //     ),
+  //   );
+  // }
 }
 
 class AppPagesController extends StatelessWidget {

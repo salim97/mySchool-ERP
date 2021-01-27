@@ -1,0 +1,38 @@
+version: '3'
+services:
+  nodejs: 
+    image: node:14.15-alpine
+    container_name: "NodeJS-School-ERP"
+    build: 
+      context: ./backend/
+    depends_on:
+      - mydatabase
+    volumes:
+      - ./backend/:/usr/src/app
+      - ./frontend/my_school_web/build/web:/usr/src/app/public
+      - /usr/src/app/node_modules # this make nodemon restart faster, Remove this if you have pure JS dependencies
+    ports:
+      - "80:3000"
+    environment: 
+      - NODEJS_PORT=3000
+      - MONGO_INITDB_URL=mydatabase
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootpassword
+      - MONGO_INITDB_DATABASE=school-database
+
+  mydatabase:
+    image: mongo:latest
+    container_name: "mydatabase_NOSQL_MONGODB"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=rootpassword
+      - MONGO_INITDB_DATABASE=school-database
+      - MONGO_DATABASE=mongodb://$MONGO_INITDB_ROOT_USERNAME:$MONGO_INITDB_ROOT_PASSWORD@127.0.0.1:27017/$MONGO_INITDB_DATABASE?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false
+    ports:
+      - "27017-27019:27017-27019"
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
+  
