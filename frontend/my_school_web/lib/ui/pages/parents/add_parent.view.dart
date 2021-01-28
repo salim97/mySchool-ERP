@@ -30,7 +30,6 @@ class _AddParentViewState extends State<AddParentView> {
 
   @override
   Widget build(BuildContext context) {
-
     return ViewModelBuilder<AddParentViewModel>.reactive(
       viewModelBuilder: () => AddParentViewModel(),
       onModelReady: (model) {
@@ -92,7 +91,9 @@ class _AddParentViewState extends State<AddParentView> {
               child: Column(
                 // shrinkWrap: true,
                 children: [
-                  PageHeader( title: "Add New Parent",),
+                  PageHeader(
+                    title: "Add New Parent",
+                  ),
                   Card(
                       elevation: 10,
                       shadowColor: Colors.black,

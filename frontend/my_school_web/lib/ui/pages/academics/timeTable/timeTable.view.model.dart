@@ -176,7 +176,7 @@ class TimeTableViewModel extends BaseViewModel {
 
     await currentService.update(currentModel);
     timeTableRefresh();
-     onCancel();
+    onCancel();
     // await onRefresh();
   }
 

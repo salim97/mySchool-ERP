@@ -25,8 +25,6 @@ const bool production = false;
 
 void main() {
   print(currentVersion);
-  print("ZEBI 4:33");
-
   setupLocator();
   // setupDialogUi();
   setupBottomSheetUi();

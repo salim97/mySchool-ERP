@@ -10,7 +10,7 @@ import 'package:logger/logger.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 
 const DEBUG_HTTP = true; //print http responses from server
 
@@ -39,15 +39,18 @@ class RestAPI {
 // customization
     if (DEBUG_HTTP)
       dio.interceptors.add(PrettyDioLogger(
-        request: true,
-        requestHeader: false,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        error: true,
-        compact: false,
-        maxWidth: 120,
-      ));
+          request: true,
+          requestHeader: false,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: false,
+          error: true,
+          compact: false,
+          maxWidth: 120,
+          logPrint: (object) {
+            print(object);
+            // debugPrint(object);
+          }));
     if (!kIsWeb) {
       dio.interceptors.add(CookieManager(CookieJar()));
     } else {

@@ -3,7 +3,7 @@ import 'package:my_school_web/app/router.gr.dart';
 import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/provider/auth.provider.dart';
 import 'package:my_school_web/ui/widgets/custom_text.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -35,9 +35,7 @@ class NavigationBar extends StatelessWidget {
                     // label: CustomText(
                     //   text: '',
                     // ),
-                    onPressed: () {
-
-                    },
+                    onPressed: () {},
                   ),
                   Positioned(
                     top: 4,

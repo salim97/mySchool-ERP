@@ -31,8 +31,8 @@
 .pub-cache/
 .pub/
 
-# !build/web/ 
-# build/
+!build/web/ 
+build/
 # exception
 
 # Web related

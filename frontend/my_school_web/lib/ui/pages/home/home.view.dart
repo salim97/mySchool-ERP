@@ -8,7 +8,7 @@ import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/ui/widgets/navbar/navigation_bar.dart';
 import 'package:my_school_web/ui/widgets/side_menu/side_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:my_school_web/app/router.gr.dart' as auto_router;
 import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
@@ -46,7 +46,7 @@ class _HomeViewState extends State<HomeView> {
         builder: (context, model, child) {
           return ScreenTypeLayout(
             mobile: Scaffold(
-              body:  mobile(),
+              body: mobile(),
             ),
             desktop: Scaffold(
               // key: _key,
@@ -108,8 +108,13 @@ class _HomeViewState extends State<HomeView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.android, color: Colors.white),
-                  SizedBox(width: 5,),
-                  Text("Available on the PlayStore", style: TextStyle(color: Colors.white),),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    "Available on the PlayStore",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ],
               ),
               onPressed: () {

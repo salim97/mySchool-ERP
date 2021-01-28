@@ -5,8 +5,11 @@ services:
     container_name: "Flutter-WEB-Builder"
     build: 
       context: ./frontend/
+    command: sh myBuild.sh
+    working_dir: /usr/src/app
     volumes:
       - ./frontend/my_school_web:/usr/src/app
-      - ./Flutter-WEB-App:/usr/src/app/build/web
+      - ./frontend/common/lib:/usr/src/app/lib/common
+      - ./Flutter-WEB-App:/usr/src/tmp/build/web
 
   

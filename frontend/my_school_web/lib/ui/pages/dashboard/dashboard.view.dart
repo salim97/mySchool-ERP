@@ -3,7 +3,7 @@ import 'package:my_school_web/ui/widgets/cards/cards_list.dart';
 import 'package:my_school_web/ui/widgets/custom_text.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';
 import 'package:my_school_web/ui/widgets/charts/sales_chart.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:my_school_web/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked/stacked.dart';
