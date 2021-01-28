@@ -9,11 +9,7 @@ COPY package.json .
 RUN npm install
 
 # Bundle app source
-COPY ./src .
-COPY ./public .
-COPY ./school-erp-ef01f-firebase-adminsdk-8nouk-98c56d46f6.json .
-COPY ./config.env .
+COPY . .
 
-ENV NODE_ENV=production
 
-ENTRYPOINT [ "npm", "start" ]
+ENTRYPOINT [ "npm", "run", "dev" ]
