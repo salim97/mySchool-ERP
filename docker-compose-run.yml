@@ -14,7 +14,7 @@ services:
     ports:
       - "80:3000"
     environment: 
-      - NODEJS_PORT=3000
+      - PORT=3000
       - MONGO_INITDB_URL=mydatabase
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=rootpassword

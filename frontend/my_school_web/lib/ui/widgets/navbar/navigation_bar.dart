@@ -1,9 +1,6 @@
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/app/router.gr.dart';
-import 'package:my_school_web/provider/app.provider.dart';
 import 'package:my_school_web/provider/auth.provider.dart';
-import 'package:my_school_web/ui/widgets/custom_text.dart';
-import 'package:my_school_web/common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -16,7 +13,7 @@ class NavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)]),
-      height: 50,
+      height: 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end, //change here don't //worked
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -81,9 +78,9 @@ class NavigationBar extends StatelessWidget {
                         context: context,
                         position: RelativeRect.fromLTRB(25.0, 25.0, 0.0, 0.0), //position where you want to show the menu on screen
                         items: [
-                          PopupMenuItem<String>(child: const Text('Your profile'), value: '1'),
-                          PopupMenuItem<String>(child: const Text('Settings'), value: '2'),
-                          PopupMenuItem<String>(child: const Text('Sign out'), value: '3'),
+                          PopupMenuItem<String>(child: Text('profile', style: Theme.of(context).textTheme.bodyText1), value: '1'),
+                          PopupMenuItem<String>(child: Text('Settings', style: Theme.of(context).textTheme.bodyText1), value: '2'),
+                          PopupMenuItem<String>(child: Text('Sign out', style: Theme.of(context).textTheme.bodyText1), value: '3'),
                         ],
                         elevation: 8.0,
                       ).then<void>((String itemSelected) async {

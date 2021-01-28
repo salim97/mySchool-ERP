@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:my_school_web/app/locator.dart';
 import 'package:my_school_web/provider/app.provider.dart';
+import 'package:my_school_web/theme.dart';
 import 'package:my_school_web/ui/widgets/navbar/navbar_logo.dart';
 import 'package:my_school_web/ui/widgets/side_menu/side_menu_item.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,19 @@ class SideMenu extends StatelessWidget {
     List<Widget> menuWidget = new List<Widget>();
     menuWidget.add(NavBarLogo());
     menuJSON.forEach((key1, value1) {
+      if (value1 == "divider") {
+        menuWidget.add(Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: Container(
+              height: 4,
+              width: 130,
+              color: Colors.white,
+            ),
+          ),
+        ));
+        return;
+      }
       if (value1["children"] == null) {
         menuWidget.add(
           SideMenuItemDesktop(
@@ -52,17 +66,28 @@ class SideMenu extends StatelessWidget {
         children: subItems,
       ));
     });
-
-    return Container(
-      decoration: BoxDecoration(color: Colors.white,
-          // gradient: LinearGradient(
-          //   colors: [Colors.indigo, Colors.indigo.shade600],
-          // ),
-          boxShadow: [BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)]),
-      width: 250,
-      child: Container(
-        child: ListView(
-          children: menuWidget,
+    final theme = Theme.of(context);
+    // theme.textTheme.button = theme.textTheme.button.apply(color: Colors.white);
+    return Theme(
+      data: theme.copyWith(
+        // textTheme: theme.textTheme.copyWith(button: theme.textTheme.button.copyWith(color: Colors.white)),
+        unselectedWidgetColor: Colors.white,
+        accentColor: Colors.white,
+      ),
+      child: ListTileTheme(
+        iconColor: Colors.white,
+        child: Container(
+          decoration: BoxDecoration(
+            color: MyTheme.user_interface.first,
+            // gradient: LinearGradient(
+            //   colors: [Colors.indigo, Colors.indigo.shade600],
+            // ),
+            boxShadow: [BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)],
+          ),
+          width: 250,
+          child: ListView(
+            children: menuWidget,
+          ),
         ),
       ),
     );

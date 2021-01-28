@@ -4,12 +4,17 @@ class NavBarLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+      padding: const EdgeInsets.only(left: 0.0, bottom: 8.0),
       child: SizedBox(
-        height: 50,
-        width: 100,
-        child: Image.asset(
-          "assets/images/logo.png",
+        height: 60,
+        width: 250,
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 22.0, vertical: 10.0),
+          color: Colors.white,
+          child: Image.asset(
+            "assets/images/splash_logo.png",
+            fit: BoxFit.fill,
+          ),
         ),
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:my_school_web/app/helpers/app_colors.dart';
+
 import 'package:my_school_web/provider/app.provider.dart';
+import 'package:my_school_web/theme.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myInputWidget.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myTableView.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';

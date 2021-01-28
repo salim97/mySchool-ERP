@@ -10,21 +10,13 @@ class SideMenuItemWidthSubItemDesktop extends StatelessWidget {
   const SideMenuItemWidthSubItemDesktop({Key key, this.active, this.text, this.icon, this.children}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        new ExpansionTile(
-            leading: Icon(icon, color: Colors.black),
-            // backgroundColor: active ? Colors.green.withOpacity(.3) : null,
-            // title: CustomText(
-            //   text: text,
-            //   color: Colors.white,
-            //   size: active ? 23 : 18,
-            //   weight: active ? FontWeight.bold : FontWeight.w300,
-            // ),
-            title: Text(text, style: TextStyle(color: Colors.black),),
-            children: children),
-      ],
+    return new ExpansionTile(
+      leading: Icon(icon),
+      title: Text(
+        text,
+        style: Theme.of(context).textTheme.button,
+      ),
+      children: children,
     );
   }
 }

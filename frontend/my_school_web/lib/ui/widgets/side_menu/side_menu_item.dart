@@ -13,12 +13,11 @@ class SideMenuItemDesktop extends StatelessWidget {
     return ListTile(
       onTap: onTap,
       tileColor: active ? Colors.green.withOpacity(.3) : null,
-      leading: Icon(icon, color: Colors.black),
-      title: CustomText(
-        text: text,
-        color: Colors.black,
-        size: 18, //active ? 23 : 18,
-        weight: active ? FontWeight.bold : FontWeight.w300,
+      leading: Icon(icon),
+      title: Text(
+         text,
+        style: Theme.of(context).textTheme.button,
+        // weight: active ? FontWeight.bold : FontWeight.w300,
       ),
     );
   }
