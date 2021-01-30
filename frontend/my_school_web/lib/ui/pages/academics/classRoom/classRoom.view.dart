@@ -1,9 +1,8 @@
 import 'package:argon_buttons_flutter/argon_buttons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-
+import 'package:my_school_web/app/helpers/app_colors.dart';
 import 'package:my_school_web/provider/app.provider.dart';
-import 'package:my_school_web/theme.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myInputWidget.dart';
 import 'package:my_school_web/ui/widgets/myWidgets/myTableView.dart';
 import 'package:my_school_web/ui/widgets/page_header.dart';
@@ -20,6 +19,7 @@ class ClassRoomView extends StatefulWidget {
 class _ClassRoomViewState extends State<ClassRoomView> {
   @override
   Widget build(BuildContext context) {
+
     return ViewModelBuilder<ClassRoomViewModel>.reactive(
       viewModelBuilder: () => ClassRoomViewModel(),
       onModelReady: (model) {
@@ -31,9 +31,9 @@ class _ClassRoomViewState extends State<ClassRoomView> {
             child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
           if (model.isAddElementVisible)
             Card(
-              elevation: 8,
+              elevation: 1,
               shadowColor: Colors.black,
-              // clipBehavior: Clip.none,
+              clipBehavior: Clip.none,
               child: Column(
                 children: [
                   Row(
@@ -146,21 +146,25 @@ class _ClassRoomViewState extends State<ClassRoomView> {
           SizedBox(
             height: 20,
           ),
-          Column(
-            children: [
-              PageHeader(),
-              MyTableView(
-                isLoading: model.isLoading,
-                source: model.source,
-                headers: model.headers,
-                onRefresh: model.onRefresh,
-                onCreateNew: model.onCreateNew,
-                onEdit: model.onEdit,
-                onDelete: model.onDelete,
-                onSearch: model.onSearch,
-                createNewTitle: "Add Class",
-              ),
-            ],
+          Card(
+            elevation: 1,
+            shadowColor: Colors.black,
+            clipBehavior: Clip.none,
+            child: Column(
+              children: [
+                PageHeader(),
+                MyTableView(
+                  isLoading: model.isLoading,
+                  source: model.source,
+                  headers: model.headers,
+                  onRefresh: model.onRefresh,
+                  onCreateNew: model.onCreateNew,
+                  onEdit: model.onEdit,
+                  onDelete: model.onDelete,
+                  onSearch: model.onSearch,
+                ),
+              ],
+            ),
           ),
         ]));
       },
