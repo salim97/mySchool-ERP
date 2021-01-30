@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class MyTheme {
   static const primary_button = Color(0xFF4269F2);
   static const accents_check = Color(0xFF30D6B0);
+  static const drawer_item = Color(0xFF34495E);
+  static const drawer_subitem = Color(0xFF293542);
 
   static const primary = [Color(0xFF4269F2), Color(0xFF517394), Color(0xFF9CB3C9), Color(0xFFDEE6ED)];
   static const secondary = [Color(0xFF388CAD), Color(0xFF78B9D3), Color(0xFFC5E1EC), Color(0xFFECFBFF)];

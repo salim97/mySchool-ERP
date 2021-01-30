@@ -1,3 +1,4 @@
+import 'package:my_school_web/theme.dart';
 import 'package:my_school_web/ui/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 
@@ -11,6 +12,7 @@ class SideMenuItemWidthSubItemDesktop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new ExpansionTile(
+      backgroundColor: MyTheme.drawer_subitem,
       leading: Icon(icon),
       title: Text(
         text,

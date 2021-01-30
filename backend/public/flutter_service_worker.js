@@ -3,7 +3,8 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
-  "assets/AssetManifest.json": "f47a04c706f8e99e26cdfa960dec6539",
+  "404.html": "0a27a4163254fc8fce870c8cc3a3f94f",
+"assets/AssetManifest.json": "f47a04c706f8e99e26cdfa960dec6539",
 "assets/assets/images/bookshelf-loading-animation.gif": "aea82a19e2d2c3b67a080a059adcf463",
 "assets/assets/images/default_avtar.jpg": "41531ecdea16da1fa883b9f2e4d569f8",
 "assets/assets/images/error_page/10_Connection%2520Lost.png": "b8f9fa9d002fe96fa3fb8cf5b2c84e09",
@@ -30,9 +31,9 @@ const RESOURCES = {
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
-"index.html": "6b4e8bd2154401a370378a59301051a4",
-"/": "6b4e8bd2154401a370378a59301051a4",
-"main.dart.js": "a0e6f41f3147a816b709b4ebd26db780",
+"index.html": "41b81ffd3c19823be2ec4c8139d52b98",
+"/": "41b81ffd3c19823be2ec4c8139d52b98",
+"main.dart.js": "6dc51d70ecd29069b2c61d72d9955f2b",
 "manifest.json": "74b591fb6a5d49ede118d198f525aecb",
 "version.json": "1138c94fed89ea80ac342b3f5c0c903b"
 };
