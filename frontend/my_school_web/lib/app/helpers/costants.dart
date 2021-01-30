@@ -16,7 +16,6 @@ Map menuAdmin = {
   "Teachers": {"route name": "/teachers-view", "icon": MdiIcons.accountTie, "children": null},
   "Students": {"route name": "/students-view", "icon": MdiIcons.account, "children": null},
   "Parents": {"route name": "/parents-view", "icon": MdiIcons.humanFemaleGirl, "children": null},
-  "divider1": "divider",
   "Academics": {
     "icon": MdiIcons.newspaper,
     "children": {
@@ -38,7 +37,6 @@ Map menuAdmin = {
       "Teachers Attendance": {"route name": "/to-do-page", "icon": MdiIcons.minus, "children": null},
     }
   },
-  "divider2": "divider",
   "Events": {"route name": "/to-do-page", "icon": MdiIcons.calendar, "children": null},
   "Notify": {"route name": "/notification-view", "icon": MdiIcons.bell, "children": null},
   "General Settings": {

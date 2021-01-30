@@ -1,3 +1,12 @@
+# Build the container image
+# if i remove --build-arg CACHEBUST then it will not update time date in index.html until i change something in source code
+# in order to docker to rebuild all commands below COPY, so current version date time will be related to last time the source code was modified
+# https://github.com/moby/moby/issues/1996#issuecomment-185872769
+## docker build -t registry.gitlab.com/salim97/gitlab-container-registry .
+# Run the docker image with localhost 80 port.
+## docker run -d -p 80:3000 registry.gitlab.com/salim97/gitlab-container-registry
+# push image to gitlab container registry
+## docker push registry.gitlab.com/salim97/gitlab-container-registry
 
 FROM node:14.15-alpine 
 
@@ -8,12 +17,16 @@ WORKDIR /usr/src/app
 COPY package.json .
 RUN npm install
 
+ENV NODE_ENV=production
+EXPOSE 3000
+
 # Bundle app source
-COPY ./src .
-COPY ./public .
 COPY ./school-erp-ef01f-firebase-adminsdk-8nouk-98c56d46f6.json .
 COPY ./config.env .
+COPY ./src ./src
 
-ENV NODE_ENV=production
+RUN mkdir public
+RUN date > ./public/index.html
+
 
 ENTRYPOINT [ "npm", "start" ]

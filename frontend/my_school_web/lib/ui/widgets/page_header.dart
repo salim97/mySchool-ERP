@@ -16,9 +16,11 @@ class PageHeader extends StatelessWidget {
         // SizedBox(width: 30,),
         Padding(
           padding: const EdgeInsets.all(14),
-          child: Text(
-            title,
-           style: Theme.of(context).textTheme.headline3,
+          child: CustomText(
+            text: title,
+            size: 40,
+            weight: FontWeight.bold,
+            color: Colors.black,
           ),
         ),
       ],

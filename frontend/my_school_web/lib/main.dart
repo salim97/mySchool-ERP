@@ -36,35 +36,41 @@ void main() {
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
-  // @override
-  // Widget build(BuildContext context) {
-  //   return MaterialApp(
-  //     debugShowCheckedModeBanner: false,
-  //     theme: ThemeData(
-  //       primarySwatch: Colors.green,
-  //     ),
-  //     // navigatorKey: locator<DialogService>().navigatorKey,
-  //     // navigatorKey: locator<NavigationService>().navigatorKey,
-  //     initialRoute: auto_router.Routes.appPagesController,
-  //     onGenerateRoute: auto_router.Router().onGenerateRoute,
-  //     //key: locator<DialogService>().navigatorKey,
-  //     // home: AppPagesController(),
-  //   );
-  // }
   @override
   Widget build(BuildContext context) {
-    return AdaptiveTheme(
-      light: MyTheme.lightThemeData,
-      dark: MyTheme.darkThemeData,
-      initial: AdaptiveThemeMode.light,
-      builder: (theme, darkTheme) => MaterialApp(
-        theme: theme,
-        debugShowCheckedModeBanner: false,
-        initialRoute: auto_router.Routes.appPagesController,
-        onGenerateRoute: auto_router.Router().onGenerateRoute,
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
       ),
+      // navigatorKey: locator<DialogService>().navigatorKey,
+      // navigatorKey: locator<NavigationService>().navigatorKey,
+      initialRoute: auto_router.Routes.appPagesController,
+      onGenerateRoute: auto_router.Router().onGenerateRoute,
+      //key: locator<DialogService>().navigatorKey,
+      // home: AppPagesController(),
     );
   }
+  // @override
+  // Widget build(BuildContext context) {
+  //   return AdaptiveTheme(
+  //     light: MyTheme.lightThemeData,
+  //     dark: MyTheme.darkThemeData,
+  //     initial: AdaptiveThemeMode.light,
+  //     builder: (theme, darkTheme) => MaterialApp(
+  //       debugShowCheckedModeBanner: false,
+  //       theme: ThemeData(
+  //         primarySwatch: Colors.green,
+  //       ),
+  //       // navigatorKey: locator<DialogService>().navigatorKey,
+  //       // navigatorKey: locator<NavigationService>().navigatorKey,
+  //       initialRoute: auto_router.Routes.appPagesController,
+  //       onGenerateRoute: auto_router.Router().onGenerateRoute,
+  //       //key: locator<DialogService>().navigatorKey,
+  //       // home: AppPagesController(),
+  //     ),
+  //   );
+  // }
 }
 
 class AppPagesController extends StatelessWidget {

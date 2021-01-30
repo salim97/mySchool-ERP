@@ -25,10 +25,14 @@ class RestAPI {
     // print("serverIP");
     // print(serverIP);
     // return window.location.href.split("/#").first;
-    if (window.location.href.contains("localhost") || window.location.href.contains("127.0.0.1"))
-      return "http://127.0.0.1:3000";
-    else
+    if (kIsWeb) {
+      if (DEVELOPMENT_MODE())
+        return "http://127.0.0.1:3000";
+      else
+        return "https://school-erp-2021.azurewebsites.net";
+    } else {
       return "https://school-erp-2021.azurewebsites.net";
+    }
   }
 
   // String serverIP = "https://myschoolerp.azurewebsites.net";

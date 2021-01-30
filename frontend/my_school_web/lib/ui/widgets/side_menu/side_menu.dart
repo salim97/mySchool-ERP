@@ -78,10 +78,7 @@ class SideMenu extends StatelessWidget {
         iconColor: Colors.white,
         child: Container(
           decoration: BoxDecoration(
-            color: MyTheme.user_interface.first,
-            // gradient: LinearGradient(
-            //   colors: [Colors.indigo, Colors.indigo.shade600],
-            // ),
+            color: MyTheme.drawer_item,
             boxShadow: [BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)],
           ),
           width: 250,

@@ -24,14 +24,11 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  String initialRoute = auto_router.Routes.classRoomView;
+  String initialRoute = auto_router.Routes.dashboardView;
 
   @override
   void initState() {
     super.initState();
-    if (!DEVELOPMENT_MODE()) {
-      initialRoute = auto_router.Routes.dashboardView;
-    }
     setupDialogUi();
   }
 
@@ -40,13 +37,11 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(),
         onModelReady: (model) async {
-          if (DEVELOPMENT_MODE()) {
-            final AuthService _authService = locator<AuthService>();
-            await _authService.login(
-              email: "admin@email.com",
-              password: "azerty2020",
-            );
-          }
+          final AuthService _authService = locator<AuthService>();
+          await _authService.login(
+            email: "admin@email.com",
+            password: "azerty2020",
+          );
         },
         builder: (context, model, child) {
           return ScreenTypeLayout(
@@ -66,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
                         NavigationBar(),
                         Expanded(
                           child: Container(
-                            margin: EdgeInsets.all(10),
+                            // margin: EdgeInsets.all(10),
                             padding: EdgeInsets.all(0),
                             child: Navigator(
                               key: locator<NavigationService>().navigatorKey,

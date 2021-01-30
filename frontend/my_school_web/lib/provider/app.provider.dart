@@ -14,7 +14,6 @@ class AppProvider with ChangeNotifier {
   String getNameOfThisRoute(String route) {
     String currentRoute = "NULL";
     sideMenu.forEach((key1, value1) {
-      if (value1 == "divider") return;
       if (value1["children"] == null) {
         if (value1["route name"] == route) currentRoute = key1;
         return;

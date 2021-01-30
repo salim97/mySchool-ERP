@@ -11,9 +11,6 @@ process.on('uncaughtException', err => {
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 
-
-
-
 const MONGO_INITDB_ROOT_USERNAME = process.env.MONGO_INITDB_ROOT_USERNAME || "root";
 const MONGO_INITDB_ROOT_PASSWORD = process.env.MONGO_INITDB_ROOT_PASSWORD || "rootpassword";
 const MONGO_INITDB_URL = process.env.MONGO_INITDB_URL || "localhost";
@@ -23,11 +20,11 @@ var PORT = 3000;
 if (process.env.NODE_ENV === 'production') {
   console.log("production")
   MONGODB_BASE_ADDRESS = process.env.DATABASE;
-  PORT = 80;
+  // PORT = 80;
 } else {
   console.log("development")
   MONGODB_BASE_ADDRESS = `mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_URL}:27017/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=MongoDB%20Compass&ssl=false`
-  PORT = 3000;
+  // PORT = 3000;
 }
 
 mongoose
@@ -38,11 +35,13 @@ mongoose
     useFindAndModify: false
   })
   .then(() => {
+    console.log('DB connection successful!');
     const userModel = require('./models/users/user.model');
     userModel.estimatedDocumentCount().then((estimate) => {
-      if (!process.env.NODE_ENV === 'production') {
-        // console.log(MONGODB_BASE_ADDRESS);
-        // console.log(`Estimated number of documents in the user collection: ${estimate}`);
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log(MONGODB_BASE_ADDRESS);
+        console.log(`Estimated number of documents in the user collection: ${estimate}`);
       }
 
       if (estimate == 0) {
@@ -54,8 +53,6 @@ mongoose
         });
       }
     });
-
-    return console.log('DB connection successful!');
   });
 
 
@@ -70,6 +67,4 @@ process.on('unhandledRejection', err => {
     process.exit(1);
   });
 });
-
-
 

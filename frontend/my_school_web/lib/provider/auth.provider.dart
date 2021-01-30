@@ -2,16 +2,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:my_school_web/common/rest_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:my_school_web/common/common.dart';
 
 enum Status { Uninitialized, Authenticated, Authenticating, Unauthenticated }
 
 class AuthProvider with ChangeNotifier {
   // User _user;
   // Status status = Status.Uninitialized;
-  // Status status = Status.Unauthenticated;
-  Status status = Status.Authenticated;
+  Status status = Status.Unauthenticated;
+  // Status status = Status.Authenticated;
   // UserModel _userModel;
 
 //  getter
