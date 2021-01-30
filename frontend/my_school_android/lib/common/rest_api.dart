@@ -1,9 +1,4 @@
-import 'dart:html';
-import 'dart:io';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:dio/adapter.dart';
-import 'package:dio/adapter_browser.dart';
-
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:logger/logger.dart';
@@ -11,9 +6,11 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
+// import 'dart:html';
+// DEVELOPMENT_MODE() => window.location.href.contains("localhost") || window.location.href.contains("127.0.0.1") ? true : false;
+DEVELOPMENT_MODE() => false;
 
 const DEBUG_HTTP = true; //print http responses from server
-DEVELOPMENT_MODE() => window.location.href.contains("localhost") || window.location.href.contains("127.0.0.1") ? true : false;
 
 class RestAPI {
   // String serverIP = "http://127.0.0.1:3000";

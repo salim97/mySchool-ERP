@@ -64,7 +64,7 @@ class _HomeViewState extends State<HomeView> {
                         NavigationBar(),
                         Expanded(
                           child: Container(
-                            // margin: EdgeInsets.all(10),
+                            margin: EdgeInsets.all(10),
                             padding: EdgeInsets.all(0),
                             child: Navigator(
                               key: locator<NavigationService>().navigatorKey,

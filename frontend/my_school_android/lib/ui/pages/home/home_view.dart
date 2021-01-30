@@ -19,8 +19,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   bool isTapped;
   int currentSelectedIndex;
-  int rtlValue;
-
   Map _menu;
 
   @override

@@ -15,8 +15,10 @@ class NavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)]),
-      height: 70,
+      decoration: BoxDecoration(color: Colors.white, boxShadow: [
+        BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)
+      ]),
+      height: 60,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end, //change here don't //worked
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +45,9 @@ class NavigationBar extends StatelessWidget {
                     child: Container(
                       width: 12,
                       height: 12,
-                      decoration: BoxDecoration(color: Colors.red, borderRadius: BorderRadius.circular(20)),
+                      decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(20)),
                     ),
                   )
                 ],
@@ -79,11 +83,15 @@ class NavigationBar extends StatelessWidget {
                     onPressed: () {
                       showMenu<String>(
                         context: context,
-                        position: RelativeRect.fromLTRB(25.0, 25.0, 0.0, 0.0), //position where you want to show the menu on screen
+                        position: RelativeRect.fromLTRB(25.0, 25.0, 0.0,
+                            0.0), //position where you want to show the menu on screen
                         items: [
-                          PopupMenuItem<String>(child: const Text('Your profile'), value: '1'),
-                          PopupMenuItem<String>(child: const Text('Settings'), value: '2'),
-                          PopupMenuItem<String>(child: const Text('Sign out'), value: '3'),
+                          PopupMenuItem<String>(
+                              child: const Text('Your profile'), value: '1'),
+                          PopupMenuItem<String>(
+                              child: const Text('Settings'), value: '2'),
+                          PopupMenuItem<String>(
+                              child: const Text('Sign out'), value: '3'),
                         ],
                         elevation: 8.0,
                       ).then<void>((String itemSelected) async {
@@ -91,11 +99,14 @@ class NavigationBar extends StatelessWidget {
 
                         if (itemSelected == "1") {
                           //  await locator<NavigationService>().navigateTo(Routes.teachersView);
-                          locator<NavigationService>().replaceWith(Routes.dashboardView);
+                          locator<NavigationService>()
+                              .replaceWith(Routes.dashboardView);
                         } else if (itemSelected == "2") {
-                          locator<NavigationService>().replaceWith(Routes.toDoPage);
+                          locator<NavigationService>()
+                              .replaceWith(Routes.toDoPage);
                         } else {
-                          final authProvider = Provider.of<AuthProvider>(context, listen: false);
+                          final authProvider =
+                              Provider.of<AuthProvider>(context, listen: false);
                           authProvider.status = Status.Unauthenticated;
                           authProvider.notifyListeners();
                         }

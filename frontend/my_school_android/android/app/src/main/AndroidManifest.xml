@@ -6,7 +6,7 @@
         android:name=".Application"
         android:usesCleartextTraffic="true"
         android:label="my_school_android"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
