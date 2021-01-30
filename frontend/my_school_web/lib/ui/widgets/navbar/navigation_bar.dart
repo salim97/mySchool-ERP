@@ -16,7 +16,7 @@ class NavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: Colors.white, boxShadow: [BoxShadow(color: Colors.grey[200], offset: Offset(3, 5), blurRadius: 17)]),
-      height: 50,
+      height: 70,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end, //change here don't //worked
         crossAxisAlignment: CrossAxisAlignment.center,

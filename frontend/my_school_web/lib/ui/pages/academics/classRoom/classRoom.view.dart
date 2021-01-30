@@ -19,7 +19,6 @@ class ClassRoomView extends StatefulWidget {
 class _ClassRoomViewState extends State<ClassRoomView> {
   @override
   Widget build(BuildContext context) {
-
     return ViewModelBuilder<ClassRoomViewModel>.reactive(
       viewModelBuilder: () => ClassRoomViewModel(),
       onModelReady: (model) {
@@ -31,7 +30,7 @@ class _ClassRoomViewState extends State<ClassRoomView> {
             child: Column(mainAxisAlignment: MainAxisAlignment.start, mainAxisSize: MainAxisSize.max, children: [
           if (model.isAddElementVisible)
             Card(
-              elevation: 1,
+              elevation: 15,
               shadowColor: Colors.black,
               clipBehavior: Clip.none,
               child: Column(
@@ -146,25 +145,20 @@ class _ClassRoomViewState extends State<ClassRoomView> {
           SizedBox(
             height: 20,
           ),
-          Card(
-            elevation: 1,
-            shadowColor: Colors.black,
-            clipBehavior: Clip.none,
-            child: Column(
-              children: [
-                PageHeader(),
-                MyTableView(
-                  isLoading: model.isLoading,
-                  source: model.source,
-                  headers: model.headers,
-                  onRefresh: model.onRefresh,
-                  onCreateNew: model.onCreateNew,
-                  onEdit: model.onEdit,
-                  onDelete: model.onDelete,
-                  onSearch: model.onSearch,
-                ),
-              ],
-            ),
+          Column(
+            children: [
+              PageHeader(),
+              MyTableView(
+                isLoading: model.isLoading,
+                source: model.source,
+                headers: model.headers,
+                onRefresh: model.onRefresh,
+                onCreateNew: model.onCreateNew,
+                onEdit: model.onEdit,
+                onDelete: model.onDelete,
+                onSearch: model.onSearch,
+              ),
+            ],
           ),
         ]));
       },

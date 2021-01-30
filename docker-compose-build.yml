@@ -10,6 +10,6 @@ services:
     volumes:
       - ./frontend/my_school_web:/usr/src/app
       - ./frontend/common/lib:/usr/src/app/lib/common
-      - ./Flutter-WEB-App:/usr/src/tmp/build/web
+      - ./backend/public:/usr/src/tmp/build/web
 
   

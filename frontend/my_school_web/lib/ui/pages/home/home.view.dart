@@ -37,11 +37,14 @@ class _HomeViewState extends State<HomeView> {
     return ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => HomeViewModel(),
         onModelReady: (model) async {
-          final AuthService _authService = locator<AuthService>();
-          await _authService.login(
-            email: "admin@email.com",
-            password: "azerty2020",
-          );
+          if (DEVELOPMENT_MODE()) {
+            final AuthService _authService = locator<AuthService>();
+            await _authService.login(
+              email: "admin@email.com",
+              password: "azerty2020",
+            );
+            
+          }
         },
         builder: (context, model, child) {
           return ScreenTypeLayout(

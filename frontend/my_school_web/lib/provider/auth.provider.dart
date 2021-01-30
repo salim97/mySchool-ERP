@@ -28,6 +28,11 @@ class AuthProvider with ChangeNotifier {
   String userProfileImage = "";
 
   AuthProvider.initialize() {
+    if (DEVELOPMENT_MODE()) {
+      status = Status.Authenticated;
+    } else {
+      status = Status.Unauthenticated;
+    }
     email.text = "admin@email.com";
     password.text = "azerty2020";
     notifyListeners();

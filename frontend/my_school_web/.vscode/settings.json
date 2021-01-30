@@ -1,5 +1,6 @@
 {
     "files.exclude": {
         "**/*.g.dart": true
-    }
+    },
+    "files.autoSave": "afterDelay"
 }

@@ -31,7 +31,7 @@ class DashboardView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      height: 800,
+                      height: 1000,
                       width: MediaQuery.of(context).size.width / 1.9,
                       child: SalesChart(),
                     ),
