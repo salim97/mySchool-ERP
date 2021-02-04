@@ -20,7 +20,6 @@ void setupLocator() {
   // locator.registerLazySingleton<WorkingHoursService>(() => FakeWorkingHoursService());
   locator.registerLazySingleton<ClassRoomService>(() => ClassRoomServiceImpl());
   locator.registerLazySingleton<GroupService>(() => GroupServiceImpl());
-  locator.registerLazySingleton<StudentGroupService>(() => StudentGroupServiceImpl());
   locator.registerLazySingleton<SectionService>(() => SectionServiceImpl());
   locator.registerLazySingleton<SubjectService>(() => SubjectServiceImpl());
   locator.registerLazySingleton<TeacherSubjectService>(() => TeacherSubjectServiceImpl());
