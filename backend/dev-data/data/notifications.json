@@ -1,0 +1,19 @@
+[{
+  "_id": {
+    "$oid": "6017cfeade72a8288c702ef5"
+  },
+  "createdAt": {
+    "$date": "2021-02-01T09:54:50.620Z"
+  },
+  "topic": [
+    "all_teachers"
+  ],
+  "children": [],
+  "title": "1612173278262",
+  "message": "1612173278262",
+  "type": "fcm",
+  "senderInfo": {
+    "$oid": "60104c635a734f001d070994"
+  },
+  "__v": 0
+}]

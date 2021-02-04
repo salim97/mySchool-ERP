@@ -17,7 +17,13 @@ const groupSchema = new mongoose.Schema({
     required: [true, 'group must belong to a section!']
   },
 
-
+  children: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'Students',
+      autopopulate: true
+    }
+  ],
 
 },
   {

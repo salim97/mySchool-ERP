@@ -59,7 +59,9 @@ class _AddTeacherViewState extends State<AddTeacherView> {
               child: Column(
                 // shrinkWrap: true,
                 children: [
-                  PageHeader(),
+                  PageHeader(
+                     title: "Add New Teacher",
+                  ),
                   Card(
                       elevation: 10,
                       shadowColor: Colors.black,
@@ -81,6 +83,13 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                           Row(
                             children: [
                               userProfile(),
+                              SizedBox(
+                                width: 150,
+                              ),
+                                                            SizedBox(
+                                width: 500,
+                                child: userInputText(title: "Full Name", textEditingController: model.usernameController, mustFill: true),
+                              ),
                               SizedBox(
                                 width: 150,
                               ),
@@ -186,9 +195,7 @@ class _AddTeacherViewState extends State<AddTeacherView> {
                                       return "Please enter a valid email address";
                                     }
                                   }),
-                              !model.editOnly
-                                  ? Container()
-                                  : userInputText(title: "Username", textEditingController: model.usernameController, mustFill: true),
+
                               !model.editOnly
                                   ? Container()
                                   : userInputText(

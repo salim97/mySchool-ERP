@@ -15,6 +15,7 @@ import '../ui/pages/WorkingHours/working_hours.view.dart';
 import '../ui/pages/academics/classRoom/classRoom.view.dart';
 import '../ui/pages/academics/group/group.view.dart';
 import '../ui/pages/academics/section/section.view.dart';
+import '../ui/pages/academics/studentGroup/studentGroup.view.dart';
 import '../ui/pages/academics/subject/subject.view.dart';
 import '../ui/pages/academics/teacherSubject/teacherSubject.view.dart';
 import '../ui/pages/academics/timeTable/timeTable.view.dart';
@@ -49,6 +50,7 @@ class Routes {
   static const String teacherSubjectView = '/teacher-subject-view';
   static const String timeTableView = '/time-table-view';
   static const String notificationView = '/notification-view';
+  static const String studentGroupView = '/student-group-view';
   static const all = <String>{
     splashView,
     loginView,
@@ -69,6 +71,7 @@ class Routes {
     teacherSubjectView,
     timeTableView,
     notificationView,
+    studentGroupView,
   };
 }
 
@@ -95,6 +98,7 @@ class Router extends RouterBase {
     RouteDef(Routes.teacherSubjectView, page: TeacherSubjectView),
     RouteDef(Routes.timeTableView, page: TimeTableView),
     RouteDef(Routes.notificationView, page: NotificationView),
+    RouteDef(Routes.studentGroupView, page: StudentGroupView),
   ];
   @override
   Map<Type, AutoRouteFactory> get pagesMap => _pagesMap;
@@ -210,6 +214,12 @@ class Router extends RouterBase {
     NotificationView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => NotificationView(),
+        settings: data,
+      );
+    },
+    StudentGroupView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => StudentGroupView(),
         settings: data,
       );
     },

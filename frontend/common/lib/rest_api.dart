@@ -6,16 +6,17 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stack_trace/stack_trace.dart';
 import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
+
 // import 'dart:html';
 // DEVELOPMENT_MODE() => window.location.href.contains("localhost") || window.location.href.contains("127.0.0.1") ? true : false;
-DEVELOPMENT_MODE() => false;
+DEVELOPMENT_MODE() => true;
 
 const DEBUG_HTTP = true; //print http responses from server
 
 class RestAPI {
   // String serverIP = "http://127.0.0.1:3000";
   // String serverIP = "http://10.0.2.2:3000";
-  String _serverIP = "http://temporaryurl.ddnsking.com:3000";
+  // String _serverIP = "http://temporaryurl.ddnsking.com:3000";
 
   String get serverIP {
     // String url = window.location.href.split("/#").first;
@@ -28,7 +29,8 @@ class RestAPI {
       else
         return "https://school-erp-2021.azurewebsites.net";
     } else {
-      return "https://school-erp-2021.azurewebsites.net";
+      return "http://10.0.2.2:3000";
+      // return "https://school-erp-2021.azurewebsites.net";
     }
   }
 

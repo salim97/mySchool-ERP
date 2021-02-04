@@ -230,4 +230,5 @@ class TimeTableViewModel extends BaseViewModel {
     // });
     notifyListeners();
   }
+
 }

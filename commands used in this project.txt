@@ -54,3 +54,13 @@ docker-compose -f docker-compose-build.yml up
 # to run backend( Node.js + MongoDB ) + frontend on localhost 
 docker-compose -f docker-compose-run.yml up
 
+#once you are in mongoDB container, run this command to backup database
+mongodump --host 127.0.0.1 --port 27017 --db $MONGO_INITDB_DATABASE  --authenticationDatabase admin --username $MONGO_INITDB_ROOT_USERNAME --password $MONGO_INITDB_ROOT_PASSWORD --out .
+
+#to get id of mongodb container
+docker container ls
+
+#to get backup from the running container into local storage
+docker cp 51d42b522921:/tmp .tmp/
+https://stackoverflow.com/questions/18931668/how-to-restore-the-dump-into-your-running-mongodb
+mongorestore --db databasename --verbose \path\dump\<dumpfolder>

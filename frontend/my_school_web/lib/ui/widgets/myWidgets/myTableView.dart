@@ -1,3 +1,4 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -52,7 +53,6 @@ class _MyTableViewState extends State<MyTableView> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     widget.headers.add(DatatableHeader(
       flex: 1,
@@ -169,8 +169,10 @@ class _MyTableViewState extends State<MyTableView> {
                 selecteds: selecteds,
                 showSelect: showSelect,
                 autoHeight: false,
+                
                 onTabRow: (data) {
                   print(data);
+                  FlutterClipboard.copy(data.toString()).then(( value ) => print('copied'));
                 },
                 onSort: (value) {
                   setState(() {

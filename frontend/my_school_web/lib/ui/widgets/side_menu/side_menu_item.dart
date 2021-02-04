@@ -17,7 +17,6 @@ class SideMenuItemDesktop extends StatelessWidget {
       title: Text(
         text,
         style: Theme.of(context).textTheme.button,
-        
         // weight: active ? FontWeight.bold : FontWeight.w300,
       ),
     );

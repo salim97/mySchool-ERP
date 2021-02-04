@@ -1,0 +1,110 @@
+[{
+  "_id": {
+    "$oid": "60104c635a734f001d070994"
+  },
+  "photo": "default.jpg",
+  "role": "admin",
+  "active": true,
+  "email": "admin@email.com",
+  "password": "$2a$12$AeVPAgYCbE/FTHqFpeHr7uXmWFeShvzeyT6y8bg03XAkeJGFlut.O",
+  "__v": 0,
+  "fcmToken": null
+},{
+  "_id": {
+    "$oid": "6017d711de72a8288c702ef6"
+  },
+  "photo": "default.jpg",
+  "role": "admin",
+  "active": true,
+  "email": "teacher@email.com",
+  "password": "$2a$12$VEZTjKumVCaBvIZKCqhPm.AB.Qp.xkkMunMMadm70rSp2wAOic9Lq",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b46b58f0826283a6052"
+  },
+  "photo": "default.jpg",
+  "role": "teacher",
+  "active": true,
+  "fcmToken": null,
+  "email": "salim@teacher.com",
+  "password": "$2a$12$TYMKWhR4PwEey/1Ly4Bo6.Z9TZsBXYkN3yajgHOwPa2y9ipYGevVG",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b5ab58f0826283a6054"
+  },
+  "photo": "default.jpg",
+  "role": "teacher",
+  "active": true,
+  "fcmToken": null,
+  "email": "teen@teacher.com",
+  "password": "$2a$12$Z4d7kkAu5hB2nG7FmtyjR.J5dhKekfw7qaCuJpU7cJS4CVX5HkBSa",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b67b58f0826283a6056"
+  },
+  "photo": "default.jpg",
+  "role": "teacher",
+  "active": true,
+  "fcmToken": null,
+  "email": "akram@teacher.com",
+  "password": "$2a$12$n2drZrTgkmaspe6ih6SxqOJzqF1wONRDObk/XgtPzZHDEkfrAOhfm",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b78b58f0826283a6058"
+  },
+  "photo": "default.jpg",
+  "role": "student",
+  "active": true,
+  "fcmToken": null,
+  "email": "salim@student.com",
+  "password": "$2a$12$p4ff/O.yoVBSZnEavtNT8OlsuXdfm.oRCsGX./6kSnT4PvXKiVEHm",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b8bb58f0826283a605a"
+  },
+  "photo": "default.jpg",
+  "role": "student",
+  "active": true,
+  "fcmToken": null,
+  "email": "teen@student.com",
+  "password": "$2a$12$NGXAz5FVRw28Xem/G.gU0u3hfANxP/VI4XSKjyfAmxSdlBPlJ2bjK",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b9ab58f0826283a605c"
+  },
+  "photo": "default.jpg",
+  "role": "student",
+  "active": true,
+  "fcmToken": null,
+  "email": "akram@student.com",
+  "password": "$2a$12$BylCl5TSYSuH.fFDteCTb.iugZ687xbTzK6SuMBDp8PLxUFKg8tlG",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194ba8b58f0826283a605e"
+  },
+  "photo": "default.jpg",
+  "role": "parent",
+  "active": true,
+  "fcmToken": null,
+  "email": "salim@parent.com",
+  "password": "$2a$12$f4dUKkHEVaTjcNUXEYzRFuv1Glf9d2SFNAmpCHizpinAtyHUEF8yq",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194bb9b58f0826283a6060"
+  },
+  "photo": "default.jpg",
+  "role": "parent",
+  "active": true,
+  "fcmToken": null,
+  "email": "teen@parent.com",
+  "password": "$2a$12$p3PsmLwDw/fEmt39Q0TpEuhpMXLKikmKC0kPj7m0KvcYbysDIN0jK",
+  "__v": 0
+}]

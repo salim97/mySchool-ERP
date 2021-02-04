@@ -1,0 +1,67 @@
+[{
+  "_id": {
+    "$oid": "60194b78b58f0826283a6059"
+  },
+  "createdAt": {
+    "$date": "2021-02-02T12:54:16.661Z"
+  },
+  "name": "salim",
+  "gender": "male",
+  "date_of_birth": null,
+  "phone": "1612270442666",
+  "street_address": "1612270442666",
+  "city_name": "",
+  "country": "",
+  "pin_code": "",
+  "joining_date": "",
+  "leaving_date": "",
+  "current_position": "",
+  "user": {
+    "$oid": "60194b78b58f0826283a6058"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b8bb58f0826283a605b"
+  },
+  "createdAt": {
+    "$date": "2021-02-02T12:54:35.784Z"
+  },
+  "name": "teen",
+  "gender": "male",
+  "date_of_birth": null,
+  "phone": "1612270458048",
+  "street_address": "1612270458048",
+  "city_name": "",
+  "country": "",
+  "pin_code": "",
+  "joining_date": "",
+  "leaving_date": "",
+  "current_position": "",
+  "user": {
+    "$oid": "60194b8bb58f0826283a605a"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194b9ab58f0826283a605d"
+  },
+  "createdAt": {
+    "$date": "2021-02-02T12:54:50.826Z"
+  },
+  "name": "akram",
+  "gender": "male",
+  "date_of_birth": null,
+  "phone": "1612270477350",
+  "street_address": "1612270477350",
+  "city_name": "",
+  "country": "",
+  "pin_code": "",
+  "joining_date": "",
+  "leaving_date": "",
+  "current_position": "",
+  "user": {
+    "$oid": "60194b9ab58f0826283a605c"
+  },
+  "__v": 0
+}]

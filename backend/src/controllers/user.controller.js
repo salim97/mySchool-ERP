@@ -103,7 +103,38 @@ exports.createUser = (req, res) => {
   });
 };
 
-exports.getUser = factory.getOne(User);
+exports.getUser = catchAsync(async (req, res, next) => {
+
+  let query = User.findById(req.params.id);
+  var doc = await query;
+
+  if (!doc) {
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+
+  var extraData = undefined;
+  if (doc.role == "teacher") {
+    const Teacher = require('../models/users/teacher.model');
+    extraData = await Teacher.findOne({ user: doc });
+  }
+  if (doc.role == "student") {
+    const Student = require('../models/users/student.model');
+    extraData= await Student.findOne({ user: doc });
+  }
+  if (doc.role == "parent") {
+    const Parent = require('../models/users/parent.model');
+    extraData=await Parent.findOne({ user: doc });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      data: doc,
+      extra: extraData
+    }
+  });
+});;
 exports.getAllUsers = factory.getAll(User);
 
 // Do NOT update passwords with this!

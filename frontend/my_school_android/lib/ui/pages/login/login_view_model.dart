@@ -37,8 +37,7 @@ class LoginViewModel extends BaseViewModel {
       priority: Priority.high,
     );
 
-    var platformChannelSpecifics =
-        new NotificationDetails(android: androidPlatformChannelSpecifics);
+    var platformChannelSpecifics = new NotificationDetails(android: androidPlatformChannelSpecifics);
     await flutterLocalNotificationsPlugin.show(
       0,
       message["notification"]["title"],
@@ -49,6 +48,12 @@ class LoginViewModel extends BaseViewModel {
   }
 
   init() async {
+    // emailController.text = "1611680952895@email.com"; // teacher
+    // emailController.text = "1612196960900@email.com"; // parent
+    emailController.text = "1612196971585@email.com"; // student
+    passwordController.text = "azerty2020";
+    notifyListeners();
+    return;
     var initializationSettingsAndroid = AndroidInitializationSettings('@mipmap/ic_launcher');
 
     var initializationSettings = InitializationSettings(android: initializationSettingsAndroid);
@@ -57,7 +62,7 @@ class LoginViewModel extends BaseViewModel {
     await _pushNotificationService.initialise();
 
     _pushNotificationService.fcm.configure(
-        onBackgroundMessage: myBackgroundHandler,
+      onBackgroundMessage: myBackgroundHandler,
       onMessage: (Map<String, dynamic> message) async {
         var l = new Logger();
         l.d(message);
@@ -85,8 +90,6 @@ class LoginViewModel extends BaseViewModel {
     await _pushNotificationService.fcm.unsubscribeFromTopic("all_teachers");
     await _pushNotificationService.fcm.unsubscribeFromTopic("all_students");
     await _pushNotificationService.fcm.unsubscribeFromTopic("all_parent");
-    emailController.text = "teacher@email.com";
-    passwordController.text = "azerty2020";
   }
 
   var l = new Logger();
@@ -106,6 +109,7 @@ class LoginViewModel extends BaseViewModel {
       email: emailController.text,
       password: passwordController.text,
     );
+    if (response.statusCode != 200) return;
 
     if (_authService.userModel.role == "teacher") {
       await _pushNotificationService.fcm.subscribeToTopic('all_teachers');
@@ -116,7 +120,7 @@ class LoginViewModel extends BaseViewModel {
     if (_authService.userModel.role == "parent") {
       await _pushNotificationService.fcm.subscribeToTopic('all_parent');
     }
-    await _navigationService.navigateTo(Routes.homeView);
+    await _navigationService.replaceWith(Routes.homeView);
     // l.d(response.statusCode);
     // l.d(_authService.userModel.toJson());
     // Future.delayed(Duration(seconds: 3), () async {

@@ -118,6 +118,13 @@ class _AddParentViewState extends State<AddParentView> {
                               SizedBox(
                                 width: 150,
                               ),
+                                                            SizedBox(
+                                width: 500,
+                                child: userInputText(title: "Full Name", textEditingController: model.usernameController, mustFill: true),
+                              ),
+                              SizedBox(
+                                width: 150,
+                              ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -258,9 +265,6 @@ class _AddParentViewState extends State<AddParentView> {
                                       return "Please enter a valid email address";
                                     }
                                   }),
-                              !model.editOnly
-                                  ? Container()
-                                  : userInputText(title: "Username", textEditingController: model.usernameController, mustFill: true),
                               !model.editOnly
                                   ? Container()
                                   : userInputText(

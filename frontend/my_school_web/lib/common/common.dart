@@ -1,4 +1,6 @@
 library common;
+// flutter pub run build_runner clean
+//  flutter pub get ; flutter pub run build_runner build --delete-conflicting-outputs
 
 export './models/academics/class_room.model.dart';
 export './models/academics/group.model.dart';

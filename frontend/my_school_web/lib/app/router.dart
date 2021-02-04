@@ -10,6 +10,7 @@ import 'package:my_school_web/ui/pages/WorkingHours/working_hours.view.dart';
 import 'package:my_school_web/ui/pages/academics/classRoom/classRoom.view.dart';
 import 'package:my_school_web/ui/pages/academics/group/group.view.dart';
 import 'package:my_school_web/ui/pages/academics/section/section.view.dart';
+import 'package:my_school_web/ui/pages/academics/studentGroup/studentGroup.view.dart';
 import 'package:my_school_web/ui/pages/academics/subject/subject.view.dart';
 import 'package:my_school_web/ui/pages/academics/teacherSubject/teacherSubject.view.dart';
 import 'package:my_school_web/ui/pages/academics/timeTable/timeTable.view.dart';
@@ -47,9 +48,9 @@ import 'package:my_school_web/ui/pages/error_page/todo.view.dart';
     MaterialRoute(page: TeacherSubjectView),
     MaterialRoute(page: TimeTableView),
     MaterialRoute(page: NotificationView),
+    MaterialRoute(page: StudentGroupView),
   ],
   transitionsBuilder: TransitionsBuilders.zoomIn,
   durationInMilliseconds: 400,
 )
 class $Router {}
-

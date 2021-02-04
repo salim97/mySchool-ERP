@@ -1,0 +1,34 @@
+[{
+  "_id": {
+    "$oid": "60194c52b58f0826283a6071"
+  },
+  "createdAt": {
+    "$date": "2021-02-02T12:57:54.633Z"
+  },
+  "name": "English",
+  "code": "e1",
+  "type": "Practical",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194c60b58f0826283a6072"
+  },
+  "createdAt": {
+    "$date": "2021-02-02T12:58:08.257Z"
+  },
+  "name": "Math",
+  "code": "m1",
+  "type": "Theory",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60194c6eb58f0826283a6073"
+  },
+  "createdAt": {
+    "$date": "2021-02-02T12:58:22.978Z"
+  },
+  "name": "French",
+  "code": "f1",
+  "type": "Practical",
+  "__v": 0
+}]

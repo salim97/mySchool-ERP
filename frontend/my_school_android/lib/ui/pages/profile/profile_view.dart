@@ -19,21 +19,14 @@ class _ProfileViewState extends State<ProfileView> {
   String _password;
   String id;
   String image;
-  Map<String, String> userInfo = {
-    "Date of Birth": "05/05/2015",
-    "Religion": "05/05/2015",
-    "Phone Number": "+213 6XX XXX XX",
-    "Email address": "email@email.com",
-    "Present address": "85/6, Address, DZ",
-    "Father name": "Father Name",
-    "Mother name": "Mother Name",
-    "Blood group": "O(+ve)",
-  };
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProfileViewModel>.reactive(
       viewModelBuilder: () => ProfileViewModel(),
+      onModelReady: (model) {
+        model.init();
+      },
       builder: (
         BuildContext context,
         ProfileViewModel model,
@@ -67,7 +60,12 @@ class _ProfileViewState extends State<ProfileView> {
                       SizedBox(
                         width: 15.0,
                       ),
-                      getProfileHeader(fullName: "Full Name", classNumber: "5", sectionNumber: "A", rollNumber: "123456", admNumber: "89754321"),
+                      getProfileHeader(
+                        fullName: model.userInfo["name"],
+                        classNumber: model.userInfo["Group"],
+                        sectionNumber: model.userInfo["Section"],
+                        rollNumber: model.userInfo["rollNo"],
+                      ),
                     ],
                   ),
                 ),
@@ -109,96 +107,96 @@ class _ProfileViewState extends State<ProfileView> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isParents = true;
-                              isPersonal = false;
-                              isTransport = false;
-                              isOthers = false;
+                      // Expanded(
+                      //   child: GestureDetector(
+                      //     onTap: () {
+                      //       setState(() {
+                      //         isParents = true;
+                      //         isPersonal = false;
+                      //         isTransport = false;
+                      //         isOthers = false;
 
-                              section = 'parents';
-                            });
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Parents',
-                                style: Theme.of(context).textTheme.display1.copyWith(
-                                      color: Color(0xFF415094),
-                                    ),
-                              ),
-                              Container(
-                                height: 2.0,
-                                decoration: BoxDecoration(
-                                  color: isParents ? Colors.deepPurpleAccent : Colors.white,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isTransport = true;
-                              isParents = false;
-                              isPersonal = false;
-                              isOthers = false;
+                      //         section = 'parents';
+                      //       });
+                      //     },
+                      //     child: Column(
+                      //       children: <Widget>[
+                      //         Text(
+                      //           'Parents',
+                      //           style: Theme.of(context).textTheme.display1.copyWith(
+                      //                 color: Color(0xFF415094),
+                      //               ),
+                      //         ),
+                      //         Container(
+                      //           height: 2.0,
+                      //           decoration: BoxDecoration(
+                      //             color: isParents ? Colors.deepPurpleAccent : Colors.white,
+                      //           ),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // Expanded(
+                      //   child: GestureDetector(
+                      //     onTap: () {
+                      //       setState(() {
+                      //         isTransport = true;
+                      //         isParents = false;
+                      //         isPersonal = false;
+                      //         isOthers = false;
 
-                              section = 'transport';
-                            });
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Transport',
-                                style: Theme.of(context).textTheme.display1.copyWith(
-                                      color: Color(0xFF415094),
-                                    ),
-                              ),
-                              Container(
-                                height: 2.0,
-                                decoration: BoxDecoration(
-                                  color: isTransport ? Colors.deepPurpleAccent : Colors.white,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isTransport = false;
-                              isParents = false;
-                              isPersonal = false;
-                              isOthers = true;
+                      //         section = 'transport';
+                      //       });
+                      //     },
+                      //     child: Column(
+                      //       children: <Widget>[
+                      //         Text(
+                      //           'Transport',
+                      //           style: Theme.of(context).textTheme.display1.copyWith(
+                      //                 color: Color(0xFF415094),
+                      //               ),
+                      //         ),
+                      //         Container(
+                      //           height: 2.0,
+                      //           decoration: BoxDecoration(
+                      //             color: isTransport ? Colors.deepPurpleAccent : Colors.white,
+                      //           ),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
+                      // Expanded(
+                      //   child: GestureDetector(
+                      //     onTap: () {
+                      //       setState(() {
+                      //         isTransport = false;
+                      //         isParents = false;
+                      //         isPersonal = false;
+                      //         isOthers = true;
 
-                              section = 'others';
-                            });
-                          },
-                          child: Column(
-                            children: <Widget>[
-                              Text(
-                                'Others',
-                                style: Theme.of(context).textTheme.display1.copyWith(
-                                      color: Color(0xFF415094),
-                                    ),
-                              ),
-                              Container(
-                                height: 2.0,
-                                decoration: BoxDecoration(
-                                  color: isOthers ? Colors.deepPurpleAccent : Colors.white,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                      //         section = 'others';
+                      //       });
+                      //     },
+                      //     child: Column(
+                      //       children: <Widget>[
+                      //         Text(
+                      //           'Others',
+                      //           style: Theme.of(context).textTheme.display1.copyWith(
+                      //                 color: Color(0xFF415094),
+                      //               ),
+                      //         ),
+                      //         Container(
+                      //           height: 2.0,
+                      //           decoration: BoxDecoration(
+                      //             color: isOthers ? Colors.deepPurpleAccent : Colors.white,
+                      //           ),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -211,7 +209,7 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
               ),
               Expanded(
-                child: getProfileList(),
+                child: getProfileList(model),
               ),
             ],
           ),
@@ -220,48 +218,55 @@ class _ProfileViewState extends State<ProfileView> {
     );
   }
 
-  Widget getProfileList() {
+  Widget getProfileList(model) {
     return Container(
       height: MediaQuery.of(context).size.height,
       child: Container(
         child: ListView.builder(
-          itemCount: userInfo.keys.length,
+          itemCount: model.userInfo.keys.length,
           itemBuilder: (BuildContext context, int index) {
-            return ProfileRowList(userInfo.keys.elementAt(index), userInfo.values.elementAt(index));
+            return ProfileRowList(model.userInfo.keys.elementAt(index), model.userInfo.values.elementAt(index));
           },
         ),
       ),
     );
   }
 
-  Widget getProfileHeader({ fullName,  classNumber,  sectionNumber,  rollNumber, admNumber}) {
+  Widget getProfileHeader({fullName, classNumber, sectionNumber, rollNumber, admNumber}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      // mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Text(fullName, style: Theme.of(context).textTheme.headline),
-        Text(
-          'Class : ' + classNumber + ' | Section : ' +sectionNumber,
-          style: Theme.of(context).textTheme.title.copyWith(color: Color(0xFF727FC8)),
-        ),
-        Text(
-          'Roll No: ' + rollNumber + ' | Adm No: ' + admNumber,
-          style: Theme.of(context).textTheme.title.copyWith(color: Color(0xFF727FC8)),
-        ),
+        classNumber != null
+            ? Text(
+                'Class : ' + classNumber,
+                style: Theme.of(context).textTheme.title.copyWith(color: Color(0xFF727FC8)),
+              )
+            : Container(),
+        sectionNumber != null
+            ? Text(
+                'Section : ' + sectionNumber,
+                style: Theme.of(context).textTheme.title.copyWith(color: Color(0xFF727FC8)),
+              )
+            : Container(),
+        rollNumber != null
+            ? Text(
+                'Roll No: ' + rollNumber,
+                style: Theme.of(context).textTheme.title.copyWith(color: Color(0xFF727FC8)),
+              )
+            : Container(),
       ],
     );
   }
-
-
 }
-
 
 // ignore: must_be_immutable
 class ProfileRowList extends StatelessWidget {
-
   String _key;
   String _value;
 
-  ProfileRowList(this._key,this._value);
+  ProfileRowList(this._key, this._value);
 
   @override
   Widget build(BuildContext context) {
@@ -275,8 +280,7 @@ class ProfileRowList extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: Column(
-                crossAxisAlignment:
-                CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
                     _key,
@@ -300,11 +304,10 @@ class ProfileRowList extends StatelessWidget {
             ),
             Expanded(
               child: Column(
-                crossAxisAlignment:
-                CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Text(
-                    _value == null ? 'NA':_value,
+                    _value == null ? 'NA' : _value,
                     style: Theme.of(context).textTheme.display1,
                     maxLines: 1,
                   ),
