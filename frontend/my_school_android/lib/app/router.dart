@@ -23,7 +23,7 @@ import 'package:my_school_android/ui/pages/todo_page.dart';
     MaterialRoute(page: SplashView),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: HomeView),
-    // MaterialRoute(page: RoutineView),
+    MaterialRoute(page: RoutineView),
     MaterialRoute(page: ToDoPage),
     // MaterialRoute(page: HomeWorkView),
     MaterialRoute(page: SubjectView),

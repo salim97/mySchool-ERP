@@ -18,7 +18,9 @@ class TimeTableModel {
   TimeTableModel({
     this.id,
     this.createdAt,
-  });
+  }) {
+    children = new List<OneTimeTable>();
+  }
 
   factory TimeTableModel.fromJson(Map<String, dynamic> json) {
     TimeTableModel model = _$TimeTableModelFromJson(json);

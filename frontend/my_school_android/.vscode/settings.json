@@ -1,2 +1,7 @@
 {
+    "files.exclude": {
+        "**/*.g.dart": true
+    },
+    "files.autoSave": "afterDelay",
+    "dart.checkForSdkUpdates": false
 }

@@ -50,7 +50,7 @@ class LoginViewModel extends BaseViewModel {
   init() async {
     // emailController.text = "1611680952895@email.com"; // teacher
     // emailController.text = "1612196960900@email.com"; // parent
-    emailController.text = "1612196971585@email.com"; // student
+    emailController.text = "salim@student.com"; // student
     passwordController.text = "azerty2020";
     notifyListeners();
     return;

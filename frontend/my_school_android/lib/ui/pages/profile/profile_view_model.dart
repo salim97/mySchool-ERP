@@ -26,11 +26,22 @@ class ProfileViewModel extends BaseViewModel {
 
     if (_authService.userModel.role == "student") {
       StudentModel studentModel = StudentModel.fromJson(response.data["data"]["extra"]);
+      final TimeTableService timeTableService = locator<TimeTableService>();
+      await timeTableService.getAll();
+      GroupModel groupModel = null;
+      timeTableService.list.forEach((element1) {
+        element1.groupid.children.forEach((element2) {
+          if (groupModel == null) {
+            if (element2.id == studentModel.id) groupModel = element1.groupid;
+          }
+        });
+      });
+
       userInfo = {
         "name": studentModel.name,
         "rollNo": studentModel.rollNo,
-        "Group": null,
-        "Section": null,
+        "Group": groupModel.name,
+        "Section": groupModel.section.name,
         "date_of_birth": studentModel.date_of_birth,
         "phone": studentModel.phone,
         "email": studentModel.userAccount.email,

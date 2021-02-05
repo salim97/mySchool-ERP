@@ -7,6 +7,7 @@ import 'package:stacked/stacked.dart';
 class HomeViewModel extends BaseViewModel {
   final PushNotificationService _pushNotificationService = locator<PushNotificationService>();
   final AuthService _authService = locator<AuthService>();
+  final TimeTableService timeTableService = locator<TimeTableService>();
   Map menu;
   Future handleStartUpLogic() async {
     // await _pushNotificationService.initialise();
@@ -29,5 +30,6 @@ class HomeViewModel extends BaseViewModel {
     if (_authService.userModel.role == "admin") {
       menu = Constants.menuAdmin;
     }
+    timeTableService.getAll();
   }
 }

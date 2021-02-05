@@ -16,6 +16,7 @@ import '../ui/pages/home/home_view.dart';
 import '../ui/pages/login/login_view.dart';
 import '../ui/pages/notice/notice_view.dart';
 import '../ui/pages/profile/profile_view.dart';
+import '../ui/pages/routine/routine_view.dart';
 import '../ui/pages/settings/settings_view.dart';
 import '../ui/pages/splash/splash_view.dart';
 import '../ui/pages/subjects/subject_screen_view.dart';
@@ -26,6 +27,7 @@ class Routes {
   static const String splashView = '/splash-view';
   static const String loginView = '/login-view';
   static const String homeView = '/home-view';
+  static const String routineView = '/routine-view';
   static const String toDoPage = '/to-do-page';
   static const String subjectView = '/subject-view';
   static const String studentTeacherView = '/student-teacher-view';
@@ -39,6 +41,7 @@ class Routes {
     splashView,
     loginView,
     homeView,
+    routineView,
     toDoPage,
     subjectView,
     studentTeacherView,
@@ -58,6 +61,7 @@ class Router extends RouterBase {
     RouteDef(Routes.splashView, page: SplashView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.homeView, page: HomeView),
+    RouteDef(Routes.routineView, page: RoutineView),
     RouteDef(Routes.toDoPage, page: ToDoPage),
     RouteDef(Routes.subjectView, page: SubjectView),
     RouteDef(Routes.studentTeacherView, page: StudentTeacherView),
@@ -86,6 +90,12 @@ class Router extends RouterBase {
     HomeView: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => HomeView(),
+        settings: data,
+      );
+    },
+    RoutineView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => RoutineView(),
         settings: data,
       );
     },
