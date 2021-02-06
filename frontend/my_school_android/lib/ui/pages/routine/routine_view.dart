@@ -28,67 +28,79 @@ class _RoutineViewState extends State<RoutineView> {
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: model.currentModel != null
-                ? ListView.builder(
-                    itemCount: model.days.length,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 16.0, left: 10.0, right: 10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Center(
-                                child: Text(model.currentModel.groupid.section.name + " - " + model.currentModel.groupid.name,
-                                    style: Theme.of(context).textTheme.title.copyWith(fontSize: 15.0)),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 8.0),
-                              child: Text(model.days.elementAt(index), style: Theme.of(context).textTheme.title.copyWith(fontSize: 15.0)),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 5.0),
-                              child: Row(
+                ? Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 8.0),
+                        child: Center(
+                          child: Text(model.currentModel.groupid.section.name + " - " + model.currentModel.groupid.name,
+                              style: Theme.of(context).textTheme.title.copyWith(fontSize: 15.0)),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: model.days.length,
+                          itemBuilder: (context, index) {
+                            var currentDay = model.days.elementAt(index);
+                            return Padding(
+                              padding: const EdgeInsets.only(top: 16.0, left: 10.0, right: 10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Expanded(
-                                    child: Text('Time', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 8.0),
+                                    child: Text(currentDay, style: Theme.of(context).textTheme.title.copyWith(fontSize: 15.0)),
                                   ),
-                                  Expanded(
-                                    child: Text('Subject', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
+                                  Padding(
+                                    padding: const EdgeInsets.only(bottom: 5.0),
+                                    child: Row(
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: Text('Time', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
+                                        ),
+                                        Expanded(
+                                          child: Text('Subject', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
+                                        ),
+                                        Expanded(
+                                          child: Text('Room', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  Expanded(
-                                    child: Text('Room', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
+                                  ListView.builder(
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: model.currentModel.children.length,
+                                    shrinkWrap: true,
+                                    itemBuilder: (context, myindex) {
+                                      var oneTimeTable = model.currentModel.children.elementAt(myindex);
+                                      print(oneTimeTable.day + " == " + model.days.elementAt(index));
+
+                                      if (model.days.elementAt(index) == oneTimeTable.day)
+                                        return RoutineRowDesign(
+                                          oneTimeTable.workingHoursModel.startTime + ' - ' + oneTimeTable.workingHoursModel.endTime,
+                                          oneTimeTable.teacherSubjectModel.subjectid.name,
+                                          oneTimeTable.classRoomModel.room_number,
+                                        );
+                                      else
+                                        return Container();
+                                    },
                                   ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Container(
+                                      height: 0.5,
+                                      decoration: BoxDecoration(
+                                        color: Color(0xFF415094),
+                                      ),
+                                    ),
+                                  )
                                 ],
                               ),
-                            ),
-                            ListView.builder(
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: model.currentModel.children.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index2) {
-                                var oneTimeTable = model.currentModel.children.elementAt(index2);
-                                return RoutineRowDesign(
-                                  oneTimeTable.workingHoursModel.startTime + ' - ' + oneTimeTable.workingHoursModel.endTime,
-                                  oneTimeTable.teacherSubjectModel.subjectid.name,
-                                  oneTimeTable.classRoomModel.room_number,
-                                );
-                              },
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 8.0),
-                              child: Container(
-                                height: 0.5,
-                                decoration: BoxDecoration(
-                                  color: Color(0xFF415094),
-                                ),
-                              ),
-                            )
-                          ],
+                            );
+                          },
                         ),
-                      );
-                    },
+                      ),
+                    ],
                   )
                 : Container(),
           ),
