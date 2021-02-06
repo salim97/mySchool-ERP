@@ -76,7 +76,6 @@ teacherSchema.post('findOneAndDelete',async function(doc){
         const user = this
         // await userModel.findOneAndDelete({_id:doc.user._id})
         await userModel.deleteOne({_id:doc.user._id})
-
     }
 })
 // https://stackoverflow.com/questions/11904159/automatically-remove-referencing-objects-on-deletion-in-mongodb

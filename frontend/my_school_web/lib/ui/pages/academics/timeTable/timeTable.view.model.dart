@@ -137,7 +137,7 @@ class TimeTableViewModel extends BaseViewModel {
   onCreateNew({day, workingHoursModel}) async {
     await onCancel();
     currentOneTimeTable.day = day;
-    currentOneTimeTable.workingHoursModel = workingHoursModel;
+    currentOneTimeTable.workingHoursModel = WorkingHoursModel.fromJson(workingHoursModel.toJson());
     // currentModel.id = null;
 
     isAddElementVisible = true;
@@ -145,8 +145,13 @@ class TimeTableViewModel extends BaseViewModel {
   }
 
   onCancel() async {
+        currentOneTimeTable = new OneTimeTable();
     currentOneTimeTable.classRoomModel = null;
     currentOneTimeTable.teacherSubjectModel = null;
+    // currentOneTimeTable.day = null;
+    // currentOneTimeTable.workingHoursModel = null;
+
+
     dropdownErrorTeacherSubjectModel = null;
     dropdownErrorClassRoomModel = null;
 
@@ -170,13 +175,14 @@ class TimeTableViewModel extends BaseViewModel {
     notifyListeners();
     if (!isEverythinISOkey) return;
     if (currentModel.children == null) currentModel.children = new List<OneTimeTable>();
+
     currentModel.children.removeWhere(
         (element) => element.day == currentOneTimeTable.day && element.workingHoursModel.id == currentOneTimeTable.workingHoursModel.id);
     currentModel.children.add(currentOneTimeTable);
 
     await currentService.update(currentModel);
-    timeTableRefresh();
-    onCancel();
+    await onCancel();
+    await timeTableRefresh();
     // await onRefresh();
   }
 
@@ -230,5 +236,4 @@ class TimeTableViewModel extends BaseViewModel {
     // });
     notifyListeners();
   }
-
 }

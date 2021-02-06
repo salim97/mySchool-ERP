@@ -10,7 +10,6 @@ import 'package:my_school_web/ui/widgets/side_menu/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:my_school_web/common/common.dart';
 import 'package:my_school_web/app/router.gr.dart' as auto_router;
-import 'package:provider/provider.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -24,7 +23,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  String initialRoute = auto_router.Routes.dashboardView;
+  String initialRoute = auto_router.Routes.timeTableView;
 
   @override
   void initState() {
@@ -43,7 +42,6 @@ class _HomeViewState extends State<HomeView> {
               email: "admin@email.com",
               password: "azerty2020",
             );
-            
           }
         },
         builder: (context, model, child) {
