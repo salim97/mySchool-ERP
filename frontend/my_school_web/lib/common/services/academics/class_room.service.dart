@@ -25,7 +25,6 @@ class ClassRoomServiceImpl extends RestAPI implements ClassRoomService {
     Response response = await myDioPOST(
       url: endPointURL,
       data: model.toJson(),
-      
     );
     if (response.statusCode == 200) {
       // userModel = new UserModel.fromJson(response.data["data"]["user"]);
@@ -69,5 +68,44 @@ class ClassRoomServiceImpl extends RestAPI implements ClassRoomService {
       // userModel = new UserModel.fromJson(response.data["data"]["user"]);
     }
     return response;
+  }
+}
+
+class ClassRoomServiceFake extends RestAPI implements ClassRoomService {
+  @override
+  List<ClassRoomModel> list;
+  ClassRoomModel model;
+  String endPointURL;
+  ClassRoomServiceFake() {
+    endPointURL = serverIP + "/api/v1/academics/classRoom_service";
+    list = new List<ClassRoomModel>();
+    list.clear();
+    for (int i = 0; i < 5; i++)
+      list.add(ClassRoomModel(id: i.toString(), capacity: 20, room_number: "A"+i.toString(), createdAt: "2021-03-20"));
+  }
+  @override
+  Future<Response> add(ClassRoomModel model) async {
+    list.add(model);
+      return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> delete(ClassRoomModel model) async {
+    list.removeWhere((element) => element.id == model.id);
+
+        return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> getAll() async {
+  return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> update(ClassRoomModel model) async {
+    for (int i = 0; i < list.length; i++) {
+      if (list.elementAt(i).id == model.id) list[i] = model;
+    }
+    return Response(statusCode: 200);
   }
 }

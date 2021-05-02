@@ -71,3 +71,39 @@ class SectionServiceImpl extends RestAPI implements SectionService {
     return response;
   }
 }
+
+class SectionServiceFake extends RestAPI implements SectionService {
+  @override
+  List<SectionModel> list;
+  String endPointURL;
+  SectionServiceFake() {
+    endPointURL = serverIP + "/api/v1/academics/section_service";
+    list = new List<SectionModel>();
+    for (int i = 0; i < 3; i++) list.add(SectionModel(name: "Section" + i.toString()));
+  }
+  @override
+  Future<Response> add(SectionModel model) async {
+    list.add(model);
+    return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> delete(SectionModel model) async {
+    list.removeWhere((element) => element.id == model.id);
+
+    return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> getAll() async {
+    return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> update(SectionModel model) async {
+    for (int i = 0; i < list.length; i++) {
+      if (list.elementAt(i).id == model.id) list[i] = model;
+    }
+    return Response(statusCode: 200);
+  }
+}

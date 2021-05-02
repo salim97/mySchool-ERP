@@ -8,8 +8,8 @@ class AppProvider with ChangeNotifier {
   Map sideMenu;
   String currentPage;
 
-  // Locale locale = Locale('fr', 'FR');
-  Locale locale = Locale('en', 'US');
+  Locale locale = Locale('fr', 'FR');
+  // Locale locale = Locale('en', 'US');
 
   AppProvider.init() {
     sideMenu = Constants.menuStudent;

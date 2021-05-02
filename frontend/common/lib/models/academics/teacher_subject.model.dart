@@ -16,6 +16,8 @@ class TeacherSubjectModel {
   TeacherSubjectModel({
     this.id,
     this.createdAt,
+    this.teacherid,
+    this.subjectid,
   });
 
   factory TeacherSubjectModel.fromJson(Map<String, dynamic> json) {

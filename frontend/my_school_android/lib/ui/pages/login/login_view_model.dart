@@ -18,7 +18,7 @@ Future<dynamic> myBackgroundHandler(Map<String, dynamic> message) {
 class LoginViewModel extends BaseViewModel {
   final PushNotificationService _pushNotificationService = locator<PushNotificationService>();
   final NavigationService _navigationService = locator<NavigationService>();
-  final AuthService _authService = locator<AuthService>();
+  final AuthService _authService = null; // locator<AuthService>();
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -48,6 +48,7 @@ class LoginViewModel extends BaseViewModel {
   }
 
   init() async {
+        return;
     // emailController.text = "1611680952895@email.com"; // teacher
     // emailController.text = "1612196960900@email.com"; // parent
     emailController.text = "salim@student.com"; // student
@@ -94,6 +95,10 @@ class LoginViewModel extends BaseViewModel {
 
   var l = new Logger();
   onLoginClicked() async {
+    if (SHOW_CASE) {
+      await _navigationService.replaceWith(Routes.homeView);
+      return;
+    }
     String token = await _pushNotificationService.fcm.getToken();
     print("token");
     print(token);

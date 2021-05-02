@@ -5,7 +5,7 @@ import 'package:my_school_android/app/locator.dart';
 import 'package:stacked/stacked.dart';
 
 class ProfileViewModel extends BaseViewModel {
-  final AuthService _authService = locator<AuthService>();
+  final AuthService _authService = null; // locator<AuthService>();
   Map<String, String> userInfo = {
     "name": "name",
     "Group": null,

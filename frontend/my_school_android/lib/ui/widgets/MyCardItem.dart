@@ -55,7 +55,7 @@ class _CustomWidgetState extends State<CustomWidget> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5.0),
             ),
-            elevation: 0,
+            elevation: 15,
             child: Container(
               decoration: BoxDecoration(
                 gradient: widget.isSelected

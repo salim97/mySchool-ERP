@@ -25,7 +25,7 @@ import 'package:my_school_android/ui/pages/todo_page.dart';
     MaterialRoute(page: HomeView),
     MaterialRoute(page: RoutineView),
     MaterialRoute(page: ToDoPage),
-    // MaterialRoute(page: HomeWorkView),
+    MaterialRoute(page: HomeWorkView),
     MaterialRoute(page: SubjectView),
     MaterialRoute(page: StudentTeacherView),
     MaterialRoute(page: AttendanceView),

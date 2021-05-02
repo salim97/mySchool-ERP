@@ -23,7 +23,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  String initialRoute = auto_router.Routes.timeTableView;
+  String initialRoute = auto_router.Routes.dashboardView;
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _HomeViewState extends State<HomeView> {
                             margin: EdgeInsets.all(10),
                             padding: EdgeInsets.all(0),
                             child: Navigator(
-                              key: locator<NavigationService>().navigatorKey,
+                              key: StackedService.navigatorKey,
                               // key: locator<DialogService>().navigatorKey,
                               onGenerateRoute: auto_router.Router().onGenerateRoute,
                               initialRoute: initialRoute,

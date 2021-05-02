@@ -85,6 +85,60 @@ class StudentServiceImpl extends RestAPI implements StudentService {
   String secret;
 }
 
+class StudentServiceFake extends RestAPI implements StudentService {
+  @override
+  List<StudentModel> list = new List<StudentModel>();
+
+  StudentServiceFake() {
+    list.add(StudentModel(id: "01", rollNo: "01", name: "Salim",  phone: "05 *** ***"));
+    list.add(StudentModel(id: "02", rollNo: "02", name: "Amine",  phone: "05 *** ***"));
+    list.add(StudentModel(id: "03", rollNo: "03", name: "Chakib",  phone: "05 *** ***"));
+    list.add(StudentModel(id: "04", rollNo: "04", name: "Kader",  phone: "05 *** ***"));
+  }
+  @override
+  Future<Response> add(StudentModel studentModel) async {
+    list.add(studentModel);
+    return Response(statusCode: 201);
+  }
+
+  @override
+  Future<Response> getAll() async {
+
+    return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> delete(StudentModel studentModel) async {
+    list.removeWhere((element) => element.id == studentModel.id);
+
+    return Response(statusCode: 201);
+  }
+
+  @override
+  Future<List<StudentModel>> search(String query) {
+    List<StudentModel> selected = new List<StudentModel>();
+    list.forEach((element) {
+      if (element.name.contains(query)) selected.add(element);
+      // if (element.userAccount.email.contains(query)) selected.add(element);
+      if (element.phone.contains(query)) selected.add(element);
+      // if (element.name.contains(query)) selected.add(element);
+    });
+    return Future<List<StudentModel>>.value(selected);
+  }
+
+  @override
+  Future<Response> update(StudentModel studentModel) async {
+    for (int i = 0; i < list.length; i++) {
+      if (list.elementAt(i).id == studentModel.id) list[i] = studentModel;
+    }
+    return Response(statusCode: 201);
+  }
+
+  @override
+  String secret;
+}
+
+
 // class FakeStudentService extends RestAPI implements StudentService {
 //   List<StudentModel> list = new List<StudentModel>();
 //   FakeStudentService() {

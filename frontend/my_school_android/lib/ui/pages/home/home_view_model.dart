@@ -6,9 +6,9 @@ import 'package:stacked/stacked.dart';
 
 class HomeViewModel extends BaseViewModel {
   final PushNotificationService _pushNotificationService = locator<PushNotificationService>();
-  final AuthService _authService = locator<AuthService>();
-  final TimeTableService timeTableService = locator<TimeTableService>();
-  Map menu;
+  final AuthService _authService = null; // locator<AuthService>();
+  final TimeTableService timeTableService = new TimeTableServiceFake();
+  Map menu = Constants.menuStudent;
   Future handleStartUpLogic() async {
     // await _pushNotificationService.initialise();
     // String token = await _pushNotificationService.fcm.getToken();

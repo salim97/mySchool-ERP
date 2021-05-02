@@ -19,7 +19,6 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   bool isTapped;
   int currentSelectedIndex;
- 
 
   @override
   void initState() {
@@ -43,16 +42,16 @@ class _HomeViewState extends State<HomeView> {
         Widget child,
       ) {
         return Scaffold(
-                appBar: AppBar(
+          appBar: AppBar(
             toolbarHeight: 70,
             title: ListTile(
               leading: Image.asset(
                 'assets/images/logo.png',
-                width: 80.0,
+                width: 140.0,
               ),
               trailing: FloatingActionButton(
                 onPressed: () {
-                   locator<NavigationService>().navigateTo(Routes.profileView);
+                  locator<NavigationService>().navigateTo(Routes.profileView);
                 },
                 child: CircleAvatar(
                   radius: 25.0,
@@ -95,66 +94,61 @@ class _HomeViewState extends State<HomeView> {
               );
             },
           ),
+          drawer: Drawer(
+            child: ListView(
+              children: [
+                UserAccountsDrawerHeader(
+                    decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.blueAccent, Colors.deepPurpleAccent])),
+                    accountName: Text(
+                      "Unknown User",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    currentAccountPicture: CircleAvatar(
+                      radius: 25.0,
+                      backgroundImage: AssetImage("assets/images/unknown_profile.png"),
+                      backgroundColor: Colors.transparent,
+                    )),
+                ListTile(
+                  title: Text("Student Menu"),
+                  onTap: () {
+                    model.menu = Constants.menuStudent;
+                    model.notifyListeners();
+
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  title: Text("Teacher Menu"),
+                  onTap: () {
+                    model.menu = Constants.menuTeacher;
+                    model.notifyListeners();
+
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  title: Text("Admin Menu"),
+                  onTap: () {
+                    model.menu = Constants.menuAdmin;
+                    model.notifyListeners();
+                    Navigator.of(context).pop();
+                  },
+                ),
+                ListTile(
+                  // selected: currentSelectedIndex == 3,
+                  // selectedTileColor: Colors.lightBlue,
+                  title: Text("Parent Menu"),
+                  onTap: () {
+                    model.menu = Constants.menuParent;
+                    model.notifyListeners();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          ),
         );
       },
     );
   }
 }
-
-    // drawer: Drawer(
-    //         child: ListView(
-    //           children: [
-    //             UserAccountsDrawerHeader(
-    //                 decoration: BoxDecoration(gradient: LinearGradient(colors: [Colors.blueAccent, Colors.deepPurpleAccent])),
-    //                 accountName: Text(
-    //                   "Unknown User",
-    //                   style: TextStyle(color: Colors.white),
-    //                 ),
-    //                 currentAccountPicture: CircleAvatar(
-    //                   radius: 25.0,
-    //                   backgroundImage: AssetImage("assets/images/unknown_profile.png"),
-    //                   backgroundColor: Colors.transparent,
-    //                 )),
-    //             ListTile(
-    //               title: Text("Student Menu"),
-    //               onTap: () {
-    //                 setState(() {
-    //                   _menu = Constants.menuStudent;
-    //                 });
-    //                 Navigator.of(context).pop();
-    //               },
-    //             ),
-    //             ListTile(
-    //               title: Text("Teacher Menu"),
-    //               onTap: () {
-    //                 setState(() {
-    //                   _menu = Constants.menuTeacher;
-    //                 });
-    //                 Navigator.of(context).pop();
-    //               },
-    //             ),
-    //             ListTile(
-    //               title: Text("Admin Menu"),
-    //               onTap: () {
-    //                 setState(() {
-    //                   _menu = Constants.menuAdmin;
-    //                 });
-    //                 Navigator.of(context).pop();
-    //               },
-    //             ),
-    //             ListTile(
-    //               // selected: currentSelectedIndex == 3,
-    //               // selectedTileColor: Colors.lightBlue,
-    //               title: Text("Parent Menu"),
-    //               onTap: () {
-    //                 print(currentSelectedIndex);
-    //                 setState(() {
-    //                   _menu = Constants.menuParent;
-    //                   //currentSelectedIndex = 3;
-    //                 });
-    //                 Navigator.of(context).pop();
-    //               },
-    //             ),
-    //           ],
-    //         ),
-    //       ),

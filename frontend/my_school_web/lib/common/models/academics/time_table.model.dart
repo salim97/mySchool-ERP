@@ -62,4 +62,5 @@ class OneTimeTable {
   WorkingHoursModel workingHoursModel = new WorkingHoursModel();
   ClassRoomModel classRoomModel = new ClassRoomModel();
   TeacherSubjectModel teacherSubjectModel = new TeacherSubjectModel();
+  OneTimeTable({this.day, this.workingHoursModel, this.classRoomModel, this.teacherSubjectModel}) {}
 }

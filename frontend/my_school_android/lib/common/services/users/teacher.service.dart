@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/animation.dart';
 import '../../common.dart';
 
 abstract class TeacherService {
@@ -74,5 +75,54 @@ class TeacherServiceImpl extends RestAPI implements TeacherService {
       // userModel = new UserModel.fromJson(response.data["data"]["user"]);
     }
     return response;
+  }
+}
+
+class TeacherServiceFake extends RestAPI implements TeacherService {
+  @override
+  List<TeacherModel> list = new List<TeacherModel>();
+  TeacherServiceFake() {
+    list.add(TeacherModel(id: "01", employee_code: "01", name: "Salim", subjects_handling: "Math", phone: "05 *** ***"));
+    list.add(TeacherModel(id: "02", employee_code: "02", name: "Amine", subjects_handling: "Math", phone: "05 *** ***"));
+    list.add(TeacherModel(id: "03", employee_code: "03", name: "Chakib", subjects_handling: "Math", phone: "05 *** ***"));
+    list.add(TeacherModel(id: "04", employee_code: "04", name: "Kader", subjects_handling: "Math", phone: "05 *** ***"));
+  }
+
+  @override
+  Future<Response> add(TeacherModel teacherModel) async {
+    list.add(teacherModel);
+    return Response(statusCode: 201);
+  }
+
+  @override
+  Future<Response> getAll() async {
+    return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> delete(TeacherModel teacherModel) async {
+    list.removeWhere((element) => element.id == teacherModel.id);
+
+    return Response(statusCode: 201);
+  }
+
+  @override
+  Future<List<TeacherModel>> search(String query) {
+    List<TeacherModel> selected = new List<TeacherModel>();
+    list.forEach((element) {
+      if (element.name.contains(query)) selected.add(element);
+      // if (element.userAccount.email.contains(query)) selected.add(element);
+      if (element.phone.contains(query)) selected.add(element);
+      // if (element.name.contains(query)) selected.add(element);
+    });
+    return Future<List<TeacherModel>>.value(selected);
+  }
+
+  @override
+  Future<Response> update(TeacherModel teacherModel) async {
+    for (int i = 0; i < list.length; i++) {
+      if (list.elementAt(i).id == teacherModel.id) list[i] = teacherModel;
+    }
+    return Response(statusCode: 201);
   }
 }

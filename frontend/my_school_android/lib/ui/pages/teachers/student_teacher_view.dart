@@ -19,7 +19,10 @@ class StudentTeacherView extends StatefulWidget {
 
 class _StudentTeacherViewState extends State<StudentTeacherView> with SingleTickerProviderStateMixin {
   List<TeacherModel> teachers = [
-
+    TeacherModel(name: "Salim", subjects_handling: "Math", phone: "05 *** ***"),
+    TeacherModel(name: "Amine", subjects_handling: "Francais", phone: "06 *** ***"),
+    TeacherModel(name: "Chakib", subjects_handling: "Physique", phone: "07 *** ***"),
+    TeacherModel(name: "Kader", subjects_handling: "Anglais", phone: "05 *** ***"),
   ];
 
   int mId;
@@ -46,8 +49,6 @@ class _StudentTeacherViewState extends State<StudentTeacherView> with SingleTick
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-
-
     return ViewModelBuilder<StudentTeacherViewModel>.reactive(
       viewModelBuilder: () => StudentTeacherViewModel(),
       builder: (
@@ -73,15 +74,19 @@ class _StudentTeacherViewState extends State<StudentTeacherView> with SingleTick
                           children: <Widget>[
                             Expanded(
                               child: Text('Teacher Name',
-                                  style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0, fontWeight: FontWeight.w500)),
+                                  style: Theme.of(context).textTheme.display1.copyWith(fontSize: 16.0, fontWeight: FontWeight.w500)),
+                            ),
+                            Expanded(
+                              child: Text('Subject',
+                                  style: Theme.of(context).textTheme.display1.copyWith(fontSize: 16.0, fontWeight: FontWeight.w500)),
                             ),
                             Expanded(
                               child: Text('Email',
-                                  style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0, fontWeight: FontWeight.w500)),
+                                  style: Theme.of(context).textTheme.display1.copyWith(fontSize: 16.0, fontWeight: FontWeight.w500)),
                             ),
                             Expanded(
                               child: Text('Phone',
-                                  style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0, fontWeight: FontWeight.w500)),
+                                  style: Theme.of(context).textTheme.display1.copyWith(fontSize: 16.0, fontWeight: FontWeight.w500)),
                             ),
                           ],
                         ),
@@ -120,14 +125,17 @@ class StudentTeacherRowLayout extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: Text(teacher.name, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 10.0)),
+                child: Text(teacher.name, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
               ),
               Expanded(
-                child: Text(teacher.userAccount.email, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 10.0)),
+                child: Text(teacher.subjects_handling, style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
+              ),
+              Expanded(
+                child: Text("not available", style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
               ),
               Expanded(
                 child:
-                    Text(per == 1 ? teacher.phone : 'not available', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 10.0)),
+                    Text(per == 1 ? teacher.phone : 'not available', style: Theme.of(context).textTheme.display1.copyWith(fontSize: 13.0)),
               ),
             ],
           ),

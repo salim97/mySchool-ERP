@@ -71,3 +71,55 @@ class TimeTableServiceImpl extends RestAPI implements TimeTableService {
     return response;
   }
 }
+
+class TimeTableServiceFake extends RestAPI implements TimeTableService {
+  @override
+  List<TimeTableModel> list;
+  TimeTableModel model;
+  String endPointURL;
+  TimeTableServiceFake() {
+    endPointURL = serverIP + "/api/v1/academics/classRoom_service";
+    list = new List<TimeTableModel>();
+    list.clear();
+    list.add(timeTableModel(groupid: GroupModel(name: "Group 1", section: SectionModel(name: "Section 1")), children: [
+      OneTimeTable(
+        day: "dimanche",
+        classRoomModel: ClassRoomModel(room_number: "A01"),
+        teacherSubjectModel: TeacherSubjectModel(subjectid: SubjectModel(name: "Math", type: "TD")),
+        workingHoursModel: WorkingHoursModel(startTime: "08:00", endTime: "09:00"),
+      )
+    ]));
+  }
+  TimeTableModel timeTableModel({GroupModel groupid, List<OneTimeTable> children}) {
+    TimeTableModel tmp = new TimeTableModel();
+    tmp.groupid = groupid;
+    tmp.children = children;
+    return tmp;
+  }
+
+  @override
+  Future<Response> add(TimeTableModel model) async {
+    list.add(model);
+    return null;
+  }
+
+  @override
+  Future<Response> delete(TimeTableModel model) async {
+    list.removeWhere((element) => element.id == model.id);
+
+    return null;
+  }
+
+  @override
+  Future<Response> getAll() async {
+    return null;
+  }
+
+  @override
+  Future<Response> update(TimeTableModel model) async {
+    for (int i = 0; i < list.length; i++) {
+      if (list.elementAt(i).id == model.id) list[i] = model;
+    }
+    return null;
+  }
+}

@@ -13,6 +13,7 @@ import '../ui/pages/attendance/attendance_view.dart';
 import '../ui/pages/documents/documents_view.dart';
 import '../ui/pages/examination/examination_view.dart';
 import '../ui/pages/home/home_view.dart';
+import '../ui/pages/homework/homework_view.dart';
 import '../ui/pages/login/login_view.dart';
 import '../ui/pages/notice/notice_view.dart';
 import '../ui/pages/profile/profile_view.dart';
@@ -29,6 +30,7 @@ class Routes {
   static const String homeView = '/home-view';
   static const String routineView = '/routine-view';
   static const String toDoPage = '/to-do-page';
+  static const String homeWorkView = '/home-work-view';
   static const String subjectView = '/subject-view';
   static const String studentTeacherView = '/student-teacher-view';
   static const String attendanceView = '/attendance-view';
@@ -43,6 +45,7 @@ class Routes {
     homeView,
     routineView,
     toDoPage,
+    homeWorkView,
     subjectView,
     studentTeacherView,
     attendanceView,
@@ -63,6 +66,7 @@ class Router extends RouterBase {
     RouteDef(Routes.homeView, page: HomeView),
     RouteDef(Routes.routineView, page: RoutineView),
     RouteDef(Routes.toDoPage, page: ToDoPage),
+    RouteDef(Routes.homeWorkView, page: HomeWorkView),
     RouteDef(Routes.subjectView, page: SubjectView),
     RouteDef(Routes.studentTeacherView, page: StudentTeacherView),
     RouteDef(Routes.attendanceView, page: AttendanceView),
@@ -102,6 +106,12 @@ class Router extends RouterBase {
     ToDoPage: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => const ToDoPage(),
+        settings: data,
+      );
+    },
+    HomeWorkView: (data) {
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => HomeWorkView(),
         settings: data,
       );
     },

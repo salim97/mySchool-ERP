@@ -19,12 +19,14 @@ class SubjectView extends StatefulWidget {
 
 class _SubjectViewState extends State<SubjectView> {
   List<SubjectModel> subjects = [
-
+    SubjectModel(name: "Math", type: "TD"),
+    SubjectModel(name: "Physique", type: "TD"),
+    SubjectModel(name: "Francais", type: "TD"),
+    SubjectModel(name: "Anglais", type: "TD"),
   ];
 
   @override
   Widget build(BuildContext context) {
-
     return ViewModelBuilder<SubjectScreenViewModel>.reactive(
       viewModelBuilder: () => SubjectScreenViewModel(),
       builder: (

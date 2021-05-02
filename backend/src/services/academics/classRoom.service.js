@@ -33,3 +33,4 @@ router
   .delete(authController.restrictTo('admin'), deleteOne);
 
 module.exports = router;
+

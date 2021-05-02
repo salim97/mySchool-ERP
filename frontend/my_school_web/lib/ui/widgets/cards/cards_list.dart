@@ -16,7 +16,7 @@ class CardsList extends StatelessWidget {
           children: [
             CardItem(
               icon: Icons.monetization_on_outlined,
-              title: "ÉLÈVES",
+              title: "STUDENTS",
               subtitle: "",
               value: "31+",
               color1: Color(0xfffb6b47),
@@ -24,7 +24,7 @@ class CardsList extends StatelessWidget {
             ),
             CardItem(
               icon: Icons.shopping_basket_outlined,
-              title: "ENSEIGNANTES",
+              title: "TEACHERS",
               subtitle: "",
               value: "5+",
               color1: Color(0xffff911b),
@@ -32,7 +32,7 @@ class CardsList extends StatelessWidget {
             ),
             CardItem(
               icon: Icons.delivery_dining,
-              title: "PARENTE",
+              title: "PARENTS",
               subtitle: "",
               value: "31+",
               color1: Color(0xffffc000),
@@ -40,7 +40,7 @@ class CardsList extends StatelessWidget {
             ),
             CardItem(
               icon: Icons.delivery_dining,
-              title: "DES CLASSES",
+              title: "ROOMS",
               subtitle: "",
               value: "31+",
               color1: Color(0xffa7c850),

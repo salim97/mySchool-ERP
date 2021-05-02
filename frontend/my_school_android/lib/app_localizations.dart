@@ -22,7 +22,7 @@ class AppLocalizations {
   Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
-            print("sdfsd " + locale.languageCode.toString());
+            // print("sdfsd " + locale.languageCode.toString());
     // Load the language JSON file from the "lang" folder
     String jsonString =
         await rootBundle.loadString('langs/${locale.languageCode}.json');

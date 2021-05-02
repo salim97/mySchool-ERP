@@ -71,3 +71,42 @@ class GroupServiceImpl extends RestAPI implements GroupService {
     return response;
   }
 }
+
+class GroupServiceFake extends RestAPI implements GroupService {
+  @override
+  List<GroupModel> list;
+  String endPointURL;
+  GroupServiceFake() {
+    endPointURL = serverIP + "/api/v1/academics/classRoom_service";
+    list = new List<GroupModel>();
+    list.clear();
+    for (int i = 0; i < 3; i++)
+      list.add(GroupModel(id: i.toString(),  name: "Group "+i.toString(), section: SectionModel(name: "Section"+i.toString()), createdAt: "2021-03-20"));
+  }
+  @override
+  Future<Response> add(GroupModel model) async {
+    list.add(model);
+    return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> delete(GroupModel model) async {
+    list.removeWhere((element) => element.id == model.id);
+
+        return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> getAll() async {
+  return Response(statusCode: 200);
+  }
+
+  @override
+  Future<Response> update(GroupModel model) async {
+    for (int i = 0; i < list.length; i++) {
+      if (list.elementAt(i).id == model.id) list[i] = model;
+    }
+    return Response(statusCode: 200);
+  }
+}
+

@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart' show debugPrint, kIsWeb;
 DEVELOPMENT_MODE() => true;
 
 const DEBUG_HTTP = true; //print http responses from server
+const SHOW_CASE = true; 
 
 class RestAPI {
   // String serverIP = "http://127.0.0.1:3000";
@@ -297,6 +298,7 @@ class RestAPI {
         break;
       default:
         print("Something went wrong. status code =" + error.response.statusCode.toString());
+        
     }
   }
 }

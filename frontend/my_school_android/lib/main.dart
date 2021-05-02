@@ -12,14 +12,13 @@ import 'app_localizations.dart';
 import 'provider/app_provider.dart';
 import 'setup_bottom_sheet_ui.dart';
 
+
 void main() {
   setupLocator();
   setupBottomSheetUi();
 
-
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider.value(value: AppProvider.init()),
       ChangeNotifierProvider.value(value: AppProvider.init()),
     ],
     child: MyApp(),
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppProvider appProvider = Provider.of<AppProvider>(context);
     return MaterialApp(
-      initialRoute: auto_router.Routes.loginView,
+      initialRoute: auto_router.Routes.splashView,
       navigatorKey: locator<NavigationService>().navigatorKey,
       onGenerateRoute: auto_router.Router().onGenerateRoute,
       debugShowCheckedModeBanner: false,

@@ -71,3 +71,41 @@ class SubjectServiceImpl extends RestAPI implements SubjectService {
     return response;
   }
 }
+
+class SubjectServiceFake extends RestAPI implements SubjectService {
+  @override
+  List<SubjectModel> list;
+  String endPointURL;
+  SubjectServiceFake() {
+    endPointURL = serverIP + "/api/v1/academics/subject_service";
+    list = new List<SubjectModel>();
+    list.add(SubjectModel(name: "Math", type: "TD"));
+    list.add(SubjectModel(name: "Physique", type: "TD"));
+    list.add(SubjectModel(name: "Francais", type: "TD"));
+    list.add(SubjectModel(name: "Anglais", type: "TD"));
+  }
+
+  @override
+  Future<Response> add(SubjectModel model) {
+    // TODO: implement add
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Response> delete(SubjectModel model) {
+    // TODO: implement delete
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Response> getAll() {
+    // TODO: implement getAll
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Response> update(SubjectModel model) {
+    // TODO: implement update
+    throw UnimplementedError();
+  }
+}

@@ -21,6 +21,7 @@ class GroupModel {
     this.id,
     this.name,
     this.createdAt,
+    this.section,
   }) {
     children = new List<StudentModel>();
   }

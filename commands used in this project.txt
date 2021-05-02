@@ -64,3 +64,15 @@ docker container ls
 docker cp 51d42b522921:/tmp .tmp/
 https://stackoverflow.com/questions/18931668/how-to-restore-the-dump-into-your-running-mongodb
 mongorestore --db databasename --verbose \path\dump\<dumpfolder>
+
+
+"For Windows 10 Home (alternative Optimize-VHD cmdlet):
+c:\Users\Salim\AppData\Local\Docker\wsl\data\
+wsl --shutdown
+diskpart
+# open window Diskpart
+select vdisk file="c:\Users\Salim\AppData\Local\Docker\wsl\data\"
+attach vdisk readonly
+compact vdisk
+detach vdisk
+exit

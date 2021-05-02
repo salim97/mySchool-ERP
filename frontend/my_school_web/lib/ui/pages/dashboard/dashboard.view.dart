@@ -35,30 +35,30 @@ class DashboardView extends StatelessWidget {
                       width: MediaQuery.of(context).size.width / 1.9,
                       child: SalesChart(),
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 4,
-                      height: 800,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [BoxShadow(color: Colors.grey[300], offset: Offset(0, 3), blurRadius: 16)]),
-                      child: Column(
-                        children: [
-                          CustomText(
-                            text: 'EXAMS',
-                            size: 30,
-                          ),
-                          // TopBuyerWidget(),
-                          // TopBuyerWidget(),
-                          // TopBuyerWidget(),
-                          // TopBuyerWidget(),
-                          // TopBuyerWidget(),
-                          // TopBuyerWidget(),
-                          // TopBuyerWidget(),
-                          // TopBuyerWidget(),
-                        ],
-                      ),
-                    )
+                  //   Container(
+                  //     width: MediaQuery.of(context).size.width / 4,
+                  //     height: 800,
+                  //     decoration: BoxDecoration(
+                  //         color: Colors.white,
+                  //         borderRadius: BorderRadius.circular(20),
+                  //         boxShadow: [BoxShadow(color: Colors.grey[300], offset: Offset(0, 3), blurRadius: 16)]),
+                  //     child: Column(
+                  //       children: [
+                  //         CustomText(
+                  //           text: 'EXAMS',
+                  //           size: 30,
+                  //         ),
+                  //         // TopBuyerWidget(),
+                  //         // TopBuyerWidget(),
+                  //         // TopBuyerWidget(),
+                  //         // TopBuyerWidget(),
+                  //         // TopBuyerWidget(),
+                  //         // TopBuyerWidget(),
+                  //         // TopBuyerWidget(),
+                  //         // TopBuyerWidget(),
+                  //       ],
+                  //     ),
+                  //   )
                   ],
                 ),
               ),

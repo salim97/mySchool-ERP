@@ -100,22 +100,22 @@ class AddTeacherViewModel extends BaseViewModel {
     Response response;
     if (teacherModel.id == null) {
       print("new");
-      response = await authService.signup(UserModel(
-        fcmToken: teacherModel.userAccount.fcmToken,
-        password: teacherModel.userAccount.password,
-        role: teacherModel.userAccount.role,
-        email: teacherModel.userAccount.email,
-      ));
+      // response = await authService.signup(UserModel(
+      //   fcmToken: teacherModel.userAccount.fcmToken,
+      //   password: teacherModel.userAccount.password,
+      //   role: teacherModel.userAccount.role,
+      //   email: teacherModel.userAccount.email,
+      // ));
       // log.i(response.data);
       // print(response.statusCode);
 
-      teacherModel.userAccount.id = response.data["data"]["user"]["_id"];
+      // teacherModel.userAccount.id = response.data["data"]["user"]["_id"];
       response = await teacherService.add(teacherModel);
     } else {
       print("update");
-      response = await authService.updateUser(teacherModel.userAccount);
-      print(response.data);
-      print(response.statusCode);
+      // response = await authService.updateUser(teacherModel.userAccount);
+      // print(response.data);
+      // print(response.statusCode);
 
       response = await teacherService.update(teacherModel);
       // print(response.data);
