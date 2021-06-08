@@ -1,0 +1,8 @@
+  2021-06-08 8:53:35 PM: Starting composition “-HD-1080-”.
+
+  Output To: C:\4\-HD-1080-.avi    2021-06-08 9:02:41 PM: Finished composition “-HD-1080-”.
+
+
+  Total Time Elapsed: 9 Min, 6 Sec
+Log closed on 2021-06-08 at 9:02:41 PM
+

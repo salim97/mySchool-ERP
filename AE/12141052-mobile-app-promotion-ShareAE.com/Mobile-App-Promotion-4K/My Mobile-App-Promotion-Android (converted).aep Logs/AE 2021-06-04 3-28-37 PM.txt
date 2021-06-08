@@ -1,0 +1,8 @@
+  2021-06-04 3:28:37 PM: Starting composition “-4K-UHD-”.
+
+  Output To: D:\Archive\4_GITHUB\mySchool-ERP\AE\-4K-UHD-.avi    2021-06-04 3:40:04 PM: Finished composition “-4K-UHD-”.
+
+
+  Total Time Elapsed: 11 Min, 25 Sec
+Log closed on 2021-06-04 at 3:40:04 PM
+

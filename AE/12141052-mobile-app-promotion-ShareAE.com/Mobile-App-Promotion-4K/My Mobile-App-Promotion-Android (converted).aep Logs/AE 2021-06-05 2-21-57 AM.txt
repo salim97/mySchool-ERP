@@ -1,0 +1,8 @@
+  2021-06-05 2:21:57 AM: Starting composition “-4K-UHD-”.
+
+  Output To: C:\4\-4K-UHD-.avi    2021-06-05 2:33:44 AM: Finished composition “-4K-UHD-”.
+
+
+  Total Time Elapsed: 11 Min, 46 Sec
+Log closed on 2021-06-05 at 2:33:46 AM
+

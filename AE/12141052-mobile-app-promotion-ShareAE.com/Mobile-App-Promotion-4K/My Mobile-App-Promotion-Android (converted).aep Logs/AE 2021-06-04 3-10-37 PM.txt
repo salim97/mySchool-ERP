@@ -1,0 +1,8 @@
+  2021-06-04 3:10:37 PM: Starting composition “-4K-UHD-”.
+
+  Output To: D:\Archive\4_GITHUB\mySchool-ERP\AE\12141052-mobile-app-promotion-ShareAE.com\2021-06-04.mov      Render stopped by user.    2021-06-04 3:11:17 PM: Finished composition “-4K-UHD-”.
+
+
+  Total Time Elapsed: 37 Seconds
+Log closed on 2021-06-04 at 3:11:17 PM
+
