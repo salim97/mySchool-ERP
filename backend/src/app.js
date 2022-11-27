@@ -40,7 +40,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const limiter = rateLimit({
-  max: async (request, response) => {
+  max: (request, response) => {
     if (process.env.NODE_ENV === 'development') {
       return 1000;
     }
